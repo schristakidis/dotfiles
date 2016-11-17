@@ -73,3 +73,6 @@
 [submodule "vim/bundle/vim-maximiser"]
 	path = vim/bundle/vim-maximiser
 	url = https://github.com/szw/vim-maximizer.git
+[submodule "dotbot"]
+	path = dotbot
+	url = https://github.com/anishathalye/dotbot
