@@ -134,7 +134,7 @@ function prompt_sakis_setup {
     'status' '$(coalesce "%b" "%p" "%c")%s%A%B%S%a%d%m%r%U%u'
 
   # Define prompts.
-  PROMPT='${SSH_TTY:+"%B%F{10}%n%f%F{10}@%f%F{10}%m:%f%b"}%F{6}${_prompt_sakis_pwd}%(!. %B%F{1}#%f%b.)%b${editor_info[keymap]} '
+  PROMPT='${SSH_TTY:+"%B%F{10}%n%f%F{10}@%f%F{10}%m:%f%b"}%B%F{9}${_prompt_sakis_pwd}%(!. %B%F{1}#%f%b.)%b${editor_info[keymap]} '
   RPROMPT=''
   SPROMPT='zsh: correct %F{1}%R%f to %F{2}%r%f [nyae]? '
 }
