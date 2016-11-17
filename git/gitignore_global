@@ -1,0 +1,9 @@
+#global ignored files for git
+
+#ignore vim swap files
+*.swp
+*.csv
+*.pyc
+*egg-info
+.idea
+tags

@@ -1,0 +1,21 @@
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	stash-unapply = !git stash show -p | git apply -R
+	ctags = !.git/hooks/ctags
+[user]
+	name = Sakis Christakidis
+	email = athanasios.christakidis@motionpicturesolutions.com
+[core]
+	editor = vim
+	excludesfile = $HOME/.dotfiles/git/gitignore_global
+[merge]
+	tool = vimdiff
+[push]
+	default = simple
+[init]
+	templatedir = $HOME/.dotfiles/git/git_template
