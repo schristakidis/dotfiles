@@ -1,0 +1,21 @@
+subtrees and submodules together. Ugly stuff
+Was constructed by:
+git remote add prezto_remote https://github.com/sorin-ionescu/prezto.git
+git fetch prezto_remote
+git co -b prezto_branch prezto_remote/master
+git submodule update --init --recursive
+git co master
+rm -rf modules
+git read-tree --prefix=zsh/.zprezto -u prezto_branch
+git ci
+
+
+To checkout and update
+git fetch 
+git co -b prezto_branch origin/prezto_branch
+git remote add prezto_remote https://github.com/sorin-ionescu/prezto.git
+git pull
+git co master
+git merge --squash -s subtree --no-commit prezto_branch
+
+Got it form https://git-scm.com/book/en/v1/Git-Tools-Subtree-Merging
