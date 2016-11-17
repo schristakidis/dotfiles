@@ -7,3 +7,4 @@
 tags
 .zhistory
 .zcompdump
+*.log
