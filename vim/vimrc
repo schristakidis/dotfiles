@@ -1,0 +1,178 @@
+let g:pathogen_disabled=[]
+execute pathogen#infect()
+call pathogen#helptags()
+
+set t_Co=256
+
+" set gfn=Sauce\ Code\ Powerline\ Medium\ 11
+
+set nocompatible
+syntax on
+filetype plugin indent on
+syntax enable
+
+set background=dark
+colo solarized
+
+set nu
+set hlsearch
+set incsearch
+
+set ignorecase
+set smartcase
+set title
+set hidden
+
+let mapleader=','
+
+" automatically change window's cwd to file's dir
+set autochdir
+
+autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview
+autocmd Filetype php setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+" set tabstop=4
+" set shiftwidth=4
+" set softtabstop=4
+" set expandtab
+
+set foldmethod=indent
+set foldenable
+set foldlevel=99
+let g:DisableAutoPHPFolding = 1
+" Press Space to turn off highlighting and clear any message already displayed.
+:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" Copy to 'clipboard registry'
+vmap <C-c> "*y
+" Select all text
+nmap <C-a> ggVG
+
+set clipboard=unnamed
+
+" Show matching brackets when text indicator is over them
+set showmatch
+" How many tenths of a second to blink when matching brackets
+set mat=2
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+"
+"insert a new line in normal mode
+nmap <S-Enter> O<Esc>
+
+"navigate in quickfix window
+nmap <silent> <A-n> :cn<CR>zv
+nmap <silent> <A-p> :cp<CR>zv
+
+"navigate in quickfix window
+nmap <silent> <A-[> :lprev<CR>zv
+nmap <silent> <A-]> :lnext<CR>zv
+
+"move swap files to vim tmp directories
+set backupdir=~/.vim/tmp/backup_files//
+set directory=~/.vim/tmp/swap_files//
+set undodir=~/.vim/tmp/undo_files//
+
+"----------------------------------------------------------
+"PLUGINS
+"---------------------------------------------------------
+"
+"NerdTREE
+"
+map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"
+"maximizer
+"
+nnoremap <silent><F3> :MaximizerToggle<CR>
+vnoremap <silent><F3> :MaximizerToggle<CR>gv
+inoremap <silent><F3> <C-o>:MaximizerToggle<CR> 
+
+"Jedi
+let g:jedi#auto_initialization = 1
+let g:jedi#show_call_signatures = 0
+let g:jedi#use_tabs_not_buffers = 0
+
+"Python-Mode
+"turn off rope from python mode. Conflict with jedi-vim
+let g:pymode_rope = 0
+let ropevim_vim_completion = 0
+
+" 
+" "pymode options
+" let g:pymode_lint = 1
+let g:pymode_lint = 1
+let g:pymode_lint_write = 0
+let g:pymode_lint_checkers = ['pyflakes']
+" let g:pymode_lint_checkers = []
+let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
+let g:pymode_lint_sort = ['E', 'C', 'I']
+let g:pymode_lint_cwindow = 1
+let g:pymode_folding = 0
+let g:pymode_motion = 1
+let g:pymode_virtualenv = 1
+let g:pymode_syntax_all = 1
+let g:pymode_syntax = 1
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+let g:pymode_virtualenv_path = $VIRTUAL_ENV
+let g:pymode_lint_message = 1
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+
+
+"minibuf exproler <leader>mbe to open
+let g:miniBufExplCycleArround = 1
+map <Leader>mbe :MBEOpen<cr>
+map <Leader>mbc :MBEClose<cr>
+map <Leader>mbt :MBEToggle<cr>
+
+map <Leader><TAB> :MBEbf<CR>
+
+map <Leader>1 :MBEbn<CR>
+map <Leader>2 :MBEbp<CR>
+
+"ctrlP
+set wildignore+=*.pyc
+set wildignore+=**/*egg*
+set wildignore+=**/setup.py
+set wildignore+=**/__init__.py
+
+"fugitive helper functions
+autocmd BufReadPost fugitive://* set bufhidden=delete
+" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+set laststatus=2 "always show the status line
+"powerline setup. Requires pip install powerline-status
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
+
+nmap <F8> :TagbarToggle<CR> 
+
+" django html highlighting
+" au BufNewFile,BufRead *.html set filetype=htmldjango
+au BufNewFile,BufRead *.jinja2 set filetype=htmljinja
+
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
+autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
+
+"vimux
+map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
+map <Leader>tl :call VimuxRunCommand("!! \n")<CR>
+
+"<ctrl-s> for saving
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
