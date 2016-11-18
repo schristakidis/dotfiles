@@ -41,7 +41,10 @@ vim_command()
 
 alias tmux="TERM=xterm-256color tmux -2"
 
-eval `dircolors ~/.dotfiles/resources/dircolors-solarized/dircolors.ansi-dark`
+if [[ `uname` != 'Darwin' ]]; then
+	eval `dircolors ~/.dotfiles/resources/dircolors-solarized/dircolors.ansi-dark`
+fi
+
 
 export LC_CTYPE=en_US.UTF-8
 

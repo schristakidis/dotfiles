@@ -7,7 +7,7 @@
 	last = log -1 HEAD
 	stash-unapply = !git stash show -p | git apply -R
 	ctags = !.git/hooks/ctags
-	tree = log --graph --decorate --pretty=oneline --abrev-commit
+	tree = log --graph --decorate --pretty=oneline --abbrev-commit
 [user]
 	name = Sakis Christakidis
 	email = athanasios.christakidis@motionpicturesolutions.com

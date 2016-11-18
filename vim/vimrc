@@ -28,14 +28,14 @@ let mapleader=','
 " automatically change window's cwd to file's dir
 set autochdir
 
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
 autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview
 autocmd Filetype php setlocal ts=2 ts=2 sw=2 sts=2 expandtab
 autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
 autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
-" set tabstop=4
-" set shiftwidth=4
-" set softtabstop=4
-" set expandtab
 
 set foldmethod=indent
 set foldenable
