@@ -18,3 +18,8 @@
         -
           command: ~/.dotfiles/resources/fonts/install.sh
           stdout: true
+        -
+          command: ~/.dotfiles/resources/gnome-terminal-colors-solarized/set_dark.sh
+          stdout: true
+          stdin: true
+
