@@ -77,8 +77,8 @@
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
 [submodule "fonts"]
-	path = fonts
+	path = resources/fonts
 	url = https://github.com/powerline/fonts.git
 [submodule "dircolors-solarized"]
-	path = dircolors-solarized
+	path = resources/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized.git

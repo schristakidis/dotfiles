@@ -16,5 +16,5 @@
           command: git submodule update --init --recursive
           stdout: true
         -
-          command: ~/.dotfiles/fonts/install.sh
+          command: ~/.dotfiles/resources/fonts/install.sh
           stdout: true
