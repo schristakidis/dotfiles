@@ -176,3 +176,9 @@ map <Leader>tl :call VimuxRunCommand("!! \n")<CR>
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
+
+"quickfix window
+map <Leader>q :cclose<CR>
+map <Leader>o :copen<CR>
+map <Leader>n :cnext<CR>
+map <Leader>p :cprevious<CR>
