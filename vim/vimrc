@@ -182,3 +182,11 @@ map <Leader>q :cclose<CR>
 map <Leader>o :copen<CR>
 map <Leader>n :cnext<CR>
 map <Leader>p :cprevious<CR>
+
+
+"vim-go specific
+let g:go_list_type = "quickfix"
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
