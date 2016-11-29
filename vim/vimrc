@@ -66,14 +66,13 @@ map <C-l> <C-W>l
 "insert a new line in normal mode
 nmap <S-Enter> O<Esc>
 
-"quickfix window
-map <Leader>q :cclose<CR>
-map <Leader>o :copen<CR>
+"quickfix window and location list
+"From ListToggle Plugin
+"use <leader>l or q to toggle the location or quick fix winodows 
+" From unimpaired plugin
+" Use ]q [q [Q ]Q
+" ]l [l ]L [L
 
-"location list
-map <Leader>lo :lopen<CR>
-map <Leader>lc :lclose<CR>
-"
 "move swap files to vim tmp directories
 set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
@@ -109,6 +108,7 @@ let ropevim_vim_completion = 0
 " let g:pymode_lint = 1
 let g:pymode_lint = 1
 let g:pymode_lint_write = 0
+let g:pymode_lint_on_write = 0
 let g:pymode_lint_checkers = ['pyflakes']
 " let g:pymode_lint_checkers = []
 let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
