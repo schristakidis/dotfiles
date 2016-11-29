@@ -38,6 +38,7 @@ autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
 autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
 
 set foldmethod=indent
+set foldignore=
 set foldenable
 set foldlevel=99
 let g:DisableAutoPHPFolding = 1
@@ -65,14 +66,14 @@ map <C-l> <C-W>l
 "insert a new line in normal mode
 nmap <S-Enter> O<Esc>
 
-"navigate in quickfix window
-nmap <silent> <A-n> :cn<CR>zv
-nmap <silent> <A-p> :cp<CR>zv
+"quickfix window
+map <Leader>q :cclose<CR>
+map <Leader>o :copen<CR>
 
-"navigate in quickfix window
-nmap <silent> <A-[> :lprev<CR>zv
-nmap <silent> <A-]> :lnext<CR>zv
-
+"location list
+map <Leader>lo :lopen<CR>
+map <Leader>lc :lclose<CR>
+"
 "move swap files to vim tmp directories
 set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
