@@ -38,11 +38,9 @@ values."
      ;; ----------------------------------------------------------------
      ivy
      python
-     flycheck
      auto-completion
-     ;; better-defaults
      emacs-lisp
-     ;; git
+     git
      ;; markdown
      ;; org
      ;; (shell :variables
@@ -50,7 +48,8 @@ values."
      ;;        shell-default-position 'bottom)
      semantic
      syntax-checking
-     version-control
+     tmux
+     ;; version-control
      ;; spell-checking
      )
    ;; List of additional packages that will be installed without being
@@ -311,10 +310,11 @@ you should place your code here."
 
   (spaceline-toggle-buffer-size-off)
 
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+  ;; This are defined in the tmux layer
+  ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+  ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+  ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
   (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
   (define-key evil-normal-state-map (kbd ", SPC") 'spacemacs/evil-search-clear-highlight)
@@ -326,9 +326,11 @@ you should place your code here."
 
   ;; ivy find buffer bindings
   (define-key ivy-switch-buffer-map (kbd "C-v") (kbd "M-o j"))
-  
-  (counsel-projectile-on)
-  (define-key counsel-projectile-map (kbd "C-v") (kbd "M-o j"))
+
+  (with-eval-after-load 'counsel-projectile
+    (define-key counsel-projectile-map (kbd "C-v") (kbd "M-o j")))
+
+  (evil-ex-define-cmd "p" 'counsel-projectile-find-file)
 
 
 
