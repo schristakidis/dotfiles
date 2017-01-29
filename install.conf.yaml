@@ -24,4 +24,11 @@
           command: ~/.dotfiles/resources/gnome-terminal-colors-solarized/set_dark.sh
           stdout: true
           stdin: true
+        -
+          command: git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+          stdout: true
+        - 
+          command: git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/pyenv-virtualenvwrapper
+          stdout: true
+
 

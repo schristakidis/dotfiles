@@ -48,4 +48,9 @@ fi
 
 export LC_CTYPE=en_US.UTF-8
 
-. /usr/local/bin/virtualenvwrapper.sh
+# . /usr/local/bin/virtualenvwrapper.sh
+
+#pyenv
+export PATH="/home/sakis/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+pyenv virtualenvwrapper_lazy
