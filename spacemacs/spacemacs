@@ -52,7 +52,8 @@ values."
      (evil-snipe :variables
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
      search-engine
-     ;; version-control
+     ibuffer
+     version-control
      ;; spell-checking
      )
    ;; List of additional packages that will be installed without being
@@ -340,9 +341,10 @@ you should place your code here."
   (spacemacs/set-leader-keys "G" 'engine/search-google)
   (spacemacs/set-leader-keys "s j" 'helm-semantic)
 
-  
+  (define-key evil-normal-state-map (kbd ", m") 'spacemacs/toggle-maximize-buffer)
+  (define-key evil-normal-state-map (kbd ", M") 'ace-swap-window)
 
-  )
+)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
