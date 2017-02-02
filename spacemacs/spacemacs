@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -313,7 +314,17 @@ you should place your code here."
   (set-terminal-parameter nil 'background-mode 'dark)
   (spacemacs/load-theme 'solarized)
 
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (set-terminal-parameter nil 'background-mode 'dark)
+                  (spacemacs/load-theme 'solarized)))
+    (spacemacs/load-theme 'solarized))
+
+
   (spaceline-toggle-buffer-size-off)
+
   (setq vc-follow-symlinks t)
 
   ;; This are defined in the tmux layer
@@ -351,7 +362,6 @@ you should place your code here."
    ranger-cleanup-on-disable t
    ranger-show-dotfiles t
    ranger-ignored-extensions '("mkv" "iso" "mp4"))
-
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
