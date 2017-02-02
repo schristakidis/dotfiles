@@ -38,6 +38,7 @@ values."
      ;; ----------------------------------------------------------------
      ivy
      python
+     yaml
      auto-completion
      emacs-lisp
      git
@@ -135,9 +136,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(spacemacs-dark
-                         material
-                         solarized
-                         monokai)
+                         solarized)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -347,11 +346,11 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd ", m") 'spacemacs/toggle-maximize-buffer)
   (define-key evil-normal-state-map (kbd ", M") 'ace-swap-window)
 
+  (ranger-override-dired-mode t)
   (setq
    ranger-cleanup-on-disable t
    ranger-show-dotfiles t
    ranger-ignored-extensions '("mkv" "iso" "mp4"))
-
 
 )
 
