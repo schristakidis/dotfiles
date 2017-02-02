@@ -54,6 +54,8 @@ values."
      search-engine
      ibuffer
      version-control
+     (ranger :variables
+             ranger-show-preview t)
      ;; spell-checking
      )
    ;; List of additional packages that will be installed without being
@@ -344,6 +346,12 @@ you should place your code here."
 
   (define-key evil-normal-state-map (kbd ", m") 'spacemacs/toggle-maximize-buffer)
   (define-key evil-normal-state-map (kbd ", M") 'ace-swap-window)
+
+  (setq
+   ranger-cleanup-on-disable t
+   ranger-show-dotfiles t
+   ranger-ignored-extensions '("mkv" "iso" "mp4"))
+
 
 )
 
