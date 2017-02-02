@@ -313,6 +313,7 @@ you should place your code here."
   (spacemacs/load-theme 'solarized)
 
   (spaceline-toggle-buffer-size-off)
+  (setq vc-follow-symlinks t)
 
   ;; This are defined in the tmux layer
   ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
