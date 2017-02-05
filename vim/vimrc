@@ -156,9 +156,9 @@ autocmd BufReadPost fugitive://* set bufhidden=delete
 
 set laststatus=2 "always show the status line
 "powerline setup. Requires pip install powerline-status
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 
 nmap <F8> :TagbarToggle<CR> 
 

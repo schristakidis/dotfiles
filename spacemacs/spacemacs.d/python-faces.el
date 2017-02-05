@@ -130,7 +130,6 @@
      '("XXX\\|TODO\\|FIXME" 0 font-lock-type-face t)
      ;; operators
      '("\\([|!+=&/%*^<>-]+\\)" 1 font-lock-keyword-face)
-
      ))
   "Additional expressions to highlight in Python mode.")
 
