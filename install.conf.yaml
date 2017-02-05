@@ -10,7 +10,7 @@
         ~/.vim: vim
         ~/.vimrc: vim/vimrc
         ~/.gitconfig: git/gitconfig
-        ~/.spacemacs: spacemacs/spacemacs
+        ~/.spacemacs.d: spacemacs/spacemacs.d
         ~/.dotfiles/zsh/.zprezto/modules/completion/external/src/_docker: zsh_extra/_docker
 
 - shell:

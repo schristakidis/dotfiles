@@ -31,7 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -40,10 +39,10 @@ values."
      ivy
      python
      yaml
+     markdown
      auto-completion
      emacs-lisp
      git
-     ;; markdown
      ;; org
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -142,9 +141,9 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Source Code Pro "
                                :size 13
-                               :weight normal
+                               :weight semi-bold
                                :width normal
                                :powerline-scale 1.1)
    ;; The leader key
@@ -273,7 +272,7 @@ values."
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
-   dotspacemacs-highlight-delimiters 'all
+   dotspacemacs-highlight-delimiters 'current
    ;; If non nil, advise quit functions to keep server open when quitting.
    ;; (default nil)
    dotspacemacs-persistent-server nil
@@ -300,7 +299,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  )
+
+  (push "~/.spacemacs.d" load-path)
+  (require 'python-faces)
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -321,7 +323,6 @@ you should place your code here."
                   (set-terminal-parameter nil 'background-mode 'dark)
                   (spacemacs/load-theme 'solarized)))
     (spacemacs/load-theme 'solarized))
-
 
   (spaceline-toggle-buffer-size-off)
 
