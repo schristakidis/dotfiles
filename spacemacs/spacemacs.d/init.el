@@ -363,6 +363,16 @@ you should place your code here."
    ranger-cleanup-on-disable t
    ranger-show-dotfiles t
    ranger-ignored-extensions '("mkv" "iso" "mp4"))
+
+  ;; draw line at 80 characters
+  (define-globalized-minor-mode
+    global-fci-mode fci-mode (lambda () (fci-mode 1)))
+  ;; (global-fci-mode t)
+
+  ; specify the fringe width for windows -- this sets both the left and
+  ; right fringes to 10
+  (fringe-mode 10)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
