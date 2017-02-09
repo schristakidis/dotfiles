@@ -349,7 +349,7 @@ you should place your code here."
   (with-eval-after-load 'counsel-projectile
     (define-key counsel-projectile-map (kbd "C-v") (kbd "M-o j")))
 
-  (evil-ex-define-cmd "p" 'counsel-projectile-find-file)
+  ;; (evil-ex-define-cmd "p" 'counsel-projectile-find-file)
 
   (setq evil-snipe-enable-highlight nil)
 
@@ -377,6 +377,10 @@ you should place your code here."
   (set-face-attribute 'evil-search-highlight-persist-highlight-face nil
                       :foreground "OrangeRed3"
                       :background "Black")
+
+  (define-key evil-normal-state-map (kbd ", b") 'ivy-switch-buffer)
+  (define-key evil-normal-state-map (kbd ", f") 'counsel-find-file)
+  (define-key evil-normal-state-map (kbd ", p") 'counsel-projectile-find-file)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
