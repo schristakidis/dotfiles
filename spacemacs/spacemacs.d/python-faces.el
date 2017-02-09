@@ -98,6 +98,9 @@
   	(kw5 (mapconcat 'identity
         '("type" "int" "float" "tuple" "str" "dict" "list" "bool")
   			"\\|"))
+  	(kw6 (mapconcat 'identity
+                    '("from" "import")
+        "\\|"))
 	)
     (list
      '("\\([@$]+\\)" 1 font-lock-preprocessor-face)
@@ -105,7 +108,7 @@
      ;; keywords
      (cons (concat "\\<\\(" kw1 "\\)\\>[ \n\t(]") 1)
      ;; builtins when they don't appear as object attributes
-     (list (concat "\\([^. \t]\\|^\\)[ \t]*\\<\\(" kw3 "\\)\\>[ \n\t(]") 2
+     (list (concat "\\([^. _\t]\\|^\\)[ \t]*\\<\\(" kw3 "\\)\\>[ \n\t(]") 2
 	   'font-lock-function-name-face)
      ;; block introducing keywords with immediately following colons.
      ;; Yes "except" is in both lists.
@@ -125,7 +128,8 @@
      '("\\<\\(None\\|True\\|False\\|Ellipsis\\|object\\)\\>"
        1 font-lock-type-face)
      '("\\<\\(self\\)\\>" 1 font-lock-function-name-face)
-     '("\\<\\(from\\|import\\)\\>" 1 font-lock-preprocessor-face)
+     (list (concat "\\([^. _\t]\\|^\\)[ \t]*\\<\\(" kw6 "\\)\\>[ \n\t(]") 2
+           'font-lock-preprocessor-face)
      ;; XXX, TODO, and FIXME tags
      '("XXX\\|TODO\\|FIXME" 0 font-lock-type-face t)
      ;; operators

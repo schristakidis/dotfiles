@@ -374,6 +374,9 @@ you should place your code here."
   ; right fringes to 10
   (fringe-mode 10)
 
+  (set-face-attribute 'evil-search-highlight-persist-highlight-face nil
+                      :foreground "OrangeRed3"
+                      :background "Black")
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
