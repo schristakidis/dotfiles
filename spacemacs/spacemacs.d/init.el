@@ -314,6 +314,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (xterm-mouse-mode -1)
+  (setq mouse-sel-mode t)
+  (setq x-select-enable-clipboard t)
+  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+
   (set-terminal-parameter nil 'background-mode 'dark)
   (spacemacs/load-theme 'solarized)
 
@@ -374,6 +378,7 @@ you should place your code here."
   ; right fringes to 10
   (fringe-mode 10)
 
+
   (set-face-attribute 'evil-search-highlight-persist-highlight-face nil
                       :foreground "OrangeRed3"
                       :background "Black")
@@ -381,6 +386,7 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd ", b") 'ivy-switch-buffer)
   (define-key evil-normal-state-map (kbd ", f") 'counsel-find-file)
   (define-key evil-normal-state-map (kbd ", p") 'counsel-projectile-find-file)
+
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
