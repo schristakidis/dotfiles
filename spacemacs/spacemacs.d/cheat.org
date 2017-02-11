@@ -1,0 +1,10 @@
+* Ranger 
+** File Actions
+   | Key | Action                                                 |
+   |-----+--------------------------------------------------------|
+   | w s | exit ranger and open selected file in vertical split   |
+   | w v | exit ranger and open selected file in horizontal split |
+   | w f | exit ranger and open selected file in new frame        |
+   | w e | open the selected file in external app                 |
+
+   

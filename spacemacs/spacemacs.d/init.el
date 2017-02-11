@@ -31,7 +31,6 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -45,6 +44,7 @@ values."
      emacs-lisp
      git
      org
+     html
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -68,7 +68,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(git-gutter)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -330,6 +330,11 @@ you should place your code here."
     (spacemacs/load-theme 'solarized))
 
   (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-which-function-off)
+  (setq
+   spaceline-window-numbers-unicode nil
+   spaceline-workspace-numbers-unicode nil)
 
   (setq vc-follow-symlinks t)
 
