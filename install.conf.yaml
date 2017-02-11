@@ -30,5 +30,8 @@
         - 
           command: git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/pyenv-virtualenvwrapper
           stdout: true
+        -
+          command: git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+          stdout: true
 
 

@@ -68,7 +68,8 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '(git-gutter)
+   dotspacemacs-excluded-packages '(git-gutter
+                                    git-gutter-fringe)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -313,10 +314,14 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (xterm-mouse-mode -1)
-  (setq mouse-sel-mode t)
-  (setq x-select-enable-clipboard t)
-  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+  (defun is-in-terminal()
+    (not (display-graphic-p)))
+
+  (when (is-in-terminal)
+    (xterm-mouse-mode -1)
+    (setq mouse-sel-mode t)
+    (setq x-select-enable-clipboard t)
+    (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
   (set-terminal-parameter nil 'background-mode 'dark)
   (spacemacs/load-theme 'solarized)
@@ -380,9 +385,8 @@ you should place your code here."
   ;; (global-fci-mode t)
 
   ; specify the fringe width for windows -- this sets both the left and
-  ; right fringes to 10
-  (fringe-mode 10)
-
+  ; right fringes to 16
+  (fringe-mode 16)
 
   (set-face-attribute 'evil-search-highlight-persist-highlight-face nil
                       :foreground "OrangeRed3"
@@ -392,7 +396,18 @@ you should place your code here."
   (define-key evil-normal-state-map (kbd ", f") 'counsel-find-file)
   (define-key evil-normal-state-map (kbd ", p") 'counsel-projectile-find-file)
 
-)
+  (setq flycheck-idle-change-delay 2)
 
-;; Do not write anything past this comment. This is where Emacs will
-;; auto-generate custom variable definitions.
+  (when (is-in-terminal)
+    (setq-default linum-format "%4d \u2502")
+    (global-git-gutter+-mode -1))
+
+  (when (display-graphic-p)
+    (diff-hl-mode)
+    (diff-hl-flydiff-mode)
+    (git-gutter+-toggle-fringe)
+    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+
+-;; Do not write anything past this comment. This is where Emacs will
+-;; auto-generate custom variable definitions.
+)
