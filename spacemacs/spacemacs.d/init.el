@@ -408,6 +408,13 @@ you should place your code here."
     (git-gutter+-toggle-fringe)
     (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
 
--;; Do not write anything past this comment. This is where Emacs will
--;; auto-generate custom variable definitions.
+  (evil-ex-define-cmd "diff" 'magit-ediff-compare)
+  (evil-ex-define-cmd "diffu" 'magit-ediff-show-unstaged)
+  (evil-ex-define-cmd "diffw" 'magit-ediff-show-working-tree)
+
+
+  (require 'ediff-faces)
 )
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
