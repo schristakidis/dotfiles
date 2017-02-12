@@ -6,5 +6,32 @@
    | w v | exit ranger and open selected file in horizontal split |
    | w f | exit ranger and open selected file in new frame        |
    | w e | open the selected file in external app                 |
-
-   
+* Misc
+** Parentheses
+*** evil-surround : ysiw( to wrap a word in (  
+*** spacemas : S-v-s-) which is S-v expand region (visual) and s is evil-surround
+** Region selection and narrowing
+*** Selection : <SPC> v 	initiate expand-region mode then...
+    - v: expand the region by one semantic unit
+    - V: 	contract the region by one semantic unit
+    - r: 	reset the region to initial selection
+*** Narrowing: <SPC> p initiate narrowing mode then 
+    -  f: 	narrow the buffer to the current function
+    -  p: 	nwarrow the buffer to the visible page 
+    -  r: 	niwarrow the buffer to the selected text 
+    -  w: 	wiwiden, i.e show the whole buffer again
+** Multi-cursors
+*** Normal: g r
+    - j : add cursor to next match
+    - k : add cursor to previous match
+    - n : skip and goto next
+    - p : skip and goto to previous
+    - u : exit multi cursor
+*** Visual: Select visual block and 
+    - g I : multi-cursors on block
+    - g A : append cursors on block
+** Evil search mode
+*** g n 
+    - c g n : change next selection
+    - d g n : delete next selection
+    - ...

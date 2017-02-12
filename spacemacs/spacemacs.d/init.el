@@ -302,6 +302,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
 
+  (setq evil-search-module (quote evil-search))
   (push "~/.spacemacs.d" load-path)
   (require 'python-faces)
 )
@@ -414,6 +415,7 @@ you should place your code here."
 
 
   (require 'ediff-faces)
+  (require 'evil-mc-visual)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
