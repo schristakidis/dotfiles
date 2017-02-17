@@ -45,6 +45,7 @@ values."
      git
      org
      html
+     nlinum
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -260,7 +261,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -344,6 +345,7 @@ you should place your code here."
 
   (setq vc-follow-symlinks t)
 
+  (global-linum-mode t)
   ;; This are defined in the tmux layer
   ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
