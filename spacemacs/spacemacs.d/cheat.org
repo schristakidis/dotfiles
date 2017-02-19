@@ -8,7 +8,10 @@
    | w e | open the selected file in external app                 |
 * Misc
 ** Parentheses
-*** evil-surround : ysiw( to wrap a word in (  
+*** evil-surround :
+**** ysiw( to wrap a word in (
+**** change surrounding (normal state) : cs<old><new>
+**** add surrounfing (visual) : s or for symbols in new lines gS 
 *** spacemas : S-v-s-) which is S-v expand region (visual) and s is evil-surround
 ** Region selection and narrowing
 *** Selection : <SPC> v 	initiate expand-region mode then...
@@ -35,3 +38,5 @@
     - c g n : change next selection
     - d g n : delete next selection
     - ...
+** Evil matchit 
+   Pressing % goes not matching symbol
