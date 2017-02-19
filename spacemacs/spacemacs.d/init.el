@@ -56,7 +56,9 @@ values."
                  evil-snipe-enable-alternate-f-and-t-behaviors t)
      search-engine
      ibuffer
-     version-control
+     (version-control :variables
+                      version-control-diff-tool 'git-gutter+
+                      version-control-global-margin -1)
      (ranger :variables
              ranger-show-preview t)
      ;; spell-checking
@@ -70,7 +72,8 @@ values."
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '(git-gutter
-                                    git-gutter-fringe)
+                                    git-gutter-fringe
+                                    linum)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -316,71 +319,30 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
-  (defun is-in-terminal()
-    (not (display-graphic-p)))
-
   (when (is-in-terminal)
     (xterm-mouse-mode -1)
     (setq mouse-sel-mode t)
     (setq x-select-enable-clipboard t)
     (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
 
-  (set-terminal-parameter nil 'background-mode 'dark)
-  (spacemacs/load-theme 'solarized)
-
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (select-frame frame)
-                  (set-terminal-parameter nil 'background-mode 'dark)
-                  (spacemacs/load-theme 'solarized)))
-    (spacemacs/load-theme 'solarized))
-
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-toggle-minor-modes-off)
-  (spaceline-toggle-which-function-off)
-  (setq
-   spaceline-window-numbers-unicode nil
-   spaceline-workspace-numbers-unicode nil)
+  (set-solarized-theme)
+  (configure-spaceline)
 
   (setq vc-follow-symlinks t)
 
-  (global-linum-mode t)
-  ;; This are defined in the tmux layer
-  ;; (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  ;; (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  ;; (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
-  ;; (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-
-  (define-key evil-normal-state-map (kbd "C-i") 'evil-jump-forward)
-  (define-key evil-normal-state-map (kbd ", SPC") 'spacemacs/evil-search-clear-highlight)
+  (global-linum-mode -1)
+  (global-nlinum-mode t)
 
   (setq ivy-use-virtual-buffers t)
-  ;; counsel find files bindings
-  (define-key counsel-find-file-map (kbd "C-v") (kbd "M-o w"))
-  (define-key counsel-find-file-map (kbd "C-s") (kbd "M-o s"))
-
-  ;; ivy find buffer bindings
-  (define-key ivy-switch-buffer-map (kbd "C-v") (kbd "M-o j"))
-
-  (with-eval-after-load 'counsel-projectile
-    (define-key counsel-projectile-map (kbd "C-v") (kbd "M-o j")))
-
-  ;; (evil-ex-define-cmd "p" 'counsel-projectile-find-file)
 
   (setq evil-snipe-enable-highlight nil)
-
-  (spacemacs/set-leader-keys "G" 'engine/search-google)
-  (spacemacs/set-leader-keys "s j" 'helm-semantic)
-
-  (define-key evil-normal-state-map (kbd ", m") 'spacemacs/toggle-maximize-buffer)
-  (define-key evil-normal-state-map (kbd ", M") 'ace-swap-window)
 
   (ranger-override-dired-mode t)
   (setq
    ranger-cleanup-on-disable t
    ranger-show-dotfiles t
    ranger-ignored-extensions '("mkv" "iso" "mp4"))
+
 
   ;; draw line at 80 characters
   (define-globalized-minor-mode
@@ -395,30 +357,67 @@ you should place your code here."
                       :foreground "OrangeRed3"
                       :background "Black")
 
-  (define-key evil-normal-state-map (kbd ", b") 'ivy-switch-buffer)
-  (define-key evil-normal-state-map (kbd ", f") 'counsel-find-file)
-  (define-key evil-normal-state-map (kbd ", p") 'counsel-projectile-find-file)
-
   (setq flycheck-idle-change-delay 2)
 
-  (when (is-in-terminal)
-    (setq-default linum-format "%4d \u2502")
-    (global-git-gutter+-mode -1))
+  (customize-diff)
 
-  (when (display-graphic-p)
-    (diff-hl-mode)
-    (diff-hl-flydiff-mode)
-    (git-gutter+-toggle-fringe)
-    (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh))
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions #'customize-linenum-daemon)
+    (customize-linenum))
 
-  (evil-ex-define-cmd "diff" 'magit-ediff-compare)
-  (evil-ex-define-cmd "diffu" 'magit-ediff-show-unstaged)
-  (evil-ex-define-cmd "diffw" 'magit-ediff-show-working-tree)
-
-
+  (require 'custom-bindings)
   (require 'ediff-faces)
   (require 'evil-mc-visual)
 )
 
+(defun is-in-terminal()
+  (not (display-graphic-p)))
+
+(defun configure-spaceline()
+  (spaceline-toggle-buffer-size-off)
+  (spaceline-toggle-minor-modes-off)
+  (spaceline-toggle-which-function-off)
+  (setq
+   spaceline-window-numbers-unicode nil
+   spaceline-workspace-numbers-unicode nil)
+  )
+
+(defun set-solarized-theme()
+  (set-terminal-parameter nil 'background-mode 'dark)
+  (spacemacs/load-theme 'solarized)
+
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (set-terminal-parameter nil 'background-mode 'dark)
+                  (spacemacs/load-theme 'solarized)))
+      (spacemacs/load-theme 'solarized))
+  )
+
+(defun customize-diff()
+  (global-diff-hl-mode t)
+  (diff-hl-margin-mode t)
+  (setq-default version-control-global-margin -1)
+  (setq-default diff-hl-margin-side 'right)
+  (diff-hl-flydiff-mode)
+  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+  )
+
+(defun customize-linenum-daemon(frame)
+  (if (is-in-terminal)
+      (progn
+        (select-frame frame)
+        (setq-default nlinum-format "%4d \u2502"))
+    (progn
+      (select-frame frame)
+      (setq-default nlinum-format "%4d"))))
+
+(defun customize-linenum()
+  (if (is-in-terminal)
+      (setq-default nlinum-format "%4d \u2502")
+    (setq-default nlinum-format "%4d")))
+
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+;; If there is more than one, they won't work right.
