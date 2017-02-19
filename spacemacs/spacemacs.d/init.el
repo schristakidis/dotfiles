@@ -13,7 +13,7 @@ values."
    dotspacemacs-distribution 'spacemacs
    ;; Lazy installation of layers (i.e. layers are installed only when a file
    ;; with a supported type is opened). Possible values are `all', `unused'
-   ;; and `nil'. `unused' will lazy install only unused layers (i.e. layers
+   ;; and `nil'. `unusspacemacs/spacemacs.d/init.eled' will lazy install only unused layers (i.e. layers
    ;; not listed in variable `dotspacemacs-configuration-layers'), `all' will
    ;; lazy install any layer that support lazy installation even the layers
    ;; listed in `dotspacemacs-configuration-layers'. `nil' disable the lazy
@@ -320,10 +320,10 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
   (when (is-in-terminal)
-    (xterm-mouse-mode -1)
-    (setq mouse-sel-mode t)
-    (setq x-select-enable-clipboard t)
-    (setq interprogram-paste-function 'x-cut-buffer-or-selection-value))
+    (xterm-mouse-mode -1))
+
+  (setq select-enable-clipboard t)
+  (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
   (set-solarized-theme)
   (configure-spaceline)
