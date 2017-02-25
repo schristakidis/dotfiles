@@ -135,6 +135,10 @@ let g:syntastic_python_checkers = ["pyflakes", "flake8"]
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
+" Autoformatter
+noremap = :Autoformat<CR>
+let g:formatters_python = ['yapf']
+
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
 map <Leader>mbe :MBEOpen<cr>
