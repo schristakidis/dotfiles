@@ -1,6 +1,11 @@
 * Pure Vim
 ** Navigating vim documentation
    - C-]
+** Vim Surround
+   - add in visual mode: S <symbol>
+** Auto format python 
+   - whole buffer : =
+   - also visual mode =
    
 * Ranger 
 ** File Actions
@@ -16,7 +21,7 @@
 **** ysiw( to wrap a word in (
 **** change surrounding (normal state) : cs<old><new>
 **** add surrounfing (visual) : s or for symbols in new lines gS 
-*** spacemas : S-v-s-) which is S-v expand region (visual) and s is evil-surround
+*** spacemacs : S-v-s-) which is S-v expand region (visual) and s is evil-surround
 ** Region selection and narrowing
 *** Selection : <SPC> v 	initiate expand-region mode then...
     - v: expand the region by one semantic unit
