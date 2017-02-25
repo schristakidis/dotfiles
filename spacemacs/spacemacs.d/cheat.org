@@ -25,6 +25,25 @@
 ** Macros 
    - @@ executes the last macro
    - n@q executes n times the macro stored in q
+** Easy Clip 
+*** NEW CUTTING BEHAVIOUR
+**** Deletion
+     - d now just deletes and doesn't yank
+     - m now deletes and yanks
+     - To set a mark use gm
+**** Substitution
+     s now changes the contents of the selection to the contents of the register
+     - si(: subtitutes the word inside ( to the contents of the register
+     - "asiw: su the word to the contents of register a
+**** Autoformating 
+     pasting will be auto formatted
+     <leader>cf: to toggle betwenn formatted or not 
+**** Pasting Cycle 
+     Immediatly after pasting use c-f to cycle through the yank ring
+
+
+
+
 
 
 * Ranger 

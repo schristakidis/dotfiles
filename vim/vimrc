@@ -151,6 +151,21 @@ omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
+" Easy Clip
+" Clash between m (d without redirecting to black hole) and setting a mark
+" Now to set a mark use gm
+nnoremap gm m
+" using s to substitute
+let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipAutoFormat = 1
+nmap <leader>cf <plug>EasyClipToggleFormattedPaste
+" Paste in insert mode with c-v
+imap <c-v> <plug>EasyClipInsertModePaste
+
+let g:EasyClipUsePasteToggleDefaults = 0
+
+nmap <c-f> <plug>EasyClipSwapPasteForward
+
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
 map <Leader>mbe :MBEOpen<cr>
