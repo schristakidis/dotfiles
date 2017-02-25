@@ -105,16 +105,14 @@ let ropevim_vim_completion = 0
 
 " 
 " "pymode options
-" let g:pymode_lint = 1
 let g:pymode_lint = 0
-let g:pymode_lint_write = 0
-let g:pymode_lint_on_write = 0
-let g:pymode_lint_checkers = ['pyflakes']
-" let g:pymode_lint_checkers = []
-let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
-let g:pymode_lint_sort = ['E', 'C', 'I']
+let g:pymode_lint_write = 1
+let g:pymode_lint_on_write = 1
+let g:pymode_lint_checkers = ['pyflakes', 'pep8']
+" let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
+" let g:pymode_lint_sort = ['E', 'C', 'I']
 let g:pymode_lint_cwindow = 1
-let g:pymode_folding = 0
+let g:pymode_folding = 1
 let g:pymode_motion = 1
 let g:pymode_virtualenv = 1
 let g:pymode_syntax_all = 1
@@ -132,7 +130,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 
-let g:synanstic_python_checkers = ["flake8"] 
+let g:syntastic_python_checkers = ["pyflakes", "flake8"]
 " Close syntastic loaction window also with :bd
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
