@@ -1,3 +1,7 @@
+* Pure Vim
+** Navigating vim documentation
+   - C-]
+   
 * Ranger 
 ** File Actions
    | Key | Action                                                 |

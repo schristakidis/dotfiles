@@ -106,7 +106,7 @@ let ropevim_vim_completion = 0
 " 
 " "pymode options
 " let g:pymode_lint = 1
-let g:pymode_lint = 1
+let g:pymode_lint = 0
 let g:pymode_lint_write = 0
 let g:pymode_lint_on_write = 0
 let g:pymode_lint_checkers = ['pyflakes']
@@ -129,9 +129,13 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_check_on_open = 1
 
+let g:synanstic_python_checkers = ["flake8"] 
+" Close syntastic loaction window also with :bd
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
