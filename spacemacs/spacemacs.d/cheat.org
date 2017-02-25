@@ -6,7 +6,24 @@
 ** Auto format python 
    - whole buffer : =
    - also visual mode =
-   
+** Git Gutter 
+   - Jump between hunks : ]h [h
+   - Preview : <leader>hp
+   - Stage : <leader>hs
+   - Undo : <leader>hu   
+** Python Mode 
+   | Key | Command                                                                            |
+   |-----+------------------------------------------------------------------------------------|
+   | [[  | Jump to previous class or function (normal, visual, operator modes)                |
+   | ]]  | Jump to next class or function  (normal, visual, operator modes)                   |
+   | [M  | Jump to next class or function  (normal, visual, operator modes)                   |
+   | ]M  | Jump to next class or method (normal, visual, operator modes                       |
+   | aC  | Select a class. Ex: vaC, daC, yaC, caC (normal, operator modes)                    |
+   | iC  | Select inner class. Ex: viC, diC, yiC, ciC (normal, operator modes                 |
+   | aM  | Select a function or method. Ex: vaM, daM, yaM, caM (normal, operator modes)       |
+   | iM  | Select inner function or method. Ex: viM, diM, yiM, ciM (normal, operator modes) |
+
+
 * Ranger 
 ** File Actions
    | Key | Action                                                 |

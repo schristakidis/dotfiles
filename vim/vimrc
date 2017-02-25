@@ -28,6 +28,9 @@ let mapleader=','
 " automatically change window's cwd to file's dir
 set autochdir
 
+" got this from gitgutter config
+set updatetime=250
+
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -106,8 +109,8 @@ let ropevim_vim_completion = 0
 " 
 " "pymode options
 let g:pymode_lint = 0
-let g:pymode_lint_write = 1
-let g:pymode_lint_on_write = 1
+let g:pymode_lint_write = 0
+let g:pymode_lint_on_write = 0
 let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 " let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
 " let g:pymode_lint_sort = ['E', 'C', 'I']
@@ -138,6 +141,15 @@ cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdele
 " Autoformatter
 noremap = :Autoformat<CR>
 let g:formatters_python = ['yapf']
+
+" Git Gutter
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+map ih <Plug>GitGutterTextObjectInnerPending
+omap ah <Plug>GitGutterTextObjectOuterPending
+xmap ih <Plug>GitGutterTextObjectInnerVisual
+xmap ah <Plug>GitGutterTextObjectOuterVisual
 
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
