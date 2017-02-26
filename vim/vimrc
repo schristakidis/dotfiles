@@ -81,6 +81,9 @@ set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
 set undodir=~/.vim/tmp/undo_files//
 
+nmap <silent> <leader>vo :e $MYVIMRC<CR>
+nmap <silent> <leader>vs :so $MYVIMRC<CR>
+
 "----------------------------------------------------------
 "PLUGINS
 "---------------------------------------------------------
@@ -189,6 +192,7 @@ nnoremap <silent><c-b> :CtrlPBuffer<CR>
 "fugitive helper functions
 autocmd BufReadPost fugitive://* set bufhidden=delete
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+nmap <Leader>sg :Ggrep <C-R><C-W><CR>
 
 set laststatus=2 "always show the status line
 "powerline setup. Requires pip install powerline-status
@@ -213,3 +217,11 @@ map <Leader>tl :call VimuxRunCommand("!! \n")<CR>
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
+
+
+" -----------------------------------
+"  Misc
+"  ----------------------------------
+
+" open quickfix window after grep commands
+autocmd QuickFixCmdPost *grep* cwindow

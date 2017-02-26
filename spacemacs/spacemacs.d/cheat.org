@@ -59,6 +59,17 @@
    - <F5>: purge the cache
    - <c-f> and <c-b>: cycle between modes.
    - <c-d> : switch to filename only search instead of full path.
+** QuickFix Window
+   - [q ]q : go to next/previous
+   - [Q ]Q : go to first/last
+   - <leader q> : toggle quick fix window
+   - :cnfile :cpfile : go to next/previous file in quick fix
+   - :colder :cnewere : go to previous/next search result list
+** Search
+*** Ggrep
+    - <leader>sg : search the word on cursor with ggrep (fugitive)
+
+
    
 
 
