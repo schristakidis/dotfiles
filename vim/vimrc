@@ -90,7 +90,7 @@ nmap <silent> <leader>vs :so $MYVIMRC<CR>
 "
 "NerdTREE
 "
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>nt :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "
 "maximizer
