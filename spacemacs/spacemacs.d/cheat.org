@@ -49,6 +49,10 @@
     - <C-x> : remove cursor and skip the next one
 *** Quit 
     ESC in normal mode
+** Matchit
+   - % : goes to matching symbol
+   - [% ]% : go to the start and end of the current block, respectively 
+   
 
 
 
@@ -98,4 +102,4 @@
     - d g n : delete next selection
     - ...
 ** Evil matchit 
-   Pressing % goes not matching symbol
+   Pressing % goes to matching symbol
