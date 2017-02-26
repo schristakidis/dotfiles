@@ -40,6 +40,17 @@
      <leader>cf: to toggle betwenn formatted or not 
 **** Pasting Cycle 
      Immediatly after pasting use c-f to cycle through the yank ring
+** Multi Cursors 
+*** Normal Mode
+    - <C-n> : start multi cursors for the current word
+*** Visual Mode 
+    - <C-n> : add cursor 
+    - <C-p> : remove cursor and go to previous
+    - <C-x> : remove cursor and skip the next one
+*** Quit 
+    ESC in normal mode
+
+
 
 
 

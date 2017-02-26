@@ -166,6 +166,10 @@ let g:EasyClipUsePasteToggleDefaults = 0
 
 nmap <c-f> <plug>EasyClipSwapPasteForward
 
+" Multicursors
+let g:multi_cursor_exit_from_visual_mode = 0
+let g:multi_cursor_exit_from_insert_mode = 0
+
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
 map <Leader>mbe :MBEOpen<cr>

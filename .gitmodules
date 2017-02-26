@@ -109,3 +109,6 @@
 [submodule "vim/bundle/vim-easyclip"]
 	path = vim/bundle/vim-easyclip
 	url = https://github.com/svermeulen/vim-easyclip.git
+[submodule "vim/bundle/vim-multiple-cursors"]
+	path = vim/bundle/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors.git
