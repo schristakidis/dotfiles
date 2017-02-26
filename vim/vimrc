@@ -184,8 +184,7 @@ map <Leader>2 :MBEbp<CR>
 "ctrlP
 set wildignore+=*.pyc
 set wildignore+=**/*egg*
-set wildignore+=**/setup.py
-set wildignore+=**/__init__.py
+nnoremap <silent><c-b> :CtrlPBuffer<CR>
 
 "fugitive helper functions
 autocmd BufReadPost fugitive://* set bufhidden=delete

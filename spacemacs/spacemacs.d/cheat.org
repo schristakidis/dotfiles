@@ -52,6 +52,13 @@
 ** Matchit
    - % : goes to matching symbol
    - [% ]% : go to the start and end of the current block, respectively 
+** CtrlP
+   - <c-p> : open
+   - <c-b> : open for opened buffers
+   - :CtrlPMRU: recentrly opened files
+   - <F5>: purge the cache
+   - <c-f> and <c-b>: cycle between modes.
+   - <c-d> : switch to filename only search instead of full path.
    
 
 
