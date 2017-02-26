@@ -192,7 +192,7 @@ nnoremap <silent><c-b> :CtrlPBuffer<CR>
 "fugitive helper functions
 autocmd BufReadPost fugitive://* set bufhidden=delete
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-nmap <Leader>sg :Ggrep <C-R><C-W><CR>
+nmap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
 set laststatus=2 "always show the status line
 "powerline setup. Requires pip install powerline-status
@@ -213,10 +213,16 @@ autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
 map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
 map <Leader>tl :call VimuxRunCommand("!! \n")<CR>
 
-"<ctrl-s> for saving
-noremap <silent> <C-S>          :update<CR>
-vnoremap <silent> <C-S>         <C-C>:update<CR>
-inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
+" Ack vim with Ag
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+    let g:ackprg = 'git grep -n'
+endif
+
+nnoremap \ :Ack!<SPACE> <C-R><C-W>
+let g:ackhighlight = 1
+nmap <Leader>ss :Ack!  <C-R><C-W> <CR>
+nmap <Leader>sa :Ack!   <C-R>/ <CR>
 
 
 " -----------------------------------
@@ -225,3 +231,8 @@ inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
 
 " open quickfix window after grep commands
 autocmd QuickFixCmdPost *grep* cwindow
+
+"<ctrl-s> for saving
+noremap <silent> <C-S>          :update<CR>
+vnoremap <silent> <C-S>         <C-C>:update<CR>
+inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
