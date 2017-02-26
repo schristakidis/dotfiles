@@ -211,7 +211,7 @@ autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
 
 "vimux
 map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
-map <Leader>tl :call VimuxRunCommand("!! \n")<CR>
+map <Leader>trl :call VimuxRunCommand("!! \n")<CR>
 
 " Ack vim with Ag
 if executable('ag')
@@ -221,9 +221,16 @@ endif
 
 nnoremap \ :Ack!<SPACE> <C-R><C-W>
 let g:ackhighlight = 1
-nmap <Leader>ss :Ack!  <C-R><C-W> <CR>
-nmap <Leader>sa :Ack!   <C-R>/ <CR>
+nmap <Leader>ss :Ack! <C-R><C-W> <CR>
 
+" vim test
+nmap <silent> <leader>tt :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
+let test#strategy = "vimux"
+let test#python#runner = 'nose'
 
 " -----------------------------------
 "  Misc
