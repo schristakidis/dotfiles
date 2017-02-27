@@ -57,8 +57,8 @@ values."
      search-engine
      ibuffer
      (version-control :variables
-                      version-control-diff-tool 'git-gutter+
-                      version-control-global-margin -1)
+                      version-control-diff-tool 'diff-hl
+                      version-control-global-margin t)
      (ranger :variables
              ranger-show-preview t)
      ;; spell-checking

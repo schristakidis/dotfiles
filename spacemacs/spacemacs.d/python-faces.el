@@ -115,7 +115,8 @@
      (cons (concat "\\<\\(" kw2 "\\)[ \n\t(]") 1)
      ;; Exceptions
      (list (concat "\\<\\(" kw4 "\\)[ \n\t:,(]") 1 'font-lock-function-name-face)
-     (list (concat "\\<\\(" kw5 "\\)[ \n\t:,(]") 1 'font-lock-type-face)
+     (list (concat "\\([^. _\t]\\|^\\)[ \t]*\\<\\(" kw5 "\\)\\>[ \n\t(]") 2
+	   'font-lock-type-face)
      ;; `as' but only in "import foo as bar" or "with foo as bar"
      '("[ \t]*\\(\\<from\\>.*\\)?\\<import\\>.*\\<\\(as\\)\\>" . 2)
      '("[ \t]*\\<with\\>.*\\<\\(as\\)\\>" . 1)
