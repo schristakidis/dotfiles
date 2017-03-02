@@ -23,6 +23,8 @@ set smartcase
 set title
 set hidden
 
+set backspace=indent,eol,start
+
 let mapleader=','
 
 " automatically change window's cwd to file's dir
@@ -231,6 +233,7 @@ nmap <silent> <leader>tl :TestLast<CR>
 nmap <silent> <leader>tg :TestVisit<CR>
 let test#strategy = "vimux"
 let test#python#runner = 'nose'
+let test#python#nose#options = '-s'
 
 " -----------------------------------
 "  Misc
