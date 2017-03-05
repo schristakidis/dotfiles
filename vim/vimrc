@@ -1,4 +1,10 @@
 let g:pathogen_disabled=[]
+if v:version >= '800'
+    call add(g:pathogen_disabled, 'syntastic')
+else
+    call add(g:pathogen_disabled, 'ale')
+endif
+
 execute pathogen#infect()
 call pathogen#helptags()
 
@@ -35,23 +41,34 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
-autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview
-autocmd Filetype php setlocal ts=2 ts=2 sw=2 sts=2 expandtab
-autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
-autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+
+augroup my_filetypes
+    autocmd!
+    autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview
+    autocmd Filetype php setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+    autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+    
+    " django html highlighting
+    " au BufNewFile,BufRead *.html set filetype=htmldjango
+    autocmd BufNewFile,BufRead *.jinja2 set filetype=htmljinja
+    autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
+    autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
+    autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+augroup END
 
 set foldmethod=indent
 set foldignore=
 set foldenable
 set foldlevel=99
 let g:DisableAutoPHPFolding = 1
+"
 " Press Space to turn off highlighting and clear any message already displayed.
-:nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " Copy to 'clipboard registry'
-vmap <C-c> "*y
+vnoremap <C-c> "*y
 " Select all text
-nmap <C-a> ggVG
+nnoremap <C-a> ggVG
 
 set clipboard=unnamed
 
@@ -61,13 +78,13 @@ set showmatch
 set mat=2
 
 " Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+noremap <C-j> <C-W>j
+noremap <C-k> <C-W>k
+noremap <C-h> <C-W>h
+noremap <C-l> <C-W>l
 "
 "insert a new line in normal mode
-nmap <S-Enter> O<Esc>
+nnoremap <S-Enter> O<Esc>
 
 "quickfix window and location list
 "From ListToggle Plugin
@@ -81,8 +98,8 @@ set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
 set undodir=~/.vim/tmp/undo_files//
 
-nmap <silent> <leader>vo :e $MYVIMRC<CR>
-nmap <silent> <leader>vs :so $MYVIMRC<CR>
+nnoremap <silent> <leader>vo :e $MYVIMRC<CR>
+nnoremap <silent> <leader>vs :so $MYVIMRC<CR>
 
 "----------------------------------------------------------
 "PLUGINS
@@ -91,7 +108,10 @@ nmap <silent> <leader>vs :so $MYVIMRC<CR>
 "NerdTREE
 "
 map <Leader>nt :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup nerdtree
+    autocmd!
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 "
 "maximizer
 "
@@ -118,7 +138,7 @@ let g:pymode_lint_checkers = ['pyflakes', 'pep8']
 " let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
 " let g:pymode_lint_sort = ['E', 'C', 'I']
 let g:pymode_lint_cwindow = 1
-let g:pymode_folding = 1
+let g:pymode_folding = 0
 let g:pymode_motion = 1
 let g:pymode_virtualenv = 1
 let g:pymode_syntax_all = 1
@@ -128,27 +148,32 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
+if v:version > '800':
+    set statusline+=%#warningmsg#
+    set statusline+=%{SyntasticStatuslineFlag()}
+    set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 2
-let g:syntastic_check_on_open = 1
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 2
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_python_checkers = ["pyflakes", "flake8"]
+else
+    " Ale
+    set statusline+=%#warningmsg#
+    set statusline+=%{ALEGetStatusLine()}
+    set statusline+=%*
+    let g:ale_linters = {'python': ['flake8'],}
+endif
 
-let g:syntastic_python_checkers = []
-" Close syntastic loaction window also with :bd
+
+" Close location window also with :bd
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
-" Ale
-set statusline+=%#warningmsg#
-set statusline+=%{ALEGetStatusLine()}
-set statusline+=%*
-let g:ale_linters = {'python': ['flake8'],}
 
 " Autoformatter
-noremap = :Autoformat<CR>
+nnoremap <leader> = :Autoformat<CR>
+vnoremap = :Autoformat<CR>
 let g:formatters_python = ['yapf']
 
 " Git Gutter
@@ -164,6 +189,7 @@ xmap ah <Plug>GitGutterTextObjectOuterVisual
 " Clash between m (d without redirecting to black hole) and setting a mark
 " Now to set a mark use gm
 nnoremap gm m
+"
 " using s to substitute
 let g:EasyClipUseSubstituteDefaults = 1
 let g:EasyClipAutoFormat = 1
@@ -196,9 +222,14 @@ set wildignore+=**/*egg*
 nnoremap <silent><c-b> :CtrlPBuffer<CR>
 
 "fugitive helper functions
-autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup my_fugitive
+    autocmd!
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
 " set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
-nmap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
+nnoremap \ :Ggrep<SPACE> <C-R><C-W>
+nnoremap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
 set laststatus=2 "always show the status line
 "powerline setup. Requires pip install powerline-status
@@ -208,12 +239,6 @@ python del powerline_setup
 
 nmap <F8> :TagbarToggle<CR> 
 
-" django html highlighting
-" au BufNewFile,BufRead *.html set filetype=htmldjango
-au BufNewFile,BufRead *.jinja2 set filetype=htmljinja
-
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
-autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
 
 "vimux
 map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
@@ -225,7 +250,6 @@ if executable('ag')
     let g:ackprg = 'git grep -n'
 endif
 
-nnoremap \ :Ack!<SPACE> <C-R><C-W>
 let g:ackhighlight = 1
 nmap <Leader>ss :Ack! <C-R><C-W> <CR>
 
@@ -243,7 +267,10 @@ let test#python#runner = 'nose'
 "  ----------------------------------
 
 " open quickfix window after grep commands
-autocmd QuickFixCmdPost *grep* cwindow
+augroup my_quickfix_window
+    autocmd!
+    autocmd QuickFixCmdPost *grep* cwindow
+augroup END
 
 "<ctrl-s> for saving
 noremap <silent> <C-S>          :update<CR>
