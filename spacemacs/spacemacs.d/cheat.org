@@ -3,6 +3,8 @@
    - C-]
 ** Vim Surround
    - add in visual mode: S <symbol>
+   - S( : ( word )
+   - S) : (word)
 ** Auto format python 
    - whole buffer : =
    - also visual mode =
@@ -34,7 +36,7 @@
 **** Substitution
      s now changes the contents of the selection to the contents of the register
      - si(: subtitutes the word inside ( to the contents of the register
-     - "asiw: su the word to the contents of register a
+     - "asiw: subtitutes the word to the contents of register a
 **** Autoformating 
      pasting will be auto formatted
      <leader>cf: to toggle betwenn formatted or not 
@@ -68,6 +70,10 @@
 ** Search
 *** Ggrep
     - <leader>sg : search the word on cursor with ggrep (fugitive)
+** Clipboard 
+    http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+
+   
 
 
    
