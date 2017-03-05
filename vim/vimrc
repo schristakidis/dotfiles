@@ -150,7 +150,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
-if v:version > '800':
+if v:version > '800'
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
