@@ -73,16 +73,9 @@
 ** Clipboard 
     http://vim.wikia.com/wiki/Accessing_the_system_clipboard
 
-   
 
-
-   
-
-
-
-
-
-
+* Submodules 
+  http://www.activestate.com/blog/2014/05/getting-git-submodule-track-branch
 
 
 * Ranger 
