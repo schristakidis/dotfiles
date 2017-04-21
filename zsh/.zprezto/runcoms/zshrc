@@ -48,9 +48,13 @@ fi
 
 export LC_CTYPE=en_US.UTF-8
 
-. /usr/local/bin/virtualenvwrapper.sh
+if which virtualenvwrapper.sh > /dev/null; then
+    . $(which virtualenvwrapper.sh);
+fi
 
-#pyenv
-# export PATH="/home/sakis/.pyenv/bin:$PATH"
-# eval "$(pyenv init -)"
-# pyenv virtualenvwrapper_lazy
+
+if which pyenv > /dev/null; then
+    export PATH="/home/achristakidis/.pyenv/bin:$PATH";
+    eval "$(pyenv init -)";
+    pyenv virtualenvwrapper;
+fi
