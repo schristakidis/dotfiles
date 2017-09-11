@@ -150,7 +150,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
-if v:version > '800'
+if v:version < '800'
     set statusline+=%#warningmsg#
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
@@ -169,12 +169,12 @@ endif
 
 
 " Close location window also with :bd
-nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+" nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 
 " Autoformatter
-nnoremap <leader> = :Autoformat<CR>
+" nnoremap <leader>= :Autoformat<CR>
 vnoremap = :Autoformat<CR>
 let g:formatters_python = ['yapf']
 
