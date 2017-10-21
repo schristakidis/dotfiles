@@ -1,18 +1,37 @@
-let g:pathogen_disabled=[]
-if v:version >= '800'
-    call add(g:pathogen_disabled, 'syntastic')
-else
-    call add(g:pathogen_disabled, 'ale')
-endif
+set nocompatible
+filetype off
 
-execute pathogen#infect()
-call pathogen#helptags()
+set rtp+=~/.dotfiles/vim/vundle/Vundle.vim
+call vundle#begin('~/.dotfiles/vim/vundle')
+
+Plugin 'mileszs/ack.vim'
+Plugin 'w0rp/ale.git'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'Valloric/ListToggle'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'klen/python-mode'
+Plugin 'ervandew/supertab'
+Plugin 'majutsushi/tagbar'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'svermeulen/vim-easyclip'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'szw/vim-maximizer'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'janko-m/vim-test'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'benmills/vimux'
+
+call vundle#end()
 
 set t_Co=256
 
-" set gfn=Sauce\ Code\ Powerline\ Medium\ 11
-
-set nocompatible
 syntax on
 filetype plugin indent on
 syntax enable
@@ -150,22 +169,7 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
-if v:version < '800'
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 2
-    let g:syntastic_check_on_open = 1
-    let g:syntastic_python_checkers = ["pyflakes", "flake8"]
-else
-    " Ale
-    set statusline+=%#warningmsg#
-    set statusline+=%{ALEGetStatusLine()}
-    set statusline+=%*
-    let g:ale_linters = {'python': ['flake8'],}
-endif
+let g:ale_linters = {'python': ['flake8'],}
 
 
 " Close location window also with :bd
