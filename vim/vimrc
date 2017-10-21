@@ -4,6 +4,7 @@ filetype off
 set rtp+=~/.dotfiles/vim/vundle/Vundle.vim
 call vundle#begin('~/.dotfiles/vim/vundle')
 
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'w0rp/ale.git'
 Plugin 'ctrlpvim/ctrlp.vim'
