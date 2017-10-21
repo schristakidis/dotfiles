@@ -1,0 +1,2 @@
+vim/vundle/*
+!vim/vundle/.gitkeep
