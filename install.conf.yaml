@@ -12,6 +12,7 @@
         ~/.gitconfig: git/gitconfig
         ~/.spacemacs.d: spacemacs/spacemacs.d
         ~/.dotfiles/zsh/.zprezto/modules/completion/external/src/_docker: zsh_extra/_docker
+        ~/.config/powerline: powerline 
 
 - shell:
         - 

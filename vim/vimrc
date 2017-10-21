@@ -240,6 +240,8 @@ nnoremap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
 set laststatus=2 "always show the status line
 "powerline setup. Requires pip install powerline-status
+python import sys, os
+python sys.path.append(os.path.join(os.environ['HOME'], '.config/powerline/segments'))
 python from powerline.vim import setup as powerline_setup
 python powerline_setup()
 python del powerline_setup
@@ -284,3 +286,14 @@ augroup END
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
+
+
+"Ale powerline
+function! AleLinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : [all_non_errors, all_errors]
+endfunction
