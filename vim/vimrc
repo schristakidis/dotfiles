@@ -172,6 +172,13 @@ let g:pymode_lint_message = 1
 
 let g:ale_linters = {'python': ['flake8'],}
 
+let g:ale_type_map = {'flake8': {'ES': 'WS'}}
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+let g:ale_sign_info = '--'
+let g:ale_sign_style_error = '--'
+let g:ale_sign_style_warning = '--'
+
 
 " Close location window also with :bd
 " nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
@@ -209,8 +216,8 @@ let g:EasyClipUsePasteToggleDefaults = 0
 nmap <c-f> <plug>EasyClipSwapPasteForward
 
 " Multicursors
-let g:multi_cursor_exit_from_visual_mode = 0
-let g:multi_cursor_exit_from_insert_mode = 0
+" let g:multi_cursor_exit_from_visual_mode = 0
+" let g:multi_cursor_exit_from_insert_mode = 0
 
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
@@ -292,8 +299,8 @@ inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
 function! AleLinterStatus() abort
     let l:counts = ale#statusline#Count(bufnr(''))
 
-    let l:all_errors = l:counts.error + l:counts.style_error
-    let l:all_non_errors = l:counts.total - l:all_errors
+    let l:all_errors = l:counts.error
+    let l:all_non_errors = l:counts.total - l:counts.error
 
-    return l:counts.total == 0 ? 'OK' : [all_non_errors, all_errors]
+    return l:counts.total == 0 ? 'OK' : [all_errors, all_non_errors]
 endfunction

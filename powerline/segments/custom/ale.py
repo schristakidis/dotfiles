@@ -27,12 +27,12 @@ def ale(pl, err_format='{num} ERR', warn_format='{num} WARN'):
     if isinstance(res, list):
         (errors, warnings) = res
         segments = []
-        if errors > 0:
+        if int(errors) > 0:
             segments.append({
                 'contents': err_format.format(num=errors),
                 'highlight_groups': ['ale:error', 'error'],
             })
-        if warnings > 0:
+        if int(warnings) > 0:
             segments.append({
                 'contents': warn_format.format(num=warnings),
                 'highlight_groups': ['ale:warning', 'warning'],
