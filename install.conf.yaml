@@ -16,7 +16,7 @@
 
 - shell:
         - 
-          command: gitt clone https://github.com/VundleVim/Vundle.vim.git ~/.dotfiles/vim/vundle/Vundle.vim
+          command: git clone https://github.com/VundleVim/Vundle.vim.git ~/.dotfiles/vim/vundle/Vundle.vim
           stdout: true
         - 
           command: git submodule update --init --recursive
