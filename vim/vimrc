@@ -28,6 +28,7 @@ Plugin 'janko-m/vim-test'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'benmills/vimux'
+Plugin 'terryma/vim-expand-region'
 
 call vundle#end()
 
@@ -52,6 +53,7 @@ set hidden
 set backspace=indent,eol,start
 
 let mapleader=','
+let maplocalleader=" "
 
 " automatically change window's cwd to file's dir
 set autochdir
@@ -304,3 +306,31 @@ function! AleLinterStatus() abort
 
     return l:counts.total == 0 ? 'OK' : [all_errors, all_non_errors]
 endfunction
+
+
+"vim expand region
+map <localleader>e <Plug>(expand_region_expand)
+map <localleader>s <Plug>(expand_region_shrink)
+
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'i''' :0,
+      \ 'i]'  :1,
+      \ 'ib'  :1,
+      \ 'iB'  :1,
+      \ }
+
+call expand_region#custom_text_objects({
+      \ 'a]' :1,
+      \ 'ab' :1,
+      \ 'aB' :1,
+      \ })
+
+call expand_region#custom_text_objects('python', {
+      \ 'iM' :0,
+      \ 'aM' :0,
+      \ 'iC' :0,
+      \ 'aC' :0
+      \ })
