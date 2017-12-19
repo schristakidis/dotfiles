@@ -1,36 +1,49 @@
+" Download and install vim-plug
+if empty(glob('~/.dotfiles/vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
+endif
+
+function! Cond(cond, ...)
+  let opts = get(a:000, 0, {})
+  return a:cond ? opts : extend(opts, { 'on': [], 'for': [] })
+endfunction
+
 set nocompatible
-filetype off
 
-set rtp+=~/.dotfiles/vim/vundle/Vundle.vim
-call vundle#begin('~/.dotfiles/vim/vundle')
+call plug#begin('~/.dotfiles/vim/vundle')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'w0rp/ale.git'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'Valloric/ListToggle'
-Plugin 'fholgado/minibufexpl.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'klen/python-mode'
-Plugin 'ervandew/supertab'
-Plugin 'majutsushi/tagbar'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'svermeulen/vim-easyclip'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'szw/vim-maximizer'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'janko-m/vim-test'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'benmills/vimux'
-Plugin 'terryma/vim-expand-region'
+Plug 'mileszs/ack.vim'
+Plug 'w0rp/ale'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'davidhalter/jedi-vim', Cond(!has('nvim'))
+Plug 'Valloric/ListToggle'
+Plug 'fholgado/minibufexpl.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'klen/python-mode'
+Plug 'ervandew/supertab'
+Plug 'majutsushi/tagbar'
+Plug 'tomtom/tcomment_vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'altercation/vim-colors-solarized'
+Plug 'svermeulen/vim-easyclip'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'szw/vim-maximizer'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'janko-m/vim-test'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-unimpaired'
+Plug 'benmills/vimux'
+Plug 'terryma/vim-expand-region'
+Plug 'vim-airline/vim-airline', Cond(has('nvim'))
+Plug 'vim-airline/vim-airline-themes', Cond(has('nvim'))
+Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
+Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
 
-call vundle#end()
+call plug#end()
 
 set t_Co=256
 
@@ -144,9 +157,11 @@ vnoremap <silent><F3> :MaximizerToggle<CR>gv
 inoremap <silent><F3> <C-o>:MaximizerToggle<CR> 
 
 "Jedi
-let g:jedi#auto_initialization = 1
-let g:jedi#show_call_signatures = 0
-let g:jedi#use_tabs_not_buffers = 0
+if !has('nvim')
+    let g:jedi#auto_initialization = 1
+    let g:jedi#show_call_signatures = 0
+    let g:jedi#use_tabs_not_buffers = 0
+endif
 
 "Python-Mode
 "turn off rope from python mode. Conflict with jedi-vim
@@ -248,12 +263,18 @@ nnoremap \ :Ggrep<SPACE> <C-R><C-W>
 nnoremap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
 set laststatus=2 "always show the status line
-"powerline setup. Requires pip install powerline-status
-python import sys, os
-python sys.path.append(os.path.join(os.environ['HOME'], '.config/powerline/segments'))
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+if !has('nvim')
+    "powerline setup. Requires pip install powerline-status
+    python import sys, os
+    python sys.path.append(os.path.join(os.environ['HOME'], '.config/powerline/segments'))
+    python from powerline.vim import setup as powerline_setup
+    python powerline_setup()
+    python del powerline_setup
+else
+    let g:airline_powerline_fonts = 1 
+    let g:airline_theme='powerlineish'
+    let g:deoplete#enable_at_startup = 1
+endif
 
 nmap <F8> :TagbarToggle<CR> 
 
