@@ -1,7 +1,6 @@
 " Download and install vim-plug
 if empty(glob('~/.dotfiles/vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
 endif
 
@@ -14,10 +13,11 @@ set nocompatible
 
 call plug#begin('~/.dotfiles/vim/vundle')
 
+
 Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'davidhalter/jedi-vim', Cond(!has('nvim'))
+Plug 'ctrlpvim/ctrlp.vim', Cond(!has('nvim'))
+Plug 'davidhalter/jedi-vim'
 Plug 'Valloric/ListToggle'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree'
@@ -42,6 +42,7 @@ Plug 'vim-airline/vim-airline', Cond(has('nvim'))
 Plug 'vim-airline/vim-airline-themes', Cond(has('nvim'))
 Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
+Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 
 call plug#end()
 
@@ -158,9 +159,10 @@ inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 
 "Jedi
 if !has('nvim')
-    let g:jedi#auto_initialization = 1
     let g:jedi#show_call_signatures = 0
     let g:jedi#use_tabs_not_buffers = 0
+else
+    let g:jedi#completions_enabled = 0
 endif
 
 "Python-Mode
@@ -271,9 +273,104 @@ if !has('nvim')
     python powerline_setup()
     python del powerline_setup
 else
+    function! AirlineInit()
+        let g:airline_section_z = airline#section#create(['%1p%%', '  ', 'linenr', ':%v'])
+        let g:airline_symbols.linenr = ''
+    endfunction
+    autocmd User AirlineAfterInit call AirlineInit()
+
     let g:airline_powerline_fonts = 1 
     let g:airline_theme='powerlineish'
+    let g:airline_skip_empty_sections = 1
+    let g:airline#extensions#hunks#non_zero_only = 1
+    let g:airline#extensions#whitespace#enabled = 0
+    let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+    let g:airline#extensions#virtualenv#enabled = 1
+    let g:airline#extensions#wordcount#enabled = 0
+
     let g:deoplete#enable_at_startup = 1
+    
+
+    call denite#custom#var('file_rec', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+    " Ag command on grep source
+    call denite#custom#var('grep', 'command', ['ag'])
+    " only for old versions of ag
+    call denite#custom#var('grep', 'default_opts',
+                \ ['-i', '--column'])
+    " call denite#custom#var('grep', 'default_opts',
+    "             \ ['-i', '--vimgrep'])
+    call denite#custom#var('grep', 'recursive_opts', [])
+    call denite#custom#var('grep', 'pattern_opt', [])
+    call denite#custom#var('grep', 'separator', ['--'])
+    call denite#custom#var('grep', 'final_opts', [])
+
+    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
+    call denite#custom#var('file_rec/git', 'command',
+                \ ['git', 'ls-files', '-co', '--exclude-standard'])
+
+    call denite#custom#map(
+                \ 'insert',
+                \ '<C-j>',
+                \ '<denite:move_to_next_line>',
+                \ 'noremap'
+                \)
+
+    call denite#custom#map(
+                \ 'insert',
+                \ '<C-k>',
+                \ '<denite:move_to_previous_line>',
+                \ 'noremap'
+                \)
+
+    call denite#custom#map(
+                \ 'insert',
+                \ '<C-v>',
+                \ '<denite:do_action:vsplit>',
+                \ 'noremap'
+                \)
+
+    call denite#custom#map(
+                \ 'normal',
+                \ 'v',
+                \ '<denite:do_action:vsplit>',
+                \ 'noremap'
+                \)
+
+    call denite#custom#map(
+                \ 'insert',
+                \ '<C-p>',
+                \ '<denite:do_action:preview>',
+                \ 'noremap'
+                \)
+
+    call denite#custom#map(
+                \ 'insert',
+                \ '<C-y>',
+                \ '<denite:do_action:yank>',
+                \ 'noremap'
+                \)
+
+    let s:menus = {}
+
+    let s:menus.dotfiles = {
+                \ 'description': 'Edit your import zsh configuration'
+                \ }
+    let s:menus.dotfiles.file_candidates = [
+                \ ['zshrc', '~/.dotfiles/zsh/.zshrc'],
+                \ ['zshenv', '~/.zshenv'],
+                \ ['vim', '~/.dotfiles/vim/vimrc'],
+                \ ['nvim', '~/.config/nvim/init.vim'],
+                \ ]
+    call denite#custom#var('menu', 'menus', s:menus)
+
+    nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file_rec<CR>
+    nnoremap <silent> <C-b> :<C-u>Denite buffer<CR>
+    nnoremap <silent> <C-g> :<C-u>DeniteProjectDir -no-empty -mode=normal grep:::<C-R><C-W><CR>
+    nnoremap <silent> <Leader>z :<C-u>Denite menu:dotfiles<CR>
+    nnoremap <silent> <Leader>/ :<C-u>Denite line<CR>
+    nnoremap <silent> <Leader>* :<C-u>Denite -mode=normal -auto-highlight=true line -input=<C-R><C-W><CR>
 endif
 
 nmap <F8> :TagbarToggle<CR> 
