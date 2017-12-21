@@ -11,8 +11,7 @@ endfunction
 
 set nocompatible
 
-call plug#begin('~/.dotfiles/vim/vundle')
-
+call plug#begin('~/.dotfiles/vim/vundle') 
 
 Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
@@ -123,7 +122,6 @@ noremap <C-l> <C-W>l
 "
 "insert a new line in normal mode
 nnoremap <S-Enter> O<Esc>
-
 "quickfix window and location list
 "From ListToggle Plugin
 "use <leader>l or q to toggle the location or quick fix winodows 
@@ -163,6 +161,7 @@ if !has('nvim')
     let g:jedi#use_tabs_not_buffers = 0
 else
     let g:jedi#completions_enabled = 0
+    let g:deoplete#enable_at_startup = 1
 endif
 
 "Python-Mode
@@ -189,8 +188,11 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
-let g:ale_linters = {'python': ['flake8'],}
+" Ale config
+nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
+nmap <silent> <localleader>j <Plug>(ale_next_wrap)
 
+let g:ale_linters = {'python': ['flake8'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
@@ -229,14 +231,11 @@ let g:EasyClipAutoFormat = 1
 nmap <leader>cf <plug>EasyClipToggleFormattedPaste
 " Paste in insert mode with c-v
 imap <c-v> <plug>EasyClipInsertModePaste
+cmap <c-v> <plug>EasyClipCommandModePaste
 
 let g:EasyClipUsePasteToggleDefaults = 0
 
 nmap <c-f> <plug>EasyClipSwapPasteForward
-
-" Multicursors
-" let g:multi_cursor_exit_from_visual_mode = 0
-" let g:multi_cursor_exit_from_insert_mode = 0
 
 "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
@@ -252,7 +251,9 @@ map <Leader>2 :MBEbp<CR>
 "ctrlP
 set wildignore+=*.pyc
 set wildignore+=**/*egg*
-nnoremap <silent><c-b> :CtrlPBuffer<CR>
+if !has('nvim')
+    nnoremap <silent><c-b> :CtrlPBuffer<CR>
+endif
 
 "fugitive helper functions
 augroup my_fugitive
@@ -260,7 +261,6 @@ augroup my_fugitive
     autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-" set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 nnoremap \ :Ggrep<SPACE> <C-R><C-W>
 nnoremap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
@@ -287,10 +287,11 @@ else
     let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
     let g:airline#extensions#virtualenv#enabled = 1
     let g:airline#extensions#wordcount#enabled = 0
+endif
 
-    let g:deoplete#enable_at_startup = 1
-    
 
+" denite
+if has('nvim')
     call denite#custom#var('file_rec', 'command',
                 \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
@@ -366,6 +367,7 @@ else
     call denite#custom#var('menu', 'menus', s:menus)
 
     nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file_rec<CR>
+    nnoremap <silent> <C-f> :<C-u>Denite file_rec<CR>
     nnoremap <silent> <C-b> :<C-u>Denite buffer<CR>
     nnoremap <silent> <C-g> :<C-u>DeniteProjectDir -no-empty -mode=normal grep:::<C-R><C-W><CR>
     nnoremap <silent> <Leader>z :<C-u>Denite menu:dotfiles<CR>
