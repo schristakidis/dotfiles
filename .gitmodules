@@ -34,6 +34,15 @@
 [submodule "tmux/plugins/tmux-yank"]
 	path = tmux/plugins/tmux-yank
 	url = https://github.com/tmux-plugins/tmux-yank.git
-[submodule "dotbot"]                                                                                                                                                                               
-    path = dotbot                                                                                                                                                                                  
+[submodule "fonts"]
+    path = resources/fonts
+    url = https://github.com/powerline/fonts.git
+[submodule "dircolors-solarized"]
+    path = resources/dircolors-solarized
+    url = https://github.com/seebi/dircolors-solarized.git
+[submodule "resources/gnome-terminal-colors-solarized"]
+    path = resources/gnome-terminal-colors-solarized
+    url = https://github.com/sigurdga/gnome-terminal-colors-solarized.git
+[submodule "dotbot"]
+    path = dotbot
     url = https://github.com/anishathalye/dotbot 
