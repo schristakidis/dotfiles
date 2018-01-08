@@ -53,8 +53,6 @@ if which virtualenvwrapper.sh > /dev/null; then
 fi
 
 
-if which pyenv > /dev/null; then
-    export PATH="/home/achristakidis/.pyenv/bin:$PATH";
-    eval "$(pyenv init -)";
-    pyenv virtualenvwrapper;
-fi
+export PATH="/home/achristakidis/.pyenv/bin:$PATH";
+eval "$(pyenv init -)";
+pyenv virtualenvwrapper;

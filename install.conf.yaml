@@ -9,15 +9,13 @@
         ~/.zshenv: zsh/zshenv
         ~/.vim: vim
         ~/.vimrc: vim/vimrc
+        ~/.config/nvim/init.vim: vim/init.vim
         ~/.gitconfig: git/gitconfig
         ~/.spacemacs.d: spacemacs/spacemacs.d
         ~/.dotfiles/zsh/.zprezto/modules/completion/external/src/_docker: zsh_extra/_docker
         ~/.config/powerline: powerline 
 
 - shell:
-        - 
-          command: git clone https://github.com/VundleVim/Vundle.vim.git ~/.dotfiles/vim/vundle/Vundle.vim
-          stdout: true
         - 
           command: git submodule update --init --recursive
           stdout: true
