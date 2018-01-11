@@ -373,6 +373,8 @@ if has('nvim')
     nnoremap <silent> <Leader>z :<C-u>Denite menu:dotfiles<CR>
     nnoremap <silent> <Leader>/ :<C-u>Denite line<CR>
     nnoremap <silent> <Leader>* :<C-u>Denite -mode=normal -auto-highlight=true line -input=<C-R><C-W><CR>
+
+    highlight link deniteMatchedChar WarningMsg
 endif
 
 nmap <F8> :TagbarToggle<CR> 
