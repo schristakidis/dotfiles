@@ -66,7 +66,7 @@ set hidden
 set backspace=indent,eol,start
 
 let mapleader=','
-let maplocalleader=" "
+let maplocalleader='\'
 
 " automatically change window's cwd to file's dir
 set autochdir
@@ -375,6 +375,7 @@ if has('nvim')
     nnoremap <silent> <Leader>* :<C-u>Denite -mode=normal -auto-highlight=true line -input=<C-R><C-W><CR>
 
     highlight link deniteMatchedChar WarningMsg
+    highlight link deniteMatchedRange None
 endif
 
 nmap <F8> :TagbarToggle<CR> 
