@@ -373,8 +373,8 @@ if has('nvim')
                 \ 'description': 'Edit your import zsh configuration'
                 \ }
     let s:menus.dotfiles.file_candidates = [
-                \ ['zshrc', '~/.dotfiles/zsh/.zshrc'],
-                \ ['zshenv', '~/.zshenv'],
+                \ ['zshrc', '~/.dotfiles/zsh/.zprezto/runcoms/zshrc'],
+                \ ['zshenv', '~/.dotfiles/zsh/.zprezto/runcoms/zshenv'],
                 \ ['vim', '~/.dotfiles/vim/vimrc'],
                 \ ['nvim', '~/.config/nvim/init.vim'],
                 \ ]
