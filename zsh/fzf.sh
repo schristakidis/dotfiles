@@ -1,5 +1,10 @@
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+if [ -d $HOME/.fzf ]; then
+    source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+    source "$HOME/.fzf/shell/key-bindings.zsh" 2> /dev/null
+else
+    source /usr/share/fzf/completion.zsh 2> /dev/null
+    source /usr/share/fzf/key-bindings.zsh 2> dev/null
+fi
 
 export FZF_TMUX=1
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --color=always'

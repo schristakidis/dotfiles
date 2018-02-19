@@ -60,6 +60,13 @@ if [ -d $PYENV_ROOT ]; then
     pyenv virtualenvwrapper;
 fi
 
+
+if [ -d $HOME/.fzf ]; then
+    if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
+        export PATH="$PATH:$HOME/.fzf/bin"
+    fi
+fi
+
 if which fzf > /dev/null; then
     source "${ZDOTDIR:-$HOME}/fzf.sh"
 fi
