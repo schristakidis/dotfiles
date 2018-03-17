@@ -3,7 +3,7 @@ if [ -d $HOME/.fzf ]; then
     source "$HOME/.fzf/shell/key-bindings.zsh" 2> /dev/null
 else
     source /usr/share/fzf/completion.zsh 2> /dev/null
-    source /usr/share/fzf/key-bindings.zsh 2> dev/null
+    source /usr/share/fzf/key-bindings.zsh 2> /dev/null
 fi
 
 export FZF_TMUX=1
