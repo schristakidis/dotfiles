@@ -42,6 +42,8 @@ Plug 'vim-airline/vim-airline-themes', Cond(has('nvim'))
 Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
 Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 call plug#end()
 
@@ -194,8 +196,10 @@ nmap <silent> <localleader>j <Plug>(ale_next_wrap)
 
 let g:ale_linters = {'python': ['flake8'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
+" let g:ale_sign_error = '>>'
+" let g:ale_sign_warning = '--'
 let g:ale_sign_info = '--'
 let g:ale_sign_style_error = '--'
 let g:ale_sign_style_warning = '--'
@@ -475,3 +479,27 @@ call expand_region#custom_text_objects('python', {
 
 "supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+"vim-go
+let g:go_fmt_command = "goimports"
+let g:go_autodetect_gopath = 1
+let g:go_list_type = "quickfix"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_variable_declarations = 1
+
+au FileType go set noexpandtab
+au FileType go set shiftwidth=4
+au FileType go set softtabstop=4
+au FileType go set tabstop=4
+
+let g:go_auto_type_info = 1
+
+autocmd FileType go nmap <Leader>d <Plug>(go-def)

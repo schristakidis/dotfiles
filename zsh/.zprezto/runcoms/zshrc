@@ -70,3 +70,7 @@ fi
 if which fzf > /dev/null; then
     source "${ZDOTDIR:-$HOME}/fzf.sh"
 fi
+
+
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
