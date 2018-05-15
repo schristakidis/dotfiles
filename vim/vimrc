@@ -1,4 +1,4 @@
-" Download and install vim-plug
+" Download ands install vim-plug
 if empty(glob('~/.dotfiles/vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
@@ -42,6 +42,7 @@ Plug 'vim-airline/vim-airline-themes', Cond(has('nvim'))
 Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
 Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
+Plug 'brooth/far.vim'
 
 call plug#end()
 
@@ -66,7 +67,7 @@ set hidden
 set backspace=indent,eol,start
 
 let mapleader=','
-let maplocalleader='\'
+let maplocalleader=';'
 
 " automatically change window's cwd to file's dir
 set autochdir
@@ -388,6 +389,10 @@ if has('nvim')
     nnoremap <silent> <Leader>/ :<C-u>Denite line<CR>
     nnoremap <silent> <Leader>\ :<C-u>DeniteProjectDir -mode=normal grep<CR>
     nnoremap <silent> <Leader>* :<C-u>Denite -mode=normal -auto-highlight=true line -input=<C-R><C-W><CR>
+    " open next result of previous search
+    nnoremap <silent> <localleader>j :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR> 
+    " resume previous search
+    nnoremap <silent> <localleader>J :<C-u>Denite -resume -cursor-pos=+1<CR>
 
     highlight link deniteMatchedChar WarningMsg
     highlight link deniteMatchedRange None
