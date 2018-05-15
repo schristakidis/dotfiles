@@ -46,3 +46,6 @@
 [submodule "dotbot"]
     path = dotbot
     url = https://github.com/anishathalye/dotbot 
+[submodule "tmux/plugins/tmux-open"]
+	path = tmux/plugins/tmux-open
+	url = https://github.com/tmux-plugins/tmux-open.git
