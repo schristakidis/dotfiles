@@ -45,6 +45,7 @@ Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on':
 Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
+Plug 'roxma/vim-tmux-clipboard'
 
 call plug#end()
 
