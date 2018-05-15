@@ -484,6 +484,7 @@ call expand_region#custom_text_objects('python', {
 
 "supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 "vim-go
 let g:go_fmt_command = "goimports"
