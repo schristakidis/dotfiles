@@ -19,21 +19,6 @@
 [submodule "modules/autosuggestions/external"]
 	path = zsh/.zprezto/modules/autosuggestions/external
 	url = https://github.com/tarruda/zsh-autosuggestions
-[submodule "tmux/plugins/tpm"]
-	path = tmux/plugins/tpm
-	url = https://github.com/tmux-plugins/tpm.git
-[submodule "tmux/plugins/tmux-copycat"]
-	path = tmux/plugins/tmux-copycat
-	url = https://github.com/tmux-plugins/tmux-copycat.git
-[submodule "tmux/plugins/tmux-prefix-highlight"]
-	path = tmux/plugins/tmux-prefix-highlight
-	url = https://github.com/tmux-plugins/tmux-prefix-highlight.git
-[submodule "tmux/plugins/tmux-sensible"]
-	path = tmux/plugins/tmux-sensible
-	url = https://github.com/tmux-plugins/tmux-sensible.git
-[submodule "tmux/plugins/tmux-yank"]
-	path = tmux/plugins/tmux-yank
-	url = https://github.com/tmux-plugins/tmux-yank.git
 [submodule "fonts"]
     path = resources/fonts
     url = https://github.com/powerline/fonts.git
@@ -46,6 +31,3 @@
 [submodule "dotbot"]
     path = dotbot
     url = https://github.com/anishathalye/dotbot 
-[submodule "tmux/plugins/tmux-open"]
-	path = tmux/plugins/tmux-open
-	url = https://github.com/tmux-plugins/tmux-open.git
