@@ -9,3 +9,4 @@ tags
 .zcompdump
 .zcompcache
 *.log
+.pytest_cache

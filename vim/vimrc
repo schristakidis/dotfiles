@@ -45,7 +45,6 @@ Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on':
 Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'roxma/vim-tmux-clipboard'
 
 call plug#end()
 
@@ -123,6 +122,10 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+
+" close scratch buferr
+noremap <C-q> <C-W>z
+
 "
 "insert a new line in normal mode
 nnoremap <S-Enter> O<Esc>
@@ -193,8 +196,8 @@ let g:pymode_virtualenv_path = $VIRTUAL_ENV
 let g:pymode_lint_message = 1
 
 " Ale config
-nmap <silent> <localleader>k <Plug>(ale_previous_wrap)
-nmap <silent> <localleader>j <Plug>(ale_next_wrap)
+nmap <silent> <localleader>p <Plug>(ale_previous_wrap)
+nmap <silent> <localleader>n <Plug>(ale_next_wrap)
 
 let g:ale_linters = {'python': ['flake8'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
@@ -507,6 +510,7 @@ au FileType go set shiftwidth=4
 au FileType go set softtabstop=4
 au FileType go set tabstop=4
 
-let g:go_auto_type_info = 1
+autocmd FileType go nmap <Leader>i <Plug>(go-info)
+" let g:go_auto_type_info = 1
 
 autocmd FileType go nmap <Leader>d <Plug>(go-def)
