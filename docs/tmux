@@ -1,0 +1,5 @@
+TPM Bindings
+
+install  : prefix + I
+upate    : prefix + U
+unistall : prefix + alt + u
