@@ -1,19 +1,24 @@
-Tabularize
+### Tabularize
 
-Visual selection 
+On Visual Selection
+```
 :Tabularize /<seperatror pattern like (':', '=', '|')
+```
 
-Potential mappings
+##### Potential mappings
+```
 let mapleader=','
 if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
 endif
+```
 
-Potential Function to automatically tabularize on | (for table creation)
+#####Potential Function to automatically tabularize on | (for table creation)
 
+```viml
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 function! s:align()
@@ -26,4 +31,5 @@ function! s:align()
         call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
     endif
 endfunction
+```
 

@@ -46,6 +46,8 @@ Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'godlygeek/tabular'
+Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
+Plug 'iamcco/markdown-preview.vim'
 
 call plug#end()
 
@@ -524,3 +526,9 @@ autocmd FileType go nmap <Leader>i <Plug>(go-info)
 " let g:go_auto_type_info = 1
 
 autocmd FileType go nmap <Leader>d <Plug>(go-def)
+
+" vimwiki
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+nmap <leader>md  <Plug>MarkdownPreview        " for normal mode
+nmap <leader>mc <Plug>StopMarkdownPreview    " for normal mode
