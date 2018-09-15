@@ -4,6 +4,14 @@ install  : prefix + I
 upate    : prefix + U
 unistall : prefix + alt + u
 
+Copycat
+
+n/N copy to next/prev
+
+p + ctrl-f -> file paths
+p + ctrl-g -> git paths
+p + ctrl-u -> urls
+
 
 Clipboards
 
