@@ -106,12 +106,38 @@ let g:DisableAutoPHPFolding = 1
 " Press Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-" Copy to 'clipboard registry'
+
+" CLIPBOARD
+
+set clipboard=unnamed
+"
+" Copy to primary registry'
 vnoremap <C-c> "*y
 " Select all text
 nnoremap <C-a> ggVG
 
-set clipboard=unnamed
+if has('nvim')
+    noremap <A-p> "+p
+    vnoremap <A-y> "+y
+endif
+
+" Easy Clip
+" Clash between m (d without redirecting to black hole) and setting a mark
+" Now to set a mark use gm
+nnoremap gm m
+"
+" using s to substitute
+let g:EasyClipUseSubstituteDefaults = 1
+let g:EasyClipAutoFormat = 1
+nmap <leader>cf <plug>EasyClipToggleFormattedPaste
+" Paste in insert mode with c-v
+imap <c-v> <plug>EasyClipInsertModePaste
+cmap <c-v> <plug>EasyClipCommandModePaste
+
+let g:EasyClipUsePasteToggleDefaults = 0
+
+nmap <c-f> <plug>EasyClipSwapPasteForward
+
 
 " Show matching brackets when text indicator is over them
 set showmatch
@@ -230,24 +256,7 @@ omap ah <Plug>GitGutterTextObjectOuterPending
 xmap ih <Plug>GitGutterTextObjectInnerVisual
 xmap ah <Plug>GitGutterTextObjectOuterVisual
 
-" Easy Clip
-" Clash between m (d without redirecting to black hole) and setting a mark
-" Now to set a mark use gm
-nnoremap gm m
-"
-" using s to substitute
-let g:EasyClipUseSubstituteDefaults = 1
-let g:EasyClipAutoFormat = 1
-nmap <leader>cf <plug>EasyClipToggleFormattedPaste
-" Paste in insert mode with c-v
-imap <c-v> <plug>EasyClipInsertModePaste
-cmap <c-v> <plug>EasyClipCommandModePaste
-
-let g:EasyClipUsePasteToggleDefaults = 0
-
-nmap <c-f> <plug>EasyClipSwapPasteForward
-
-"minibuf exproler <leader>mbe to open
+" "minibuf exproler <leader>mbe to open
 let g:miniBufExplCycleArround = 1
 map <Leader>mbe :MBEOpen<cr>
 map <Leader>mbc :MBEClose<cr>
