@@ -63,9 +63,9 @@ fbr() {
 export LPASS_USER='schristakidis@gmail.com'
 flpass() {
     local site
-    lpass login $LPASS_USER
+    lpass login --trust $LPASS_USER
     site=$(lpass ls | fzf --height=40%  | awk '/\[id\:/ {print $NF}' | sed 's/\]//')
     lpass show --url --username $site
     lpass show -cp $site
-    lpass logout -f
+    # lpass logout -f
 }
