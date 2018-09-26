@@ -48,6 +48,9 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'iamcco/markdown-preview.vim'
+Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
+Plug 'bronson/vim-visual-star-search'
+
 
 call plug#end()
 
@@ -70,6 +73,10 @@ set title
 set hidden
 
 set backspace=indent,eol,start
+
+if has('nvim')
+    set inccommand=nosplit
+endif
 
 let mapleader=','
 let maplocalleader=';'
