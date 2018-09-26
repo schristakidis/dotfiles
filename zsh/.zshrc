@@ -17,6 +17,10 @@ for zsh_source in $ZDOTDIR/configs/*.zsh; do
   source $zsh_source
 done
 
+for zsh_source in $ZDOTDIR/local/*.zsh; do
+    source $zsh_source
+done
+
 # completions
 fpath=(~/.zsh/completion $fpath)
 autoload -U compinit

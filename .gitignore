@@ -2,3 +2,5 @@ vim/vundle/*
 !vim/vundle/.gitkeep
 tmux/plugins/*
 !tmux/plugins/.gitkeep
+zsh/local/*
+!zsh/local/.gitkeep
