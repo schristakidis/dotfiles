@@ -3,4 +3,4 @@ vim/vundle/*
 tmux/plugins/*
 !tmux/plugins/.gitkeep
 zsh/local/*
-!zsh/local/.gitkeep
+!zsh/local/.gitkeep.zsh
