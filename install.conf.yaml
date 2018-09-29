@@ -12,7 +12,6 @@
         ~/.config/nvim: nvim
         ~/.gitconfig: git/gitconfig
         ~/.spacemacs.d: spacemacs/spacemacs.d
-        ~/.dotfiles/zsh/.zprezto/modules/completion/external/src/_docker: zsh_extra/_docker
         ~/.config/powerline: powerline 
         ~/.config/alacritty: alacritty
 
@@ -27,14 +26,4 @@
           command: ~/.dotfiles/resources/gnome-terminal-colors-solarized/set_dark.sh
           stdout: true
           stdin: true
-        -
-          command: git clone https://github.com/yyuu/pyenv.git ~/.pyenv
-          stdout: true
-        - 
-          command: git clone https://github.com/yyuu/pyenv-virtualenvwrapper.git ~/.pyenv/plugins/pyenv-virtualenvwrapper
-          stdout: true
-        -
-          command: git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-          stdout: true
-
 
