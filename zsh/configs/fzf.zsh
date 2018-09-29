@@ -25,8 +25,14 @@ fzgrep() {
 fzpac() {
     local packages
     packages="$(pacman -Ssq | fzf --height=40%)"
-    pacman -Si "$packages"
-    sudo pacman -S "$packages"
+    pacman -Qi "$packages" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo 'Package is allready installed'
+    else
+        echo 'Package is not installed'
+        pacman -Si "$packages"
+        sudo pacman -S "$packages"
+    fi
 }
 
 fkill() {
