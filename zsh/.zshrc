@@ -11,6 +11,7 @@ zplug modules/history-substring-search, from:prezto, defer:1
 zplug modules/prompt, from:prezto, defer:2
 zplug zsh-users/zsh-completions, defer:2
 zplug plugins/pip, from:oh-my-zsh
+zplug zdharma/zsh-diff-so-fancy, as:command, use:'bin/*'
 zplug zplug/zplug, hook-build:'zplug --self-manage'
 
 # Install packages that have not been installed yet
