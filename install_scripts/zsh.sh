@@ -6,10 +6,10 @@ source get_release.sh
 
 if [[ $is_arch ]]; then
     pacman -Syu
-    pacman -S zsh curl
+    pacman -S zsh curl gawk
 else
     apt-get update
-    apt-get install zsh curl
+    apt-get install zsh curl gawk
 fi
 
 
