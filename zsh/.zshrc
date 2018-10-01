@@ -10,6 +10,7 @@ zplug modules/history-substring-search, from:prezto, defer:1
 zplug modules/prompt, from:prezto, defer:2
 zplug zsh-users/zsh-completions, defer:2
 zplug plugins/pip, from:oh-my-zsh
+zplug plugins/httpie, from:oh-my-zsh
 zplug zdharma/zsh-diff-so-fancy, as:command, use:'bin/*'
 zplug "clvv/fasd", as:command, use:fasd
 zplug "plugins/fasd", from:oh-my-zsh, if:"(( $+commands[fasd] ))", on:"clvv/fasd"

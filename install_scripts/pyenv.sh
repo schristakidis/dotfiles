@@ -17,3 +17,4 @@ sudo -u $username 'curl -L https://github.com/pyenv/pyenv-installer/raw/master/b
 ./install_pip.sh
 
 pip install virtualenvwrapper
+git clone https://github.com/pyenv/pyenv-virtualenvwrapper.git $(pyenv root)/plugins/pyenv-virtualenvwrapper
