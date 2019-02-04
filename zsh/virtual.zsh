@@ -8,5 +8,6 @@ if [ -d $PYENV_ROOT ]; then
     export PATH="$HOME/.pyenv/bin:$PATH";
     eval "$(pyenv init -)";
     eval "$(pyenv virtualenv-init -)"
-    pyenv virtualenvwrapper;
+    pyenv virtualenvwrapper_lazy;
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
 fi
