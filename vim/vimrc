@@ -48,8 +48,9 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'godlygeek/tabular'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'iamcco/markdown-preview.vim'
-Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
+" Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 Plug 'bronson/vim-visual-star-search'
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 
 call plug#end()
@@ -202,7 +203,10 @@ inoremap <silent><F3> <C-o>:MaximizerToggle<CR>
 if !has('nvim')
     let g:jedi#show_call_signatures = 0
     let g:jedi#use_tabs_not_buffers = 0
+    let g:deoplete#enable_at_startup = 0
 else
+    let g:jedi#show_call_signatures = 0
+    let g:jedi#use_tabs_not_buffers = 0
     let g:jedi#completions_enabled = 0
     let g:deoplete#enable_at_startup = 1
 endif
