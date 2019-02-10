@@ -1,5 +1,5 @@
 export TERM=screen-256color
-export PATH="$HOME/.local/bin:$HOME/bin:$ZDOTDIR/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
