@@ -17,11 +17,7 @@ zplug plugins/docker-compose, from:oh-my-zsh
 zplug zdharma/zsh-diff-so-fancy, as:command, use:'bin/*'
 zplug "clvv/fasd", as:command, use:fasd
 zplug "plugins/fasd", from:oh-my-zsh, if:"(( $+commands[fasd] ))", on:"clvv/fasd"
-<<<<<<< HEAD
-zplug zplug/zplug #, hook-build:'zplug --self-manage'
-=======
 zplug zplug/zplug # hook-build:'zplug --self-manage'
->>>>>>> zsh
 
 # Install packages that have not been installed yet
 # if ! zplug check --verbose; then
