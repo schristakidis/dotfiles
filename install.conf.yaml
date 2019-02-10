@@ -15,6 +15,7 @@
         ~/.config/powerline: powerline 
         ~/.config/alacritty: alacritty
         ~/.config/i3: i3
+        ~/.config/termite: termite
         ~/.Xresources: Xresources
 
 - shell:
