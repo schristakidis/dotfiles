@@ -1,0 +1,37 @@
+#!/bin/python3
+
+import os
+import sys
+import json
+from subprocess import getoutput
+
+COLORS = {
+    'Paused': '#676E7D',
+    'Playing': '#268bd2'
+}
+
+def pango(artist, title, status):
+    print("<span foreground='{}'>{} - {}</span>".format(
+        COLORS[status], artist, title
+    ))
+
+
+button = os.environ.get('BLOCK_BUTTON', None)
+
+player = 'playerctl --player=spotify'
+if button == '1':
+    getoutput('{} previous'.format(player))
+elif button == '3':
+    getoutput('{} next'.format(player))
+elif button == '2':
+    getoutput('{} play-pause'.format(player))
+
+try:
+    artist = getoutput('{} metadata artist'.format(player))
+    title = getoutput('{} metadata title'.format(player))
+    status = getoutput('{} status'.format(player))
+except Exception as e:
+    print(e)
+    sys.exit()
+
+pango(artist, title, status)
