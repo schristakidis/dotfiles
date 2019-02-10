@@ -50,6 +50,7 @@ Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'iamcco/markdown-preview.vim'
 Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 Plug 'bronson/vim-visual-star-search'
+Plug 'chrisbra/Colorizer'
 
 
 call plug#end()
@@ -548,3 +549,6 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 
 nmap <leader>md  <Plug>MarkdownPreview        " for normal mode
 nmap <leader>mc <Plug>StopMarkdownPreview    " for normal mode
+
+
+let g:highlightedyank_highlight_duration = 100
