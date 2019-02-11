@@ -129,12 +129,12 @@ for_window [instance="dropdown_*"] border pixel 3
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_*"] scratchpad show
 for_window [instance="dropdown_*"] move position center
+for_window [instance="dropdown_nautilus"] resize set 800 600
 
 #
 ## ##### BINARIE BINDINGS #######
 bindsym $mod+Return exec $term
 bindsym $mod+f exec firefox
-bindsym $mod+n exec nautilus
 
 
 # resize window (you can also use the mouse for that)
@@ -210,6 +210,7 @@ bindsym $mod+Left exec playerctl --player=spotify previous
 bindsym mod1+Shift+l exec --no-startup-id  $dot_bin/kb_layout_change
 
 bindsym $mod+u	exec --no-startup-id $dot_bin/ddspawn tmuxdd
+bindsym $mod+n	exec --no-startup-id $dot_bin/ddspawn nautilus
 
 #
 ## ######## START-UP PROGRAMS ###########
