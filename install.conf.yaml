@@ -33,6 +33,12 @@
           stdout: true
           stdin: true
         -
-          command: git clone https://github.com/vivien/i3blocks-contrib.git ~/.scripts/i3blocks 
+          command: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+          stdout: true
+        -
+          command: git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+          stdout: true
+        -
+          command: git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
           stdout: true
 
