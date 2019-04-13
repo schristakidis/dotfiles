@@ -196,6 +196,19 @@ bar {
 bindsym $mod+Up $volume up 2
 bindsym $mod+Down $volume down 2
 
+mode "volume" {
+        bindsym Up $volume up 2
+        bindsym Down $volume down 2
+        bindsym Right $volume up 10
+        bindsym Left $volume down 10
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym --release Print mode "default"
+}
+
+bindsym Print mode "volume"
+
 bindsym XF86AudioRaiseVolume $volume up 5 
 bindsym XF86AudioLowerVolume $volume down 5
 bindsym XF86AudioMute $volume mute
