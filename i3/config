@@ -223,6 +223,7 @@ exec compton
 exec --no-startup-id unclutter
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
+$volume unmute
 exec --no-startup-id mate-power-manager
 # exec --no-startup-id blueman-applet
 

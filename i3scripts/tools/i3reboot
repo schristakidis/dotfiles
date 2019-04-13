@@ -7,9 +7,9 @@ if [ $res = "logout" ]; then
     i3-msg exit
 fi
 if [ $res = "reboot" ]; then
-    reboot
+    systemctl reboot
 fi
 if [ $res = "shutdown" ]; then
-    shutdown -h now
+    systemctl poweroff
 fi
 exit 0
