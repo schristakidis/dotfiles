@@ -35,9 +35,15 @@ for zsh_source in $ZDOTDIR/configs/*.zsh; do
   source $zsh_source
 done
 
-for zsh_source in $ZDOTDIR/local/*.zsh; do
-    source $zsh_source
-done
+if [ -d $ZDOTDIR/local ]
+then
+    for zsh_source in "$(ls $ZDOTDIR/local)"; do
+        if [[ $zsh_source =~ \.zsh$ ]]
+        then
+            source $ZDOTDIR/local/$zsh_source
+        fi
+    done
+fi
 
 source $ZDOTDIR/virtual.zsh
 
