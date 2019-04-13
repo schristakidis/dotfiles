@@ -11,4 +11,5 @@ playerctl
 xtitle
 xkblayout-state
 xidlehook (install using cargo)
+mate-power-manager
 
