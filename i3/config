@@ -17,7 +17,7 @@ floating_modifier $mod
 bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+BackSpace exec --no-startup-id $dot_bin/i3reboot
-bindsym Control+mod1+l exec $dot_bin/i3lock-script.sh
+bindsym Control+mod1+l exec $dot_bin/i3lock-script now
 
 #
 #
@@ -223,8 +223,9 @@ exec compton
 exec --no-startup-id unclutter
 exec --no-startup-id nm-applet
 exec --no-startup-id dunst
-exec --no-startup-id ~/.dotfiles/i3scripts/tools/disable_dpms_on_fs.py
 exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id blueman-applet
 
-exec --no-startup-id xautolock -time 5 -corners 000- -cornersize 30 -locker "$dot_bin/i3lock-script.sh" -detectsleep -resetsaver &
+# exec --no-startup-id ~/.dotfiles/i3scripts/tools/disable_dpms_on_fs.py
+# exec --no-startup-id xautolock -time 5 -corners 000- -cornersize 30 -locker "$dot_bin/i3lock-script.sh" -detectsleep -resetsaver &
+exec --no-startup-id $dot_bin/i3locker

@@ -1,9 +1,11 @@
 export TERM=screen-256color
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 export GOPATH="$HOME/go"
 export CARGOPATH="$HOME/.cargo/bin"
-export PATH="$PATH:$GOPATH/bin:$CARGOPATH"
+export I3BIN="$DOTDIR/i3scripts/tools"
+
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin:$CARGOPATH:$I3BIN"
 
 zshrc=$ZDOTDIR/.zshrc
 sz() {source $zshrc}

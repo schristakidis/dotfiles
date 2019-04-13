@@ -6,8 +6,9 @@ rofi-themes
 imagemagick
 gsimplecal
 acpi
-xautolock
 arandr (just for help)
 playerctl
 xtitle
 xkblayout-state
+xidlehook (install using cargo)
+
