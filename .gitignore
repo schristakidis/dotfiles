@@ -4,3 +4,5 @@ tmux/plugins/*
 !tmux/plugins/.gitkeep
 zsh/local/*
 !zsh/local/.gitkeep.zsh
+i3/i3resources/*
+!i3/i3resources/.gitkeep

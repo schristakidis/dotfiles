@@ -1,0 +1,7 @@
+setxkbmap -option caps:ctrl_modifier
+
+i3resource=$HOME/.dotfiles/i3/i3resources/i3resources
+if [ -f $i3resource ]
+then
+    xrdb -merge $i3resource
+fi

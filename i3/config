@@ -1,12 +1,10 @@
 # #---Basic Definitions---# #
 set $mod Mod4
 default_border pixel 1
-set $dot_bin $HOME/.dotfiles/i3scripts/tools
-set $volume exec --no-startup-id ~/.dotfiles/i3scripts/tools/volumectl
 
-# set $term  urxvt
-# set $term  gnome-terminal
-set $term termite
+set_from_resource $dot_bin i3wm.bin_path $HOME/.dotfiles/i3scripts/tools
+set_from_resource $term i3wm.terminal gnome-terminal
+set $volume exec --no-startup-id ~/.dotfiles/i3scripts/tools/volumectl
 
 font pango:System San Francisco Display 9
 

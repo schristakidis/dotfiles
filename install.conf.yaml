@@ -17,6 +17,7 @@
         ~/.config/i3: i3
         ~/.config/termite: termite
         ~/.Xresources: Xresources
+        ~/.xprofile: xprofile
 
 - shell:
         - 
