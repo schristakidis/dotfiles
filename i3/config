@@ -227,7 +227,7 @@ bindsym $mod+n	exec --no-startup-id $dot_bin/ddspawn nautilus
 
 #
 ## ######## START-UP PROGRAMS ###########
-exec_always feh --bg-scale $HOME/Pictures/wallpaper5.jpg
+exec_always feh --bg-scale $HOME/.dotfiles/resources/wallpaper/wallpaper5.jpg
 exec --no-startup-id xrdb ~/.Xresources; $term
 exec --no-startup-id firefox
 exec --no-startup-id spotify
@@ -243,3 +243,4 @@ exec --no-startup-id mate-power-manager
 # exec --no-startup-id ~/.dotfiles/i3scripts/tools/disable_dpms_on_fs.py
 # exec --no-startup-id xautolock -time 5 -corners 000- -cornersize 30 -locker "$dot_bin/i3lock-script.sh" -detectsleep -resetsaver &
 exec --no-startup-id $dot_bin/i3locker
+exec --no-startup-id mons -a -x "$dot_bin/i3display" &
