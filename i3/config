@@ -113,7 +113,6 @@ bindsym $mod+BackSpace scratchpad show
 bindsym $mod+Shift+minus move scratchpad
 
 assign [class="Firefox"] $ws2
-assign [class="Firefox"] $ws2
 for_window [class="vlc"] move to workspace $ws9
 for_window [class="Spotify"] move to workspace $ws10
 for_window [class="(?i)gsimplecal"] floating enable, move position mouse, move down 10px

@@ -1,13 +1,13 @@
 ### FZF
 
-```
+```sh
 pacman -S fzf lastpass-cli xclip fd
 ```
 
 
 ### Universal-ctags
 
-```
+```sh
 git clone https://github.com/universal-ctags/ctags.git
 cd ctags
 ./autogen.sh 

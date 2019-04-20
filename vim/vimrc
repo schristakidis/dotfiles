@@ -46,12 +46,14 @@ Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plug 'iamcco/markdown-preview.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 Plug 'bronson/vim-visual-star-search'
 Plug 'chrisbra/Colorizer'
 Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'dhruvasagar/vim-table-mode'
 
 
 call plug#end()
@@ -63,6 +65,12 @@ filetype plugin indent on
 syntax enable
 
 set background=dark
+
+augroup my_colours
+      autocmd!
+        autocmd ColorScheme solarized hi SpellBad cterm=underline
+augroup END
+
 colo solarized
 
 set nu
@@ -106,6 +114,9 @@ augroup my_filetypes
     autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags noci
     autocmd FileType html,jinja2 set omnifunc=htmlcomplete#CompleteTags noci
     autocmd Filetype html,htmljinja setlocal ts=2 ts=2 sw=2 sts=2 expandtab
+    
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    " autocmd BufRead,BufNewFile *.md setlocal spell
 augroup END
 
 set foldmethod=indent
@@ -550,9 +561,13 @@ autocmd FileType go nmap <Leader>d <Plug>(go-def)
 
 " vimwiki
 let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+let g:vimwiki_list = [{'path': '~/.dotfiles/wiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
-nmap <leader>md  <Plug>MarkdownPreview        " for normal mode
-nmap <leader>mc <Plug>StopMarkdownPreview    " for normal mode
+nmap <leader>md :MarkdownPreview<CR>
+nmap <leader>mc :MarkdownPreviewStop<CR>
 
 
 let g:highlightedyank_highlight_duration = 100
+
+" Enable spell check for markdown files
+au FileType markdown setlocal spell
