@@ -556,3 +556,7 @@ nmap <leader>mc <Plug>StopMarkdownPreview    " for normal mode
 
 
 let g:highlightedyank_highlight_duration = 100
+
+
+" xmllint
+vmap <leader>X :!xmllint --format -<CR>
