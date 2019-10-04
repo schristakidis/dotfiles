@@ -20,6 +20,7 @@
 ## ARCH
 - [Installation Tips](arch/Installation)
 - [Raspberry](arch/raspberry)
+- [wifi](arch/wifi)
 
 ## AWS
 - [Installation](aws/Installation)
