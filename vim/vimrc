@@ -26,6 +26,7 @@ Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'altercation/vim-colors-solarized'
+Plug 'dracula/vim'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -62,8 +63,16 @@ syntax on
 filetype plugin indent on
 syntax enable
 
+if &term =~ '256color'
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://sunaku.github.io/vim-256color-bce.html
+    set t_ut=
+endif
+
 set background=dark
 colo solarized
+" colo dracula
 
 set nu
 set hlsearch
@@ -262,8 +271,8 @@ vnoremap = :Autoformat<CR>
 let g:formatters_python = ['yapf']
 
 " Git Gutter
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 map ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
