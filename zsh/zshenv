@@ -1,5 +1,8 @@
 export DOTDIR=$HOME/.dotfiles
 export ZDOTDIR=$DOTDIR/zsh
+export DOT_BIN=$DOTDIR/i3scripts/tools
+export PATH="$DOT_BIN:$PATH"
+export TERMINAL=st
 
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"

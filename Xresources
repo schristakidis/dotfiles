@@ -64,3 +64,12 @@ URxvt.letterSpace: -1
 
 URxvt.scrollBar: false
 
+!! dwm
+!
+dwm.normbordercolor: #2f343f
+dwm.normbgcolor: #2f343f
+dwm.normfgcolor: #676E7D
+
+dwm.selbordercolor: #2f343f
+dwm.selbgcolor: #2f343f
+dwm.selfgcolor: #f3f4f5
