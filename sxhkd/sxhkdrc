@@ -5,40 +5,48 @@
 # The keys NOT bound here by sxhkd, but by dwm or i3 are:
 
 # Basic binds
-super + shift + Return
+super + Return
 	$TERMINAL
-super + d
-	dmenu_run
+super + r
+	rofi -show drun
 super + f
 	firefox
 
 
 super + shift + x
-	$DOT_BIN/dprompt "Shutdown computer?" "sudo -A shutdown -h now"
+	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
 super + shift + r
-    $DOT_BIN/dprompt "Restart computer?" "sudo -A shutdown -r now"
+    dprompt "Restart computer?" "sudo -A shutdown -r now"
 super + shift + BackSpace
-    $DOT_BIN/i3reboot
-super + shift + l
-    $DOT_BIN/i3lock-script now
+    i3reboot
+alt + shift + l
+    i3lock-script now
 
 
+control + shift + l
+    xkblayout-state set +1; dwmbar update keyboard &
 
 
 XF86PowerOff
-	$DOT_BIN/dprompt "Shutdown computer?" "sudo -A shutdown -h now"
+	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
 XF86AudioRaiseVolume
-    $DOT_BIN/volumectl up 5 ; $DOT_BIN/refbar
+    volumectl up 5 ; dwmbar update volume &
 XF86AudioLowerVolume
-    $DOT_BIN/volumectl down 5; $DOT_BIN/refbar
+    volumectl down 5;  dwmbar update volume &
 XF86AudioMute
-    $DOT_BIN/volumectl mute; $DOT_BIN/refbar
+    volumectl mute; dwmbar update volume &
+
+alt + Up
+    volumectl up 5 ; dwmbar update volume &
+
+alt + Down
+    volumectl down 5 ; dwmbar update volume &
+
 
 # bindsym $mod+Shift+p exec playerctl --player=spotify play-pause
 # bindsym $mod+Right exec playerctl --player=spotify next
 # bindsym $mod+Left exec playerctl --player=spotify previous
 #
-# bindsym mod1+Shift+l exec --no-startup-id  $dot_bin/kb_layout_change
 # bindsym $mod+Up $volume up 2
 # bindsym $mod+Down $volume down 2
 

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+notify-send 'reboot called'
+res=$(echo -e "shutdown\nreboot\nlogout" | rofi -dmenu)
+
+if [ $res = "logout" ]; then
+    i3-msg exit
+fi
+if [ $res = "reboot" ]; then
+    systemctl reboot
+fi
+if [ $res = "shutdown" ]; then
+    systemctl poweroff
+fi
+exit 0

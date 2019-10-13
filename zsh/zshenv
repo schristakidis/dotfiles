@@ -1,6 +1,6 @@
 export DOTDIR=$HOME/.dotfiles
 export ZDOTDIR=$DOTDIR/zsh
-export DOT_BIN=$DOTDIR/i3scripts/tools
+export DOT_BIN=$DOTDIR/bin
 export PATH="$DOT_BIN:$PATH"
 export TERMINAL=st
 

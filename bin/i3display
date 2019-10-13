@@ -1,0 +1,17 @@
+#!/bin/sh
+
+case ${MONS_NUMBER} in
+    1)
+        mons -o
+        feh --no-fehbg --bg-fill "${HOME}/.dotfiles/resources/wallpaper/wallpaper5.jpg"
+        ;;
+    2)
+        mons -e right
+        feh --no-fehbg --bg-fill "${HOME}/.dotfiles/resources/wallpaper/wallpaper5.jpg" \
+                       --bg-fill "${HOME}/.dotfiles/resources/wallpaper/wallpaper5.jpg"
+
+        ;;
+    *)
+        # Handle it manually
+        ;;
+esac
