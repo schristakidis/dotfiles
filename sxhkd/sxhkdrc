@@ -11,6 +11,8 @@ super + r
 	rofi -show drun
 super + f
 	firefox
+super + n
+    nautilus
 
 
 super + shift + x
