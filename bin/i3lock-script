@@ -2,15 +2,15 @@
 
 i3lock_func () {
     rm /tmp/screen.png
-    scrot /tmp/screen.png
+    scrot -z /tmp/screen.png
     convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
     convert $HOME/Pictures/Lock-icon.png -scale 25% /tmp/lock-icon.png
     convert /tmp/screen.png /tmp/lock-icon.png -gravity center -composite -matte /tmp/screen.png
     # xset +dpms
-    xset dpms 0 0 30
+    # xset dpms 0 0 30
     i3lock -n -e -f -i /tmp/screen.png 
-    sleep 1
-    xset dpms 0 0 0
+    # sleep 1
+    # xset dpms 0 0 0
     # i3lock -e -f --color=000000
     # sleep 60 && [ 4000 -lt "$(xssstate -i)" ] &&  pgrep -x i3lock && xset dpms force off
 }
@@ -28,7 +28,7 @@ case $mode in
         i3lock_func
         ;;
     now)
-        $HOME/.cargo/bin/xidlehook-client --socket /tmp/xidlehook.sock --trigger
+        xidlehook-client --socket /tmp/xidlehook.sock --trigger
         ;;
     *) exit
 esac

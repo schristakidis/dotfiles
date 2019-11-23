@@ -7,7 +7,7 @@
 # Basic binds
 super + Return
 	$TERMINAL
-super + r
+super + d
 	rofi -show drun
 super + f
 	firefox

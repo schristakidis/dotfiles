@@ -10,25 +10,20 @@ export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
 sleep 1
 
 # Run xidlehook
-$HOME/.cargo/bin/xidlehook \
-  `# Don't lock when there's a fullscreen application` \
+xidlehook \
   --socket /tmp/xidlehook.sock \
   --not-when-fullscreen \
-  `# Don't lock when there's audio playing` \
   --not-when-audio \
-  `# Dim the screen after 60 seconds, undim if user becomes active` \
-  --timer normal 60 \
+  --timer normal 600 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .5' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
-  `# Undim & lock after 10 more seconds` \
   --timer primary 10 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script' \
     '' \
-  `# turn off display after 15 seconds` \
-  --timer normal 15 \
+  --timer normal 60 \
     'xset dpms force off' \
     '' &
   # `# Finally, suspend an hour after it locks` \
   # --timer normal 3600 \
   #   'systemctl suspend' \
-  #   ''
+  #   '' &
