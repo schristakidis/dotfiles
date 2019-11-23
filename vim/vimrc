@@ -37,8 +37,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-unimpaired'
 Plug 'benmills/vimux'
 Plug 'terryma/vim-expand-region'
-Plug 'vim-airline/vim-airline', Cond(has('nvim'))
-Plug 'vim-airline/vim-airline-themes', Cond(has('nvim'))
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
 Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
@@ -273,8 +273,8 @@ vnoremap = :Autoformat<CR>
 let g:formatters_python = ['yapf']
 
 " Git Gutter
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
 
 map ih <Plug>GitGutterTextObjectInnerPending
 omap ah <Plug>GitGutterTextObjectOuterPending
@@ -310,37 +310,20 @@ nnoremap <Leader>sg :Ggrep <C-R><C-W><CR><CR>
 
 set laststatus=2 "always show the status line
 
-if !has('nvim')
-    "powerline setup. Requires pip install powerline-status
-    if $VIM_PYTHON3
-        python3 import sys, os
-        python3 sys.path.append(os.path.join(os.environ['HOME'], '.config/powerline/segments'))
-        python3 from powerline.vim import setup as powerline_setup
-        python3 powerline_setup()
-        python3 del powerline_setup
-    else
-        python import sys, os
-        python sys.path.append(os.path.join(os.environ['HOME'], '.config/powerline/segments'))
-        python from powerline.vim import setup as powerline_setup
-        python powerline_setup()
-        python del powerline_setup
-    endif
-else
-    function! AirlineInit()
-        let g:airline_section_z = airline#section#create(['%1p%%', '  ', 'linenr', ':%v'])
-        let g:airline_symbols.linenr = ''
-    endfunction
-    autocmd User AirlineAfterInit call AirlineInit()
+function! AirlineInit()
+    let g:airline_section_z = airline#section#create(['%1p%%', '  ', 'linenr', ':%v'])
+    let g:airline_symbols.linenr = ''
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
 
-    let g:airline_powerline_fonts = 1 
-    let g:airline_theme='powerlineish'
-    let g:airline_skip_empty_sections = 1
-    let g:airline#extensions#hunks#non_zero_only = 1
-    let g:airline#extensions#whitespace#enabled = 0
-    let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-    let g:airline#extensions#virtualenv#enabled = 1
-    let g:airline#extensions#wordcount#enabled = 0
-endif
+let g:airline_powerline_fonts = 1 
+let g:airline_theme='powerlineish'
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline#extensions#virtualenv#enabled = 1
+let g:airline#extensions#wordcount#enabled = 0
 
 
 " denite
