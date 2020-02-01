@@ -6,6 +6,8 @@ export CARGOPATH="$HOME/.cargo/bin"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin:$CARGOPATH"
 
+bindkey -v
+
 zshrc=$ZDOTDIR/.zshrc
 sz() {source $zshrc}
 

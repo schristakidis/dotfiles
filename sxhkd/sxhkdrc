@@ -1,9 +1,3 @@
-# The Simple X Hotkey Daemon is the program used by LARBS to map most of the
-# dwm-independent commands.  This file is pretty readable, so I'll let you read
-# it.
-
-# The keys NOT bound here by sxhkd, but by dwm or i3 are:
-
 # Basic binds
 super + Return
 	$TERMINAL
@@ -15,10 +9,10 @@ super + n
     nautilus
 
 
-super + shift + x
-	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
-super + shift + r
-    dprompt "Restart computer?" "sudo -A shutdown -r now"
+# super + shift + x
+# 	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
+# super + shift + r
+#     dprompt "Restart computer?" "sudo -A shutdown -r now"
 super + shift + BackSpace
     i3reboot
 alt + shift + l
@@ -26,30 +20,25 @@ alt + shift + l
 
 
 control + shift + l
-    xkblayout-state set +1; dwmbar update keyboard &
+    xkblayout-state set +1
 
 
 XF86PowerOff
 	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
 XF86AudioRaiseVolume
-    volumectl up 5 ; dwmbar update volume &
+    volumectl up 5
 XF86AudioLowerVolume
-    volumectl down 5;  dwmbar update volume &
+    volumectl down 5
 XF86AudioMute
-    volumectl mute; dwmbar update volume &
+    volumectl mute
 
 alt + Up
-    volumectl up 5 ; dwmbar update volume &
+    volumectl up 5
 
 alt + Down
-    volumectl down 5 ; dwmbar update volume &
+    volumectl down 5
 
 
 # bindsym $mod+Shift+p exec playerctl --player=spotify play-pause
 # bindsym $mod+Right exec playerctl --player=spotify next
 # bindsym $mod+Left exec playerctl --player=spotify previous
-#
-# bindsym $mod+Up $volume up 2
-# bindsym $mod+Down $volume down 2
-
-

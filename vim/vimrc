@@ -26,6 +26,7 @@ Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
@@ -58,20 +59,23 @@ Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 
+set termguicolors
 set t_Co=256
 
 syntax on
 filetype plugin indent on
 syntax enable
 
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 
 augroup my_colours
       autocmd!
-        autocmd ColorScheme solarized hi SpellBad cterm=underline
+        autocmd ColorScheme solarized8 hi SpellBad cterm=underline
 augroup END
 
-colo solarized
+colo solarized8
 
 set nu
 set hlsearch
