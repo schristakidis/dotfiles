@@ -18,6 +18,8 @@
         ~/.config/sxhkd: sxhkd
         ~/.config/dunst: dunst
         ~/.config/termite: termite
+        ~/.config/bspwm: bspwm
+        ~/.config/polybar: polybar
         ~/.Xresources: Xresources
         ~/.xprofile: xprofile
 

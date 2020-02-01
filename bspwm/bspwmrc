@@ -1,0 +1,50 @@
+#! /bin/sh
+
+setxkbmap -option caps:ctrl_modifier
+
+xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
+xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Natural Scrolling Enabled' 1
+
+feh --bg-scale $HOME/.dotfiles/resources/wallpaper/wallpaper5.jpg &
+xrdb ~/.Xresources
+
+$HOME/.config/polybar/launch_polybar.sh
+
+killall mate-power-manager
+mate-power-manager &
+
+killall dunst
+dunst &
+
+killall sxhkd
+sxhkd $HOME/.config/bspwm/sxhkdrc &
+
+killall compton
+compton &
+
+killall unclutter
+unclutter &
+
+killall nm-applet
+nm-applet &
+libinput-gestures &
+evolution &
+
+.dotfiles/bin/i3locker &
+
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+
+bspc config border_width         2
+bspc config window_gap           10
+bspc config top_padding          0
+bspc config focus_follows_pointer true
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config single_monocle      true
+
+bspc rule -a Chromium desktop='^2'
+bspc rule -a evolution state=floating
+bspc rule -a Kupfer.py focus=on
