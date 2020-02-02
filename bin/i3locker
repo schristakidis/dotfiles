@@ -14,16 +14,9 @@ xidlehook \
   --socket /tmp/xidlehook.sock \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer normal 600 \
+  --timer 600 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .5' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
-  --timer primary 10 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script' \
-    '' \
-  --timer normal 60 \
-    'xset dpms force off' \
-    '' &
-  # `# Finally, suspend an hour after it locks` \
-  # --timer normal 3600 \
-  #   'systemctl suspend' \
-  #   '' &
+  --timer 10 \
+    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script; xset dpms force off' \
+    ''&

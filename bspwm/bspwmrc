@@ -45,6 +45,11 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 bspc config single_monocle      true
 
+# bspc config pointer_modifier mod1
+# bspc config pointer_action1 move
+# bspc config pointer_action2 resize_side
+# bspc config pointer_action3 resize_corner
+
 bspc rule -a Chromium desktop='^2'
-bspc rule -a evolution state=floating
+bspc rule -a Evolution state=floating
 bspc rule -a Kupfer.py focus=on

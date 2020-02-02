@@ -1,18 +1,40 @@
 #!/bin/bash
 
+B='#00000000'  # blank
+C='#ffffff22'  # clear ish
+D='#ff00ffcc'  # default
+T='#ee00eeee'  # text
+W='#880000bb'  # wrong
+V='#bb00bbbb'  # verifying
+
 i3lock_func () {
-    rm /tmp/screen.png
-    scrot -z /tmp/screen.png
-    convert /tmp/screen.png -scale 10% -scale 1000% /tmp/screen.png
-    convert $HOME/Pictures/Lock-icon.png -scale 25% /tmp/lock-icon.png
-    convert /tmp/screen.png /tmp/lock-icon.png -gravity center -composite -matte /tmp/screen.png
-    # xset +dpms
-    # xset dpms 0 0 30
-    i3lock -n -e -f -i /tmp/screen.png 
-    # sleep 1
-    # xset dpms 0 0 0
-    # i3lock -e -f --color=000000
-    # sleep 60 && [ 4000 -lt "$(xssstate -i)" ] &&  pgrep -x i3lock && xset dpms force off
+    i3lock \
+        --insidevercolor=$C   \
+        --ringvercolor=$V     \
+                              \
+        --insidewrongcolor=$C \
+        --ringwrongcolor=$W   \
+        \
+        --insidecolor=$B      \
+        --ringcolor=$D        \
+        --linecolor=$B        \
+        --separatorcolor=$D   \
+        \
+        --verifcolor=$T        \
+        --wrongcolor=$T        \
+        --timecolor=$T        \
+        --datecolor=$T        \
+        --layoutcolor=$T      \
+        --keyhlcolor=$W       \
+        --bshlcolor=$W        \
+        \
+        --screen 1            \
+        --blur 5              \
+        --clock               \
+        --indicator           \
+        --timestr="%H:%M:%S"  \
+        --datestr="%A, %d %b" \
+        --keylayout 2         
 }
 
 if [ -z "$1" ] 
@@ -28,7 +50,7 @@ case $mode in
         i3lock_func
         ;;
     now)
-        xidlehook-client --socket /tmp/xidlehook.sock --trigger
+        xidlehook-client --socket /tmp/xidlehook.sock control --action trigger --timer 1 
         ;;
     *) exit
 esac
