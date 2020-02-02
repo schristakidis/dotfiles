@@ -2,7 +2,7 @@
 super + Return
 	$TERMINAL
 super + d
-	rofi -show drun
+	rofi_run
 super + f
 	firefox
 super + n
@@ -13,8 +13,10 @@ super + n
 # 	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
 # super + shift + r
 #     dprompt "Restart computer?" "sudo -A shutdown -r now"
+# super + shift + BackSpace
+#     i3reboot
 super + shift + BackSpace
-    i3reboot
+    rofi_run -l
 alt + shift + l
     i3lock-script now
 
