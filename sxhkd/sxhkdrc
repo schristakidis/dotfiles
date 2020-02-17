@@ -9,10 +9,6 @@ super + n
     nautilus
 
 
-# super + shift + x
-# 	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
-# super + shift + r
-#     dprompt "Restart computer?" "sudo -A shutdown -r now"
 # super + shift + BackSpace
 #     i3reboot
 super + shift + BackSpace

@@ -4,7 +4,7 @@ super + shift + r
 super + shift + q
     bspc node --close
 
-super + {s, shift +f, t, shift + t}
+super + {s, z, t, shift + t}
 	bspc node --state \~{floating,fullscreen,tiled,pseudo_tiled}
 
 super + space
@@ -23,6 +23,9 @@ super + bracket{left,right}
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
+# focus the next/previous node in the current desktop
+super + {_,shift + }c
+    bspc node -f {next,prev}.local
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}

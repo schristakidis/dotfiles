@@ -63,7 +63,7 @@ font-6 = FuraMono Nerd Font Mono:style=Regular
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = pulseaudio xkeyboard memory cpu temperature date powermenu
+modules-right = pulseaudio xkeyboard memory cpu temperature date
 
 tray-position = right
 tray-padding = 2
