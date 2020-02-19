@@ -20,8 +20,11 @@ super + bracket{left,right}
 
     
 # focus the last node/desktop
-super + {grave,Tab}
-	bspc {node,desktop} -f last
+alt + {_,shift} grave
+    bspc node --focus {next,prev}.same_class
+
+alt + {_,shift} Tab
+    bspc node --focus {next,prev}.!same_class
 
 # focus the next/previous node in the current desktop
 super + {_,shift + }c

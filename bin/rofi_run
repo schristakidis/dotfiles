@@ -70,7 +70,7 @@ else
 					*Lock) i3lock-script now ;;
 					*Reboot) systemctl reboot ;;
 					*Shutdown) systemctl -i poweroff ;;
-					*Logout) systemctl restart gdm ;;
+					*Logout) bspc quit ;;
 				esac
 				;;
 			*)

@@ -9,11 +9,9 @@ super + n
     nautilus
 
 
-# super + shift + BackSpace
-#     i3reboot
-super + shift + BackSpace
+alt + ctrl + BackSpace
     rofi_run -l
-alt + shift + l
+alt + ctrl + l
     i3lock-script now
 
 
