@@ -42,3 +42,5 @@ if [[ `uname` != 'Darwin' ]]; then
 fi
 
 export LC_CTYPE=en_US.UTF-8
+
+source /usr/share/nvm/init-nvm.sh

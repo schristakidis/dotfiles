@@ -28,16 +28,19 @@ unclutter &
 
 killall nm-applet
 nm-applet &
-killall libinput-gestures
-libinput-gestures &
+# killall libinput-gestures
+# libinput-gestures &
 evolution &
+slack &
 
 .dotfiles/bin/i3locker &
 
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor HDMI-1 -d 1 2 3 4 5
+bspc monitor HDMI-2 -d 6 7 8 9 10
 
-bspc config border_width         2
+bspc config border_width         4
+bspc config normal_border_color "#002b36"
 bspc config window_gap           10
 bspc config top_padding          0
 bspc config focus_follows_pointer true
@@ -56,3 +59,4 @@ bspc rule -a Chromium desktop='^2'
 bspc rule -a Evolution desktop='^10' focus=on
 bspc rule -a Kupfer.py focus=on
 bspc rule -a Slack desktop='^9' focus=on
+bspc rule -a Packman state=floating center=on
