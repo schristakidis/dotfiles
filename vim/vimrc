@@ -42,7 +42,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
-Plug 'Shougo/denite.nvim', {'tag': '2.0'} "has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
+Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -332,80 +332,84 @@ let g:airline#extensions#wordcount#enabled = 0
 
 " denite
 if has('nvim')
-    call denite#custom#var('file_rec', 'command',
+
+    " Define mappings
+    autocmd FileType denite call s:denite_my_settings()
+    function! s:denite_my_settings() abort
+        nnoremap <silent><buffer><expr> <CR>
+                    \ denite#do_map('do_action')
+        nnoremap <silent><buffer><expr> p
+                    \ denite#do_map('do_action', 'preview')
+        nnoremap <silent><buffer><expr> q
+                    \ denite#do_map('quit')
+        nnoremap <silent><buffer><expr> <Esc>
+                    \ denite#do_map('quit')
+        nnoremap <silent><buffer><expr> i
+                    \ denite#do_map('open_filter_buffer')
+        nnoremap <silent><buffer><expr> v
+                    \ denite#do_map('do_action','vsplit' )
+        nnoremap <silent><buffer><expr> <Space>
+                    \ denite#do_map('toggle_select').'j'
+    endfunction
+
+    autocmd FileType denite-filter call s:denite_filter_my_settings()
+    function! s:denite_filter_my_settings() abort
+        call deoplete#custom#buffer_option('auto_complete', v:false)
+
+        imap <silent><buffer> <Esc>       <Plug>(denite_filter_quit)
+
+        nnoremap <silent><buffer><expr> <Esc>
+                    \ denite#do_map('quit')
+
+        inoremap <silent><buffer><expr> <C-v>
+                    \ denite#do_map('do_action','vsplit' )
+        inoremap <silent><buffer><expr> <C-p>
+                    \ denite#do_map('do_action','preview' )
+
+        inoremap <silent><buffer> <C-j>
+                    \ <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+        inoremap <silent><buffer> <C-k>
+                    \ <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+    endfunction
+
+    call denite#custom#var('file/rec', 'command',
                 \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+
+    " Change matchers.
+    call denite#custom#source(
+                \ 'file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+
+    call denite#custom#source(
+                \ 'file/rec', 'matchers', ['matcher/fuzzy'])
+
+    " Change sorters.
+    call denite#custom#source(
+                \ 'file/rec', 'sorters', ['sorter/sublime'])
+
+    " Change default action.
+    call denite#custom#kind('file', 'default_action', 'split')
+
 
     " Ag command on grep source
     call denite#custom#var('grep', 'command', ['ag'])
-    " only for old versions of ag
     call denite#custom#var('grep', 'default_opts',
-                \ ['-i', '--column'])
-    " call denite#custom#var('grep', 'default_opts',
-    "             \ ['-i', '--vimgrep'])
+                \ ['-i', '--vimgrep'])
     call denite#custom#var('grep', 'recursive_opts', [])
     call denite#custom#var('grep', 'pattern_opt', [])
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
 
-    call denite#custom#alias('source', 'file_rec/git', 'file_rec')
-    call denite#custom#var('file_rec/git', 'command',
+    " Define alias
+    call denite#custom#alias('source', 'file/rec/git', 'file/rec')
+    call denite#custom#var('file/rec/git', 'command',
                 \ ['git', 'ls-files', '-co', '--exclude-standard'])
 
-    call denite#custom#map(
-                \ 'insert',
-                \ '<C-j>',
-                \ '<denite:move_to_next_line>',
-                \ 'noremap'
-                \)
+    " Change ignore_globs
+    call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',
+                \ [ '.git/', '.ropeproject/', '__pycache__/',
+                \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/'])
 
-    call denite#custom#map(
-                \ 'insert',
-                \ '<C-k>',
-                \ '<denite:move_to_previous_line>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'insert',
-                \ '<Down>',
-                \ '<denite:move_to_next_line>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'insert',
-                \ '<Up>',
-                \ '<denite:move_to_previous_line>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'insert',
-                \ '<C-v>',
-                \ '<denite:do_action:vsplit>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'normal',
-                \ 'v',
-                \ '<denite:do_action:vsplit>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'insert',
-                \ '<C-p>',
-                \ '<denite:do_action:preview>',
-                \ 'noremap'
-                \)
-
-    call denite#custom#map(
-                \ 'insert',
-                \ '<C-y>',
-                \ '<denite:do_action:yank>',
-                \ 'noremap'
-                \)
+    call denite#custom#kind('file', 'default_action', 'open')
 
     let s:menus = {}
 
@@ -420,17 +424,17 @@ if has('nvim')
                 \ ]
     call denite#custom#var('menu', 'menus', s:menus)
 
-    nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file_rec<CR>
-    nnoremap <silent> <C-f> :<C-u>Denite file_rec<CR>
+    " nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file/rec -split=floating -wincol=20 -winrow=20 -start-filter<CR>
+    nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file/rec -start-filter<CR>
+    nnoremap <silent> <C-f> :<C-u>Denite file/rec -split=floating -wincol=20 -winrow=20 -start-filter<CR>
     nnoremap <silent> <C-b> :<C-u>Denite buffer<CR>
-    nnoremap <silent> <C-g> :<C-u>DeniteProjectDir -no-empty -mode=normal grep:::<C-R><C-W><CR>
+    nnoremap <silent> <C-g> :<C-u>DeniteProjectDir -no-empty grep:::<C-R><C-W><CR>
     nnoremap <silent> <Leader>z :<C-u>Denite menu:dotfiles<CR>
-    nnoremap <silent> <Leader>/ :<C-u>Denite line<CR>
-    nnoremap <silent> <Leader>\ :<C-u>DeniteProjectDir -mode=normal grep<CR>
-    nnoremap <silent> <Leader>* :<C-u>Denite -mode=normal -auto-highlight=true line -input=<C-R><C-W><CR>
-    " open next result of previous search
+    nnoremap <silent> <Leader>/ :<C-u>Denite line -start-filter<CR>
+    nnoremap <silent> <Leader>\ :<C-u>DeniteProjectDir grep<CR>
+     " open next result of previous search
     nnoremap <silent> <localleader>j :<C-u>Denite -resume -cursor-pos=+1 -immediately<CR> 
-    " resume previous search
+     " resume previous search
     nnoremap <silent> <localleader>J :<C-u>Denite -resume -cursor-pos=+1<CR>
 
     highlight link deniteMatchedChar WarningMsg
