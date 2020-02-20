@@ -57,14 +57,6 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = Noto Sans Symbols2:style=Regular
 font-4 = Material Icons:style=Regular
-font-0 = fixed:pixelsize=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = Terminus:style=Regular
-font-4 = Material Icons:style=Regular
-font-5 = Noto Sans Mono:style=Regular
-font-6 = FuraMono Nerd Font Mono:style=Regular
-
 
 modules-left = bspwm
 modules-center = xwindow
