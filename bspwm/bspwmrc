@@ -2,8 +2,6 @@
 
 setxkbmap -option caps:ctrl_modifier
 
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
-xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Natural Scrolling Enabled' 1
 xsetroot -cursor_name left_ptr
 
 feh --bg-scale $HOME/.dotfiles/resources/wallpaper/wallpaper5.jpg &
@@ -20,24 +18,24 @@ dunst &
 killall sxhkd
 sxhkd $HOME/.config/bspwm/sxhkdrc &
 
-killall compton
-compton &
+killall picom
+picom &
 
 killall unclutter
 unclutter &
 
 killall nm-applet
 nm-applet &
-# killall libinput-gestures
-# libinput-gestures &
-evolution &
-slack &
 
 .dotfiles/bin/i3locker &
 
+evolution &
+slack &
+spotify &
 
-bspc monitor HDMI-1 -d 1 2 3 4 5
-bspc monitor HDMI-2 -d 6 7 8 9 10
+
+bspc monitor HDMI-1 -d       
+bspc monitor HDMI-2 -d       
 
 bspc config border_width         4
 bspc config normal_border_color "#002b36"
@@ -55,8 +53,9 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
-bspc rule -a Chromium desktop='^2'
-bspc rule -a Evolution desktop='^10' focus=on
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Slack desktop='^9' focus=on
+bspc rule -a st-256color --one-shot desktop='^6'
+st &
+bspc rule -a Evolution desktop='^5' focus=on
+bspc rule -a Slack desktop='^5' focus=on
+bspc rule -a spotify desktop='^4'focus=on
 bspc rule -a Packman state=floating center=on

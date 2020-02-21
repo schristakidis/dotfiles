@@ -376,15 +376,15 @@ if has('nvim')
                 \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 
     " Change matchers.
-    call denite#custom#source(
-                \ 'file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
-
-    call denite#custom#source(
-                \ 'file/rec', 'matchers', ['matcher/fuzzy'])
-
-    " Change sorters.
-    call denite#custom#source(
-                \ 'file/rec', 'sorters', ['sorter/sublime'])
+    " call denite#custom#source(
+    "             \ 'file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+    "
+    " call denite#custom#source(
+    "             \ 'file/rec', 'matchers', ['matcher/fuzzy'])
+    "
+    " " Change sorters.
+    " call denite#custom#source(
+    "             \ 'file/rec', 'sorters', ['sorter/sublime'])
 
     " Change default action.
     call denite#custom#kind('file', 'default_action', 'split')

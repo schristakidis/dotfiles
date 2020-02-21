@@ -14,9 +14,9 @@ xidlehook \
   --socket /tmp/xidlehook.sock \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 600 \
+  --timer 120 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .5' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
-  --timer 10 \
+  --timer 60 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script; xset dpms force off' \
     ''&
