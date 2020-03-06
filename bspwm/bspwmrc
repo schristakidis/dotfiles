@@ -91,9 +91,8 @@ if _mutlihead; then
     bspc rule -a Slack desktop='^5' focus=on
 else
     bspc rule -a Slack desktop='^9' focus=on
-    bspc rule -a Evolution desktop='^0' focus=on
+    bspc rule -a Evolution desktop='^10' focus=on
 fi
 
 bspc rule -a spotify desktop='^4'focus=on
 bspc rule -a Packman state=floating center=on
-i
