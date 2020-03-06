@@ -46,7 +46,13 @@ else
     spotify &
 fi
 
-$HOME/.dotfiles/bin/i3locker &
+if _laptop; then
+    _lock_timer=600
+else
+    _lock_timer=120
+fi
+
+_lock_timer="$_lock_timer" $HOME/.dotfiles/bin/i3locker &
 
 evolution &
 

@@ -6,17 +6,22 @@ set -m
 # export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
 export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
 
-[ -z /tmp/xidlehook.sock ] && rm -rf ~/tmp/xidlehook.sock
+[ -z /tmp/xidlehook.sock ] && rm -rf /tmp/xidlehook.sock
 sleep 1
+
+
+if [ -z "$lock_timer" ]; then
+    _lock_timer=600
+fi
 
 # Run xidlehook
 xidlehook \
   --socket /tmp/xidlehook.sock \
   --not-when-fullscreen \
   --not-when-audio \
-  --timer 120 \
+  --timer "$_lock_timer" \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness .5' \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
   --timer 60 \
     'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script; xset dpms force off' \
-    ''&
+    ''
