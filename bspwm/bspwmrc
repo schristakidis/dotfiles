@@ -1,6 +1,15 @@
 #! /bin/sh
 
+source $HOME/.dotfiles/bin/conf_xrandr.sh
+
+_conf_monitors
+
 setxkbmap -option caps:ctrl_modifier
+
+if _laptop; then
+    xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
+    xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Natural Scrolling Enabled' 1
+fi
 
 xsetroot -cursor_name left_ptr
 
@@ -9,8 +18,10 @@ xrdb ~/.Xresources
 
 $HOME/.config/polybar/launch_polybar.sh
 
-killall mate-power-manager
-mate-power-manager &
+if _laptop; then
+    killall mate-power-manager
+    mate-power-manager &
+fi
 
 killall dunst
 dunst &
@@ -27,17 +38,31 @@ unclutter &
 killall nm-applet
 nm-applet &
 
-.dotfiles/bin/i3locker &
+if _laptop; then
+    killall libinput-gestures
+    libinput-gestures &
+else
+    slack &
+    spotify &
+fi
+
+$HOME/.dotfiles/bin/i3locker &
 
 evolution &
-slack &
-spotify &
 
+if _mutlihead; then
+    bspc monitor "$_bspwm_first_screen" -d       
+    bspc monitor "$_bspwm_second_screen" -d       
+else
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+fi
 
-bspc monitor HDMI-1 -d       
-bspc monitor HDMI-2 -d       
+if _mutlihead; then
+    bspc config border_width         4
+else
+    bspc config border_width         2
+fi
 
-bspc config border_width         4
 bspc config normal_border_color "#002b36"
 bspc config window_gap           10
 bspc config top_padding          0
@@ -53,9 +78,16 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
-bspc rule -a st-256color --one-shot desktop='^6'
-st &
-bspc rule -a Evolution desktop='^5' focus=on
-bspc rule -a Slack desktop='^5' focus=on
+if _mutlihead; then
+    bspc rule -a st-256color --one-shot desktop='^6'
+    st &
+    bspc rule -a Evolution desktop='^5' focus=on
+    bspc rule -a Slack desktop='^5' focus=on
+else
+    bspc rule -a Slack desktop='^9' focus=on
+    bspc rule -a Evolution desktop='^0' focus=on
+fi
+
 bspc rule -a spotify desktop='^4'focus=on
 bspc rule -a Packman state=floating center=on
+i

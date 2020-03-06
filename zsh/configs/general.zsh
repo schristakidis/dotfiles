@@ -43,4 +43,6 @@ fi
 
 export LC_CTYPE=en_US.UTF-8
 
-source /usr/share/nvm/init-nvm.sh
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+    source /usr/share/nvm/init-nvm.sh
+fi
