@@ -6,6 +6,8 @@ export CARGOPATH="$HOME/.cargo/bin"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin:$CARGOPATH"
 
+export EDITOR="nvim"
+
 bindkey -v
 
 zshrc=$ZDOTDIR/.zshrc

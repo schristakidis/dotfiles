@@ -27,7 +27,7 @@ alt + {_,shift} Tab
     bspc node --focus {next,prev}.!same_class
 
 # focus the next/previous node in the current desktop
-super + {_,shift + }c
+super + {_,shift + }grave
     bspc node -f {next,prev}.local
 
 # focus or send to the given desktop
