@@ -28,6 +28,7 @@
     },
     "session.saveOnVimLeave": false,
     "session.directory": "~/.vimsessions",
+    "suggest.echodocSupport": true,
     "coc.source.file.ignoreHidden": false,
     "coc.source.file.enable": true,
     "list.source.grep.command": "ag",

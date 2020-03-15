@@ -50,6 +50,7 @@ Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-python/python-syntax'
 Plug 'liuchengxu/vista.vim'
+Plug 'Shougo/echodoc.vim'
 
 call plug#end()
 
@@ -571,3 +572,11 @@ let g:vista#renderer#enable_icon = 1
 autocmd FileType vista,vista_kind nnoremap <buffer> <silent> \  :<c-u>call vista#finder#fzf#Run()<CR>
 
 nmap <leader>v :Vista!!<CR>
+
+
+" echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+" To use a custom highlight for the float window,
+" change Pmenu to your highlight group
+highlight link EchoDocFloat Pmenu
