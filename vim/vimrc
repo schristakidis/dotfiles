@@ -13,19 +13,13 @@ set nocompatible
 
 call plug#begin('~/.dotfiles/vim/vundle') 
 
-Plug 'mileszs/ack.vim'
-Plug 'w0rp/ale'
-Plug 'ctrlpvim/ctrlp.vim', Cond(!has('nvim'))
-Plug 'davidhalter/jedi-vim'
+Plug 'dense-analysis/ale'
 Plug 'Valloric/ListToggle'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'klen/python-mode'
-Plug 'ervandew/supertab'
 Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
-Plug 'altercation/vim-colors-solarized'
 Plug 'lifepillar/vim-solarized8'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tpope/vim-fugitive'
@@ -40,22 +34,22 @@ Plug 'benmills/vimux'
 Plug 'terryma/vim-expand-region'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Shougo/deoplete.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
-Plug 'zchee/deoplete-jedi', Cond(has('nvim'))
 Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
-Plug 'brooth/far.vim'
 Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 Plug 'bronson/vim-visual-star-search'
-Plug 'chrisbra/Colorizer'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'dhruvasagar/vim-table-mode'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-python/python-syntax'
 
 call plug#end()
 
@@ -66,8 +60,8 @@ syntax on
 filetype plugin indent on
 syntax enable
 
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+" let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 
 augroup my_colours
@@ -75,7 +69,10 @@ augroup my_colours
         autocmd ColorScheme solarized8 hi SpellBad cterm=underline
 augroup END
 
-colo solarized8
+" colo solarized8
+" hi Quote ctermbg=109 guifg=#83a598
+colo OceanicNext
+" colo gruvbox
 
 set nu
 set hlsearch
@@ -215,56 +212,22 @@ nnoremap <silent><F3> :MaximizerToggle<CR>
 vnoremap <silent><F3> :MaximizerToggle<CR>gv
 inoremap <silent><F3> <C-o>:MaximizerToggle<CR> 
 
-"Jedi
-if !has('nvim')
-    let g:jedi#show_call_signatures = 0
-    let g:jedi#use_tabs_not_buffers = 0
-    let g:deoplete#enable_at_startup = 0
-else
-    let g:jedi#show_call_signatures = 0
-    let g:jedi#use_tabs_not_buffers = 0
-    let g:jedi#completions_enabled = 0
-    let g:deoplete#enable_at_startup = 1
-endif
-
-"Python-Mode
-"turn off rope from python mode. Conflict with jedi-vim
-let g:pymode_rope = 0
-let ropevim_vim_completion = 0
-
-" 
-" "pymode options
-let g:pymode_lint = 0
-let g:pymode_lint_write = 0
-let g:pymode_lint_on_write = 0
-let g:pymode_lint_checkers = ['pyflakes', 'pep8']
-" let g:pymode_lint_ignore = "W,E226,E501,E225,E231,E228,E251,C0326,C011"
-" let g:pymode_lint_sort = ['E', 'C', 'I']
-let g:pymode_lint_cwindow = 1
-let g:pymode_folding = 0
-let g:pymode_motion = 1
-let g:pymode_virtualenv = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
-let g:pymode_virtualenv_path = $VIRTUAL_ENV
-let g:pymode_lint_message = 1
+let g:python_highlight_all = 1
+let g:python_highlight_func_calls = 0
 
 " Ale config
-nmap <silent> <localleader>p <Plug>(ale_previous_wrap)
-nmap <silent> <localleader>n <Plug>(ale_next_wrap)
+nmap <silent> <localleader>h <Plug>(ale_previous_wrap)
+nmap <silent> <localleader>l <Plug>(ale_next_wrap)
 
 let g:ale_linters = {'python': ['flake8'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
-" let g:ale_sign_error = '>>'
-" let g:ale_sign_warning = '--'
 let g:ale_sign_info = '--'
 let g:ale_sign_style_error = '--'
 let g:ale_sign_style_warning = '--'
-
+let g:ale_echo_cursor = 1
+"
 
 " Close location window also with :bd
 " nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
@@ -328,7 +291,8 @@ let g:airline#extensions#whitespace#enabled = 0
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
 let g:airline#extensions#virtualenv#enabled = 1
 let g:airline#extensions#wordcount#enabled = 0
-
+let g:airline#extensions#ale#enabled = 1
+let g:airline_theme='oceanicnext'
 
 " denite
 if has('nvim')
@@ -354,7 +318,7 @@ if has('nvim')
 
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        call deoplete#custom#buffer_option('auto_complete', v:false)
+        " call deoplete#custom#buffer_option('auto_complete', v:false)
 
         imap <silent><buffer> <Esc>       <Plug>(denite_filter_quit)
 
@@ -374,17 +338,6 @@ if has('nvim')
 
     call denite#custom#var('file/rec', 'command',
                 \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-
-    " Change matchers.
-    " call denite#custom#source(
-    "             \ 'file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
-    "
-    " call denite#custom#source(
-    "             \ 'file/rec', 'matchers', ['matcher/fuzzy'])
-    "
-    " " Change sorters.
-    " call denite#custom#source(
-    "             \ 'file/rec', 'sorters', ['sorter/sublime'])
 
     " Change default action.
     call denite#custom#kind('file', 'default_action', 'split')
@@ -424,9 +377,43 @@ if has('nvim')
                 \ ]
     call denite#custom#var('menu', 'menus', s:menus)
 
-    " nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file/rec -split=floating -wincol=20 -winrow=20 -start-filter<CR>
-    nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file/rec -start-filter<CR>
-    nnoremap <silent> <C-f> :<C-u>Denite file/rec -split=floating -wincol=20 -winrow=20 -start-filter<CR>
+    " Custom options for Denite
+    "   auto_resize             - Auto resize the Denite window height automatically.
+    "   prompt                  - Customize denite prompt
+    "   direction               - Specify Denite window direction as directly below current pane
+    "   winminheight            - Specify min height for Denite window
+    "   highlight_mode_insert   - Specify h1-CursorLine in insert mode
+    "   prompt_highlight        - Specify color of prompt
+    "   highlight_matched_char  - Matched characters highlight
+    "   highlight_matched_range - matched range highlight
+
+    let s:denite_options = {'default' : {
+                \ 'auto_resize': 1,
+                \ 'source_names': 'short',
+                \ 'prompt': 'λ ',
+                \ 'highlight_matched_char': 'IncSearch',
+                \ 'highlight_matched_range': 'Visual',
+                \ 'highlight_window_background': 'Visual',
+                \ 'highlight_filter_background': 'DiffAdd',
+                \ 'winrow': 1,
+                \ 'vertical_preview': 1
+                \ }}
+
+    function! s:profile(opts) abort
+        for l:fname in keys(a:opts)
+            for l:dopt in keys(a:opts[l:fname])
+                call denite#custom#option(l:fname, l:dopt, a:opts[l:fname][l:dopt])
+            endfor
+        endfor
+    endfunction
+
+    call s:profile(s:denite_options)
+    " catch
+    "     echo 'Denite not installed. It should work after running :PlugInstall'
+    " endtry
+    "
+    nnoremap <silent> <C-p> :<C-u>DeniteProjectDir file/rec -start-filter <CR> " -split=floating<CR>
+    nnoremap <silent> <C-f> :<C-u>Denite file/rec -start-filter -split=floating<CR>
     nnoremap <silent> <C-b> :<C-u>Denite buffer<CR>
     nnoremap <silent> <C-g> :<C-u>DeniteProjectDir -no-empty grep:::<C-R><C-W><CR>
     nnoremap <silent> <Leader>z :<C-u>Denite menu:dotfiles<CR>
@@ -437,25 +424,15 @@ if has('nvim')
      " resume previous search
     nnoremap <silent> <localleader>J :<C-u>Denite -resume -cursor-pos=+1<CR>
 
-    highlight link deniteMatchedChar WarningMsg
-    highlight link deniteMatchedRange None
+    " highlight link deniteMatchedChar WarningMsg
+    " highlight link deniteMatchedRange None
 endif
 
 nmap <F8> :TagbarToggle<CR> 
 
-
 "vimux
 map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
 map <Leader>trl :call VimuxRunCommand("!! \n")<CR>
-
-" Ack vim with Ag
-if executable('ag')
-    let g:ackprg = 'ag --vimgrep'
-    let g:ackprg = 'git grep -n'
-endif
-
-let g:ackhighlight = 1
-nmap <Leader>ss :Ack! <C-R><C-W> <CR>
 
 " vim test
 nmap <silent> <leader>tt :TestNearest<CR>
@@ -481,18 +458,6 @@ augroup END
 noremap <silent> <C-S>          :update<CR>
 vnoremap <silent> <C-S>         <C-C>:update<CR>
 inoremap <silent> <C-S>         <ESC><C-C>:update<CR><ESC>
-
-
-"Ale powerline
-function! AleLinterStatus() abort
-    let l:counts = ale#statusline#Count(bufnr(''))
-
-    let l:all_errors = l:counts.error
-    let l:all_non_errors = l:counts.total - l:counts.error
-
-    return l:counts.total == 0 ? 'OK' : [all_errors, all_non_errors]
-endfunction
-
 
 "vim expand region
 map <localleader>e <Plug>(expand_region_expand)
@@ -520,10 +485,6 @@ call expand_region#custom_text_objects('python', {
       \ 'iC' :0,
       \ 'aC' :0
       \ })
-
-"supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabClosePreviewOnPopupClose = 1
 
 "vim-go
 let g:go_fmt_command = "goimports"
@@ -562,3 +523,39 @@ let g:highlightedyank_highlight_duration = 100
 
 " Enable spell check for markdown files
 au FileType markdown setlocal spell
+
+
+" COC
+"
+" use <tab> for trigger completion and navigate to next complete item
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr to confirm completion
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"Close preview window when completion is done.
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
+nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>').' words'<CR>
+
+" nmap <localleader>di <Plug>(coc-diagnostic-info)
+nmap <localleader>p <Plug>(coc-diagnostic-next)
+nmap <localleader>n <Plug>(coc-diagnostic-prev)
+
+autocmd FileType python nmap K :call CocAction("doHover")<CR>
+nmap <leader>d <Plug>(coc-definition)
+nmap <leader>g <Plug>(coc-declaration)
+nmap <leader>r <Plug>(coc-references)

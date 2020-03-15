@@ -10,6 +10,8 @@
 	tree = log --graph --decorate --pretty=oneline --abbrev-commit
 	fshow = !HASH=`git log --pretty=oneline | head -n 100 | fzf` && git show `echo ${HASH} | awk '{ print $1 }'`
     fbr = !FZF_BRANCH=`git br | fzf | sed "s/*//"` && git co ${FZF_BRANCH}
+    rgrep = !git grep
+    ls = !git ls-files -co --exclude-standard
 [user]
 	name = Sakis Christakidis
 	email = athanasios.christakidis@motionpicturesolutions.com
