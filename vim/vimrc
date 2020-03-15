@@ -17,7 +17,6 @@ Plug 'dense-analysis/ale'
 Plug 'Valloric/ListToggle'
 Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'lifepillar/vim-solarized8'
@@ -50,6 +49,7 @@ Plug 'morhetz/gruvbox'
 Plug 'mhartington/oceanic-next'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-python/python-syntax'
+Plug 'liuchengxu/vista.vim'
 
 call plug#end()
 
@@ -285,6 +285,7 @@ autocmd User AirlineAfterInit call AirlineInit()
 
 let g:airline_powerline_fonts = 1 
 let g:airline_theme='powerlineish'
+let g:airline#extensions#vista#enabled = 1
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#extensions#whitespace#enabled = 0
@@ -555,7 +556,18 @@ nnoremap <silent> <space>w  :exe 'CocList -I --normal --input='.expand('<cword>'
 nmap <localleader>p <Plug>(coc-diagnostic-next)
 nmap <localleader>n <Plug>(coc-diagnostic-prev)
 
-autocmd FileType python nmap K :call CocAction("doHover")<CR>
+" autocmd FileType python nmap K :call CocAction("doHover")<CR>
+nmap K :call CocAction("doHover")<CR>
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>g <Plug>(coc-declaration)
 nmap <leader>r <Plug>(coc-references)
+
+" Vista
+
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+" let g:vista_default_executive = 'coc'
+let g:vista#renderer#enable_icon = 1
+
+autocmd FileType vista,vista_kind nnoremap <buffer> <silent> \  :<c-u>call vista#finder#fzf#Run()<CR>
+
+nmap <leader>v :Vista!!<CR>

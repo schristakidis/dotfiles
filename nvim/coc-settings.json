@@ -27,6 +27,7 @@
         "default": "\uf29c"
     },
     "session.saveOnVimLeave": false,
+    "session.directory": "~/.vimsessions",
     "coc.source.file.ignoreHidden": false,
     "coc.source.file.enable": true,
     "list.source.grep.command": "ag",
