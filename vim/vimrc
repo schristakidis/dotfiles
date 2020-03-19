@@ -106,7 +106,7 @@ set expandtab
 
 augroup my_filetypes
     autocmd!
-    autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview
+    autocmd Filetype python setlocal ts=4 ts=4 sw=4 sts=4 expandtab completeopt-=preview colorcolumn=80
     autocmd Filetype php setlocal ts=2 ts=2 sw=2 sts=2 expandtab
     autocmd Filetype javascript setlocal ts=2 ts=2 sw=2 sts=2 expandtab
     
@@ -562,6 +562,12 @@ nmap K :call CocAction("doHover")<CR>
 nmap <leader>d <Plug>(coc-definition)
 nmap <leader>g <Plug>(coc-declaration)
 nmap <leader>r <Plug>(coc-references)
+
+call coc#config('python', {
+            \ 'pythonPath': $PYENV_ROOT . "/shims/python"
+            \})
+
+call coc#add_extension('coc-json', 'coc-python', 'coc-highlight', 'coc-yaml')
 
 " Vista
 

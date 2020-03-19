@@ -8,3 +8,6 @@ bindkey "^[b" backward-char
 
 bindkey "^f" forward-word
 bindkey "^b" backward-word
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down

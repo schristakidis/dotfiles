@@ -37,8 +37,5 @@
     "diagnostic.displayByAle": false,
     "coc.preferences.hoverTarget": "float",
     "python.linting.enabled": false,
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "~/.virtualenvs/neovim3/bin/flake8",
     "python.autoComplete.addBrackets": true
 }
