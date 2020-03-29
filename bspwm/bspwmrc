@@ -96,3 +96,5 @@ fi
 
 bspc rule -a spotify desktop='^4'focus=on
 bspc rule -a Packman state=floating center=on
+bspc rule -a "Cisco AnyConnect Secure Mobility Client" state=floating center=on desktop='^10'
+bspc rule -a ringcentral desktop='^4'

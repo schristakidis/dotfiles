@@ -1,7 +1,13 @@
 super + shift + r
     bspc wm -r
 
+ctrl + s ; r
+    bspc wm -r
+
 super + shift + q
+    bspc node --close
+
+ctrl + s ; q
     bspc node --close
 
 super + {s, z, t, shift + t}
@@ -13,6 +19,9 @@ super + space
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
+    
+ctrl + s ; {_,shift + }{h,j,k,l}
+    bspc node -{f,s} {west,south,north,east}
 
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
@@ -34,6 +43,8 @@ super + {_,shift + }grave
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
+ctrl + s ; {_,shift + }{1-9,0}
+    bspc {desktop -f,node -d} '^{1-9,10}'
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
