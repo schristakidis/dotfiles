@@ -569,6 +569,8 @@ call coc#config('python', {
 
 call coc#add_extension('coc-json', 'coc-python', 'coc-highlight', 'coc-yaml')
 
+autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
 " Vista
 
 let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]

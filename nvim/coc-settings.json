@@ -39,7 +39,7 @@
     "python.linting.enabled": false,
     "python.autoComplete.addBrackets": true,
     "yaml.schemas": {
-        "kubernetes": "/*.yaml"
+        "kubernetes": ["/*.yaml", "/*.yml"]
     },
     "languageserver": {
         "dockerfile": {
