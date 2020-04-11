@@ -1,27 +1,33 @@
 #! /bin/sh
 
-source $HOME/.dotfiles/bin/conf_xrandr.sh
-
-_conf_monitors
+$HOME/.dotfiles/bin/bspwm_monitors
+for i in $($HOME/.dotfiles/bin/bspwm_monitors --export); do
+    export "$i";
+done
 
 setxkbmap -option caps:ctrl_modifier
 
-if _laptop; then
+if [ -z $_laptop ] ; then
+    slack &
+    spotify &
+
+    _lock_timer=120
+else
     xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
     xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Natural Scrolling Enabled' 1
+
+    killall mate-power-manager
+    mate-power-manager &
+
+    killall libinput-gestures
+    libinput-gestures &
+
+    _lock_timer=600
 fi
 
 xsetroot -cursor_name left_ptr
 
-feh --bg-scale $HOME/.dotfiles/resources/wallpaper/wallpaper5.jpg &
 xrdb ~/.Xresources
-
-$HOME/.config/polybar/launch_polybar.sh
-
-if _laptop; then
-    killall mate-power-manager
-    mate-power-manager &
-fi
 
 killall dunst
 dunst &
@@ -38,32 +44,12 @@ unclutter &
 killall nm-applet
 nm-applet &
 
-if _laptop; then
-    killall libinput-gestures
-    libinput-gestures &
-else
-    slack &
-    spotify &
-fi
-
-if _laptop; then
-    _lock_timer=600
-else
-    _lock_timer=120
-fi
-
+killall i3locker
 _lock_timer="$_lock_timer" $HOME/.dotfiles/bin/i3locker &
 
 evolution &
 
-if _mutlihead; then
-    bspc monitor "$_bspwm_first_screen" -d       
-    bspc monitor "$_bspwm_second_screen" -d       
-else
-    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-fi
-
-if _mutlihead; then
+if [ -z $_mutlihead ] ; then
     bspc config border_width         4
 else
     bspc config border_width         2
@@ -84,7 +70,7 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
-if _mutlihead; then
+if [ -z $_mutlihead ] ; then
     bspc rule -a st-256color --one-shot desktop='^6'
     st &
     bspc rule -a Evolution desktop='^5' focus=on

@@ -2,7 +2,7 @@ super + shift + r
     bspc wm -r
 
 ctrl + s ; r
-    bspc wm -r
+    bspwm_monitors
 
 super + shift + q
     bspc node --close
