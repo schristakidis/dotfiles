@@ -6,7 +6,7 @@ set -m
 # export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
 export PRIMARY_DISPLAY="$(xrandr | awk '/ connected/{print $1}')"
 
-[ -z /tmp/xidlehook.sock ] && rm -rf /tmp/xidlehook.sock
+[ -z /tmp/xidlehook.sock ] || rm -rf /tmp/xidlehook.sock
 sleep 1
 
 

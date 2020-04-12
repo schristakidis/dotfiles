@@ -16,7 +16,7 @@
 	name = Sakis Christakidis
 	email = athanasios.christakidis@motionpicturesolutions.com
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = ~/.dotfiles/git/gitignore_global
 [merge]
 	tool = vimdiff
