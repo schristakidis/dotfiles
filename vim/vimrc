@@ -567,7 +567,7 @@ call coc#config('python', {
             \ 'pythonPath': $PYENV_ROOT . "/shims/python"
             \})
 
-call coc#add_extension('coc-json', 'coc-python', 'coc-highlight', 'coc-yaml')
+call coc#add_extension('coc-json', 'coc-python', 'coc-highlight', 'coc-yaml', 'coc-marketplace')
 
 autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
@@ -588,3 +588,10 @@ let g:echodoc#type = 'floating'
 " To use a custom highlight for the float window,
 " change Pmenu to your highlight group
 highlight link EchoDocFloat Pmenu
+
+" table-mode conflicting with vim-test
+let g:table_mode_map_prefix = '<Leader>T'
+
+
+" Disable annoying Ex mode
+nnoremap Q <Nop>

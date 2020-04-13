@@ -2,8 +2,8 @@
 source ~/.zplug/init.zsh
 source $ZDOTDIR/prezto.zsh
 
-zplug modules/directory, from:prezto
-zplug modules/command-not-found, from:prezto
+# zplug modules/directory, from:prezto
+# zplug modules/command-not-found, from:prezto
 zplug modules/utility, from:prezto
 zplug zdharma/fast-syntax-highlighting, defer:0
 zplug supercrabtree/k
@@ -53,6 +53,3 @@ autoload -U compinit
 compinit
 
 fast-theme $HOME/.dotfiles/fsh/mytheme.ini > /dev/null
-
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down

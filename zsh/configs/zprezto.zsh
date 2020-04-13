@@ -6,27 +6,11 @@
 #
 
 #
-# Browser
-#
-
-if [[ "$OSTYPE" == darwin* ]]; then
-export BROWSER='open'
-fi
-
-#
-# Editors
-#
-
-export EDITOR='nvim'
-export VISUAL='st nvim'
-export PAGER='less'
-
-#
 # Language
 #
 
 if [[ -z "$LANG" ]]; then
-export LANG='en_US.UTF-8'
+    export LANG='en_US.UTF-8'
 fi
 
 #
@@ -67,8 +51,8 @@ fi
 #
 
 if [[ ! -d "$TMPDIR" ]]; then
-export TMPDIR="/tmp/$LOGNAME"
-mkdir -p -m 700 "$TMPDIR"
+    export TMPDIR="/tmp/$LOGNAME"
+    mkdir -p -m 700 "$TMPDIR"
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
