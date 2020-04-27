@@ -35,7 +35,7 @@
     "highlight.document.enable": true,
     "highlight.colors.enable": true,
     "diagnostic.displayByAle": false,
-    "coc.preferences.hoverTarget": "float",
+    "coc.preferences.hoverTarget": "preview",
     "python.linting.enabled": false,
     "python.autoComplete.addBrackets": true,
     "yaml.schemas": {
