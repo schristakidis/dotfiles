@@ -4,6 +4,7 @@ from subprocess import run, Popen
 from pathlib import Path
 import os
 import argparse
+from time import sleep
 
 DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
 DOTBIN = Path(os.environ.get('DOT_BIN', '.dotfiles/bin'))
@@ -30,6 +31,12 @@ SINGLE_CONFIGS = [
     "bspc rule -a Slack desktop='^9' focus=on",
     "bspc rule -a Evolution desktop='^10' focus=on"
 ]
+
+
+def set_layout(layout):
+    cmd = f'autorandr --load {layout}'
+    run(cmd.split(), capture_output=False)
+    sleep(2)
 
 
 def get_monitors():
@@ -59,10 +66,16 @@ def get_monitors():
             'laptop': laptop_monitor
         }
 
+    enabled_monitors = {
+        name: m
+        for name, m in monitors.items() if m['enabed']
+    }
+
     status = {
         'laptop': laptop,
         'monitors': monitors,
-        'multihead': len(monitors) > 1
+        'enabled_monitors': enabled_monitors,
+        'multihead': len(enabled_monitors) > 1
     }
 
     return status
@@ -72,6 +85,7 @@ def set_workspaces(status):
     multihead = status['multihead']
     laptop = status['laptop']
     monitors = status['monitors']
+    enabled_monitors = status['enabled_monitors']
 
     if multihead:
         if laptop:
@@ -99,7 +113,7 @@ def set_workspaces(status):
         env['_bspwm_first_screen'] = screen1
         env['_bspwm_second_screen'] = screen2
     else:
-        env['_bspwm_first_screen'] = list(monitors.keys())[0]
+        env['_bspwm_first_screen'] = list(enabled_monitors.keys())[0]
 
     if multihead:
         cmds = [
@@ -122,9 +136,13 @@ def set_workspaces(status):
 def print_env(status):
     if status['laptop']:
         print('_laptop=1')
+    else:
+        print('_laptop=')
 
     if status['multihead']:
         print('_multihead=1')
+    else:
+        print('_multihead=')
 
 
 if __name__ == '__main__':
@@ -133,8 +151,14 @@ if __name__ == '__main__':
 
     parser.add_argument('--manual', action="store_true", default=False)
     parser.add_argument('--export', action="store_true", default=False)
+    parser.add_argument('--layout', type=int)
 
     args = parser.parse_args()
+
+    if args.layout == 1:
+        set_layout('laptop')
+    elif args.layout == 2:
+        set_layout('multi')
 
     status = get_monitors()
     if args.export:

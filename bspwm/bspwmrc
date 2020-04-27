@@ -22,6 +22,9 @@ else
     killall libinput-gestures
     libinput-gestures &
 
+    killall redshift-gtk
+    redshift-gtk &
+
     _lock_timer=600
 fi
 

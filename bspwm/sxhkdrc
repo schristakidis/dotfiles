@@ -1,8 +1,11 @@
 super + shift + r
     bspc wm -r
 
-ctrl + s ; r
+ctrl + s; r
     bspwm_monitors
+
+ctrl + r ; {0, 1, 2}
+    bspwm_monitors {--layout=0, --layout=1, --layout=2}
 
 super + shift + q
     bspc node --close
