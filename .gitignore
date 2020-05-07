@@ -1,4 +1,5 @@
 vim/vundle/*
+vim/sessions
 !vim/vundle/.gitkeep
 tmux/plugins/*
 !tmux/plugins/.gitkeep
