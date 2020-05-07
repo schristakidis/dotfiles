@@ -1,36 +1,61 @@
-# Basic binds
+# Run terminal
 super + Return
 	$TERMINAL
+
+# Rofi
 super + d
 	rofi_run
+
+# Rofi Windows
+super + w
+    rofi_run -w
+
+# Rofi Shortcuts
+super + shift + s
+    rofi_run -s
+
+# Rofi Clipboard
+super + shift + y
+    rofi_run -c
+
+# Power Menu
+alt + ctrl + BackSpace
+    rofi_run -l
+
+# Firefox
 super + f
 	firefox
+
+# Nautilus
 super + n
     nautilus
 
-
-alt + ctrl + BackSpace
-    rofi_run -l
+# Lock Screen
 alt + ctrl + l
     i3lock-script now
 
-
+# Change Keyboard Layout
 control + shift + l
     xkblayout-state set +1
 
 
 XF86PowerOff
 	dprompt "Shutdown computer?" "sudo -A shutdown -h now"
+
 XF86AudioRaiseVolume
     volumectl up 5
+
 XF86AudioLowerVolume
     volumectl down 5
+
 XF86AudioMute
     volumectl mute
 
+# Increase Volume
 alt + Up
     volumectl up 5
 
+# Decrease Volume
 alt + Down
     volumectl down 5
 

@@ -1,21 +1,28 @@
+# Reload bspwm
 super + shift + r
     bspc wm -r
 
+# Reload monitors
 ctrl + s; r
     bspwm_monitors
 
+# Choose Monitor Layout
 ctrl + r ; {0, 1, 2}
     bspwm_monitors {--layout=0, --layout=1, --layout=2}
 
+# Close Window
 super + shift + q
     bspc node --close
 
+# Close Window
 ctrl + s ; q
     bspc node --close
 
+# Change Window Layout
 super + {s, z, t, shift + t}
 	bspc node --state \~{floating,fullscreen,tiled,pseudo_tiled}
 
+# Toggle Window Layout
 super + space
     bspc desktop -l next
 
@@ -23,6 +30,7 @@ super + space
 super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
     
+# focus the node in the given direction
 ctrl + s ; {_,shift + }{h,j,k,l}
     bspc node -{f,s} {west,south,north,east}
 
@@ -30,11 +38,11 @@ ctrl + s ; {_,shift + }{h,j,k,l}
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
-    
-# focus the last node/desktop
+# focus the next/previous window of the same class
 alt + {_,shift} grave
     bspc node --focus {next,prev}.same_class
 
+# focus the next/previous window of a different class
 alt + {_,shift} Tab
     bspc node --focus {next,prev}.!same_class
 
@@ -46,6 +54,7 @@ super + {_,shift + }grave
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
+# focus or send to the given desktop
 ctrl + s ; {_,shift + }{1-9,0}
     bspc {desktop -f,node -d} '^{1-9,10}'
 
@@ -56,7 +65,6 @@ super + alt + {h,j,k,l}
 # contract a window by moving one of its side inward
 super + alt + shift + {h,j,k,l}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
 
 # move a floating window
 super + {Left,Down,Up,Right}

@@ -27,6 +27,8 @@ usage()
 
      -c,--clipboard     Select previous clipboard entries (requires greenclip)
 
+     -s,--shortcuts     Display shortcuts
+
 
   Without any options the run dialog will be opened.
 
@@ -62,7 +64,7 @@ else
 				;;
 			-b|--browser)
 				hash surfraw >/dev/null 2>&1 || { echo "Requires 'surfraw' installed"; exit 1; }
-				surfraw -browser="$BROWSER" "$(sr -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' |
+				surfraw "$(sr -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' |
 					rofi -hide-scrollbar -kb-row-select 'Tab' -kb-row-tab 'Control+space' -dmenu -mesg 'Tab for Autocomplete' -i -p 'Web Search')"
 				;;
 			-l|--logout)
@@ -73,6 +75,9 @@ else
 					*Logout) bspc quit ;;
 				esac
 				;;
+            -s|--shortcuts)
+                cat ~/.config/sxhkd/sxhkdrc ~/.config/bspwm/sxhkdrc | awk '/^[a-z]/ && last {print $0,"\t",last} {last=""} /^#/{last=$0}' | column -t -s $'\t' | rofi -dmenu -i -no-show-icons -width 1000
+                ;;
 			*)
 				printf "\nOption does not exist: %s\n\n" "$arg"
 				exit 2
