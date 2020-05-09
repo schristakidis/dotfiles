@@ -51,6 +51,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vim-python/python-syntax'
 Plug 'liuchengxu/vista.vim'
 Plug 'Shougo/echodoc.vim'
+Plug 'unblevable/quick-scope'
 
 call plug#end()
 
@@ -606,3 +607,11 @@ let g:table_mode_map_prefix = '<Leader>T'
 
 " Disable annoying Ex mode
 nnoremap Q <Nop>
+
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+highlight QuickScopePrimary guifg='#00C7DF' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#afff5f' gui=underline ctermfg=81 cterm=underline
+
+let g:qs_max_chars=150
