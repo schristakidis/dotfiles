@@ -1,2 +1,2 @@
-cmap W! w suda://%
-cmap E! e suda://%
+cmap w!! w suda://%
+cmap e!! e suda://
