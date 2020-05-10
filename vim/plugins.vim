@@ -25,6 +25,7 @@ Plug 'godlygeek/tabular'
 Plug 'bronson/vim-visual-star-search'
 Plug 'unblevable/quick-scope'
 Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
+Plug 'lambdalisue/suda.vim'
 
 " tmux
 Plug 'benmills/vimux'

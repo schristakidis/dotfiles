@@ -7,7 +7,7 @@ augroup END
 
 " colo solarized8
 " hi Quote ctermbg=109 guifg=#83a598
-colo OceanicNext
+" colo OceanicNext
 
 
 hi Comment cterm=italic
@@ -15,7 +15,7 @@ hi Comment cterm=italic
 let g:onedark_hide_endofbuffer=1
 let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
-" colo onedark
+colo onedark
 "
 
 if (has("termguicolors"))

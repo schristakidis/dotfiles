@@ -48,3 +48,5 @@ fi
 if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then
     source /usr/share/doc/pkgfile/command-not-found.zsh
 fi
+
+alias joplin-cli="joplin --profile ~/.config/joplin-desktop"

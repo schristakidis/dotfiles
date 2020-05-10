@@ -120,9 +120,6 @@ noremap <C-q> <C-W>z
 nnoremap <silent> <leader>vo :e $MYVIMRC<CR>
 nnoremap <silent> <leader>vs :so $MYVIMRC<CR>
 
-" Sudo
-cmap w!! w !sudo tee %
-
 " Close location window also with :bd
 " nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>

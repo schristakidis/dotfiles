@@ -15,6 +15,7 @@ source $HOME/.dotfiles/vim/plug-config/mbe.vim
 source $HOME/.dotfiles/vim/plug-config/nerdtree.vim
 source $HOME/.dotfiles/vim/plug-config/pythonsyntax.vim
 source $HOME/.dotfiles/vim/plug-config/quickscope.vim
+source $HOME/.dotfiles/vim/plug-config/suda.vim
 source $HOME/.dotfiles/vim/plug-config/tablemode.vim
 source $HOME/.dotfiles/vim/plug-config/tabular.vim
 source $HOME/.dotfiles/vim/plug-config/vimtest.vim
