@@ -55,12 +55,13 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/echodoc.vim'
 Plug 'liuchengxu/vista.vim'
+Plug 'sheerun/vim-polyglot'
 
 " Python
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'vim-python/python-syntax'
+" Plug 'vim-python/python-syntax'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Theming
