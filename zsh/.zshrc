@@ -1,38 +1,66 @@
-# zmodload zsh/zprof
-source ~/.zplug/init.zsh
-source $ZDOTDIR/prezto.zsh
 
-# zplug modules/directory, from:prezto
-# zplug modules/command-not-found, from:prezto
-zplug modules/utility, from:prezto
-zplug zdharma/fast-syntax-highlighting, defer:0
-zplug supercrabtree/k
-zplug modules/history-substring-search, from:prezto, defer:1
-zplug modules/prompt, from:prezto, defer:2
-zplug zsh-users/zsh-completions, defer:2
-zplug plugins/pip, from:oh-my-zsh
-zplug plugins/httpie, from:oh-my-zsh
-zplug plugins/docker, from:oh-my-zsh
-zplug plugins/docker-compose, from:oh-my-zsh
-zplug zdharma/zsh-diff-so-fancy, as:command, use:'bin/*'
-zplug "clvv/fasd", as:command, use:fasd
-zplug "plugins/fasd", from:oh-my-zsh, if:"(( $+commands[fasd] ))", on:"clvv/fasd"
-zplug zplug/zplug # hook-build:'zplug --self-manage'
+ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
+### Added by Zinit's installer
+if [[ ! -f $ZINIT_DIR/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$ZINIT_DIR" && command chmod g-rwX "$ZINIT_DIR"
+    command git clone https://github.com/zdharma/zinit "$ZINIT_DIR" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
-# Install packages that have not been installed yet
-# if ! zplug check --verbose; then
-#     printf "Install? [y/N]: "
-#     if read -q; then
-#         echo; zplug install
-#     else
-#         echo
-#     fi
-# fi
+source "$ZINIT_DIR/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit wait lucid light-mode for \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
 #
-zplug load
+zinit ice wait"0a" lucid \
+    atload="bindkey '^P' history-substring-search-up \
+        && bindkey '^N' history-substring-search-down  \
+        && bindkey '^[[A' history-substring-search-up \
+        && bindkey '^[[B' history-substring-search-down" 
+zinit light "zsh-users/zsh-history-substring-search"
+    #
+# ### End of Zinit's installer chunk
+zinit wait lucid light-mode for \
+  atinit"zicompinit; zicdreplay" \
+  atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
+      zdharma/fast-syntax-highlighting \
+  blockf atpull'zinit creinstall -q .' \
+      zinit light zsh-users/zsh-completions \
+  as"program" pick"bin/git-dsf" \
+      zinit light zdharma/zsh-diff-so-fancy \
+  PZT::modules/utility \
+  as"completion" OMZP::pip/_pip \
+  as"completion" OMZP::docker/_docker \
+  as"completion" OMZP::docker-compose/_docker-compose \
+  as"completion" OMZP::httpie/_httpie \
+  OMZP::fasd
+
+
+zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)git*]} ]]'
+zinit light "wfxr/forgit"
+
+zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+zinit light trapd00r/LS_COLORS
+
+zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+zinit load sindresorhus/pure
+
+zinit ice lucid wait"1"
+zinit snippet $HOME/.dotfiles/zsh/virtual.zsh
 
 for zsh_source in $ZDOTDIR/configs/*.zsh; do
-  source $zsh_source
+    source $zsh_source
 done
 
 if [ -d $ZDOTDIR/local ]
@@ -45,11 +73,9 @@ then
     done
 fi
 
-source $ZDOTDIR/virtual.zsh
+zstyle ':prezto:module:editor' ps-context 'yes'
+#
+zstyle ':prezto:*:*' color 'yes'
 
-# completions
-fpath=(~/.zsh/completion $fpath)
-autoload -U compinit
-compinit
-
-fast-theme $HOME/.dotfiles/fsh/mytheme.ini > /dev/null
+zstyle ':completion:*' menu select
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
