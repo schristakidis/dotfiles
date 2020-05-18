@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.dotfiles/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 
 ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
 ### Added by Zinit's installer
@@ -44,6 +51,7 @@ zinit wait lucid light-mode for \
   as"completion" OMZP::httpie/_httpie \
   OMZP::fasd
 
+zinit load softmoth/zsh-vim-mode
 
 zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)git*]} ]]'
 zinit light "wfxr/forgit"
@@ -53,8 +61,8 @@ zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
 zinit light trapd00r/LS_COLORS
 
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit load sindresorhus/pure
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 
 zinit ice lucid wait"1"
 zinit snippet $HOME/.dotfiles/zsh/virtual.zsh
@@ -79,3 +87,6 @@ zstyle ':prezto:*:*' color 'yes'
 
 zstyle ':completion:*' menu select
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
+[[ ! -f ~/.dotfiles/zsh/.p10k.zsh ]] || source ~/.dotfiles/zsh/.p10k.zsh
