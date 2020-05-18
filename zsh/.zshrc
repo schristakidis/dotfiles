@@ -53,9 +53,6 @@ zinit wait lucid light-mode for \
 
 zinit load softmoth/zsh-vim-mode
 
-zinit ice lucid wait'[[ -n ${ZLAST_COMMANDS[(r)git*]} ]]'
-zinit light "wfxr/forgit"
-
 zinit ice atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
