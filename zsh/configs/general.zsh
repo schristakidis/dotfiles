@@ -52,6 +52,8 @@ sz() {source $zshrc}
 
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
+elif [ -f $HOME/.nvm/nvm.sh ]; then
+    source $HOME/.nvm/nvm.sh
 fi
 
 if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then

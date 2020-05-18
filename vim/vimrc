@@ -21,5 +21,3 @@ source $HOME/.dotfiles/vim/plug-config/tabular.vim
 source $HOME/.dotfiles/vim/plug-config/vimtest.vim
 source $HOME/.dotfiles/vim/plug-config/vimwiki.vim
 source $HOME/.dotfiles/vim/plug-config/vista.vim
-
-noremap U <C-R>
