@@ -48,8 +48,8 @@ nmap <leader>r <Plug>(coc-references)
 
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 call coc#config('python', {
             \ 'pythonPath': $PYENV_ROOT . "/shims/python"

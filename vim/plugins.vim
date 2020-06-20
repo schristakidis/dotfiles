@@ -36,6 +36,7 @@ Plug 'plasticboy/vim-markdown'
 Plug 'vimwiki/vimwiki', { 'branch': 'dev' }
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'mzlogin/vim-markdown-toc'
 
 " Git
 Plug 'tpope/vim-fugitive'

@@ -1,30 +1,21 @@
-[#](#) TABLE OF CONTENTS
+# TABLE OF CONTENTS
 
 ## VIM
-- [Surround](vim/surround)
-- [Tabularize](vim/tabularize)
-- [Spelling](vim/Spelling)
+- [Plugins](vim/plugins/Plugins.md)
+- [Setup](vim/setup.md)
 
 ## TMUX
-- [Plugins](tmux/Plugins)
-- [Clipboard](tmux/clipboard)
-- [Terminal Bindings](tmux/terminal_bindings)
+- [Plugins](tmux/Plugins.md)
+- [Clipboard](tmux/clipboard.md)
+- [Terminal Bindings](tmux/terminal_bindings.md)
 
 ## LINUX
-- [Utilities](linux/Utilities)
+- [Guides](linux/Guides.md)
+- [Troubleshooting](linux/Troubleshooting.md)
 
-## I3
-- [Requirements](i3/requirements)
+## BSPWM
+- [Requirements](bspwm/requirements.md)
 
-
-## ARCH
-- [Installation Tips](arch/Installation)
-- [Raspberry](arch/raspberry)
-- [wifi](arch/wifi)
-
-## AWS
-- [Installation](aws/Installation)
-- [Cluster](https://medium.com/boltops/gentle-introduction-to-how-aws-ecs-works-with-example-tutorial-cea3d27ce63d)
-
-## MISC
-- [nginx/mutual ssl](misc/mssl)
+## DevOps
+- [kubernetes](devops/kubernetes.md)
+- [docker](devops/docker.md)
