@@ -63,6 +63,7 @@ fi
 alias vim="nvim"
 alias tmux="TERM=xterm-256color tmux -2"
 alias joplin-cli="joplin --profile ~/.config/joplin-desktop"
+alias k8s="kubectl"
 
 bindkey -v
 
@@ -72,3 +73,5 @@ bindkey "^[b" backward-char
 
 bindkey "^f" forward-word
 bindkey "^b" backward-word
+
+export AWS_PROFILE=staging

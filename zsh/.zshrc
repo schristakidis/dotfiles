@@ -32,7 +32,9 @@ zinit ice wait"0a" lucid \
     atload="bindkey '^P' history-substring-search-up \
         && bindkey '^N' history-substring-search-down  \
         && bindkey '^[[A' history-substring-search-up \
-        && bindkey '^[[B' history-substring-search-down" 
+        && bindkey '^[[B' history-substring-search-down \
+        && bindkey '^[OA' history-substring-search-up \
+        && bindkey '^[OB' history-substring-search-down" 
 zinit light "zsh-users/zsh-history-substring-search"
     #
 # ### End of Zinit's installer chunk
@@ -50,6 +52,10 @@ zinit wait lucid light-mode for \
   as"completion" OMZP::docker-compose/_docker-compose \
   as"completion" OMZP::httpie/_httpie \
   OMZP::fasd
+
+zplugin ice as"null" atclone'stern --completion=zsh > sterm_completion.zsh' \
+    atpull'%atclone' src"sterm_completion.zsh" run-atpull
+    zplugin light zdharma/null
 
 zinit load softmoth/zsh-vim-mode
 
