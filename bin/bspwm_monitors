@@ -50,7 +50,12 @@ def get_monitors():
             continue
 
         laptop_monitor = False
-        monitor = m.split(':')[1].strip().split(' ')
+
+        monitor = [
+            m for m in m.split(':')[1].strip().split(' ')
+            if m and m!='*'
+        ]
+
         name = monitor[0]
         info = monitor[-1]
         status = False
