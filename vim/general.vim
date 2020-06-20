@@ -108,10 +108,10 @@ nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 " Select all text
 nnoremap <C-a> ggVG
 
-" if has('nvim')
-"     noremap <A-p> "+p
-"     vnoremap <A-y> "+y
-" endif
+if has('nvim')
+    noremap <A-v> "+p
+    vnoremap <A-p> "+y
+endif
 
 
 " close scratch buferr
