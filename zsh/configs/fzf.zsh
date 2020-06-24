@@ -11,7 +11,7 @@ if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
 fi
 
 export FZF_TMUX=1
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git --color=always'
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--ansi"
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
@@ -49,7 +49,7 @@ fzyac() {
     fi
 }
 
-fkill() {
+fzkill() {
   local pid
   pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
 
