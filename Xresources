@@ -39,7 +39,7 @@
 ! *.foreground:	#f8f8f2
 
 
-*.font: Monaco for Powerline :pixelsize=12:antialias=true:autohint=true
+*.font: Monaco for Powerline :pixelsize=14:antialias=true:autohint=true
 *.fontalt0: siji:pixelsize=12;1
 *.alpha: 1
 

@@ -27,3 +27,5 @@
 [color]
 	diff = auto
 	status = auto
+[pull]
+	rebase = false

@@ -46,6 +46,7 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
+set nowrap
 
 "move swap files to vim tmp directories
 set backupdir=~/.vim/tmp/backup_files//

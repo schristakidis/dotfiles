@@ -12,9 +12,11 @@
 ## LINUX
 - [Guides](linux/Guides.md)
 - [Troubleshooting](linux/Troubleshooting.md)
+- [General](linux/General.md)
 
 ## BSPWM
 - [Requirements](bspwm/requirements.md)
+- [Misc](bspwm/misc.md)
 
 ## DevOps
 - [kubernetes](devops/kubernetes.md)
