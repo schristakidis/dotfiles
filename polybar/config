@@ -151,6 +151,9 @@ label-empty-padding = 2
 format = <label-state> <label-mode>
 
 pin-workspaces = true
+enable-click = true
+enable-scroll = true
+reverse-scroll = false
 
 [module/xbacklight]
 type = internal/xbacklight

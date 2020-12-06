@@ -67,3 +67,13 @@ ctrl + s; w
 # bindsym $mod+Shift+p exec playerctl --player=spotify play-pause
 # bindsym $mod+Right exec playerctl --player=spotify next
 # bindsym $mod+Left exec playerctl --player=spotify previous
+
+# Show clipmenu
+#alt + v
+#    CM_LAUNCHER=rofi clipmenu \
+#        -location 1 \
+#        -m -3 \
+#        -no-show-icons \
+#        -theme-str '* \{ font: 10px; \}' \
+#        -theme-str 'listview \{ spacing: 0; \}' \
+#        -theme-str 'window \{ width: 20em; \}'

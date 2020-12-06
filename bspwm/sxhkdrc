@@ -1,6 +1,6 @@
 # Reload bspwm
 super + shift + r
-    bspc wm -r
+    pkill -usr1 -x sxhkd; notify-send 'sxhkd' 'Reloaded config'; bspc wm -r
 
 # Reload monitors
 ctrl + s; r
@@ -8,7 +8,7 @@ ctrl + s; r
 
 # Choose Monitor Layout
 ctrl + r ; {0, 1, 2}
-    bspwm_monitors {--layout=0, --layout=1, --layout=2}
+    auto_monitors {--single, --mirror, --double}
 
 # Close Window
 super + shift + q
@@ -42,9 +42,16 @@ super + bracket{left,right}
 alt + {_,shift} grave
     bspc node --focus {next,prev}.same_class
 
-# focus the next/previous window of a different class
+# focus the previous/next window of a different class
+#alt + {_,shift} Tab */
+#     bspc node --focus {prev,next} */
+
+# focus the older or newer node in the focus history
 alt + {_,shift} Tab
-    bspc node --focus {next,prev}.!same_class
+    bspc wm -h off; \
+        bspc node {older,newer} -f; \
+        bspc wm -h on
+
 
 # focus the next/previous node in the current desktop
 super + {_,shift + }grave
@@ -77,3 +84,27 @@ super + v
 # unhide window
 super + shift + v
     bspc node {,$(bspc query -N -n .hidden | tail -n1)} -g hidden=off
+
+# Expand/contract a window by moving one of its side outward/inward
+super + shift + w : {h,j,k,l}
+    STEP=20; SELECTION={1,2,3,4}; \
+    bspc node -z $(echo "left -$STEP 0,bottom 0 $STEP,top 0 -$STEP,right $STEP 0" | cut -d',' -f$SELECTION) || \
+    bspc node -z $(echo "right -$STEP 0,top 0 $STEP,bottom 0 -$STEP,left $STEP 0" | cut -d',' -f$SELECTION)
+
+# Show splunk
+ctrl + s; s
+    bspwm-toggle-visibility Slack slack --take-first
+
+# Show mailspring
+ctrl + s; m
+    bspwm-toggle-visibility Mailspring mailspring
+
+# Show minetime
+ctrl + s; c
+    bspwm-toggle-visibility MineTime minetime
+
+ctrl + s; shift + a
+    slack &; \
+    mailspring &; \
+    minetime &; \
+    /opt/cisco/anyconnect/bin/vpnui &

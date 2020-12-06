@@ -11,32 +11,16 @@ DOTBIN = Path(os.environ.get('DOT_BIN', '.dotfiles/bin'))
 
 FEH = f"feh --bg-scale {DOTDIR}/resources/wallpaper/wallpaper5.jpg"
 
-MULTIHEAD_WORKSPACES = [
+MULTIPLE_WORKSPACES = [
+    'bspc config border_width 4',
     'bspc monitor {} -d       ',
     'bspc monitor {} -d       ',
 ]
 
-MULTIHEAD_CONFIGS = [
-    'bspc config border_width 4',
-    "bspc rule -a Evolution desktop='^5' focus=on",
-    "bspc rule -a Slack desktop='^5' focus=on"
-]
-
-SINGLE_WORKSPACES = [
-    'bspc monitor -d 1 2 3 4 5 6 7 8 9 10',
-]
-
-SINGLE_CONFIGS = [
+SINGLE_WORKSPACES = (
     'bspc config border_width 2',
-    "bspc rule -a Slack desktop='^9' focus=on",
-    "bspc rule -a Evolution desktop='^10' focus=on"
-]
-
-
-def set_layout(layout):
-    cmd = f'autorandr --load {layout}'
-    run(cmd.split(), capture_output=False)
-    sleep(2)
+    '/usr/bin/bspc monitor -d 1 2 3 4 5 6 7 8 9 10',
+)
 
 
 def get_monitors():
@@ -63,7 +47,7 @@ def get_monitors():
             status = True
 
         if 'eDP' in name:
-            laptop = True
+            laptop = name
             laptop_monitor = True
 
         monitors[name] = {
@@ -86,48 +70,39 @@ def get_monitors():
     return status
 
 
-def set_workspaces(status):
-    multihead = status['multihead']
+def set_workspaces(status, multi=False):
     laptop = status['laptop']
     monitors = status['monitors']
     enabled_monitors = status['enabled_monitors']
 
-    if multihead:
-        if laptop:
-            run(str(DOTDIR.joinpath('screenlayouts/p1_multi.sh')))
-        else:
-            run(str(DOTDIR.joinpath('screenlayouts/mps.sh')))
-    else:
-        run(str(DOTDIR.joinpath('screenlayouts/p1.sh')))
+    screen1 = None
+    screen2 = None
 
     env = os.environ.copy()
 
-    if multihead:
+    if laptop:
+        screen1 = laptop
+    else:
+        screen1 = [
+            name for name in monitors if '1' in name
+        ][0]
+
+    if not multi:
+        cmds = SINGLE_WORKSPACES
+    else:
         if laptop:
-            screen1 = [
-                name for name, state in monitors.items()
-                if state['laptop']
-            ][0]
             screen2 = [name for name in monitors if name != screen1][0]
         else:
-            screen1 = [
-                name for name in monitors if '1' in name
-            ][0]
             screen2 = [name for name in monitors if name != screen1][0]
 
-        env['_bspwm_first_screen'] = screen1
-        env['_bspwm_second_screen'] = screen2
-    else:
-        env['_bspwm_first_screen'] = list(enabled_monitors.keys())[0]
-
-    if multihead:
         cmds = [
-            MULTIHEAD_WORKSPACES[0].format(env['_bspwm_first_screen']),
-            MULTIHEAD_WORKSPACES[1].format(env['_bspwm_second_screen'])
+            MULTIPLE_WORKSPACES[-2].format(screen1),
+            MULTIPLE_WORKSPACES[-1].format(screen2)
         ]
-        cmds = cmds + MULTIHEAD_CONFIGS
-    else:
-        cmds = SINGLE_WORKSPACES + SINGLE_CONFIGS
+
+    env['_bspwm_first_screen'] = screen1
+    if screen2:
+        env['_bspwm_second_screen'] = screen2
 
     for cmd in cmds:
         run(cmd.split(), capture_output=False, env=env)
@@ -135,8 +110,11 @@ def set_workspaces(status):
     polybar = str(DOTDIR.joinpath('polybar/launch_polybar.sh'))
     run(polybar, capture_output=False, env=env)
 
-    Popen(FEH.split())
+    sleep(2)
+    cm = "xdo raise -n polybar"
+    run(cm.split())
 
+    Popen(FEH.split())
 
 def print_env(status):
     if status['laptop']:
@@ -151,22 +129,20 @@ def print_env(status):
 
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description='BSPWM Monitor helper')
 
-    parser.add_argument('--manual', action="store_true", default=False)
+    parser.add_argument('--single', action="store_true", default=False)
+    parser.add_argument('--mirror', action="store_true", default=False)
+    parser.add_argument('--double', action="store_true", default=False)
     parser.add_argument('--export', action="store_true", default=False)
-    parser.add_argument('--layout', type=int)
 
     args = parser.parse_args()
-
-    if args.layout == 1:
-        set_layout('laptop')
-    elif args.layout == 2:
-        set_layout('multi')
-
     status = get_monitors()
+
     if args.export:
         print_env(status)
     else:
-        set_workspaces(status)
+        if args.double:
+            set_workspaces(status, multi=True)
+        else:
+            set_workspaces(status)

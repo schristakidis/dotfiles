@@ -1,16 +1,12 @@
 #! /bin/sh
 
-$HOME/.dotfiles/bin/bspwm_monitors
-for i in $($HOME/.dotfiles/bin/bspwm_monitors --export); do
+for i in $($HOME/.dotfiles/bin/auto_monitors --export); do
     export "$i";
 done
 
 setxkbmap -option caps:ctrl_modifier
 
 if [ -z $_laptop ] ; then
-    slack &
-    spotify &
-
     _lock_timer=120
 else
     xinput set-prop 'SynPS/2 Synaptics TouchPad' 'libinput Tapping Enabled' 1
@@ -21,6 +17,9 @@ else
 
     killall libinput-gestures
     libinput-gestures &
+
+    killall optimus-manager-qt
+    optimus-manager-qt &
 
     # killall redshift-gtk
     # redshift-gtk &
@@ -50,8 +49,6 @@ nm-applet &
 killall i3locker
 _lock_timer="$_lock_timer" $HOME/.dotfiles/bin/i3locker &
 
-evolution &
-
 if [ -z $_mutlihead ] ; then
     bspc config border_width         4
 else
@@ -73,17 +70,24 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 
-if [ -z $_mutlihead ] ; then
-    bspc rule -a st-256color --one-shot desktop='^6'
-    st &
-    bspc rule -a Evolution desktop='^5' focus=on
-    bspc rule -a Slack desktop='^5' focus=on
-else
-    bspc rule -a Slack desktop='^9' focus=on
-    bspc rule -a Evolution desktop='^10' focus=on
-fi
+# if [ -z $_mutlihead ] ; then
+#     bspc rule -a st-256color --one-shot desktop='^6'
+#     st &
+#     bspc rule -a Evolution desktop='^5' focus=on
+#     bspc rule -a Slack desktop='^5' focus=on
+# else
+#     bspc rule -a Slack desktop='^9' focus=on
+#     bspc rule -a Evolution desktop='^10' focus=on
+# fi
+bspc rule -a Slack desktop='^9' focus=on
+bspc rule -a Evolution desktop='^9' focus=on
+bspc rule -a Mailspring desktop='^9' focus=on
+bspc rule -a MineTime desktop='^10' focus=on
 
 bspc rule -a spotify desktop='^4'focus=on
 bspc rule -a Packman state=floating center=on
 bspc rule -a "Cisco AnyConnect Secure Mobility Client" state=floating center=on desktop='^10'
-bspc rule -a ringcentral desktop='^4'
+bspc rule -a ringcentral desktop='^8'
+
+
+autorandr --change --force

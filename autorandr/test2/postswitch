@@ -1,0 +1,5 @@
+#!/bin/bash
+
+notify-send 'post switch test'
+
+$HOME/.dotfiles/bin/auto_monitors --double
