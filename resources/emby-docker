@@ -1,1 +1,1 @@
-docker run -d --volume /home/sakis/.docker/emby:/config --volume /home/media:/mnt/share1 --device /dev/dri/renderD128 --publish 8080:8096 --env UID=970 --env GID=970 --env GIDLIST=986 emby/embyserver:latest
+docker run -d --volume /home/sakis/.docker/emby:/config --volume /home/sakis/Videos:/mnt/share1 --device /dev/dri/renderD128 --publish 8096:8096 --env UID=970 --env GID=970 --env GIDLIST=986 emby/embyserver:latest
