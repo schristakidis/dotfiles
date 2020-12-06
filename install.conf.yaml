@@ -21,6 +21,7 @@
         ~/.config/polybar: polybar
         ~/.Xresources: Xresources
         ~/.config/fd: fd
+        ~/.config/autorandr: autorandr
 
 - shell:
         - 
