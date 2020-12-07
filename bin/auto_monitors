@@ -110,9 +110,9 @@ def set_workspaces(status, multi=False):
     polybar = str(DOTDIR.joinpath('polybar/launch_polybar.sh'))
     run(polybar, capture_output=False, env=env)
 
-    sleep(2)
-    cm = "xdo raise -n polybar"
-    run(cm.split())
+    # sleep(2)
+    # cm = "xdo raise -n polybar"
+    # run(cm.split())
 
     Popen(FEH.split())
 
