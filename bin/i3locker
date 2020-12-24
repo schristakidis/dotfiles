@@ -20,8 +20,8 @@ xidlehook \
   --not-when-fullscreen \
   --not-when-audio \
   --timer "$_lock_timer" \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness .5' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+    "xrandr --output $PRIMARY_DISPLAY --brightness .5" \
+    "xrandr --output $PRIMARY_DISPLAY --brightness 1" \
   --timer 60 \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; ~/.dotfiles/bin/i3lock-script; xset dpms force off' \
-    ''
+    "xrandr --output $PRIMARY_DISPLAY --brightness 1; ~/.dotfiles/bin/i3lock-script; xset dpms force off" \
+    ""

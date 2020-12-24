@@ -21,3 +21,5 @@
 ## DevOps
 - [kubernetes](devops/kubernetes.md)
 - [docker](devops/docker.md)
+- [git](devops/git.md)
+

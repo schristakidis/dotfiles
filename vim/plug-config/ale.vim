@@ -1,7 +1,7 @@
 nmap <silent> <localleader>h <Plug>(ale_previous_wrap)
 nmap <silent> <localleader>l <Plug>(ale_next_wrap)
 
-let g:ale_linters = {'python': ['flake8'],}
+let g:ale_linters = {'python': ['flake8', 'mypy'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'

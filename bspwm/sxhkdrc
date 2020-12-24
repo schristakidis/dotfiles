@@ -105,6 +105,6 @@ ctrl + s; c
 
 ctrl + s; shift + a
     slack &; \
-    mailspring &; \
+    mailspring --disable-gpu &; \
     minetime &; \
     /opt/cisco/anyconnect/bin/vpnui &
