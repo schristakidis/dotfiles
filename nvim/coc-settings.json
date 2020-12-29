@@ -35,9 +35,10 @@
     "highlight.document.enable": true,
     "highlight.colors.enable": true,
     "diagnostic.displayByAle": false,
-    "coc.preferences.hoverTarget": "preview",
+    "diagnostic.level": "warning",
+    "coc.preferences.hoverTarget": "float",
+    "python.analysis.typeCheckingMode": "off",
     "python.linting.enabled": false,
-    "python.autoComplete.addBrackets": true,
     "yaml.schemas": {
         "kubernetes": ["/*.yaml", "/*.yml"]
     },
