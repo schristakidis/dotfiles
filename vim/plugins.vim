@@ -42,6 +42,7 @@ Plug 'mzlogin/vim-markdown-toc'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'junkblocker/git-time-lapse'
 
 " Easyclip/Yanking
 Plug 'svermeulen/vim-cutlass'
