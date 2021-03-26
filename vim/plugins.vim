@@ -24,7 +24,6 @@ Plug 'wellle/targets.vim'
 Plug 'godlygeek/tabular'
 Plug 'bronson/vim-visual-star-search'
 Plug 'unblevable/quick-scope'
-Plug 'Shougo/denite.nvim', has('nvim') ? {'do': 'UpdateRemotePlugins'} : { 'on': [] } 
 Plug 'lambdalisue/suda.vim'
 
 " tmux
@@ -58,13 +57,11 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
 Plug 'Shougo/echodoc.vim'
 Plug 'liuchengxu/vista.vim'
-Plug 'sheerun/vim-polyglot'
 
 " Python
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'jeetsukumaran/vim-pythonsense'
-" Plug 'vim-python/python-syntax'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Theming
@@ -72,9 +69,18 @@ Plug 'morhetz/gruvbox'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-solarized8'
-Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+" NeoVim 0.5
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'kyazdani42/nvim-web-devicons'
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'neovim/nvim-lspconfig'
+
 
 
 call plug#end()

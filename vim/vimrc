@@ -2,18 +2,18 @@ source $HOME/.dotfiles/vim/plugins.vim
 source $HOME/.dotfiles/vim/general.vim
 source $HOME/.dotfiles/vim/theme.vim
 
+lua require("config")
+
 source $HOME/.dotfiles/vim/plug-config/ale.vim
 source $HOME/.dotfiles/vim/plug-config/airline.vim
 source $HOME/.dotfiles/vim/plug-config/autoformat.vim
 source $HOME/.dotfiles/vim/plug-config/coc.vim
-source $HOME/.dotfiles/vim/plug-config/denite.vim
 source $HOME/.dotfiles/vim/plug-config/easyclip.vim
 source $HOME/.dotfiles/vim/plug-config/echodoc.vim
 source $HOME/.dotfiles/vim/plug-config/gitgutter.vim
 source $HOME/.dotfiles/vim/plug-config/maximizer.vim
 source $HOME/.dotfiles/vim/plug-config/mbe.vim
 source $HOME/.dotfiles/vim/plug-config/nerdtree.vim
-source $HOME/.dotfiles/vim/plug-config/pythonsyntax.vim
 source $HOME/.dotfiles/vim/plug-config/quickscope.vim
 source $HOME/.dotfiles/vim/plug-config/suda.vim
 source $HOME/.dotfiles/vim/plug-config/tablemode.vim

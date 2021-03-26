@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Needs pip install markdown-server
 source $HOME/.virtualenvs/markdown-serve/bin/activate
 cd $HOME/.dotfiles/wiki && markdownserver >/dev/null 2>&1 &
 
