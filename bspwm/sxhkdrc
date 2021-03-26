@@ -4,7 +4,7 @@ super + shift + r
 
 # Reload monitors
 ctrl + s; r
-    bspwm_monitors
+    auto_monitors 
 
 # Choose Monitor Layout
 ctrl + r ; {0, 1, 2}
@@ -57,13 +57,6 @@ alt + {_,shift} Tab
 super + {_,shift + }grave
     bspc node -f {next,prev}.local
 
-# focus or send to the given desktop
-super + {_,shift + }{1-9,0}
-	bspc {desktop -f,node -d} '^{1-9,10}'
-
-# focus or send to the given desktop
-ctrl + s ; {_,shift + }{1-9,0}
-    bspc {desktop -f,node -d} '^{1-9,10}'
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
@@ -105,6 +98,7 @@ ctrl + s; c
 
 ctrl + s; shift + a
     slack &; \
-    mailspring --disable-gpu &; \
+    birdtray &; \
     minetime &; \
     /opt/cisco/anyconnect/bin/vpnui &
+# mailspring --disable-gpu &; \

@@ -6,9 +6,9 @@ if [ $res = "logout" ]; then
     sudo /usr/bin/systemctl restart gdm
 fi
 if [ $res = "reboot" ]; then
-    systemctl reboot
+    reboot
 fi
 if [ $res = "shutdown" ]; then
-    systemctl poweroff
+    poweroff
 fi
 exit 0

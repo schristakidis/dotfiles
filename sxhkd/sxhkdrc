@@ -1,10 +1,10 @@
 # Run terminal
 super + Return
-	$TERMINAL
+    $TERMINAL -e tmux
 
 # Rofi
 super + d
-	rofi_run
+	~/.config/rofi/launchers/ribbon/launcher.sh
 
 # Rofi Windows
 super + w
@@ -20,7 +20,7 @@ super + shift + y
 
 # Power Menu
 alt + ctrl + BackSpace
-    rofi_run -l
+    ~/.config/rofi/powermenu/powermenu.sh
 
 # Firefox
 super + f

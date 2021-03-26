@@ -1,0 +1,20 @@
+#! /bin/sh
+
+killall sxhkd
+sxhkd $HOME/.config/bspwm/sxhkdrc $HOME/.config/bspwm/sxhkdrc_inverse &
+
+bspc config border_width 2
+# bspc monitor "$_bspwm_first_screen" -d       
+# bspc monitor "$_bspwm_second_screen" -d       
+
+bspc monitor "$_bspwm_first_screen" -d 6 7 8 9 10
+bspc monitor "$_bspwm_second_screen" -d 1 2 3 4 5
+
+bspc rule -a Evolution desktop=^5 focus=on
+bspc rule -a Slack desktop=^5 focus=on
+bspc rule -a slack desktop=^5 focus=on
+bspc rule -a Mailspring desktop=^5 focus=on
+bspc rule -a MineTime desktop=^4 focus=on
+bspc rule -a ringcentral desktop=^3
+bspc rule -a 'Cisco AnyConnect Secure Mobility Client' state=floating center=on desktop=^4
+

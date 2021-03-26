@@ -12,6 +12,6 @@ primary
 rate 60.00
 output HDMI-1-0
 crtc 4
-mode 1920x1080
+mode 1920x1200
 pos 1920x0
-rate 60.00
+rate 59.95

@@ -1,0 +1,15 @@
+# focus or send to the given desktop
+super + {_,shift + }{1-5}
+    bspc {desktop -f,node -d} '^{6-9,10}'
+
+# focus or send to the given desktop
+ctrl + s ; {_,shift + }{1-5}
+    bspc {desktop -f,node -d} '^{6-9,10}'
+
+# focus or send to the given desktop
+super + {_,shift + }{6-9,0}
+    bspc {desktop -f,node -d} '^{1-5}'
+
+# focus or send to the given desktop
+ctrl + s ; {_,shift + }{6-9,0}
+    bspc {desktop -f,node -d} '^{1-5}'

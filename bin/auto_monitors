@@ -4,23 +4,41 @@ from subprocess import run, Popen
 from pathlib import Path
 import os
 import argparse
-from time import sleep
+import pprint
+
+pp = pprint.PrettyPrinter(indent=4)
 
 DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
 DOTBIN = Path(os.environ.get('DOT_BIN', '.dotfiles/bin'))
 
 FEH = f"feh --bg-scale {DOTDIR}/resources/wallpaper/wallpaper5.jpg"
+MULTI_SETUP = DOTDIR/'bspwm'/'bspwmrc_multi'
+SINGLE_SETUP = DOTDIR/'bspwm'/'bspwmrc_single'
 
-MULTIPLE_WORKSPACES = [
-    'bspc config border_width 4',
-    'bspc monitor {} -d       ',
-    'bspc monitor {} -d       ',
-]
 
-SINGLE_WORKSPACES = (
-    'bspc config border_width 2',
-    '/usr/bin/bspc monitor -d 1 2 3 4 5 6 7 8 9 10',
-)
+def _get_bspc_output(cmd):
+    result = run(cmd.split(), capture_output=True)
+    return [r.decode() for r in result.stdout.splitlines()]
+
+
+def remove_all_rules():
+    rules = 'bspc rule -l'
+    for rule in _get_bspc_output(rules):
+        cmd = ['bspc', 'rule', '-r'] + rule.split()
+        run(cmd)
+
+
+def get_bsp_desktops():
+    setup = {}
+    cmd = 'bspc query --monitors --names'
+    monitors = _get_bspc_output(cmd)
+
+    for monitor in monitors:
+        cmd = f'bspc query --desktops -m {monitor}'
+        desktops = _get_bspc_output(cmd)
+        setup[monitor] = desktops
+
+    return setup
 
 
 def get_monitors():
@@ -36,8 +54,7 @@ def get_monitors():
         laptop_monitor = False
 
         monitor = [
-            m for m in m.split(':')[1].strip().split(' ')
-            if m and m != '*'
+            m for m in m.split(':')[1].strip().split(' ') if m and m != '*'
         ]
 
         name = monitor[0]
@@ -50,15 +67,9 @@ def get_monitors():
             laptop = name
             laptop_monitor = True
 
-        monitors[name] = {
-            'enabed': status,
-            'laptop': laptop_monitor
-        }
+        monitors[name] = {'enabed': status, 'laptop': laptop_monitor}
 
-    enabled_monitors = {
-        name: m
-        for name, m in monitors.items() if m['enabed']
-    }
+    enabled_monitors = {name: m for name, m in monitors.items() if m['enabed']}
 
     status = {
         'laptop': laptop,
@@ -70,10 +81,93 @@ def get_monitors():
     return status
 
 
-def set_workspaces(status, multi=False):
+def auto_workspaces(status):
+    multihead = status['multihead']
+    laptop = status['laptop']
+
+    if multihead:
+        if laptop:
+            run(str(DOTDIR.joinpath('screenlayouts/p1_multi.sh')))
+        else:
+            run(str(DOTDIR.joinpath('screenlayouts/mps.sh')))
+    else:
+        run(str(DOTDIR.joinpath('screenlayouts/p1.sh')))
+
+    set_workspaces(status, auto=True)
+
+
+def relocate_desktops(screen1, screen2):
+    if not screen2:
+        remove_monitor(screen1)
+    else:
+        add_monitor(screen1, screen2)
+
+
+def remove_monitor(solo_monitor):
+    setup = get_bsp_desktops()
+    if len(setup) == 1:
+        return
+
+    removed = [m for m in setup.keys() if m != solo_monitor][0]
+
+    cmd = f"bspc monitor {removed} -a Desktop"
+    run(cmd.split())
+
+    for desktop in setup[removed]:
+        cmd = f"bspc desktop {desktop} --to-monitor {solo_monitor}"
+        run(cmd.split())
+
+    cmd = f"bspc monitor {removed} --remove"
+    run(cmd.split())
+
+
+def add_monitor(screen1, screen2):
+    setup = get_bsp_desktops()
+    try:
+        with open('/tmp/auto_monitors.logs', 'a') as f:
+            f.write(str(setup))
+            f.write('\n')
+            f.write(f'{screen1} {screen2}')
+            f.write('\n')
+    except Exception:
+        pass
+
+    desktops_1 = status.get(screen1, [])
+    desktops_2 = status.get(screen2, [])
+
+    if len(desktops_1) == 1:
+        for desktop in desktops_1:
+            cmd = f"bspc desktop {desktop} --remove"
+            run(cmd.split())
+
+    if len(desktops_2) == 1:
+        for desktop in desktops_2:
+            cmd = f"bspc desktop {desktop} --remove"
+            run(cmd.split())
+
+    if screen1 in setup:
+        new_monitor = screen2
+        existing_monitor = screen1
+    elif screen2 in setup:
+        new_monitor = screen1
+        existing_monitor = screen2
+    else:
+        return
+
+    for desktop in setup[existing_monitor][5:]:
+        cmd = f"bspc desktop {desktop} --to-monitor {new_monitor}"
+        run(cmd.split())
+
+    cmd = "bspc desktop Desktop --remove"
+    run(cmd.split())
+
+
+def set_workspaces(status, multi=False, auto=False):
     laptop = status['laptop']
     monitors = status['monitors']
-    enabled_monitors = status['enabled_monitors']
+
+    if auto:
+        multi = status['multihead']
 
     screen1 = None
     screen2 = None
@@ -83,29 +177,21 @@ def set_workspaces(status, multi=False):
     if laptop:
         screen1 = laptop
     else:
-        screen1 = [
-            name for name in monitors if '1' in name
-        ][0]
+        screen1 = [name for name in monitors if '1' in name][0]
 
-    if not multi:
-        cmds = SINGLE_WORKSPACES
-    else:
-        if laptop:
-            screen2 = [name for name in monitors if name != screen1][0]
-        else:
-            screen2 = [name for name in monitors if name != screen1][0]
-
-        cmds = [
-            MULTIPLE_WORKSPACES[-2].format(screen1),
-            MULTIPLE_WORKSPACES[-1].format(screen2)
-        ]
+    if multi:
+        screen2 = [name for name in monitors if name != screen1][0]
 
     env['_bspwm_first_screen'] = screen1
     if screen2:
         env['_bspwm_second_screen'] = screen2
 
-    for cmd in cmds:
-        run(cmd.split(), capture_output=False, env=env)
+    relocate_desktops(screen1, screen2)
+
+    if multi:
+        run((MULTI_SETUP,), capture_output=False, env=env)
+    else:
+        run((SINGLE_SETUP,), capture_output=False, env=env)
 
     polybar = str(DOTDIR.joinpath('polybar/launch_polybar.sh'))
     run(polybar, capture_output=False, env=env)
@@ -115,6 +201,7 @@ def set_workspaces(status, multi=False):
     # run(cm.split())
 
     Popen(FEH.split())
+
 
 def print_env(status):
     if status['laptop']:
@@ -142,7 +229,11 @@ if __name__ == '__main__':
     if args.export:
         print_env(status)
     else:
-        if args.double:
+        if args.mirror:
+            setup = get_bsp_desktops()
+            pp.pprint(status)
+            pp.pprint(setup)
+        elif args.double:
             set_workspaces(status, multi=True)
         else:
-            set_workspaces(status)
+            set_workspaces(status, auto=True)

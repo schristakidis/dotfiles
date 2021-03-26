@@ -1,0 +1,19 @@
+#! /bin/sh
+
+killall sxhkd
+sxhkd $HOME/.config/bspwm/sxhkdrc $HOME/.config/bspwm/sxhkdrc_normal &
+
+bspc config border_width         2
+bspc monitor "$_bspwm_first_screen" -d 1 2 3 4 5 6 7 8 9 10
+
+bspc rule -a Slack desktop=^9 focus=on
+bspc rule -a slack desktop=^9 focus=on
+bspc rule -a Evolution desktop=^9 focus=on
+bspc rule -a Mailspring desktop=^9 focus=on
+bspc rule -a MineTime desktop=^10 focus=on
+bspc rule -a Thunderbird desktop=^10 focus=on
+bspc rule -a "Cisco AnyConnect Secure Mobility Client" state=floating center=on desktop=^10
+bspc rule -a ringcentral desktop=^8
+
+bspc rule -a spotify desktop=^4 focus=on
+
