@@ -22,6 +22,7 @@
         ~/.Xresources: Xresources
         ~/.config/fd: fd
         ~/.config/autorandr: autorandr
+        ~/.config/rofi: rofi
 
 - shell:
         - 
