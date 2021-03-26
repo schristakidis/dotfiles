@@ -78,25 +78,24 @@ M.project_files = function()
     if not ok then require'telescope.builtin'.find_files(opts) end
 end
 
-M.git_grep = function() 
+M.git_grep = function()
     local lsp = require 'lspconfig'
     require("telescope.builtin").grep_string({
         prompt_title = "< Git Grep >",
-        cwd = lsp.util.root_pattern('.git')(vim.loop.cwd()),
+        cwd = lsp.util.find_git_ancestor(vim.loop.cwd()),
         initial_mode = "normal"
     })
 end
 
-M.git_live_grep = function() 
+M.git_live_grep = function()
     local lsp = require 'lspconfig'
     require("telescope.builtin").live_grep({
         prompt_title = "< Git Live Grep >",
-        cwd = lsp.util.root_pattern('.git')(vim.loop.cwd())
+        cwd = lsp.util.find_git_ancestor(vim.loop.cwd()),
     })
 end
 
-M.search_dotfiles = function() 
-    local lsp = require 'lspconfig'
+M.search_dotfiles = function()
     require("telescope.builtin").find_files({
         prompt_title = "< VimRC >",
         cwd = "$HOME/.dotfiles/vim"

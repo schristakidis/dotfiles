@@ -51,7 +51,7 @@ Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 
 " Programming
 Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
@@ -74,13 +74,15 @@ Plug 'vim-airline/vim-airline-themes'
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/playground'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'neovim/nvim-lspconfig'
-
-
+Plug 'nvim-lua/completion-nvim'
+Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
+" Plug 'hrsh7th/nvim-compe'
 
 call plug#end()
