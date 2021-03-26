@@ -65,6 +65,10 @@ alias tmux="TERM=xterm-256color tmux -2"
 alias joplin-cli="joplin --profile ~/.config/joplin-desktop"
 alias k8s="kubectl"
 
+alias reboot="sudo /usr/bin/systemctl reboot"
+alias poweroff="sudo /usr/bin/systemctl poweroff"
+alias halt="sudo /usr/bin/systemctl halt"
+
 bindkey -v
 
 # exchange alt and control f/b bindings

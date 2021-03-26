@@ -3,7 +3,7 @@ nmap <silent> <localleader>l <Plug>(ale_next_wrap)
 
 let g:ale_linters = {'python': ['flake8', 'mypy'],}
 let g:ale_type_map = {'flake8': {'ES': 'WS'}}
-let g:ale_python_mypy_options = '--warn-no-return --ignore-missing-imports'
+let g:ale_python_mypy_options = '--warn-no-return --ignore-missing-imports --no-strict-optional'
 
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'

@@ -10,3 +10,4 @@ tags
 .zcompcache
 *.log
 .pytest_cache
+.mypy_cache

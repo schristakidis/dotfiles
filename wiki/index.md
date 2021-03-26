@@ -3,6 +3,7 @@
 ## VIM
 - [Plugins](vim/plugins/Plugins.md)
 - [Setup](vim/setup.md)
+- [Notes](vim/notes.md)
 
 ## TMUX
 - [Plugins](tmux/Plugins.md)

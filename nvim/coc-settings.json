@@ -37,10 +37,23 @@
     "diagnostic.displayByAle": false,
     "diagnostic.level": "warning",
     "coc.preferences.hoverTarget": "float",
-    "python.analysis.typeCheckingMode": "off",
-    "python.linting.enabled": false,
+    "yaml.format.enable": true,
     "yaml.schemas": {
-        "kubernetes": ["/*.yaml", "/*.yml"]
+        "https://json.schemastore.org/gitlab-ci" : ["/.gitlab-ci*.yaml", "/.gitlab-ci*.yml"],
+        "kubernetes": [
+            "*deployment*.yaml",
+            "*service*.yaml",
+            "*account*.yaml",
+            "*config*.yaml",
+            "*pod*.yaml",
+            "*ingress*.yaml",
+            "*deployment*.yml",
+            "*service*.yml",
+            "*account*.yml",
+            "*config*.yml",
+            "*pod*.yml",
+            "*ingress*.yml"
+        ]
     },
     "languageserver": {
         "dockerfile": {
@@ -116,7 +129,7 @@
                             "enabled": false
                         },
                         "rope_completion": {
-                            "enabled": true
+                            "enabled": false
                         },
                         "yapf": {
                             "enabled": true
