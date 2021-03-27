@@ -40,7 +40,7 @@ Plug 'mzlogin/vim-markdown-toc'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'junkblocker/git-time-lapse'
 
 " Easyclip/Yanking
@@ -84,5 +84,6 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
+Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 
 call plug#end()

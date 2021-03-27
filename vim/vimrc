@@ -7,7 +7,7 @@ lua require("config")
 source $HOME/.dotfiles/vim/plug-config/airline.vim
 source $HOME/.dotfiles/vim/plug-config/autoformat.vim
 source $HOME/.dotfiles/vim/plug-config/easyclip.vim
-source $HOME/.dotfiles/vim/plug-config/gitgutter.vim
+" source $HOME/.dotfiles/vim/plug-config/gitgutter.vim
 source $HOME/.dotfiles/vim/plug-config/maximizer.vim
 source $HOME/.dotfiles/vim/plug-config/mbe.vim
 source $HOME/.dotfiles/vim/plug-config/nerdtree.vim
