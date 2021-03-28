@@ -37,16 +37,16 @@ vim.api.nvim_set_keymap(
 )
 
 vim.api.nvim_set_keymap(
-    'n', '<leader>cd',
+    'n', '<leader>cc',
     [[<Cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<CR>]],
     { noremap = true, silent = true }
 )
 
-vim.api.nvim_set_keymap(
-    'n', '<leader>cc',
-    [[<Cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>]],
-    { noremap = true, silent = true }
-)
+-- vim.api.nvim_set_keymap(
+--     'n', '<leader>cd',
+--     [[<Cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>]],
+--     { noremap = true, silent = true }
+-- )
 
 vim.api.nvim_set_keymap(
     'n', ']e',
@@ -72,9 +72,18 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    virtual_text = {
+        severity_limit = "Error"
+    },
+    underline = true,
+    signs = true,
+    update_in_insert = true
+  }
+)
+
 saga.init_lsp_saga {
-    -- add your config value here
-    -- default value
     use_saga_diagnostic_sign = true,
     error_sign = '',
     warn_sign = '',
