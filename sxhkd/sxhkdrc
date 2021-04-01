@@ -1,6 +1,7 @@
 # Run terminal
 super + Return
-    $TERMINAL -e tmux
+    $TERMINAL
+# $TERMINAL -e tmux
 
 # Rofi
 super + d

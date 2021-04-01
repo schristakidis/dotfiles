@@ -69,8 +69,8 @@ Plug 'morhetz/gruvbox'
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-solarized8'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -85,5 +85,6 @@ Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 call plug#end()

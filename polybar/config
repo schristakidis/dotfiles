@@ -249,7 +249,12 @@ label-urgent-foreground = "#ff5555"
 # label-urgent-background = "#212121"
 label-urgent-underline = "#ff5555"
 label-urgent-padding = 2
-label-empty =
+
+# leave empty to not show empty workspaces
+# label-empty = 
+label-empty = %icon%
+label-empty-foreground = #555
+label-empty-padding = 2
 
 label-monocle = 
 label-tiled = 
