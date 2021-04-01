@@ -137,31 +137,3 @@ noremap U <C-R>
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
-
-let g:completion_customize_lsp_label = {
-            \ "Keyword": "\uf1de",
-            \ "Variable": "\ue79b",
-            \ "Value": "\uf89f",
-            \ "Operator": "\u03a8",
-            \ "Function": "\u0192",
-            \ "Reference": "\ufa46",
-            \ "Constant": "\uf8fe",
-            \ "Method": "\uf09a",
-            \ "Struct": "\ufb44",
-            \ "Class": "\uf0e8",
-            \ "Interface": "\uf417",
-            \ "Text": "\ue612",
-            \ "Enum": "\uf435",
-            \ "EnumMember": "\uf02b",
-            \ "Module": "\uf40d",
-            \ "Color": "\ue22b",
-            \ "Property": "\ue624",
-            \ "Field": "\uf9be",
-            \ "Unit": "\uf475",
-            \ "Event": "\ufacd",
-            \ "File": "\uf723",
-            \ "Folder": "\uf114",
-            \ "Snippet": "\ue60b",
-            \ "TypeParameter": "\uf728",
-            \ "Default": "\uf29c"
-        \ }

@@ -80,11 +80,12 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-lua/completion-nvim'
+Plug 'hrsh7th/nvim-compe'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'onsails/lspkind-nvim' 
 
 call plug#end()
