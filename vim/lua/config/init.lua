@@ -7,4 +7,4 @@ require("config.kind")
 require("config.saga")
 require("config.gitsigns")
 require("config.galaxy")
--- lua print(vim.env.VIRTUAL_ENV:match("^.+/(.+)$"))o
+require'lsp_signature'.on_attach()

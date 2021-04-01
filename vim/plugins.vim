@@ -88,5 +88,7 @@ Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'onsails/lspkind-nvim' 
 Plug 'Raimondi/delimitMate'
+Plug 'ray-x/lsp_signature.nvim'
+Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 
 call plug#end()
