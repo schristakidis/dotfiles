@@ -87,5 +87,6 @@ Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'onsails/lspkind-nvim' 
+Plug 'Raimondi/delimitMate'
 
 call plug#end()
