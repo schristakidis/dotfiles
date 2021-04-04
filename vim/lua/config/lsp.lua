@@ -42,96 +42,6 @@ local on_attach = function(client, bufnr)
   -- end
 end
 
--- Configure lua language server for neovim development
-local lua_settings = {
-  Lua = {
-    runtime = {
-      -- LuaJIT in the case of Neovim
-      version = 'LuaJIT',
-      path = vim.split(package.path, ';'),
-    },
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = {'vim'},
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      },
-    },
-  }
-}
-
-local pyls_settings = {
-    pyls = {
-        configurationSources = { "pycodestyle" },
-        plugins = {
-            jedi_completion = {
-                enabled = false
-            },
-            jedi_definition = {
-                enabled = false
-            },
-            jedi_hover = {
-                enabled = false
-            },
-            jedi_references = {
-                enabled = false
-            },
-            jedi_signature_help = {
-                enabled = false
-            },
-            jedi_symbols = {
-                enabled = false
-            },
-            mccabe = {
-                enabled = false
-            },
-            pycodestyle = {
-                enabled = true
-            },
-            pyflakes = {
-                enabled = false
-            },
-            pylint = {
-                enabled = false
-            },
-            rope_completion = {
-                enabled = false
-            },
-            yapf = {
-                enabled = false
-            }
-        }
-    }
-}
-
-local yaml_settings = {
-    yaml = {
-        schemas = {
-            ["https://json.schemastore.org/gitlab-ci"] = {"/.gitlab-ci*.yaml", "/.gitlab-ci*.yml"},
-            -- ['https://json.schemastore.org/helmfile.json'] = { "/helm/**" },
-            kubernetes = {
-                "*deployment*.yaml",
-                "*service*.yaml",
-                "*account*.yaml",
-                "*config*.yaml",
-                "*pod*.yaml",
-                "*ingress*.yaml",
-                "*deployment*.yml",
-                "*service*.yml",
-                "*account*.yml",
-                "*config*.yml",
-                "*pod*.yml",
-                "*ingress*.yml"
-            }
-        }
-    }
-}
-
-
 -- config that activates keymaps and enables snippet support
 local function make_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -167,14 +77,14 @@ local function setup_servers()
 
     -- language specific config
     if server == "lua" then
-      config.settings = lua_settings
+      config.settings = require('config.servers.lua').get_settings()
     end
     if server == "pyls" then
         config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
-        config.settings = pyls_settings
+        config.settings = require('config.servers.pyls').get_settings()
     end
     if server == "yaml" then
-        config.settings = yaml_settings
+        config.settings = require('config.servers.yaml').get_settings()
     end
 
     require'lspconfig'[server].setup(config)
