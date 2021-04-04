@@ -85,5 +85,7 @@ Plug 'onsails/lspkind-nvim'
 Plug 'Raimondi/delimitMate'
 Plug 'ray-x/lsp_signature.nvim'
 Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
+Plug 'lewis6991/spellsitter.nvim'
+Plug 'gennaro-tedesco/nvim-jqx'
 
 call plug#end()

@@ -33,6 +33,12 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+    'n', "z=",
+    [[<Cmd>lua require('telescope.builtin').spell_suggest()<CR>]],
+    { noremap = true, silent = true }
+)
+
 
 local actions = require('telescope.actions')
 require('telescope').setup {

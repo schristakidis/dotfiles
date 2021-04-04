@@ -232,6 +232,13 @@ local checkwidth_middle = function()
 end
 
 gls.left[8] = {
+    SpaceC = {
+        provider = function () return ' ' end,
+        highlight = {colors.fg,colors.line_bg}
+    }
+}
+
+gls.left[9] = {
     DiffAdd = {
         provider = 'DiffAdd',
         condition = checkwidth,
@@ -239,7 +246,7 @@ gls.left[8] = {
         highlight = {colors.green,colors.line_bg},
     }
 }
-gls.left[9] = {
+gls.left[10] = {
     DiffModified = {
         provider = 'DiffModified',
         condition = checkwidth,
@@ -247,7 +254,7 @@ gls.left[9] = {
         highlight = {colors.orange,colors.line_bg},
     }
 }
-gls.left[10] = {
+gls.left[11] = {
     DiffRemove = {
         provider = 'DiffRemove',
         condition = checkwidth,
@@ -255,7 +262,7 @@ gls.left[10] = {
         highlight = {colors.red,colors.line_bg},
     }
 }
-gls.left[11] = {
+gls.left[12] = {
     LeftEnd = {
         provider = function() return '' end,
         separator = '',
@@ -264,7 +271,7 @@ gls.left[11] = {
     }
 }
 
-gls.left[12] = {
+gls.left[13] = {
     TrailingWhiteSpace = {
         provider = TrailingWhiteSpace,
         icon = icons.trail_whitespaces,
@@ -272,19 +279,19 @@ gls.left[12] = {
     }
 }
 
-gls.left[13] = {
+gls.left[14] = {
     DiagnosticError = {
         provider = 'DiagnosticError',
         icon = icons.diagnostic_error,
         highlight = {colors.red,colors.bg}
     }
 }
-gls.left[14] = {
+gls.left[15] = {
     Space = {
         provider = function () return ' ' end
     }
 }
-gls.left[15] = {
+gls.left[16] = {
     DiagnosticWarn = {
         provider = 'DiagnosticWarn',
         icon = icons.diagnostic_warning,
@@ -292,13 +299,13 @@ gls.left[15] = {
     }
 }
 
-gls.left[16] = {
+gls.left[17] = {
     Space = {
         provider = function () return ' ' end
     }
 }
 
-gls.left[17] = {
+gls.left[18] = {
     DiagnosticHint = {
         provider = 'DiagnosticHint',
         icon = icons.diagnostic_hint,
