@@ -40,7 +40,6 @@ Plug 'mzlogin/vim-markdown-toc'
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
-" Plug 'airblade/vim-gitgutter'
 Plug 'junkblocker/git-time-lapse'
 
 " Easyclip/Yanking
@@ -50,12 +49,10 @@ Plug 'svermeulen/vim-subversive'
 Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 
 " Programming
-" Plug 'dense-analysis/ale'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tomtom/tcomment_vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
-" Plug 'Shougo/echodoc.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'liuchengxu/vista.vim'
 
 " Python
@@ -65,12 +62,10 @@ Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'michaeljsmith/vim-indent-object'
 
 " Theming
-Plug 'morhetz/gruvbox'
-Plug 'mhartington/oceanic-next'
+Plug 'tjdevries/colorbuddy.vim'
 Plug 'joshdick/onedark.vim'
-Plug 'lifepillar/vim-solarized8'
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
+Plug 'Th3Whit3Wolf/one-nvim', {'branch': 'main'}
+Plug 'mhartington/oceanic-next'
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

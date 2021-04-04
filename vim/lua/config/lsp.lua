@@ -67,45 +67,68 @@ local lua_settings = {
 local pyls_settings = {
     pyls = {
         configurationSources = { "pycodestyle" },
-    plugins = {
-        jedi_completion = {
-            enabled = false
-        },
-        jedi_definition = {
-            enabled = false
-        },
-        jedi_hover = {
-            enabled = false
-        },
-        jedi_references = {
-            enabled = false
-        },
-        jedi_signature_help = {
-            enabled = false
-        },
-        jedi_symbols = {
-            enabled = false
-        },
-        mccabe = {
-            enabled = false
-        },
-        pycodestyle = {
-            enabled = true
-        },
-        pyflakes = {
-            enabled = false
-        },
-        pylint = {
-            enabled = false
-        },
-        rope_completion = {
-            enabled = false
-        },
-        yapf = {
-            enabled = false
+        plugins = {
+            jedi_completion = {
+                enabled = false
+            },
+            jedi_definition = {
+                enabled = false
+            },
+            jedi_hover = {
+                enabled = false
+            },
+            jedi_references = {
+                enabled = false
+            },
+            jedi_signature_help = {
+                enabled = false
+            },
+            jedi_symbols = {
+                enabled = false
+            },
+            mccabe = {
+                enabled = false
+            },
+            pycodestyle = {
+                enabled = true
+            },
+            pyflakes = {
+                enabled = false
+            },
+            pylint = {
+                enabled = false
+            },
+            rope_completion = {
+                enabled = false
+            },
+            yapf = {
+                enabled = false
+            }
         }
     }
 }
+
+local yaml_settings = {
+    yaml = {
+        schemas = {
+            ["https://json.schemastore.org/gitlab-ci"] = {"/.gitlab-ci*.yaml", "/.gitlab-ci*.yml"},
+            -- ['https://json.schemastore.org/helmfile.json'] = { "/helm/**" },
+            kubernetes = {
+                "*deployment*.yaml",
+                "*service*.yaml",
+                "*account*.yaml",
+                "*config*.yaml",
+                "*pod*.yaml",
+                "*ingress*.yaml",
+                "*deployment*.yml",
+                "*service*.yml",
+                "*account*.yml",
+                "*config*.yml",
+                "*pod*.yml",
+                "*ingress*.yml"
+            }
+        }
+    }
 }
 
 
@@ -133,6 +156,10 @@ local function setup_servers()
   -- table.insert(servers, "yaml")
   -- table.insert(servers, "bash")
   -- table.insert(servers, "dockerfile")
+  -- table.insert(servers, "json")
+  -- table.insert(servers, "vim")
+  -- table.insert(servers, "typescript")
+  -- table.insert(servers, "terraform")
   table.insert(servers, "pyls")
 
   for _, server in pairs(servers) do
@@ -145,6 +172,9 @@ local function setup_servers()
     if server == "pyls" then
         config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
         config.settings = pyls_settings
+    end
+    if server == "yaml" then
+        config.settings = yaml_settings
     end
 
     require'lspconfig'[server].setup(config)
