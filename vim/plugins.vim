@@ -87,5 +87,6 @@ Plug 'ray-x/lsp_signature.nvim'
 Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
+Plug 'windwp/nvim-projectconfig'
 
 call plug#end()
