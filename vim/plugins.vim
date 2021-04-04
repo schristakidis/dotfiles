@@ -66,6 +66,7 @@ Plug 'tjdevries/colorbuddy.vim'
 Plug 'joshdick/onedark.vim'
 Plug 'Th3Whit3Wolf/one-nvim', {'branch': 'main'}
 Plug 'mhartington/oceanic-next'
+Plug 'marko-cerovac/material.nvim'
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

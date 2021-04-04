@@ -124,256 +124,207 @@ local buffer_not_empty = function()
     return false
 end
 
-gls.left[1] = {
-    FirstElement = {
-        provider = function() return ' ' end,
-        highlight = {colors.blue,colors.line_bg}
-    },
-}
-gls.left[2] = {
-    ViMode = {
-        provider = function()
-            -- auto change color according the vim mode
-            local alias = {
-                n = 'NORMAL',
-                i = 'INSERT',
-                c= 'COMMAND',
-                V= 'VISUAL',
-                [''] = 'VISUAL',
-                v ='VISUAL',
-                c  = 'COMMAND-LINE',
-                ['r?'] = ':CONFIRM',
-                rm = '--MORE',
-                R  = 'REPLACE',
-                Rv = 'VIRTUAL',
-                s  = 'SELECT',
-                S  = 'SELECT',
-                ['r']  = 'HIT-ENTER',
-                [''] = 'SELECT',
-                t  = 'TERMINAL',
-                ['!']  = 'SHELL',
-            }
-            local mode_color = {
-                n = colors.green,
-                i = colors.blue,v=colors.magenta,[''] = colors.blue,V=colors.blue,
-                c = colors.red,no = colors.magenta,s = colors.orange,S=colors.orange,
-                [''] = colors.orange,ic = colors.yellow,R = colors.purple,Rv = colors.purple,
-                cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
-                ['!']  = colors.green,t = colors.green,
-                c  = colors.purple,
-                ['r?'] = colors.red,
-                ['r']  = colors.red,
-                rm = colors.red,
-                R  = colors.yellow,
-                Rv = colors.magenta,
-            }
-            local vim_mode = vim.fn.mode()
-            vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
-            return alias[vim_mode] .. '   '
-        end,
-        highlight = {colors.red,colors.line_bg,'bold'},
-    },
-}
-gls.left[3] ={
-    FileIcon = {
-        provider = 'FileIcon',
-        condition = buffer_not_empty,
-        highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
-    },
-}
-gls.left[4] = {
-    FileName = {
-        provider = {'FileName'},
-        condition = buffer_not_empty,
-        highlight = {colors.fg,colors.line_bg,'bold'}
-    }
-}
-
-gls.left[5] = {
-    VirtuelEnv = {
-        provider = get_virtual_env,
-        condition = has_virtualenv,
-        icon = ' ' .. icons.virtualenv .. ' ',
-        highlight = {colors.cyan,colors.line_bg}
-    }
-}
-
-
-gls.left[6] = {
-    GitIcon = {
-        provider = function() return ' ' .. icons.git .. ' ' end,
-        condition = require('galaxyline.provider_vcs').get_git_branch,
-        highlight = {colors.orange,colors.line_bg},
-    }
-}
-
-gls.left[7] = {
-    GitBranch = {
-        provider = 'GitBranch',
-        condition = require('galaxyline.provider_vcs').get_git_branch,
-        highlight = {'#8FBCBB',colors.line_bg,'bold'},
-    }
-}
-
 local checkwidth = function()
-    local squeeze_width  = vim.fn.winwidth(0) / 2
-    if squeeze_width > 40 then
-        return true
-    end
-    return false
+        local squeeze_width  = vim.fn.winwidth(0) / 2
+        if squeeze_width > 40 then
+                return true
+        end
+        return false
 end
 
 local checkwidth_middle = function()
-    local squeeze_width  = vim.fn.winwidth(0) / 2
-    if squeeze_width > 60 then
-        return true
-    end
-    return false
+        local squeeze_width  = vim.fn.winwidth(0) / 2
+        if squeeze_width > 60 then
+                return true
+        end
+        return false
 end
 
-gls.left[8] = {
-    SpaceC = {
-        provider = function () return ' ' end,
-        highlight = {colors.fg,colors.line_bg}
+gls.left = {
+    {
+        FirstElement = {
+            provider = function() return ' ' end,
+            highlight = {colors.blue,colors.line_bg}
+        },
+    }, {
+        ViMode = {
+            provider = function()
+                -- auto change color according the vim mode
+                local alias = {
+                    n = 'NORMAL',
+                    i = 'INSERT',
+                    c= 'COMMAND',
+                    V= 'VISUAL',
+                    [''] = 'VISUAL',
+                    v ='VISUAL',
+                    c  = 'COMMAND-LINE',
+                    ['r?'] = ':CONFIRM',
+                    rm = '--MORE',
+                    R  = 'REPLACE',
+                    Rv = 'VIRTUAL',
+                    s  = 'SELECT',
+                    S  = 'SELECT',
+                    ['r']  = 'HIT-ENTER',
+                    [''] = 'SELECT',
+                    t  = 'TERMINAL',
+                    ['!']  = 'SHELL',
+                }
+                local mode_color = {
+                    n = colors.green,
+                    i = colors.blue,v=colors.magenta,[''] = colors.magenta,V=colors.magenta,
+                    c = colors.red,no = colors.magenta,s = colors.orange,S=colors.orange,
+                    [''] = colors.orange,ic = colors.yellow,R = colors.purple,Rv = colors.purple,
+                    cv = colors.red,ce=colors.red, r = colors.cyan,rm = colors.cyan, ['r?'] = colors.cyan,
+                    ['!']  = colors.green,t = colors.green,
+                    c  = colors.purple,
+                    ['r?'] = colors.red,
+                    ['r']  = colors.red,
+                    rm = colors.red,
+                    R  = colors.yellow,
+                    Rv = colors.magenta,
+                }
+                local vim_mode = vim.fn.mode()
+                vim.api.nvim_command('hi GalaxyViMode guifg='..mode_color[vim_mode])
+                return alias[vim_mode] .. '   '
+            end,
+            highlight = {colors.red,colors.line_bg,'bold'},
+        }
+    }, {
+        FileIcon = {
+            provider = 'FileIcon',
+            condition = buffer_not_empty,
+            highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+        }
+    }, {
+        FileName = {
+            provider = {'FileName'},
+            condition = buffer_not_empty,
+            highlight = {colors.fg,colors.line_bg,'bold'}
+        }
+    }, {
+        VirtuelEnv = {
+            provider = get_virtual_env,
+            condition = has_virtualenv,
+            icon = ' ' .. icons.virtualenv .. ' ',
+            highlight = {colors.cyan,colors.line_bg}
+        }
+    }, {
+        GitIcon = {
+            provider = function() return ' ' .. icons.git .. ' ' end,
+            condition = require('galaxyline.provider_vcs').get_git_branch,
+            highlight = {colors.orange,colors.line_bg},
+        }
+    }, {
+        GitBranch = {
+            provider = 'GitBranch',
+            condition = require('galaxyline.provider_vcs').get_git_branch,
+            highlight = {'#8FBCBB',colors.line_bg,'bold'},
+        }
+    }, {
+        SpaceC = {
+            provider = function () return ' ' end,
+            highlight = {colors.fg,colors.line_bg}
+        }
+    }, {
+        DiffAdd = {
+            provider = 'DiffAdd',
+            condition = checkwidth,
+            icon = icons.git_add,
+            highlight = {colors.green,colors.line_bg},
+        }
+    }, {
+        DiffModified = {
+            provider = 'DiffModified',
+            condition = checkwidth,
+            icon = icons.git_modified,
+            highlight = {colors.orange,colors.line_bg},
+        }
+    }, {
+        DiffRemove = {
+            provider = 'DiffRemove',
+            condition = checkwidth,
+            icon = icons.git_remove,
+            highlight = {colors.red,colors.line_bg},
+        }
+    }, {
+        LeftEnd = {
+            provider = function() return '' end,
+            separator = '',
+            separator_highlight = {colors.bg,colors.line_bg},
+            highlight = {colors.line_bg,colors.line_bg}
+        }
+    }, {
+        TrailingWhiteSpace = {
+            provider = TrailingWhiteSpace,
+            icon = icons.trail_whitespaces,
+            highlight = {colors.yellow,colors.bg},
+        }
+    }, {
+        DiagnosticError = {
+            provider = 'DiagnosticError',
+            icon = icons.diagnostic_error,
+            highlight = {colors.red,colors.bg}
+        }
+    }, {
+        Space = {
+            provider = function () return ' ' end
+        }
+    }, {
+        DiagnosticWarn = {
+            provider = 'DiagnosticWarn',
+            icon = icons.diagnostic_warning,
+            highlight = {colors.yellow,colors.bg},
+        }
+    }, {
+        Space = {
+            provider = function () return ' ' end
+        }
+    }, {
+        DiagnosticHint = {
+            provider = 'DiagnosticHint',
+            icon = icons.diagnostic_hint,
+            highlight = {colors.cyan,colors.bg},
+        }
+    }, {
+        CurrentFunc = {
+            provider = get_current_func,
+            condition = checkwidth_middle,
+            icon = '  λ ',
+            highlight = {colors.yellow,colors.bg},
+        }
     }
 }
 
-gls.left[9] = {
-    DiffAdd = {
-        provider = 'DiffAdd',
-        condition = checkwidth,
-        icon = icons.git_add,
-        highlight = {colors.green,colors.line_bg},
+gls.right = {
+    {
+        IconFileFormat = {
+            provider = icon_file_format,
+            condition = buffer_not_empty,
+            separator = ' ',
+            separator_highlight = {colors.bg,colors.line_bg},
+            highlight = {colors.fg,colors.line_bg}
+        }
+    }, {
+        CustomBufferType = {
+            provider = get_filetype,
+            condition = has_file_type,
+            highlight = {colors.fg,colors.line_bg}
+        }
+    }, {
+        LineInfo = {
+            provider = 'LineColumn',
+            icon = '  ' .. icons.line_number .. ' ',
+            highlight = {colors.fg,colors.line_bg}
+        },
+    }, {
+        PerCent = {
+            provider = 'LinePercent',
+            separator = ' ',
+            separator_highlight = {colors.line_bg,colors.line_bg},
+            highlight = {colors.cyan,colors.darkblue,'bold'},
+        }
     }
 }
-gls.left[10] = {
-    DiffModified = {
-        provider = 'DiffModified',
-        condition = checkwidth,
-        icon = icons.git_modified,
-        highlight = {colors.orange,colors.line_bg},
-    }
-}
-gls.left[11] = {
-    DiffRemove = {
-        provider = 'DiffRemove',
-        condition = checkwidth,
-        icon = icons.git_remove,
-        highlight = {colors.red,colors.line_bg},
-    }
-}
-gls.left[12] = {
-    LeftEnd = {
-        provider = function() return '' end,
-        separator = '',
-        separator_highlight = {colors.bg,colors.line_bg},
-        highlight = {colors.line_bg,colors.line_bg}
-    }
-}
-
-gls.left[13] = {
-    TrailingWhiteSpace = {
-        provider = TrailingWhiteSpace,
-        icon = icons.trail_whitespaces,
-        highlight = {colors.yellow,colors.bg},
-    }
-}
-
-gls.left[14] = {
-    DiagnosticError = {
-        provider = 'DiagnosticError',
-        icon = icons.diagnostic_error,
-        highlight = {colors.red,colors.bg}
-    }
-}
-gls.left[15] = {
-    Space = {
-        provider = function () return ' ' end
-    }
-}
-gls.left[16] = {
-    DiagnosticWarn = {
-        provider = 'DiagnosticWarn',
-        icon = icons.diagnostic_warning,
-        highlight = {colors.yellow,colors.bg},
-    }
-}
-
-gls.left[17] = {
-    Space = {
-        provider = function () return ' ' end
-    }
-}
-
-gls.left[18] = {
-    DiagnosticHint = {
-        provider = 'DiagnosticHint',
-        icon = icons.diagnostic_hint,
-        highlight = {colors.cyan,colors.bg},
-    }
-}
-
-gls.left[19] = {
-    CurrentFunc = {
-        provider = get_current_func,
-        condition = checkwidth_middle,
-        icon = '  λ ',
-        highlight = {colors.yellow,colors.bg},
-    }
-}
-
-gls.right[1]= {
-    IconFileFormat = {
-        provider = icon_file_format,
-        condition = buffer_not_empty,
-        separator = ' ',
-        separator_highlight = {colors.bg,colors.line_bg},
-        highlight = {colors.fg,colors.line_bg}
-    }
-}
-
-
-gls.right[2] = {
-    CustomBufferType = {
-        provider = get_filetype,
-        condition = has_file_type,
-        highlight = {colors.fg,colors.line_bg}
-    }
-}
-
-
-gls.right[3] = {
-    LineInfo = {
-        provider = 'LineColumn',
-        icon = '  ' .. icons.line_number .. ' ',
-        highlight = {colors.fg,colors.line_bg}
-    },
-}
-
-gls.right[5] = {
-    PerCent = {
-        provider = 'LinePercent',
-        separator = ' ',
-        separator_highlight = {colors.line_bg,colors.line_bg},
-        highlight = {colors.cyan,colors.darkblue,'bold'},
-    }
-}
-
--- gls.right[4] = {
---   ScrollBar = {
---     provider = 'ScrollBar',
---     highlight = {colors.blue,colors.purple},
---   }
--- }
---
--- gls.right[3] = {
---   Vista = {
---     provider = VistaPlugin,
---     separator = ' ',
---     separator_highlight = {colors.bg,colors.line_bg},
---     highlight = {colors.fg,colors.line_bg,'bold'},
---   }
--- }
 
 gls.short_line_left[1] = {
     BufferType = {

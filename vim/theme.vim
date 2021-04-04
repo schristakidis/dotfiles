@@ -17,6 +17,9 @@ let g:onedark_terminal_italics=1
 let g:onedark_termcolors=256
 " colo onedark
 lua require('colorbuddy').colorscheme('one-nvim')
+"
+" let g:material_style = 'default'
+" lua require('colorbuddy').colorscheme('material')
 
 if (has("termguicolors"))
     set termguicolors
