@@ -1,16 +1,24 @@
 ## Extra installs
 
-### coc
+### Spellsitter
 
-- docker 
-```sh
-npm install -g dockerfile-language-server-nodejs
-```
-- bash 
-```sh
-npm i -g bash-language-server
-```
-- terraform [build](https://github.com/juliosueiras/terraform-lsp)
+- hunspell
+- hunspell-en_us
+
+### Telescope
+
+- bat
+- fd
+- ripgrep
+
+### Nvim-web-devicons
+
+- Nerd Fonts
+
+###  nvim-jqx 
+
+- jq
+- yq (for yaml)
 
 
 ### autoformater
@@ -26,7 +34,9 @@ npm install -g js-beautify
 pip install yapf
 ```
 - black
-only for python 3.6+ but it can format python2 also. Does not support range formatting
+
+Only for python 3.6+ but it can format python2 also. Does not support range formatting
+
 ```sh
 workon neovim3
 pip install black
