@@ -86,6 +86,10 @@ local function setup_servers()
     if server == "yaml" then
         config.settings = require('config.servers.yaml').get_settings()
     end
+    -- if server == "diagnosticls" then
+    --     config.init_options = require('config.servers.diagnostics').get_settings()
+    --     config.filetypes = { "python" }
+    -- end
 
     require'lspconfig'[server].setup(config)
   end
@@ -98,3 +102,8 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
+M = {}
+M.make_config = make_config
+
+return M

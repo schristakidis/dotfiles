@@ -20,7 +20,7 @@ nmap <leader>yf <plug>(YoinkPostPasteToggleFormat)
 let g:yoinkIncludeDeleteOperations = 1
 let g:yoinkSavePersistently = 1
 let g:yoinkSwapClampAtEnds = 0  " circle through the yank history
-let g:yoinkAutoFormatPaste = 0
+let g:yoinkAutoFormatPaste = 1
 
 xmap s <plug>(SubversiveSubstitute)
 xmap p <plug>(SubversiveSubstitute)

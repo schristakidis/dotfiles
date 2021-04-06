@@ -42,12 +42,21 @@ local pyls_settings = {
     }
 }
 
-require'lspconfig'.pyls.setup{
-    settings = pyls_settings,
-    cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
-}
+local function setup_pyls()
+    local config = require('config.lsp').make_config()
+    config.settings = pyls_settings
+    config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
 
-require'lspconfig'.python.setup{
-    autostart = false,
-    cmd = { 'ls' },
-}
+    require'lspconfig'.pyls.setup(config)
+end
+
+local function setup_pyright()
+    local config = require('config.lsp').make_config()
+    config.autostart = false
+    config.cmd = {'ls'}
+    require'lspconfig'.python.setup(config)
+end
+
+
+setup_pyls()
+setup_pyright()
