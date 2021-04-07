@@ -42,10 +42,22 @@ local pyls_settings = {
     }
 }
 
+local pyright_settings ={
+    python = {
+        analysis = {
+            typeCheckingMode = "off"
+        }
+    }
+}
+
 local M = {}
 
 M.get_settings = function()
     return pyls_settings
+end
+
+M.get_pyright_settings = function()
+    return pyright_settings
 end
 
 return M

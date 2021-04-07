@@ -83,6 +83,9 @@ local function setup_servers()
         config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
         config.settings = require('config.servers.pyls').get_settings()
     end
+    if server == "python" then
+        config.settings = require('config.servers.pyls').get_pyright_settings()
+    end
     if server == "yaml" then
         config.settings = require('config.servers.yaml').get_settings()
     end
