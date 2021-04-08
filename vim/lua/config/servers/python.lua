@@ -46,7 +46,9 @@ local pyright_settings ={
     python = {
         analysis = {
             typeCheckingMode = "basic",
-            reportGeneralTypeIssues = false
+            diagnosticSeverityOverrides = {
+                reportGeneralTypeIssues = "none"
+            }
         }
     }
 }
