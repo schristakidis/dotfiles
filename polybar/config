@@ -239,16 +239,19 @@ label-focused-background = "#bd93f9"
 label-focused-foreground = "#212121"
 label-occupied = %icon%
 label-occupied-padding = 2
-label-dimmed-foreground = #bd93f9
-label-dimmed-underline = #bd93f9
-# label-dimmed-focused-background = #212121
-label-dimmed-focused-background = #000
-# label-dimmed-focused-foreground = #212121
 label-urgent = %icon%
 label-urgent-foreground = "#ff5555"
-# label-urgent-background = "#212121"
 label-urgent-underline = "#ff5555"
 label-urgent-padding = 2
+
+label-dimmed-occupied-background = #555
+label-dimmed-occupied-foreground = #bd93f9
+
+label-dimmed-focused-foreground = "#bd93f9"
+label-dimmed-focused-background = "#212121"
+
+label-dimmed-empty-background = #555
+label-dimmed-empty-foreground = #000
 
 # leave empty to not show empty workspaces
 # label-empty = 
