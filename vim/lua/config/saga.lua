@@ -18,6 +18,7 @@ vim.api.nvim_set_keymap(
 --     { noremap = true, silent = true }
 -- )
 --
+
 vim.api.nvim_set_keymap(
     'n', 'gsh',
     [[<Cmd>lua require('lspsaga.provider').lsp_finder()<CR>]],
@@ -42,20 +43,32 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
--- vim.api.nvim_set_keymap(
---     'n', '<leader>cd',
---     [[<Cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>]],
---     { noremap = true, silent = true }
--- )
+vim.api.nvim_set_keymap(
+    'n', '<leader>cd',
+    [[<Cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>]],
+    { noremap = true, silent = true }
+)
 
 vim.api.nvim_set_keymap(
     'n', ']e',
-    [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>]],
+    [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next({severity_limit = "Warning"})<CR>]],
     { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
     'n', '[e',
+    [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev({severity_limit = "Warning"})<CR>]],
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+    'n', ']w',
+    [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>]],
+    { noremap = true, silent = true }
+    )
+
+vim.api.nvim_set_keymap(
+    'n', '[w',
     [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>]],
     { noremap = true, silent = true }
 )

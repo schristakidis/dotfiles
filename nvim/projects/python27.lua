@@ -3,31 +3,31 @@ local pyls_settings = {
         configurationSources = { "pycodestyle" },
         plugins = {
             jedi_completion = {
-                enabled = false
+                enabled = true
             },
             jedi_definition = {
-                enabled = false
+                enabled = true
             },
             jedi_hover = {
-                enabled = false
+                enabled = true
             },
             jedi_references = {
-                enabled = false
+                enabled = true
             },
             jedi_signature_help = {
-                enabled = false
+                enabled = true
             },
             jedi_symbols = {
-                enabled = false
+                enabled = true
             },
             mccabe = {
                 enabled = false
             },
             pycodestyle = {
-                enabled = true
+                enabled =true
             },
             pyflakes = {
-                enabled = false
+                enabled = true
             },
             pylint = {
                 enabled = false
@@ -42,22 +42,21 @@ local pyls_settings = {
     }
 }
 
-local pyright_settings ={
-    python = {
-        analysis = {
-            typeCheckingMode = "off"
-        }
-    }
-}
+local function setup_pyls()
+    local config = require('config.lsp').make_config()
+    config.settings = pyls_settings
+    config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
 
-local M = {}
-
-M.get_settings = function()
-    return pyls_settings
+    require'lspconfig'.pyls.setup(config)
 end
 
-M.get_pyright_settings = function()
-    return pyright_settings
+local function setup_pyright()
+    local config = require('config.lsp').make_config()
+    config.autostart = false
+    config.cmd = {'ls'}
+    require'lspconfig'.python.setup(config)
 end
 
-return M
+
+setup_pyls()
+setup_pyright()
