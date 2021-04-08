@@ -1,4 +1,4 @@
-vim.api.nvim_set_option('completeopt', 'menuone,noinsert,noselect')
+vim.api.nvim_set_option('completeopt', 'menuone,noselect')
 
 
 local t = function(str)
@@ -43,6 +43,7 @@ vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+vim.api.nvim_set_keymap('i', '<C-Space>', "compe#complete()", {expr=true, noremap=true, silent=true})  -- complete == start the autocompletion
 vim.api.nvim_set_keymap('i', '<CR>', "compe#confirm({ 'keys':" .. '"\\<Plug>delimitMateCR"' .. ",'mode': '' })", {expr=true, noremap=true, silent=true})
 vim.api.nvim_set_keymap('i', '<C-e>', "compe#close('<C-e>')", {expr=true, noremap=true, silent=true})
 vim.api.nvim_set_keymap('i', '<C-f>', "compe#scroll({ 'delta': +4 })", {expr=true, noremap=true, silent=true})
