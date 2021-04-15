@@ -89,7 +89,7 @@ M.git_grep = function()
     require("telescope.builtin").grep_string({
         prompt_title = "< Git Grep >",
         cwd = lsp.util.find_git_ancestor(vim.loop.cwd()),
-        initial_mode = "normal"
+        initial_mode = "insert"
     })
 end
 
