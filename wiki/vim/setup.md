@@ -43,3 +43,10 @@ pip install black
 ln -s ~/.local/bin/black `which black`
 deactivate
 ```
+
+- debugpy
+
+```sh
+mkvirtualenv debugpy
+pip install debugpy
+```

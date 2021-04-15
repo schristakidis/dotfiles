@@ -1,4 +1,4 @@
-# TABLE OF CONTENTS
+[#](#) TABLE OF CONTENTS
 
 ## VIM
 - [Plugins](vim/plugins/Plugins.md)
