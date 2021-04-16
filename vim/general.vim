@@ -1,5 +1,5 @@
 let mapleader=','
-let maplocalleader=';'
+let maplocalleader = "\<Space>"
 
 syntax on
 filetype plugin indent on

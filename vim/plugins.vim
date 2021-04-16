@@ -90,10 +90,14 @@ Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'windwp/nvim-projectconfig'
 
+Plug 'puremourning/vimspector'
+
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
 Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 Plug 'rcarriga/nvim-dap-ui'
+
+Plug 'dbeniamine/cheat.sh-vim'
 
 call plug#end()

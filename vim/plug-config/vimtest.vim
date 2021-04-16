@@ -10,3 +10,12 @@ let test#python#pytest#options = '-s'
 "vimux
 map <Leader>tr :call VimuxRunCommand("clear; trial " . expand("%:p"))<CR>
 map <Leader>trl :call VimuxRunCommand("!! \n")<CR>
+
+function! DPytestStrategy(cmd)
+    let testName = split(a:cmd, '::')[1]
+    call vimspector#LaunchWithSettings( #{ configuration: 'pytest', TestName: testName } )
+endfunction
+
+let g:test#custom_strategies = {'dpytest': function('DPytestStrategy')}
+
+nmap <silent> <leader>td :TestNearest -strategy=dpytest<CR>

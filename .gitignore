@@ -8,3 +8,6 @@ zsh/.zinit
 !zsh/local/.gitkeep.zsh
 i3/i3resources/*
 !i3/i3resources/.gitkeep
+vim/vimspector-config/gadgets
+
+
