@@ -63,7 +63,7 @@ fi
 alias vim="nvim"
 alias tmux="TERM=xterm-256color tmux -2"
 alias joplin-cli="joplin --profile ~/.config/joplin-desktop"
-alias k8s="kubectl"
+alias k="kubectl"
 
 alias reboot="sudo /usr/bin/systemctl reboot"
 alias poweroff="sudo /usr/bin/systemctl poweroff"
