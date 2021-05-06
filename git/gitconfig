@@ -19,7 +19,7 @@
 	editor = nvim
 	excludesfile = ~/.dotfiles/git/gitignore_global
 [merge]
-	tool = vimdiff
+	tool = neovim -d
 [push]
 	default = simple
 [init]
@@ -29,3 +29,7 @@
 	status = auto
 [pull]
 	rebase = false
+[diff]
+    tool = neovim
+[difftool "neovim"]
+    cmd = nvim -d $LOCAL $REMOTE
