@@ -1,6 +1,7 @@
 local gl = require('galaxyline')
 local gls = gl.section
 local extension = require('galaxyline.provider_extensions')
+local util = require 'lspconfig/util'
 
 gl.short_line_list = {
     'LuaTree',
@@ -58,6 +59,73 @@ local icons = {
     diagnostic_hint = '  ',
 }
 
+
+local buffer_not_empty = function()
+    if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+        return true
+    end
+    return false
+end
+
+local checkwidth = function()
+    local squeeze_width  = vim.fn.winwidth(0) / 2
+    if squeeze_width > 40 then
+        return true
+    end
+    return false
+end
+
+
+local get_file_path = function()
+    local fname
+    local file_path
+    local project_root
+
+    if not buffer_not_empty() then return '' end
+
+    file_path = vim.fn.expand '%:p'
+    project_root = util.find_git_ancestor(file_path)
+    if project_root then
+        fname = vim.fn.fnamemodify(file_path, ':s?' .. project_root .. '/??')
+    else
+        fname = vim.fn.fnamemodify(vim.fn.expand '%:p', ':~')
+    end
+
+    if not checkwidth() then
+        fname = vim.fn.pathshorten(fname)
+    end
+
+    if #fname == 0 then return '' end
+    if vim.bo.readonly then
+        fname = fname .. ' ' .. icons.locker
+    end
+    if vim.bo.modified then
+        fname = fname .. ' ' .. icons.unsaved
+    end
+    return ' ' .. fname .. ' '
+end
+
+
+local get_file_path_short_line = function()
+    if not buffer_not_empty() then return '' end
+    local fname
+    fname = vim.fn.expand '%:t'
+
+    if fname == '-MinBufExplorer-' then
+        return ''
+    end
+
+    fname = vim.fn.fnamemodify(vim.fn.expand '%:p', ':~')
+
+    if #fname == 0 then return '' end
+    if vim.bo.readonly then
+        fname = fname .. ' ' .. icons.locker
+    end
+    if vim.bo.modified then
+        fname = fname .. ' ' .. icons.unsaved
+    end
+    return ' ' .. fname .. ' '
+end
 
 local function get_virtual_env()
     local venv = vim.env.VIRTUAL_ENV:match("^.+/(.+)$")
@@ -117,24 +185,9 @@ local function has_file_type()
     return true
 end
 
-local buffer_not_empty = function()
-    if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-        return true
-    end
-    return false
-end
-
-local checkwidth = function()
-        local squeeze_width  = vim.fn.winwidth(0) / 2
-        if squeeze_width > 40 then
-                return true
-        end
-        return false
-end
-
 local checkwidth_middle = function()
         local squeeze_width  = vim.fn.winwidth(0) / 2
-        if squeeze_width > 60 then
+        if squeeze_width > 80 then
                 return true
         end
         return false
@@ -197,7 +250,7 @@ gls.left = {
         }
     }, {
         FileName = {
-            provider = {'FileName'},
+            provider = get_file_path,
             condition = buffer_not_empty,
             highlight = {colors.fg,colors.line_bg,'bold'}
         }
@@ -335,11 +388,18 @@ gls.short_line_left[1] = {
         highlight = {colors.fg,colors.purple}
     }
 }
+gls.short_line_left[2] = {
+    FilePath = {
+        provider = get_file_path_short_line,
+        condition = buffer_not_empty,
+        highlight = {colors.fg,colors.line_bg,'bold'}
+    }
+}
 
 
 gls.short_line_right[1] = {
     BufferIcon = {
-        provider= 'BufferIcon',
+        provider = icon_file_format,
         separator = '',
         condition = has_file_type,
         separator_highlight = {colors.purple,colors.bg},
