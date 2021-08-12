@@ -8,6 +8,7 @@
 * [Font Awesome](#font-awesome)
 * [Set Keyboard Languages](#set-keyboard-languages)
 * [Change CAPS key](#change-caps-key)
+* [Add certificate](#add-certificate)
 
 <!-- vim-markdown-toc -->
 ## Default Applications
@@ -62,4 +63,11 @@ localectl --no-convert set-x11-keymap us,gr "", "" grp:alt_shift_toggle
 Add to .xprofile
 ```sh
 setxkbmap -option caps:ctrl_modifier
+```
+
+## Add certificate
+
+```sh
+sudo cp crt /etc/ca-certificates/trust-source/anchors
+sudo trust extract-compat
 ```

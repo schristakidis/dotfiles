@@ -86,7 +86,7 @@ augroup my_filetypes
     au FileType go set tabstop=4
 
     au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
 
 " open quickfix window after grep commands

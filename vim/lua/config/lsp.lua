@@ -73,7 +73,7 @@ local function setup_servers()
   -- table.insert(servers, "vim")
   -- table.insert(servers, "typescript")
   -- table.insert(servers, "terraform")
-  table.insert(servers, "pyls")
+  -- table.insert(servers, "pyls")
 
   for _, server in pairs(servers) do
     local config = make_config()
