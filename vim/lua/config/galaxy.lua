@@ -111,7 +111,7 @@ local get_file_path_short_line = function()
     local fname
     fname = vim.fn.expand '%:t'
 
-    if fname == '-MinBufExplorer-' then
+    if fname == '-MiniBufExplorer-' then
         return ''
     end
 
