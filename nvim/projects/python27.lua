@@ -1,5 +1,5 @@
-local pyls_settings = {
-    pyls = {
+local pylsp_settings = {
+    pylsp = {
         configurationSources = { "pycodestyle" },
         plugins = {
             jedi_completion = {
@@ -42,12 +42,12 @@ local pyls_settings = {
     }
 }
 
-local function setup_pyls()
+local function setup_pylsp()
     local config = require('config.lsp').make_config()
-    config.settings = pyls_settings
-    config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
+    config.settings = pylsp_settings
+    config.cmd = { "pylsp" }
 
-    require'lspconfig'.pyls.setup(config)
+    require'lspconfig'.pylsp.setup(config)
 end
 
 local function setup_pyright()
@@ -58,5 +58,5 @@ local function setup_pyright()
 end
 
 
-setup_pyls()
+setup_pylsp()
 setup_pyright()

@@ -63,28 +63,21 @@ local function setup_servers()
 
   -- get all installed servers
   local servers = require'lspinstall'.installed_servers()
+  -- print(vim.inspect(servers))
   -- ... and add manually installed servers
-  -- table.insert(servers, "lua")
-  -- table.insert(servers, "python")
-  -- table.insert(servers, "yaml")
-  -- table.insert(servers, "bash")
-  -- table.insert(servers, "dockerfile")
-  -- table.insert(servers, "json")
-  -- table.insert(servers, "vim")
-  -- table.insert(servers, "typescript")
-  -- table.insert(servers, "terraform")
-  -- table.insert(servers, "pyls")
+  table.insert(servers, "pylsp")
 
   for _, server in pairs(servers) do
+    -- print(server)
     local config = make_config()
 
     -- language specific config
     if server == "lua" then
       config.settings = require('config.servers.lua').get_settings()
     end
-    if server == "pyls" then
-        config.cmd = { "pyls", '--log-file', '/tmp/pyls-log.txt' }
-        config.settings = require('config.servers.python').get_pyls_settings()
+    if server == "pylsp" then
+        config.cmd = { "pylsp" }
+        config.settings = require('config.servers.python').get_pylsp_settings()
     end
     if server == "python" then
         config.settings = require('config.servers.python').get_pyright_settings()
