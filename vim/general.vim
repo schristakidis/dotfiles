@@ -55,6 +55,19 @@ set expandtab
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set nowrap
 
+let g:clipboard = {
+    \ 'name': 'xsel_override',
+    \ 'copy': {
+    \     '+': 'xsel --input --clipboard',
+    \     '*': 'xsel --input --primary',
+    \ },
+    \ 'paste': {
+    \     '+': 'xsel --output --clipboard',
+    \     '*': 'xsel --output --primary',
+    \ },
+    \ 'cache_enabled': 1,
+\ }
+
 "move swap files to vim tmp directories
 set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
