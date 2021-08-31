@@ -79,7 +79,6 @@ Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'hrsh7th/nvim-compe'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'onsails/lspkind-nvim' 
@@ -89,6 +88,7 @@ Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'windwp/nvim-projectconfig'
+Plug 'folke/trouble.nvim'
 
 Plug 'puremourning/vimspector'
 
