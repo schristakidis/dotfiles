@@ -6,14 +6,14 @@ xnoremap m d
 nnoremap mm dd
 nnoremap M D
 
-" nmap p <plug>(YoinkPaste_p)
-" nmap P <plug>(YoinkPaste_P)
-"
-" nmap <leader>yp <plug>(YoinkPostPasteSwapBack)
-" nmap <leader>yn <plug>(YoinkPostPasteSwapForward)
+nmap p <plug>(YoinkPaste_p)
+nmap P <plug>(YoinkPaste_P)
 
-nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
-nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
+nmap <leader>yp <plug>(YoinkPostPasteSwapBack)
+nmap <leader>yn <plug>(YoinkPostPasteSwapForward)
+
+" nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
+" nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'
 
 nmap <leader>yf <plug>(YoinkPostPasteToggleFormat)
 
