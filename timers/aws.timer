@@ -1,0 +1,8 @@
+[Unit]
+Description=AWS login timer
+
+[Timer]
+OnCalendar=Mon..Fri 9..17:00/30
+
+[Install]
+WantedBy=timers.target
