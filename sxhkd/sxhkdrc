@@ -64,6 +64,10 @@ alt + Down
 ctrl + s; w
     wiki_viewer
 
+# pmixer
+ctrl + s; v
+    pmixer
+
 
 # bindsym $mod+Shift+p exec playerctl --player=spotify play-pause
 # bindsym $mod+Right exec playerctl --player=spotify next

@@ -55,6 +55,19 @@ set expandtab
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set nowrap
 
+let g:clipboard = {
+    \ 'name': 'xsel_override',
+    \ 'copy': {
+    \     '+': 'xsel --input --clipboard',
+    \     '*': 'xsel --input --primary',
+    \ },
+    \ 'paste': {
+    \     '+': 'xsel --output --clipboard',
+    \     '*': 'xsel --output --primary',
+    \ },
+    \ 'cache_enabled': 1,
+\ }
+
 "move swap files to vim tmp directories
 set backupdir=~/.vim/tmp/backup_files//
 set directory=~/.vim/tmp/swap_files//
@@ -86,7 +99,7 @@ augroup my_filetypes
     au FileType go set tabstop=4
 
     au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
 
 " open quickfix window after grep commands

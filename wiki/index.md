@@ -1,6 +1,6 @@
 [#](#) TABLE OF CONTENTS
 
-## VIM
+## [VIM](VIM)
 - [Plugins](vim/plugins/Plugins.md)
 - [Setup](vim/setup.md)
 - [Notes](vim/notes.md)
@@ -23,4 +23,4 @@
 - [kubernetes](devops/kubernetes.md)
 - [docker](devops/docker.md)
 - [git](devops/git.md)
-
+- [helm](devops/helm.md)

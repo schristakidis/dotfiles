@@ -76,10 +76,13 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'hrsh7th/nvim-compe'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'hrsh7th/cmp-path'
 Plug 'kabouzeid/nvim-lspinstall', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'onsails/lspkind-nvim' 
@@ -89,6 +92,7 @@ Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'windwp/nvim-projectconfig'
+Plug 'folke/trouble.nvim'
 
 Plug 'puremourning/vimspector'
 

@@ -166,6 +166,7 @@ format-muted = 婢 Muted
 ramp-volume-0 = 
 ramp-volume-1 = 墳
 ramp-volume-2 = 
+click-right = pmixer
 
 [module/title]
 type = internal/xwindow

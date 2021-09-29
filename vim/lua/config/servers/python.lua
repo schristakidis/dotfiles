@@ -1,5 +1,5 @@
-local pyls_settings = {
-    pyls = {
+local pylsp_settings = {
+    pylsp = {
         configurationSources = { "pycodestyle" },
         plugins = {
             jedi_completion = {
@@ -55,8 +55,8 @@ local pyright_settings ={
 
 local M = {}
 
-M.get_pyls_settings = function()
-    return pyls_settings
+M.get_pylsp_settings = function()
+    return pylsp_settings
 end
 
 M.get_pyright_settings = function()

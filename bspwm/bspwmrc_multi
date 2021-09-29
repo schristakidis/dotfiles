@@ -1,7 +1,15 @@
 #! /bin/sh
 
+setxkbmap -option caps:ctrl_modifier
 killall sxhkd
 sxhkd $HOME/.config/bspwm/sxhkdrc $HOME/.config/bspwm/sxhkdrc_inverse &
+
+if [ -z $_laptop ] ; then
+    _lock_timer=120
+else
+    xinput set-prop 'Synaptics TM3512-010' 'libinput Tapping Enabled' 1
+    xinput set-prop 'Synaptics TM3512-010' 'libinput Natural Scrolling Enabled' 1
+fi
 
 bspc config border_width 2
 # bspc monitor "$_bspwm_first_screen" -d       
