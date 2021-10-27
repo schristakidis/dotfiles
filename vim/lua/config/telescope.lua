@@ -39,31 +39,52 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+    'n', "<leader>r",
+    [[<Cmd>lua require('telescope.builtin').resume()<CR>]],
+    { noremap = true, silent = true }
+)
+
 
 local actions = require('telescope.actions')
 require('telescope').setup {
     defaults = {
         file_sorter = require('telescope.sorters').get_fzy_sorter,
         prompt_prefix = ' 🔍 ',
-        color_devicons = true,
 
-        -- transaparency (0 - 100)
         winblend = 10,
-        use_less = true,
-
-        file_previewer   = require('telescope.previewers').vim_buffer_cat.new,
-        grep_previewer   = require('telescope.previewers').vim_buffer_vimgrep.new,
-        qflist_previewer = require('telescope.previewers').vim_buffer_qflist.new,
 
         mappings = {
             i = {
-                ["<C-x>"] = false,
+                -- ["<C-x>"] = false,
                 ["<C-j>"] = actions.move_selection_next,
                 ["<C-k>"] = actions.move_selection_previous,
             },
             n = {
                 ["v"] = actions.select_vertical
             },
+        }
+    },
+    pickers = {
+        buffers = {
+            sort_lastused = true,
+            theme = "dropdown",
+            previewer = false,
+            initial_mode = "normal",
+            mappings = {
+                i = {
+                    -- ["<c-d>"] = require("telescope.actions").delete_buffer,
+                    -- -- Right hand side can also be the name of the action as a string
+                    ["<c-d>"] = "delete_buffer",
+                },
+                n = {
+                    ["<c-d>"] = require("telescope.actions").delete_buffer,
+                }
+            }
+        },
+        spell_suggest = {
+            theme = "dropdown",
+            initial_mode = "normal"
         }
     },
     extensions = {

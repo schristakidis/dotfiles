@@ -10,6 +10,8 @@ local yaml_settings = {
                 "*config*.yaml",
                 "*pod*.yaml",
                 "*ingress*.yaml",
+                "*egress*.yaml",
+                "*gateway*.yaml",
                 "*policy.yml",
                 "*deployment*.yml",
                 "*service*.yml",
@@ -18,6 +20,8 @@ local yaml_settings = {
                 "*pod*.yml",
                 "*ingress*.yml",
                 "*policy.yml",
+                "*gateway*.yml",
+                "*egress*.yml",
             }
         }
     }
