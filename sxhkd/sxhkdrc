@@ -5,7 +5,7 @@ super + Return
 
 # Rofi
 super + d
-	~/.config/rofi/launchers/ribbon/launcher.sh
+    rofi -show drun
 
 # Rofi Windows
 super + w
