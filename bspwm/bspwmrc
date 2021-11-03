@@ -36,6 +36,7 @@ dunst &
 
 killall picom
 picom &
+# picom --experimental-backend &
 
 killall unclutter
 unclutter &

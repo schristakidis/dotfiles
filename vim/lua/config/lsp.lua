@@ -99,50 +99,91 @@ local function make_config()
     }
 end
 
--- lsp-install
-local function setup_servers()
-    require'lspinstall'.setup()
+local lsp_installer = require("nvim-lsp-installer")
+local servers = {
+    "bashls",
+    "pyright",
+    "pylsp",
+    "dockerls",
+    "jsonls",
+    "sumneko_lua",
+    "terraformls",
+    "yamlls",
+}
 
-    -- get all installed servers
-    local servers = require'lspinstall'.installed_servers()
-    -- print(vim.inspect(servers))
-    -- ... and add manually installed servers
-    table.insert(servers, "pylsp")
-
-    for _, server in pairs(servers) do
-        -- print(server)
-        local config = make_config()
-
-        -- language specific config
-        if server == "lua" then
-            config.settings = require('config.servers.lua').get_settings()
+for _, name in pairs(servers) do
+    local ok, server = lsp_installer.get_server(name)
+    -- Check that the server is supported in nvim-lsp-installer
+    if ok then
+        if not server:is_installed() then
+            print("Installing " .. name)
+            server:install()
         end
-        if server == "pylsp" then
-            config.cmd = { "pylsp" }
-            config.settings = require('config.servers.python').get_pylsp_settings()
-        end
-        if server == "python" then
-            config.settings = require('config.servers.python').get_pyright_settings()
-        end
-        if server == "yaml" then
-            config.settings = require('config.servers.yaml').get_settings()
-        end
-        -- if server == "diagnosticls" then
-            --     config.init_options = require('config.servers.diagnostics').get_settings()
-            --     config.filetypes = { "python" }
-        -- end
-
-        require'lspconfig'[server].setup(config)
     end
 end
 
-setup_servers()
+local function get_root_basename()
+    local lspconfig = require('lspconfig')
 
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-    setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+    local root_pattern = lspconfig.util.root_pattern('.git')
+    local bufname = vim.api.nvim_buf_get_name(0)
+    -- Turned into a filename
+    local filename = lspconfig.util.path.is_absolute(bufname) and bufname or lspconfig.util.path.join(vim.loop.cwd(), bufname)
+    -- Then the directory of the project
+    local project_dirname = root_pattern(filename) or lspconfig.util.path.dirname(filename)
+    -- And finally perform what is essentially a `basename` on this directory
+    return vim.fn.fnamemodify(lspconfig.util.find_git_ancestor(project_dirname), ':t')
 end
+
+
+local function is_python2()
+    local version = vim.api.nvim_exec([[echo system('python -V')]], true)
+    if string.find(version, "Python 2.") then
+      return true
+    else
+      return false
+    end
+end
+
+lsp_installer.on_server_ready(function(server)
+    -- Specify the default options which we'll use for pyright and solargraph
+    -- Note: These are automatically setup from nvim-lspconfig. See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+    local default_opts = make_config()
+
+    local server_opts = {
+        ["sumneko_lua"] =  function ()
+            default_opts = make_config()
+            default_opts.settings = require('config.servers.lua').get_settings()
+            return default_opts
+        end,
+        ["pylsp"] = function ()
+            default_opts = make_config()
+            if is_python2() then
+                default_opts.settings = require('config.servers.python').get_pylsp_settings_2()
+            else
+                default_opts.settings = require('config.servers.python').get_pylsp_settings()
+            end
+            return default_opts
+        end,
+        ["pyright"] = function ()
+            default_opts = make_config()
+            default_opts.settings = require('config.servers.python').get_pylsp_settings()
+            if is_python2() then
+                default_opts.filetypes = {'notpython2'}
+            end
+            return default_opts
+        end,
+        ["yamlls"] = function ()
+            default_opts = make_config()
+            default_opts.settings = require('config.servers.yaml').get_settings()
+            return default_opts
+        end,
+    }
+
+    -- We check to see if any custom server_opts exist for the LSP server, if so, load them, if not, use our default_opts
+    server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
+    vim.cmd([[ do User LspAttachBuffers ]])
+end)
 
 M = {}
 M.make_config = make_config

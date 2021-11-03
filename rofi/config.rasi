@@ -1,6 +1,29 @@
-/** Basic config file **/
-
 configuration {
-  show-icons:         true;
-  icon-theme:         "Papirus";
+	theme: "~/.config/rofi/themes/Nord.rasi";
+	font: "Sauce Code Pro Nerd Font 12";
+	modi: "drun,window,run";
+	combi-modi: "drun, window";
+	show-icons: true;
+	drun-display-format: "{name}";
+	width: 35;
+	columns: 1;
+	lines: 12;
+	fixed-num-lines: true;
+	location: 2;
+	yoffset: 49;
+	sidebar-mode: true;
+	fullscreen: false;
+	display-drun: " ";
+	display-run: " ";
+	display-window: " ";
+	
+	/* Key bindings: */
+	/* kb-mode-next: "Control+Right"; */
+	/* kb-mode-previous: "Control+Left"; */
+	/* kb-move-word-back: "Control+b"; */
+	/* kb-move-word-forward: "Control+w"; */
+	/* kb-move-char-back: "Control+h"; */
+	/* kb-move-char-forward: "Control+l"; */
+	/* kb-clear-line: ""; */
+	/* kb-remove-char-back: ""; */
 }

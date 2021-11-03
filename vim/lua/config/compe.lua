@@ -23,32 +23,33 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ["<Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-            vim.fn.feedkeys(t("<C-n>"), "n")
-        -- elseif luasnip.expand_or_jumpable() then
-        --     vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
-        elseif check_back_space() then
-            vim.fn.feedkeys(t("<Tab>"), "n")
-        else
-            fallback()
-        end
-    end, {
-        "i",
-        "s",
-    }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-        if vim.fn.pumvisible() == 1 then
-            vim.fn.feedkeys(t("<C-p>"), "n")
-        -- elseif luasnip.jumpable(-1) then
-        --     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
-        else
-            fallback()
-        end
-    end, {
-        "i",
-        "s",
-    }),
+    ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' })
+    -- ["<Tab>"] = cmp.mapping(function(fallback)
+    --     if vim.fn.pumvisible() == 1 then
+    --         vim.fn.feedkeys(t("<C-n>"), "n")
+    --     -- elseif luasnip.expand_or_jumpable() then
+    --     --     vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+    --     elseif check_back_space() then
+    --         vim.fn.feedkeys(t("<Tab>"), "n")
+    --     else
+    --         fallback()
+    --     end
+    -- end, {
+    --     "i",
+    --     "s",
+    -- }),
+    -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --     if vim.fn.pumvisible() == 1 then
+    --         vim.fn.feedkeys(t("<C-p>"), "n")
+    --     -- elseif luasnip.jumpable(-1) then
+    --     --     vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+    --     else
+    --         fallback()
+    --     end
+    -- end, {
+    --     "i",
+    --     "s",
+    -- }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -72,4 +73,8 @@ cmp.setup {
           return vim_item
       end,
   },
+  experimental = {
+      native_menu = false,
+      ghost_text = true
+  }
 }

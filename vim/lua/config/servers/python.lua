@@ -42,7 +42,51 @@ local pylsp_settings = {
     }
 }
 
-local pyright_settings ={
+
+local pylsp_settings2 = {
+    pylsp = {
+        configurationSources = { "pycodestyle" },
+        plugins = {
+            jedi_completion = {
+                enabled = true
+            },
+            jedi_definition = {
+                enabled = true
+            },
+            jedi_hover = {
+                enabled = true
+            },
+            jedi_references = {
+                enabled = true
+            },
+            jedi_signature_help = {
+                enabled = true
+            },
+            jedi_symbols = {
+                enabled = true
+            },
+            mccabe = {
+                enabled = false
+            },
+            pycodestyle = {
+                enabled = true
+            },
+            pyflakes = {
+                enabled = true
+            },
+            pylint = {
+                enabled = false
+            },
+            rope_completion = {
+                enabled = false
+            },
+            yapf = {
+                enabled = false
+            }
+        }
+    }
+}
+local pyright_settings = {
     python = {
         analysis = {
             typeCheckingMode = "basic",
@@ -57,6 +101,10 @@ local M = {}
 
 M.get_pylsp_settings = function()
     return pylsp_settings
+end
+
+M.get_pylsp_settings_2 = function()
+    return pylsp_settings2
 end
 
 M.get_pyright_settings = function()
