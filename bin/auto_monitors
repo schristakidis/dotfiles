@@ -177,7 +177,7 @@ def set_workspaces(status, multi=False, auto=False):
     if laptop:
         screen1 = laptop
     else:
-        screen1 = [name for name in monitors if '1' in name][0]
+        screen1 = [name for name in monitors if '1' not in name][0]
 
     if multi:
         screen2 = [name for name in monitors if name != screen1][0]
