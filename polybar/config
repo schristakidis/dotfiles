@@ -60,7 +60,7 @@ font-3 = "Material Icons:style=Regular"
 ; modules-right = pulseaudio xkeyboard memory cpu date powermenu
 modules-left = workspaces
 modules-center = xwindow
-modules-right = pulseaudio separatordotted memory cpu temperature separatordotted date quit
+modules-right = pipewire separatordotted memory cpu temperature separatordotted date quit
 
 wm-restack = bspwm
 
@@ -167,6 +167,18 @@ ramp-volume-0 = 
 ramp-volume-1 = 墳
 ramp-volume-2 = 
 click-right = pmixer
+
+[module/pipewire]
+type = custom/script
+label = "%output%"
+label-font = 2
+interval = 2.0
+exec = ~/.config/polybar/scripts/pipewire.sh
+; click-right = exec pavucontrol &
+click-right = pmixer
+click-left = ~/.config/polybar/scripts/pipewire.sh mute &
+scroll-up = ~/.config/polybar/scripts/pipewire.sh up &
+scroll-down = ~/.config/polybar/scripts/pipewire.sh down &
 
 [module/title]
 type = internal/xwindow
