@@ -1,5 +1,4 @@
 configuration {
-	theme: "~/.config/rofi/themes/Nord.rasi";
 	font: "Sauce Code Pro Nerd Font 12";
 	modi: "drun,window,run";
 	combi-modi: "drun, window";
@@ -27,3 +26,5 @@ configuration {
 	/* kb-clear-line: ""; */
 	/* kb-remove-char-back: ""; */
 }
+
+@theme "~/.config/rofi/themes/Nord.rasi"
