@@ -167,7 +167,7 @@ lsp_installer.on_server_ready(function(server)
         end,
         ["pyright"] = function ()
             default_opts = make_config()
-            default_opts.settings = require('config.servers.python').get_pylsp_settings()
+            default_opts.settings = require('config.servers.python').get_pyright_settings()
             if is_python2() then
                 default_opts.filetypes = {'notpython2'}
             end
