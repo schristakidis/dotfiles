@@ -49,7 +49,7 @@ Plug 'svermeulen/vim-subversive'
 Plug 'machakann/vim-highlightedyank', Cond(has('nvim'))
 
 " Programming
-Plug 'tomtom/tcomment_vim'
+Plug 'numToStr/Comment.nvim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'janko-m/vim-test'
 Plug 'sheerun/vim-polyglot'
