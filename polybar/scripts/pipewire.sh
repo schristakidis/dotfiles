@@ -13,9 +13,9 @@ function main() {
 
     action=$1
     if [ "${action}" == "up" ]; then
-        pamixer --increase 5
+        pamixer --increase 5 --allow-boost --set-limit 150
     elif [ "${action}" == "down" ]; then
-        pamixer --decrease 5
+        pamixer --decrease 5 --allow-boost --set-limit 150
     elif [ "${action}" == "mute" ]; then
         pamixer --toggle-mute
     elif [ "${VOLUME_2}" -gt 75 ]; then

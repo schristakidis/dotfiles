@@ -1,5 +1,3 @@
 #!/bin/bash
 
-notify-send 'post switch'
-
 $HOME/.dotfiles/bin/auto_monitors

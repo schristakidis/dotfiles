@@ -4,6 +4,6 @@ id=$(xdotool search --class pmixer)
 if [ "$id" == "" ]
  then
     st -c pmixer -e pulsemixer &
+ else
+    bspc node "$id" --flag hidden -f
 fi
-
-bspc node "$id" --flag hidden -f

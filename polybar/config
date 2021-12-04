@@ -166,17 +166,17 @@ format-muted = 婢 Muted
 ramp-volume-0 = 
 ramp-volume-1 = 墳
 ramp-volume-2 = 
-click-right = pmixer
+click-right = ~/.dotfiles/bin/pmixer
 
 [module/pipewire]
 type = custom/script
 label = "%output%"
-label-font = 2
-interval = 2.0
+label-font = 1
+interval = 1.0
 exec = ~/.config/polybar/scripts/pipewire.sh
 ; click-right = exec pavucontrol &
-click-right = pmixer
-click-left = ~/.config/polybar/scripts/pipewire.sh mute &
+click-left = ~/.dotfiles/bin/pmixer
+click-right = ~/.config/polybar/scripts/pipewire.sh mute &
 scroll-up = ~/.config/polybar/scripts/pipewire.sh up &
 scroll-down = ~/.config/polybar/scripts/pipewire.sh down &
 

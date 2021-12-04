@@ -73,7 +73,8 @@ bspc config pointer_action3 resize_corner
 bspc rule -a Calendar focus=on
 bspc rule -a Packman state=floating center=on
 
-st -c pmixer -e pulsemixer &
-bspc rule -a pmixer sticky=on state=floating hidden=on
+# st -c pmixer -e pulsemixer &
+# bspc rule -a pmixer sticky=on state=floating hidden=on
+bspc rule -a pmixer sticky=on state=floating
 
 autorandr --change --force
