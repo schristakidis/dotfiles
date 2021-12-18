@@ -10,5 +10,4 @@ require("config.galaxy")
 -- require('nvim-projectconfig').load_project_config()
 require('config.trouble')
 require("config.telescope")
-
 require('Comment').setup()

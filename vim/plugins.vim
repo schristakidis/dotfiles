@@ -63,7 +63,8 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " Theming
 Plug 'tjdevries/colorbuddy.vim'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'navarasu/onedark.nvim'
 Plug 'Th3Whit3Wolf/one-nvim', {'branch': 'main'}
 Plug 'mhartington/oceanic-next'
 Plug 'marko-cerovac/material.nvim'
@@ -102,5 +103,6 @@ Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 Plug 'rcarriga/nvim-dap-ui'
 
 Plug 'dbeniamine/cheat.sh-vim'
+Plug 'glepnir/indent-guides.nvim'
 
 call plug#end()
