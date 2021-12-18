@@ -14,6 +14,7 @@
 - [Guides](linux/Guides.md)
 - [Troubleshooting](linux/Troubleshooting.md)
 - [General](linux/General.md)
+- [Gaming](linux/Gaming.md)
 
 ## BSPWM
 - [Requirements](bspwm/requirements.md)
