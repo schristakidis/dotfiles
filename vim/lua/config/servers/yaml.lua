@@ -1,8 +1,7 @@
 local yaml_settings = {
     yaml = {
         schemas = {
-            ["https://json.schemastore.org/gitlab-ci"] = {"/.gitlab-ci*.yaml", "/.gitlab-ci*.yml"},
-            -- ['https://json.schemastore.org/helmfile.json'] = { "/helm/**" },
+            ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = {"/.gitlab-ci*.yaml", "/.gitlab-ci*.yml"},
             kubernetes = {
                 "*deployment*.yaml",
                 "*service*.yaml",

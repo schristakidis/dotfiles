@@ -1,6 +1,7 @@
 local gl = require('galaxyline')
 local gls = gl.section
-local extension = require('galaxyline.provider_extensions')
+local fileinfo = require("galaxyline.providers.fileinfo")
+local vcs = require("galaxyline.providers.vcs")
 local util = require 'lspconfig/util'
 
 gl.short_line_list = {
@@ -246,7 +247,7 @@ gls.left = {
         FileIcon = {
             provider = 'FileIcon',
             condition = buffer_not_empty,
-            highlight = {require('galaxyline.provider_fileinfo').get_file_icon_color,colors.line_bg},
+            highlight = {fileinfo.get_file_icon_color,colors.line_bg},
         }
     }, {
         FileName = {
@@ -264,13 +265,13 @@ gls.left = {
     }, {
         GitIcon = {
             provider = function() return ' ' .. icons.git .. ' ' end,
-            condition = require('galaxyline.provider_vcs').get_git_branch,
+            condition = vcs.get_git_branch,
             highlight = {colors.orange,colors.line_bg},
         }
     }, {
         GitBranch = {
             provider = 'GitBranch',
-            condition = require('galaxyline.provider_vcs').get_git_branch,
+            condition = vcs.get_git_branch,
             highlight = {'#8FBCBB',colors.line_bg,'bold'},
         }
     }, {

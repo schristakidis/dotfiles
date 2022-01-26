@@ -85,7 +85,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'NTBBloodbath/galaxyline.nvim'
 Plug 'onsails/lspkind-nvim' 
 Plug 'Raimondi/delimitMate'
 Plug 'ray-x/lsp_signature.nvim'
