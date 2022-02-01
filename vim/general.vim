@@ -100,6 +100,9 @@ augroup my_filetypes
 
     au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
     autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+
+    au! BufNewFile,BufReadPost *.tf set filetype=terraform foldmethod=indent
+    autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
 augroup END
 
 " open quickfix window after grep commands
