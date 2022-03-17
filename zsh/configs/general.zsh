@@ -20,6 +20,8 @@ export CARGOPATH="$HOME/.cargo/bin"
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin:$CARGOPATH"
 
+export TFENV_CONFIG_DIR="$XDG_CONFIG_HOME/tfenv"
+
 export EDITOR='nvim'
 export VISUAL='st nvim'
 export PAGER='less'

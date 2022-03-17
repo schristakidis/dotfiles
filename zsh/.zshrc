@@ -23,9 +23,9 @@ autoload -Uz _zinit
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit wait lucid light-mode for \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+    zdharma-continuum/z-a-as-monitor \
+    zdharma-continuum/z-a-patch-dl \
+    zdharma-continuum/z-a-bin-gem-node
 
 #
 zinit ice wait"0a" lucid \
@@ -41,11 +41,11 @@ zinit light "zsh-users/zsh-history-substring-search"
 zinit wait lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
   atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
-      zdharma/fast-syntax-highlighting \
+      zdharma-continuum/fast-syntax-highlighting \
   blockf atpull'zinit creinstall -q .' \
       zinit light zsh-users/zsh-completions \
   as"program" pick"bin/git-dsf" \
-      zinit light zdharma/zsh-diff-so-fancy \
+      zinit light zdharma-continuum/zsh-diff-so-fancy \
   PZT::modules/utility \
   as"completion" OMZP::pip/_pip \
   as"completion" OMZP::docker/_docker \
@@ -55,7 +55,7 @@ zinit wait lucid light-mode for \
 
 zplugin ice as"null" atclone'stern --completion=zsh > sterm_completion.zsh' \
     atpull'%atclone' src"sterm_completion.zsh" run-atpull
-    zplugin light zdharma/null
+    zplugin light zdharma-continuum/null
 
 zinit load softmoth/zsh-vim-mode
 

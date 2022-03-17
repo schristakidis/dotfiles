@@ -3,6 +3,7 @@ export ZDOTDIR=$DOTDIR/zsh
 export DOT_BIN=$DOTDIR/bin
 export PATH="$DOT_BIN:$PATH"
 export TERMINAL=st
+export XDG_CONFIG_HOME="$HOME/.config"
 
 if [[ -n $VIRTUAL_ENV && -e "${VIRTUAL_ENV}/bin/activate" ]]; then
   source "${VIRTUAL_ENV}/bin/activate"
