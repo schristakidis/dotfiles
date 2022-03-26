@@ -81,3 +81,9 @@ bindkey "^f" forward-word
 bindkey "^b" backward-word
 
 export AWS_PROFILE=staging
+
+# Smart URLs.
+autoload -U url-quote-magic bracketed-paste-magic
+zle -N self-insert url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
+

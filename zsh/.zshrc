@@ -25,7 +25,8 @@ autoload -Uz _zinit
 zinit wait lucid light-mode for \
     zdharma-continuum/z-a-as-monitor \
     zdharma-continuum/z-a-patch-dl \
-    zdharma-continuum/z-a-bin-gem-node
+    zdharma-continuum/z-a-bin-gem-node \
+    zdharma-continuum/history-search-multi-word
 
 #
 zinit ice wait"0a" lucid \
