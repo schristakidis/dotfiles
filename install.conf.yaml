@@ -16,13 +16,13 @@
         ~/.config/i3: i3
         ~/.config/sxhkd: sxhkd
         ~/.config/dunst: dunst
-        ~/.config/termite: termite
         ~/.config/bspwm: bspwm
         ~/.config/polybar: polybar
         ~/.Xresources: Xresources
         ~/.config/fd: fd
         ~/.config/autorandr: autorandr
         ~/.config/rofi: rofi
+        ~/.config/picom: picom
 
 - shell:
         - 
@@ -35,10 +35,6 @@
           command: ~/.dotfiles/resources/more_fonts/install.sh
           stdout: true
         -
-          command: ~/.dotfiles/resources/gnome-terminal-colors-solarized/set_dark.sh
-          stdout: true
-          stdin: true
-        -
           command: git clone https://github.com/pyenv/pyenv.git ~/.pyenv
           stdout: true
         -
@@ -47,7 +43,3 @@
         -
           command: mkdir -p ~/.dotbins && git clone git@github.com:schristakidis/st.git  ~/.dotbins/st
           stdout: true
-        -
-          command: mkdir -p ~/.dotbins && git clone git@github.com:schristakidis/dwm.git  ~/.dotbins/dwm
-          stdout: true
-

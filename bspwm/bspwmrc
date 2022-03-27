@@ -35,8 +35,8 @@ killall dunst
 dunst &
 
 killall picom
-picom &
-# picom --experimental-backend &
+while pgrep -u $UID -x picom >/dev/null; do sleep 1; done
+picom -b
 
 killall unclutter
 unclutter &
@@ -73,8 +73,11 @@ bspc config pointer_action3 resize_corner
 bspc rule -a Calendar focus=on
 bspc rule -a Packman state=floating center=on
 
-# st -c pmixer -e pulsemixer &
-# bspc rule -a pmixer sticky=on state=floating hidden=on
 bspc rule -a pmixer sticky=on state=floating
+
+# floating windows
+declare -a floats=(Lxappearance Arandr Viewnior Eog feh Nm-connection-editor )
+for i in ${floats[@]}; do
+    bspc rule -a $i state=floating follow=on focus=on; done
 
 autorandr --change --force

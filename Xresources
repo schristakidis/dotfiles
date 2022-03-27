@@ -40,6 +40,7 @@
 
 
 *.font: Monaco for Powerline :pixelsize=14:antialias=true:autohint=true
+! *.font: JetBrainsMono Nerd Font:style=Medium,Regular:pixelsize=14
 *.fontalt0: siji:pixelsize=12;1
 *.alpha: 1
 
