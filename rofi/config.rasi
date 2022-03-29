@@ -1,5 +1,5 @@
 configuration {
-	font: "Sauce Code Pro Nerd Font 12";
+	font: "Sauce Code Pro Nerd Font 11";
 	modi: "drun,window,run";
 	combi-modi: "drun, window";
 	show-icons: true;
@@ -17,8 +17,8 @@ configuration {
 	display-window: " ";
 	
 	/* Key bindings: */
-	/* kb-mode-next: "Control+Right"; */
-	/* kb-mode-previous: "Control+Left"; */
+	kb-mode-next: "Alt+l";
+	kb-mode-previous: "Alt+h";
 	/* kb-move-word-back: "Control+b"; */
 	/* kb-move-word-forward: "Control+w"; */
 	/* kb-move-char-back: "Control+h"; */
