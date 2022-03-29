@@ -1,17 +1,9 @@
 configuration {
-	font: "Sauce Code Pro Nerd Font 11";
 	modi: "drun,window,run";
 	combi-modi: "drun, window";
 	show-icons: true;
-	drun-display-format: "{name}";
-	width: 35;
-	columns: 1;
-	lines: 12;
-	fixed-num-lines: true;
-	location: 2;
-	yoffset: 49;
 	sidebar-mode: true;
-	fullscreen: false;
+	fullscreen: true;
 	display-drun: " ";
 	display-run: " ";
 	display-window: " ";
@@ -27,4 +19,4 @@ configuration {
 	/* kb-remove-char-back: ""; */
 }
 
-@theme "~/.config/rofi/themes/Nord.rasi"
+@theme "/home/sakis/.config/rofi/themes/rounded-nord-dark.rasi"
