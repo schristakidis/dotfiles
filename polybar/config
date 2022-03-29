@@ -196,7 +196,7 @@ click-left = kill -s USR1 $(pidof deadd-notification-center)
 [module/quit]
 type = custom/text
 content = 
-click-left = ~/.config/rofi/powermenu/powermenu.sh
+click-left = ~/.dotfiles/bin/powermenu
 content-foreground = "#ff5555"
 content-padding = 2
 

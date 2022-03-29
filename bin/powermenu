@@ -1,0 +1,12 @@
+#!/bin/env bash
+
+[[ -z "$DISPLAY" ]] && exit 1
+choice=$(echo -e "0: Sleep\n1: Shutdown\n2: Reboot\n3: Logout" | rofi -dmenu "Powermenu:" -theme rounded-red-dark | cut -d ':' -f 1)
+[[ -z "$choice" ]] && exit 1
+case "$choice" in
+  0) systemctl suspend          ;;
+  1) poweroff			;;
+  2) reboot 			;;
+  3) pkill -KILL -u "$USER" &	;;
+esac
+

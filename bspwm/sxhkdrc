@@ -99,6 +99,4 @@ ctrl + s; c
 ctrl + s; shift + a
     slack &; \
     thunderbird & 
-    # minetime &; \
     # /opt/cisco/anyconnect/bin/vpnui &
-# mailspring --disable-gpu &; \

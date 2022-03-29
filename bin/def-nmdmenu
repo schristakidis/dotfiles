@@ -1,0 +1,4 @@
+#!/bin/env bash
+
+# configuration of networkmanager-dmenu
+networkmanager_dmenu -theme sidebar

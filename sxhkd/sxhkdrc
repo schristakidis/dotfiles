@@ -21,7 +21,7 @@ super + shift + y
 
 # Power Menu
 alt + ctrl + BackSpace
-    ~/.config/rofi/powermenu/powermenu.sh
+    powermenu
 
 # Firefox
 super + f
@@ -38,6 +38,10 @@ alt + ctrl + l
 # Change Keyboard Layout
 control + shift + l
     xkblayout-state set +1
+
+# screenshot
+Print
+   def-ssdmenu
 
 
 XF86PowerOff
