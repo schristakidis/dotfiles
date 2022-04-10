@@ -34,8 +34,22 @@ local on_attach = function(client, bufnr)
     if client.resolved_capabilities.document_formatting then
         buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     elseif client.resolved_capabilities.document_range_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
+
+    local function preview_location_callback(_, result)
+        if result == nil or vim.tbl_isempty(result) then
+            return nil
+        end
+        vim.lsp.util.preview_location(result[1])
+    end
+
+    function PeekDefinition()
+        local params = vim.lsp.util.make_position_params()
+        return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+    end
+
+    buf_set_keymap('n', '<space>p', '<cmd>lua PeekDefinition()<CR>', opts)
 
     -- Set autocommands conditional on server_capabilities
     -- if client.resolved_capabilities.document_highlight then
@@ -59,28 +73,28 @@ local on_attach = function(client, bufnr)
     local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 
     for type, icon in pairs(signs) do
-      local hl = "DiagnosticSign" .. type
-      vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
     end
 
     -- function PrintDiagnostics(opts, bufnr, line_nr, client_id)
-    --     opts = opts or {}
-    --
-    --     bufnr = bufnr or 0
-    --     line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
-    --
-    --     local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
-    --     if vim.tbl_isempty(line_diagnostics) then return end
-    --
-    --     local diagnostic_message = ""
-    --     for i, diagnostic in ipairs(line_diagnostics) do
-    --         diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
-    --         print(diagnostic_message)
-    --         if i ~= #line_diagnostics then
-    --             diagnostic_message = diagnostic_message .. "\n"
-    --         end
-    --     end
-    --     vim.api.nvim_echo({{diagnostic_message, "Normal"}}, false, {})
+        --     opts = opts or {}
+        --
+        --     bufnr = bufnr or 0
+        --     line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+        --
+        --     local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
+        --     if vim.tbl_isempty(line_diagnostics) then return end
+        --
+        --     local diagnostic_message = ""
+        --     for i, diagnostic in ipairs(line_diagnostics) do
+            --         diagnostic_message = diagnostic_message .. string.format("%d: %s", i, diagnostic.message or "")
+            --         print(diagnostic_message)
+            --         if i ~= #line_diagnostics then
+                --             diagnostic_message = diagnostic_message .. "\n"
+            --         end
+        --     end
+        --     vim.api.nvim_echo({{diagnostic_message, "Normal"}}, false, {})
     -- end
     --
     -- vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
@@ -91,36 +105,19 @@ end
 local function make_config()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
     return {
         -- enable snippet support
         capabilities = capabilities,
         -- map buffer local keybindings when the language server attaches
         on_attach = on_attach,
+        flags = {
+            -- This will be the default in neovim 0.7+
+            debounce_text_changes = 150,
+        }
     }
 end
 
-local lsp_installer = require("nvim-lsp-installer")
-local servers = {
-    "bashls",
-    "pyright",
-    "pylsp",
-    "dockerls",
-    "jsonls",
-    "sumneko_lua",
-    "terraformls",
-    "yamlls",
-}
-
-for _, name in pairs(servers) do
-    local ok, server = lsp_installer.get_server(name)
-    -- Check that the server is supported in nvim-lsp-installer
-    if ok then
-        if not server:is_installed() then
-            print("Installing " .. name)
-            server:install()
-        end
-    end
-end
 
 local function get_root_basename()
     local lspconfig = require('lspconfig')
@@ -139,53 +136,51 @@ end
 local function is_python2()
     local version = vim.api.nvim_exec([[echo system('python -V')]], true)
     if string.find(version, "Python 2.") then
-      return true
+        return true
     else
-      return false
+        return false
     end
 end
 
-lsp_installer.on_server_ready(function(server)
-    -- Specify the default options which we'll use for pyright and solargraph
-    -- Note: These are automatically setup from nvim-lspconfig. See https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+
+local servers = {
+    "bashls",
+    "pyright",
+    "pylsp",
+    "dockerls",
+    "jsonls",
+    "sumneko_lua",
+    "terraformls",
+    "terraform_lsp",
+    "yamlls",
+    "vimls"
+}
+
+
+for _, lsp in pairs(servers) do
     local default_opts = make_config()
+    if lsp == "sumneko_lua" then
+        default_opts.settings = require('config.servers.lua').get_settings()
+    elseif lsp == "pylsp" then
+        if is_python2() then
+            default_opts.settings = require('config.servers.python').get_pylsp_settings_2()
+        else
+            default_opts.settings = require('config.servers.python').get_pylsp_settings()
+        end
+    elseif lsp == "pyright" then
+        default_opts.settings = require('config.servers.python').get_pyright_settings()
+        if is_python2() then
+            default_opts.filetypes = {'notpython2'}
+        end
+    elseif lsp == "yamls" then
+        default_opts.settings = require('config.servers.yaml').get_settings()
+    elseif lsp == "jsonls" then
+        default_opts.settings = {
+            json = {
+                schemas = require('schemastore').json.schemas(),
+            },
+        }
+    end
 
-    local server_opts = {
-        ["sumneko_lua"] =  function ()
-            default_opts = make_config()
-            default_opts.settings = require('config.servers.lua').get_settings()
-            return default_opts
-        end,
-        ["pylsp"] = function ()
-            default_opts = make_config()
-            if is_python2() then
-                default_opts.settings = require('config.servers.python').get_pylsp_settings_2()
-            else
-                default_opts.settings = require('config.servers.python').get_pylsp_settings()
-            end
-            return default_opts
-        end,
-        ["pyright"] = function ()
-            default_opts = make_config()
-            default_opts.settings = require('config.servers.python').get_pyright_settings()
-            if is_python2() then
-                default_opts.filetypes = {'notpython2'}
-            end
-            return default_opts
-        end,
-        ["yamlls"] = function ()
-            default_opts = make_config()
-            default_opts.settings = require('config.servers.yaml').get_settings()
-            return default_opts
-        end,
-    }
-
-    -- We check to see if any custom server_opts exist for the LSP server, if so, load them, if not, use our default_opts
-    server:setup(server_opts[server.name] and server_opts[server.name]() or default_opts)
-    vim.cmd([[ do User LspAttachBuffers ]])
-end)
-
-M = {}
-M.make_config = make_config
-
-return M
+    require('lspconfig')[lsp].setup(default_opts)
+end

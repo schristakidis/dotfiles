@@ -85,7 +85,6 @@ Plug 'hrsh7th/cmp-nvim-lua'
 Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
 Plug 'NTBBloodbath/galaxyline.nvim'
 Plug 'onsails/lspkind-nvim' 
@@ -95,6 +94,7 @@ Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'folke/trouble.nvim'
+Plug  'b0o/SchemaStore.nvim' 
 
 Plug 'puremourning/vimspector'
 
