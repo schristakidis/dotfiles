@@ -24,6 +24,7 @@
 	default = simple
 [init]
 	templatedir = ~/.dotfiles/git/git_template
+	defaultBranch = master
 [color]
 	diff = auto
 	status = auto

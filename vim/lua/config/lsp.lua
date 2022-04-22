@@ -151,7 +151,7 @@ local servers = {
     "jsonls",
     "sumneko_lua",
     "terraformls",
-    "terraform_lsp",
+    -- "terraform_lsp",
     "yamlls",
     "vimls"
 }

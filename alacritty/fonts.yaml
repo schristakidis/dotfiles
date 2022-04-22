@@ -1,43 +1,23 @@
-# font:
-#   # The normal (roman) font face to use.
-#   normal:
-#     family: Monaco for Powerline  # should be "Menlo" or something on macOS.
-#   bold:
-#     family: Menlo for Powerline #Monaco for Powerline  # should be "Menlo" or something on macOS.
-#   italic:
-#     family: Menlo for Powerline #Monaco for Powerline  # should be "Menlo" or something on macOS.
-#   size: 10
-
 # Font configuration
 font:
   normal:
     family: "JetBrainsMono Nerd Font"
-    style: Medium
+    # family: "FiraCode Nerd Font"
 
-    # Bold font face
+    style: Medium
+    # style: Regular
+
   bold:
     family: "JetBrainsMono Nerd Font"
     style: Bold
 
-    # Italic font face
   italic:
     family: "JetBrainsMono Nerd Font"
     style: Italic
 
-    # Bold italic font face
   bold_italic:
     family: "JetBrainsMono Nerd Font"
     style: Bold Italic
 
-    # Point size
-  size: 10
-
-    # Offset
-    #offset:
-    #  x: 0
-    #  y: 0
-
-    # Glyph offset
-    #glyph_offset:
-    #  x: 0
-    #  y: 0
+  # Point size
+  size: 11
