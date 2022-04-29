@@ -339,13 +339,13 @@ gls.left = {
             icon = icons.diagnostic_hint,
             highlight = {colors.cyan,colors.bg},
         }
-    }, {
-        CurrentFunc = {
-            provider = get_current_func,
-            condition = checkwidth_middle,
-            icon = '  λ ',
-            highlight = {colors.yellow,colors.bg},
-        }
+    -- }, {
+    --     CurrentFunc = {
+    --         provider = get_current_func,
+    --         condition = checkwidth_middle,
+    --         icon = '  λ ',
+    --         highlight = {colors.yellow,colors.bg},
+    --     }
     }
 }
 
