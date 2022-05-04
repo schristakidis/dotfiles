@@ -94,7 +94,8 @@ Plug 'npxbr/glow.nvim', {'branch': 'main', 'do': ':GlowInstall'}
 Plug 'lewis6991/spellsitter.nvim'
 Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'folke/trouble.nvim'
-Plug  'b0o/SchemaStore.nvim' 
+Plug 'b0o/SchemaStore.nvim' 
+Plug 'SmiteshP/nvim-gps'
 
 Plug 'puremourning/vimspector'
 

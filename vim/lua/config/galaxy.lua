@@ -3,6 +3,8 @@ local gls = gl.section
 local fileinfo = require("galaxyline.providers.fileinfo")
 local vcs = require("galaxyline.providers.vcs")
 local util = require 'lspconfig/util'
+local gps = require("nvim-gps")
+require("nvim-gps").setup()
 
 gl.short_line_list = {
     'LuaTree',
@@ -134,12 +136,6 @@ local function get_virtual_env()
     return venv ..' '
 end
 
-local function get_current_func()
-    local func_name = vim.api.nvim_eval('nvim_treesitter#statusline(90)')
-    if not func_name then return end
-    return func_name
-end
-
 local function is_python_filetype()
     local f_type = vim.bo.filetype
     if not f_type or f_type ~= 'python' then
@@ -175,7 +171,6 @@ local function trailing_whitespace()
     end
 end
 
-CurrentFunc = get_current_func
 TrailingWhiteSpace = trailing_whitespace
 
 local function has_file_type()
@@ -339,13 +334,15 @@ gls.left = {
             icon = icons.diagnostic_hint,
             highlight = {colors.cyan,colors.bg},
         }
-    -- }, {
-    --     CurrentFunc = {
-    --         provider = get_current_func,
-    --         condition = checkwidth_middle,
-    --         icon = '  λ ',
-    --         highlight = {colors.yellow,colors.bg},
-    --     }
+    },{
+        nvimGPS = {
+            provider = function()
+                return gps.get_location()
+            end,
+            condition = function()
+                return gps.is_available()
+            end
+        }
     }
 }
 
