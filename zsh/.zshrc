@@ -6,29 +6,32 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
-### Added by Zinit's installer
-if [[ ! -f $ZINIT_DIR/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$ZINIT_DIR" && command chmod g-rwX "$ZINIT_DIR"
-    command git clone https://github.com/zdharma/zinit "$ZINIT_DIR" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
-fi
+# ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+# ### Added by Zinit's installer
+# if [[ ! -f $ZINIT_DIR/zinit.zsh ]]; then
+#     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+#     command mkdir -p "$ZINIT_DIR" && command chmod g-rwX "$ZINIT_DIR"
+#     command git clone https://github.com/zdharma/zinit "$ZINIT_DIR" && \
+#         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+#         print -P "%F{160}▓▒░ The clone has failed.%f%b"
+# fi
 
-source "$ZINIT_DIR/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+source "$ZINIT_HOME/zinit.zsh"
+# autoload -Uz _zinit
+# (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit wait lucid light-mode for \
-    zdharma-continuum/z-a-as-monitor \
-    zdharma-continuum/z-a-patch-dl \
-    zdharma-continuum/z-a-bin-gem-node \
+
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust \
     zdharma-continuum/history-search-multi-word
 
-#
+
 zinit ice wait"0a" lucid \
     atload="bindkey '^P' history-substring-search-up \
         && bindkey '^N' history-substring-search-down  \
@@ -36,17 +39,18 @@ zinit ice wait"0a" lucid \
         && bindkey '^[[B' history-substring-search-down \
         && bindkey '^[OA' history-substring-search-up \
         && bindkey '^[OB' history-substring-search-down" 
+
 zinit light "zsh-users/zsh-history-substring-search"
-    #
-# ### End of Zinit's installer chunk
-zinit wait lucid light-mode for \
-  atinit"zicompinit; zicdreplay" \
-  atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
-      zdharma-continuum/fast-syntax-highlighting \
-  blockf atpull'zinit creinstall -q .' \
-      zinit light zsh-users/zsh-completions \
-  as"program" pick"bin/git-dsf" \
-      zinit light zdharma-continuum/zsh-diff-so-fancy \
+
+
+zinit wait lucid for \
+ atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+ atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
+    zdharma-continuum/fast-syntax-highlighting \
+ blockf \
+    zsh-users/zsh-completions \
+ atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
   PZT::modules/utility \
   as"completion" OMZP::pip/_pip \
   as"completion" OMZP::docker/_docker \
@@ -54,9 +58,8 @@ zinit wait lucid light-mode for \
   as"completion" OMZP::httpie/_httpie \
   OMZP::fasd
 
-zplugin ice as"null" atclone'stern --completion=zsh > sterm_completion.zsh' \
-    atpull'%atclone' src"sterm_completion.zsh" run-atpull
-    zplugin light zdharma-continuum/null
+zplugin ice as"program" pick"bin/git-dsf"
+zplugin light zdharma-continuum/zsh-diff-so-fancy
 
 zinit load softmoth/zsh-vim-mode
 
