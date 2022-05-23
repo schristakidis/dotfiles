@@ -42,15 +42,15 @@ zinit ice wait"0a" lucid \
 
 zinit light "zsh-users/zsh-history-substring-search"
 
-
-zinit wait lucid for \
+zinit wait lucid light-mode for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
  atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
-    zdharma-continuum/fast-syntax-highlighting \
- blockf \
-    zsh-users/zsh-completions \
- atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
+      zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+  atload"bindkey '^ ' autosuggest-accept" \
+      zsh-users/zsh-autosuggestions \
+  blockf \
+      zsh-users/zsh-completions \
   PZT::modules/utility \
   as"completion" OMZP::pip/_pip \
   as"completion" OMZP::docker/_docker \

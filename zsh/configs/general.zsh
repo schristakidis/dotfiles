@@ -64,8 +64,8 @@ fi
 
 alias vim="nvim"
 alias tmux="TERM=xterm-256color tmux -2"
-alias joplin-cli="joplin --profile ~/.config/joplin-desktop"
 alias k="kubectl"
+alias x="kubectx"
 
 alias reboot="sudo /usr/bin/systemctl reboot"
 alias poweroff="sudo /usr/bin/systemctl poweroff"
@@ -81,9 +81,3 @@ bindkey "^f" forward-word
 bindkey "^b" backward-word
 
 export AWS_PROFILE=staging
-
-# Smart URLs.
-autoload -U url-quote-magic bracketed-paste-magic
-zle -N self-insert url-quote-magic
-zle -N bracketed-paste bracketed-paste-magic
-
