@@ -153,7 +153,8 @@ local servers = {
     "terraformls",
     -- "terraform_lsp",
     "yamlls",
-    "vimls"
+    "vimls",
+    "phpactor"
 }
 
 

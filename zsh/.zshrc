@@ -18,6 +18,7 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # fi
 
 source "$ZINIT_HOME/zinit.zsh"
+ZSH_AUTOSUGGEST_HISTORY_IGNORE="cd *"
 # autoload -Uz _zinit
 # (( ${+_comps} )) && _comps[zinit]=_zinit
 
