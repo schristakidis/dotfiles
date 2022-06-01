@@ -52,12 +52,14 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'path' },
+    -- { name = 'fuzzy_path' },
     {
         name = 'buffer',
         option = {
             get_bufnrs = function() return vim.api.nvim_list_bufs() end
         },
-    }
+    },
+    { name = 'tmux' },
   },
   formatting = {
       format = function(entry, vim_item)
@@ -71,6 +73,7 @@ cmp.setup {
                   luasnip = "[LuaSnip]",
                   nvim_lua = "[Lua]",
                   latex_symbols = "[Latex]",
+                  tmux = "[TMUX]",
               })[entry.source.name]
           return vim_item
       end,
@@ -81,5 +84,20 @@ cmp.setup {
   }
 }
 
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+      --     { name = 'fuzzy_path' }
+      -- }, {
+          { name = 'cmdline' }
+      })
+})
+
+cmp.setup.cmdline('/', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+      { name = 'fuzzy_buffer' }
+  }
+})
 
 require("luasnip.loaders.from_vscode").lazy_load()

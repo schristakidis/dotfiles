@@ -59,6 +59,12 @@ vim.api.nvim_set_keymap(
     { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap(
+    'n', "<leader>ott",
+    [[<Cmd>:Telescope terraform_doc<CR>]],
+    { noremap = true, silent = true }
+)
+
 
 local actions = require('telescope.actions')
 require('telescope').setup {
@@ -102,14 +108,29 @@ require('telescope').setup {
         }
     },
     extensions = {
-        fzy_native = {
-            override_generic_sorter = false,
-            override_file_sorter = true,
+        -- fzy_native = {
+        --     override_generic_sorter = false,
+        --     override_file_sorter = true,
+        -- },
+        fzf = {
+            fuzzy = true,                    -- false will only do exact matching
+            override_generic_sorter = true,  -- override the generic sorter
+            override_file_sorter = true,     -- override the file sorter
+            case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+            -- the default case_mode is "smart_case"
+        },
+        terraform_doc = {
+            url_open_command = "xdg-open",
+            latest_provider_symbol = "  ",
+            wincmd = "botright vnew",
+            wrap = "nowrap",
         }
     }
 }
 
-require('telescope').load_extension('fzy_native')
+-- require('telescope').load_extension('fzy_native')
+require('telescope').load_extension('fzf')
+require('telescope').load_extension('terraform_doc')
 
 local M = {}
 
