@@ -173,8 +173,11 @@ for _, lsp in pairs(servers) do
         if is_python2() then
             default_opts.filetypes = {'notpython2'}
         end
-    elseif lsp == "yamls" then
-        default_opts.settings = require('config.servers.yaml').get_settings()
+    elseif lsp == "yamlls" then
+        default_opts = require("yaml-companion").setup({
+                lspconfig = { on_attach = on_attach }
+            })
+        -- default_opts.settings = require('config.servers.yaml').get_settings()
     elseif lsp == "jsonls" then
         default_opts.settings = {
             json = {
@@ -185,3 +188,4 @@ for _, lsp in pairs(servers) do
 
     require('lspconfig')[lsp].setup(default_opts)
 end
+

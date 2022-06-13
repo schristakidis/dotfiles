@@ -114,5 +114,6 @@ Plug 'rcarriga/nvim-dap-ui'
 
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'glepnir/indent-guides.nvim'
+Plug 'someone-stole-my-name/yaml-companion.nvim'
 
 call plug#end()

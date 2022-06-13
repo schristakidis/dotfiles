@@ -131,6 +131,7 @@ require('telescope').setup {
 -- require('telescope').load_extension('fzy_native')
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('terraform_doc')
+require("telescope").load_extension("yaml_schema")
 
 local M = {}
 
