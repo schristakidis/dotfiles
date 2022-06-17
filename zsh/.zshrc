@@ -43,6 +43,15 @@ zinit ice wait"0a" lucid \
 
 zinit light "zsh-users/zsh-history-substring-search"
 
+zinit wait'0' lucid light-mode for \
+    OMZP::aws
+
+zinit wait'0' lucid light-mode for \
+    OMZP::terraform
+
+zinit wait'0' lucid light-mode for \
+    OMZP::istioctl
+
 zinit wait lucid light-mode for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
  atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
@@ -57,6 +66,8 @@ zinit wait lucid light-mode for \
   as"completion" OMZP::docker/_docker \
   as"completion" OMZP::docker-compose/_docker-compose \
   as"completion" OMZP::httpie/_httpie \
+  as"completion" OMZP::helm \
+  as"completion" OMZP::kubectl \
   OMZP::fasd
 
 zplugin ice as"program" pick"bin/git-dsf"
