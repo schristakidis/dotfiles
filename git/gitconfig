@@ -23,6 +23,7 @@
 	tool = neovim -d
 [push]
 	default = simple
+    autoSetupRemote = true
 [init]
 	templatedir = ~/.dotfiles/git/git_template
 	defaultBranch = master

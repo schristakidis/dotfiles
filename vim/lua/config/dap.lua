@@ -57,30 +57,30 @@ dap.listeners.after['event_terminated']['me'] = function()
 end
 
 
-local ultest_python = function(cmd)
-  -- The command can start with python command directly or an env manager
-  local non_modules = {'python', 'pipenv', 'poetry'}
-  -- Index of the python module to run the test.
-  local module
-  if vim.tbl_contains(non_modules, cmd[1]) then
-    module = cmd[3]
-  else
-    module = cmd[1]
-  end
-  -- Remaining elements are arguments to the module
-  local args = vim.list_slice(cmd, 1)
-  return {
-    dap = {
-      type = 'python',
-      request = 'launch',
-      module = module,
-      args = args
-    }
-  }
-end
+-- local ultest_python = function(cmd)
+--   -- The command can start with python command directly or an env manager
+--   local non_modules = {'python', 'pipenv', 'poetry'}
+--   -- Index of the python module to run the test.
+--   local module
+--   if vim.tbl_contains(non_modules, cmd[1]) then
+--     module = cmd[3]
+--   else
+--     module = cmd[1]
+--   end
+--   -- Remaining elements are arguments to the module
+--   local args = vim.list_slice(cmd, 1)
+--   return {
+--     dap = {
+--       type = 'python',
+--       request = 'launch',
+--       module = module,
+--       args = args
+--     }
+--   }
+-- end
 
-require("ultest").setup({
-        builders = {
-            ['python#pytest'] = ultest_python
-        }
-    })
+-- require("ultest").setup({
+--         builders = {
+--             ['python#pytest'] = ultest_python
+--         }
+--     })

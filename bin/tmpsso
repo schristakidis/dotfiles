@@ -1,0 +1,38 @@
+#!/usr/bin/python
+
+import os
+import configparser
+import subprocess
+from json import load, loads
+
+aws_folder = os.path.join(os.path.expanduser('~'), '.aws')
+aws_cache_folder = os.path.join(aws_folder, 'sso/cache')
+aws_cred_file = os.path.join(aws_folder, 'credentials')
+
+cache = [
+    f for f in os.listdir(aws_cache_folder)
+    if not f.startswith('boto')
+][0]
+
+cached_creds = load(open(os.path.join(aws_cache_folder, cache)))
+
+cmd = f"aws sso get-role-credentials --account-id 299504494894 \
+        --role-name ITRole --access-token {cached_creds['accessToken']}"
+
+role_creds = subprocess.check_output(cmd.split())
+
+role_creds = loads(role_creds.decode())['roleCredentials']
+
+tmp_creds = {
+    'aws_access_key_id': role_creds['accessKeyId'],
+    'aws_secret_access_key': role_creds['secretAccessKey'],
+    'aws_session_token': role_creds['sessionToken']
+}
+
+config = configparser.ConfigParser()
+config['tmp'] = tmp_creds
+
+with open(aws_cred_file, 'w') as configfile:
+    config.write(configfile)
+
+print('New tmp aws profile created')
