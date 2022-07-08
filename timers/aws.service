@@ -1,6 +1,0 @@
-[Unit]
-Description=AWS login service
-
-[Service]
-Type=exec
-ExecStart=aws-azure-login --profile staging --no-sandbox --no-prompt

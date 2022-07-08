@@ -1,6 +1,0 @@
-[Unit]
-Description=AWS Prod login service
-
-[Service]
-Type=exec
-ExecStart=aws-azure-login --profile production --no-sandbox --no-prompt

@@ -34,6 +34,8 @@ def get_bsp_desktops():
     monitors = _get_bspc_output(cmd)
 
     for monitor in monitors:
+        if '.' in monitor:
+            monitor = '%' + monitor
         cmd = f'bspc query --desktops -m {monitor}'
         desktops = _get_bspc_output(cmd)
         setup[monitor] = desktops
@@ -79,21 +81,6 @@ def get_monitors():
     }
 
     return status
-
-
-# def auto_workspaces(status):
-#     multihead = status['multihead']
-#     laptop = status['laptop']
-#
-#     if multihead:
-#         if laptop:
-#             run(str(DOTDIR.joinpath('screenlayouts/p1_multi.sh')))
-#         else:
-#             run(str(DOTDIR.joinpath('screenlayouts/mps.sh')))
-#     else:
-#         run(str(DOTDIR.joinpath('screenlayouts/p1.sh')))
-#
-#     set_workspaces(status, auto=True)
 
 
 def relocate_desktops(screen1, screen2):
@@ -189,7 +176,6 @@ def set_workspaces(status, multi=False, auto=False):
         if '.' in screen2:
             env['_bspwm_dot_second_screen'] = '%' + screen2
 
-    print(screen1, screen2)
     relocate_desktops(screen1, screen2)
 
     if multi:

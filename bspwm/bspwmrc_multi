@@ -12,8 +12,6 @@ else
 fi
 
 bspc config border_width 2
-# bspc monitor "$_bspwm_first_screen" -d       
-# bspc monitor "$_bspwm_second_screen" -d       
 
 bspc monitor "$_bspwm_first_screen" -d 6 7 8 9 10
 bspc monitor "$_bspwm_dot_second_screen" -d 1 2 3 4 5
