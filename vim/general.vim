@@ -13,7 +13,6 @@ set t_Co=256                            " Support 256 colors
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set laststatus=2                        " Always display the status line
-set number                              " Line numbers
 set cursorline                          " Enable highlighting of the current line
 set background=dark                     " tell vim what the background color looks like
 set nobackup                            " This is recommended by coc
@@ -54,6 +53,15 @@ set softtabstop=4
 set expandtab
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set nowrap
+
+set number
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+
 
 let g:clipboard = {
     \ 'name': 'xsel_override',
@@ -124,6 +132,12 @@ noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-h> <C-W>h
 noremap <C-l> <C-W>l
+
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 "insert a new line in normal mode
 nnoremap <S-Enter> O<Esc>
