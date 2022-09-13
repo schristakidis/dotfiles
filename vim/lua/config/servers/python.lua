@@ -96,6 +96,9 @@ local pyright_settings = {
             diagnosticSeverityOverrides = {
                 reportGeneralTypeIssues = "none",
                 reportOptionalMemberAccess = "none",
+                reportOptionalOperand = "none",
+                reportOptionalSubscript = "none",
+                reportOptionalIterable = "none",
             }
         }
     }
