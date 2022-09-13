@@ -70,6 +70,7 @@ Plug 'mhartington/oceanic-next'
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'nvim-treesitter/playground'
 Plug 'kyazdani42/nvim-web-devicons'
 Plug 'nvim-lua/popup.nvim'

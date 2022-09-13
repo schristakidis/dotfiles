@@ -90,8 +90,12 @@ local pyright_settings = {
     python = {
         analysis = {
             typeCheckingMode = "basic",
+            autoSearchPaths = true,
+            diagnosticMode = "workspace",
+            useLibraryCodeForTypes = true,
             diagnosticSeverityOverrides = {
-                reportGeneralTypeIssues = "none"
+                reportGeneralTypeIssues = "none",
+                reportOptionalMemberAccess = "none",
             }
         }
     }
