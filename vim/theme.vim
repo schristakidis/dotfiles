@@ -12,3 +12,4 @@ if (has("termguicolors"))
 endif
 
 colorscheme onedark
+" colorscheme tokyonight

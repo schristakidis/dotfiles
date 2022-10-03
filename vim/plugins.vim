@@ -67,6 +67,7 @@ Plug 'tjdevries/colorbuddy.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'Th3Whit3Wolf/one-nvim', {'branch': 'main'}
 Plug 'mhartington/oceanic-next'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " NeoVim 0.5
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
