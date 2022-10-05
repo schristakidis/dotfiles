@@ -14,7 +14,6 @@ call plug#begin('~/.dotfiles/vim/vundle')
 
 " General
 Plug 'Valloric/ListToggle'
-Plug 'fholgado/minibufexpl.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'szw/vim-maximizer'
 Plug 'tpope/vim-repeat'
@@ -25,6 +24,7 @@ Plug 'godlygeek/tabular'
 Plug 'bronson/vim-visual-star-search'
 Plug 'unblevable/quick-scope'
 Plug 'lambdalisue/suda.vim'
+Plug 'akinsho/bufferline.nvim'
 
 " tmux
 Plug 'benmills/vimux'
@@ -95,7 +95,6 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'neovim/nvim-lspconfig'
 Plug 'lewis6991/gitsigns.nvim', { 'branch': 'main' }
-" Plug 'NTBBloodbath/galaxyline.nvim'
 Plug 'feline-nvim/feline.nvim'
 Plug 'onsails/lspkind-nvim' 
 Plug 'Raimondi/delimitMate'
@@ -106,14 +105,12 @@ Plug 'gennaro-tedesco/nvim-jqx'
 Plug 'folke/trouble.nvim'
 Plug 'b0o/SchemaStore.nvim' 
 Plug 'SmiteshP/nvim-gps'
-" Plug 'SmiteshP/nvim-navic'
 
 Plug 'puremourning/vimspector'
 
 Plug 'nvim-telescope/telescope-dap.nvim'
 Plug 'mfussenegger/nvim-dap'
 Plug 'mfussenegger/nvim-dap-python'
-" Plug 'rcarriga/vim-ultest', { 'do': ':UpdateRemotePlugins' }
 Plug 'rcarriga/nvim-dap-ui'
 
 Plug 'dbeniamine/cheat.sh-vim'
