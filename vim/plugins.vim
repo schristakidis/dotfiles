@@ -63,7 +63,6 @@ Plug 'michaeljsmith/vim-indent-object'
 
 " Theming
 Plug 'tjdevries/colorbuddy.vim'
-" Plug 'joshdick/onedark.vim'
 Plug 'navarasu/onedark.nvim'
 Plug 'Th3Whit3Wolf/one-nvim', {'branch': 'main'}
 Plug 'mhartington/oceanic-next'

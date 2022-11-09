@@ -90,7 +90,7 @@ require('telescope').setup {
             sort_lastused = true,
             theme = "dropdown",
             previewer = false,
-            initial_mode = "normal",
+            initial_mode = "insert",
             mappings = {
                 i = {
                     -- ["<c-d>"] = require("telescope.actions").delete_buffer,
