@@ -1,3 +1,23 @@
+local servers = {
+    "bashls",
+    "pyright",
+    "pylsp",
+    "dockerls",
+    "jsonls",
+    "sumneko_lua",
+    "terraformls",
+    -- "terraform_lsp",
+    "yamlls",
+    "vimls",
+    "phpactor"
+}
+
+require("mason").setup()
+require("mason-lspconfig").setup{
+    ensure_installed = servers
+}
+
+
 local on_attach = function(client, bufnr)
     require('lsp_signature').on_attach()
 
@@ -11,6 +31,7 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<leader>g', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     buf_set_keymap('n', '<leader>d', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
     buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<Cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     buf_set_keymap('n', '<leader>i', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     buf_set_keymap('n', '<gk>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
@@ -29,13 +50,15 @@ local on_attach = function(client, bufnr)
     buf_set_keymap('n', '<leader>L', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
 
     buf_set_keymap('n', '<leader>ss', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+    buf_set_keymap("n", "=", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+    buf_set_keymap("v", "=", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
 
-    -- Set some keybinds conditional on server capabilities
-    if client.server_capabilities.document_formatting then
-        buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-    elseif client.server_capabilities.document_range_formatting then
-        buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
-    end
+    -- -- Set some keybinds conditional on server capabilities
+    -- if client.server_capabilities.document_formatting then
+    --     buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+    -- elseif client.server_capabilities.document_range_formatting then
+    --     buf_set_keymap("v", "<space>f", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+    -- end
 
     local function preview_location_callback(_, result)
         if result == nil or vim.tbl_isempty(result) then
@@ -142,24 +165,9 @@ local function is_python2()
     end
 end
 
-
-local servers = {
-    "bashls",
-    "pyright",
-    "pylsp",
-    "dockerls",
-    "jsonls",
-    "sumneko_lua",
-    "terraformls",
-    -- "terraform_lsp",
-    "yamlls",
-    "vimls",
-    "phpactor"
-}
-
-
 for _, lsp in pairs(servers) do
     local default_opts = make_config()
+    local enable = true
     if lsp == "sumneko_lua" then
         default_opts.settings = require('config.servers.lua').get_settings()
     elseif lsp == "pylsp" then
@@ -171,7 +179,7 @@ for _, lsp in pairs(servers) do
     elseif lsp == "pyright" then
         default_opts.settings = require('config.servers.python').get_pyright_settings()
         if is_python2() then
-            default_opts.filetypes = {'notpython2'}
+            enable = false
         end
     elseif lsp == "yamlls" then
         default_opts = require("yaml-companion").setup({
@@ -186,6 +194,32 @@ for _, lsp in pairs(servers) do
         }
     end
 
-    require('lspconfig')[lsp].setup(default_opts)
+    if enable then
+        require('lspconfig')[lsp].setup(default_opts)
+    end
 end
 
+
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        -- null_ls.builtins.diagnostics.flake8.with({
+        --     diagnostic_config = {
+        --         virtual_text = false,
+        --     }
+        -- })
+        null_ls.builtins.formatting.yapf.with({
+                extra_args = { "--style", "facebook" }
+        }),
+        null_ls.builtins.code_actions.gitsigns,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.jq,
+        null_ls.builtins.diagnostics.tfsec
+    }
+})
+
+require("mason-null-ls").setup({
+        ensure_installed = { "yapf", "tfsec", "yamllint", "jq", "xmllint", "isort" },
+        automatic_setup = false
+    })
