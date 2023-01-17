@@ -7,7 +7,7 @@ local lua_settings = {
         },
         diagnostics = {
             -- Get the language server to recognize the `vim` global
-            globals = {'vim'},
+            globals = { 'vim' },
         },
         workspace = {
             -- Make the server aware of Neovim runtime files
@@ -26,5 +26,3 @@ M.get_settings = function()
 end
 
 return M
-
-
