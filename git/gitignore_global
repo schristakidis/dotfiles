@@ -1,6 +1,5 @@
 #global ignored files for git
 *.swp
-*.csv
 *.pyc
 *egg-info
 .idea

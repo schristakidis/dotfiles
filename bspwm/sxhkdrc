@@ -98,5 +98,6 @@ ctrl + s; c
 
 ctrl + s; shift + a
     slack &; \
-    thunderbird & 
+    thunderbird &; \
+    teams &
     # /opt/cisco/anyconnect/bin/vpnui &

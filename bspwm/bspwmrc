@@ -50,6 +50,10 @@ blueman-applet &
 killall i3locker
 _lock_timer="$_lock_timer" $HOME/.dotfiles/bin/i3locker &
 
+# dbus-update-activation-environment --all
+killall lxpolkit
+lxpolkit &
+
 # bspc config normal_border_color "#002b36"
 bspc config normal_border_color "#44475a"
 bspc config focused_border_color "#bd93f9"
