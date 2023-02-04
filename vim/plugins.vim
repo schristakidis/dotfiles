@@ -25,6 +25,7 @@ Plug 'bronson/vim-visual-star-search'
 Plug 'unblevable/quick-scope'
 Plug 'lambdalisue/suda.vim'
 Plug 'akinsho/bufferline.nvim'
+Plug 'mbbill/undotree'
 
 " tmux
 Plug 'benmills/vimux'

@@ -1,4 +1,5 @@
 require("config.devicons")
+require("config.undotree")
 require("config.treesiter")
 require("config.lsp")
 require("config.compe")
