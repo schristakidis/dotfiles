@@ -1,10 +1,11 @@
 local servers = {
+    "docker_compose_language_service",
     "bashls",
     "pyright",
     "pylsp",
     "dockerls",
     "jsonls",
-    "sumneko_lua",
+    "lua_ls",
     "terraformls",
     -- "terraform_lsp",
     "yamlls",
@@ -138,7 +139,7 @@ end
 for _, lsp in pairs(servers) do
     local default_opts = make_config()
     local enable = true
-    if lsp == "sumneko_lua" then
+    if lsp == "lua_ls" then
         default_opts.settings = require('config.servers.lua').get_settings()
     elseif lsp == "pylsp" then
         if is_python2() then
