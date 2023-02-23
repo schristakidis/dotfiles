@@ -21,6 +21,7 @@ bspc rule -a Evolution desktop=^9 focus=on
 bspc rule -a Thunderbird desktop=^10 focus=on
 bspc rule -a "Cisco AnyConnect Secure Mobility Client" state=floating center=on desktop=^10
 bspc rule -a "microsoft teams - preview" desktop=^8
+bspc rule -a "Microsoft Teams - Preview" desktop=^8
 
 bspc rule -a spotify desktop=^4 focus=on
 

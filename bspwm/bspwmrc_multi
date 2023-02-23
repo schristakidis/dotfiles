@@ -19,7 +19,7 @@ bspc monitor "$_bspwm_dot_second_screen" -d 1 2 3 4 5
 bspc rule -a Evolution desktop=^5 focus=on
 bspc rule -a Slack desktop=^5 focus=on
 bspc rule -a slack desktop=^5 focus=on
-bspc rule -a "microsoft teams - preview" desktop=^3 focus=on
-bspc rule -a "Microsoft Teams - Preview" desktop=^3 focus=on
+bspc rule -a "microsoft teams - preview" desktop=^3
+bspc rule -a "Microsoft Teams - Preview" desktop=^3
 bspc rule -a 'Cisco AnyConnect Secure Mobility Client' state=floating center=on desktop=^4
 
