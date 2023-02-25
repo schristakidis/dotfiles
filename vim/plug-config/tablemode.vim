@@ -1,5 +1,5 @@
 " table-mode conflicting with vim-test
-let g:table_mode_map_prefix = '<localleader>t'
+let g:table_mode_map_prefix = '<localleader>T'
 
 function! s:isAtStartOfLine(mapping)
   let text_before_cursor = getline('.')[0 : col('.')-1]

@@ -12,7 +12,7 @@ nmap P <plug>(YoinkPaste_P)
 nmap <leader>yp <plug>(YoinkPostPasteSwapBack)
 nmap <leader>yn <plug>(YoinkPostPasteSwapForward)
 
-nmap <c-i> <plug>(YoinkPostPasteToggleFormat)
+nmap <localleader>p <plug>(YoinkPostPasteToggleFormat)
 
 " nmap <expr> p yoink#canSwap() ? '<plug>(YoinkPostPasteSwapBack)' : '<plug>(YoinkPaste_p)'
 " nmap <expr> P yoink#canSwap() ? '<plug>(YoinkPostPasteSwapForward)' : '<plug>(YoinkPaste_P)'

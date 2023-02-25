@@ -121,4 +121,9 @@ Plug 'dbeniamine/cheat.sh-vim'
 Plug 'glepnir/indent-guides.nvim'
 Plug 'someone-stole-my-name/yaml-companion.nvim'
 
+Plug 'folke/neodev.nvim'
+Plug 'antoinemadec/FixCursorHold.nvim'
+Plug 'nvim-neotest/neotest'
+Plug 'nvim-neotest/neotest-python'
+
 call plug#end()

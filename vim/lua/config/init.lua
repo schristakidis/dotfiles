@@ -1,6 +1,10 @@
 require("config.devicons")
 require("config.undotree")
 require("config.treesiter")
+require("neodev").setup({
+        library = { plugins = { "neotest" }, types = true },
+    })
+require("config.neotest")
 require("config.lsp")
 require("config.compe")
 require("config.gitsigns")
