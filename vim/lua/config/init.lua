@@ -15,3 +15,8 @@ require("config.bufferline")
 require('Comment').setup()
 require('treesitter-context').setup()
 require("nvim-gps").setup()
+require('bqf').setup({
+        preview = {
+            auto_preview = false
+        }
+    })

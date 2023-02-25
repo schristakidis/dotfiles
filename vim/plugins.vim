@@ -126,4 +126,6 @@ Plug 'antoinemadec/FixCursorHold.nvim'
 Plug 'nvim-neotest/neotest'
 Plug 'nvim-neotest/neotest-python'
 
+Plug 'kevinhwang91/nvim-bqf'
+
 call plug#end()
