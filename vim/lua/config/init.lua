@@ -20,3 +20,30 @@ require('bqf').setup({
             auto_preview = false
         }
     })
+require('neorg').setup {
+    load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+        ["core.export"] = {
+            config = {
+                export_dir = "~/notes/markdown"
+            }
+        },
+        ["core.export.markdown"] = {},
+        ["core.norg.completion"] = {
+            config = {
+                engine = "nvim-cmp"
+            },
+        },
+        ["core.norg.dirman"] = { -- Manages Neorg workspaces
+            config = {
+                workspaces = {
+                    default = "~/notes",
+                    work = "~/notes/work",
+                    home = "~/notes/home",
+                },
+                default_workspace = "home"
+            },
+        },
+    },
+}
