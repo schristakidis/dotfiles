@@ -34,10 +34,11 @@ return {
     version = "1.*",
     build = "make install_jsregexp"
   },
+  { 'simrat39/symbols-outline.nvim', config = true,  cmd = "SymbolsOutline" },
 
   -- markdown
-  { 'plasticboy/vim-markdown',  ft = 'markdown' },
-  { 'mzlogin/vim-markdown-toc', ft = 'markdown' },
+  { 'plasticboy/vim-markdown',       ft = 'markdown' },
+  { 'mzlogin/vim-markdown-toc',      ft = 'markdown' },
   'dhruvasagar/vim-table-mode',
   { 'iamcco/markdown-preview.nvim', build = "cd app && yarn install" },
   { "ellisonleao/glow.nvim",        config = true,                   cmd = "Glow" }
