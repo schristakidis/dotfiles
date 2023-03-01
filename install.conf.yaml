@@ -23,6 +23,7 @@
         ~/.config/autorandr: autorandr
         ~/.config/rofi: rofi
         ~/.config/picom: picom
+        ~/.config/fontconfig: fontconfig
 
 - shell:
         - 

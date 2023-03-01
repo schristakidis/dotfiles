@@ -24,7 +24,7 @@ M = {
       ["core.norg.dirman"] = { -- Manages Neorg workspaces
         config = {
           workspaces = {
-            default = "~/home",
+            home = "~/notes/home",
             work = "~/notes/work",
           },
           default_workspace = "home"

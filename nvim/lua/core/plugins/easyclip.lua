@@ -5,11 +5,11 @@ local M = {
     'svermeulen/vim-subversive',
   },
   init = function ()
-    vim.g.yoinkIncludeDeleteOperations = 1
     -- vim.cmd([[ let g:yoinkIncludeDeleteOperations = 1 ]])
     -- vim.cmd([[ let g:yoinkSavePersistently = 1 ]])
     -- vim.cmd([[ let g:yoinkSwapClampAtEnds = 0 ]])
     -- vim.cmd([[ let g:yoinkAutoFormatPaste = 1 ]])
+    vim.g.yoinkIncludeDeleteOperations = 1
     vim.g.yoinkSavePersistently = 1
     vim.g.yoinkSwapClampAtEnds = 0
     vim.g.yoinkAutoFormatPaste = 1

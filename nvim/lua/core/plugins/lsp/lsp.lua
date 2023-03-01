@@ -20,7 +20,7 @@ require("mason-lspconfig").setup {
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[e', function() vim.lsp.diagnostic.goto_prev { severity_limit = "Warning" } end, opts)
+vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity_limit = "Warning" } end, opts)
 vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity_limit = "Warning" } end, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -49,19 +49,19 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('v', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
 
 
-  local function preview_location_callback(_, result)
-    if result == nil or vim.tbl_isempty(result) then
-      return nil
-    end
-    vim.lsp.util.preview_location(result[1])
-  end
+  -- local function preview_location_callback(_, result)
+  --   if result == nil or vim.tbl_isempty(result) then
+  --     return nil
+  --   end
+  --   vim.lsp.util.preview_location(result[1])
+  -- end
 
-  function PeekDefinition()
-    local params = vim.lsp.util.make_position_params()
-    return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-  end
-
-  vim.keymap.set('n', '<space>p', PeekDefinition, opts)
+  -- function PeekDefinition()
+  --   local params = vim.lsp.util.make_position_params()
+  --   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
+  -- end
+  --
+  -- vim.keymap.set('n', '<space>p', PeekDefinition, opts)
 
   -- UI
   vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
