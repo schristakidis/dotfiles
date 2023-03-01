@@ -2,6 +2,7 @@ local map = vim.keymap.set
 
 -- Disable annoying Ex mode
 map("n", "Q", "<Nop>")
+map({"n", "x"}, "q:", "<Nop>")
 
 -- nnoremap n nzzzv
 -- nnoremap N Nzzzv

@@ -23,7 +23,6 @@ return {
 
   -- git
   "tpope/vim-fugitive",
-  'junkblocker/git-time-lapse',
 
   -- programming
   { 'numToStr/Comment.nvim',    config = true },
