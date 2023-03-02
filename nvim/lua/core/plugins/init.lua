@@ -34,6 +34,7 @@ return {
     build = "make install_jsregexp"
   },
   { 'simrat39/symbols-outline.nvim', config = true,  cmd = "SymbolsOutline" },
+  { 'Vimjas/vim-python-pep8-indent' },
 
   -- markdown
   { 'plasticboy/vim-markdown',       ft = 'markdown' },

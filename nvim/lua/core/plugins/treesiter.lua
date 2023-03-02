@@ -33,7 +33,10 @@ local M = {
       endwise = {
         enable = true,
       },
-      indent = { enable = true },
+      indent = {
+        enable = true,
+        disable = {"python"}  -- not working
+      },
       autopairs = { enable = true },
       textobjects = {
         select = {
