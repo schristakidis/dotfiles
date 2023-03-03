@@ -17,7 +17,7 @@ map("v", "C-c", "\"*y")
 map("v", "<A-p>", "\"+y")
 map({"n", "v"}, "<A-v>", "\"+p")
 -- Select all text
-map("n", "C-a", "ggVG")
+map("n", "<C-a>", "ggVG")
 --
 --
 -- " close scratch buferr

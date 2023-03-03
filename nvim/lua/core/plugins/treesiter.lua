@@ -35,7 +35,7 @@ local M = {
       },
       indent = {
         enable = true,
-        disable = {"python"}  -- not working
+        disable = {"python", "yaml"}  -- python not working, yaml not sure
       },
       autopairs = { enable = true },
       textobjects = {
