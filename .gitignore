@@ -9,5 +9,5 @@ zsh/.zinit
 i3/i3resources/*
 !i3/i3resources/.gitkeep
 vim/vimspector-config/gadgets
-
+nvim/lua/.luarc.json
 

@@ -1,5 +1,5 @@
 local vo = vim.opt_local
-vo.tabstop = 2
-vo.shiftwidth = 2
-vo.softtabstop = 2
+vo.tabstop = 4
+vo.shiftwidth = 4
+vo.softtabstop = 4
 

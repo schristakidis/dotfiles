@@ -65,6 +65,14 @@ local M = {
       return is_python_filetype() and vim.env.VIRTUAL_ENV
     end
 
+    local function get_schema()
+      local schema = require("yaml-companion").get_buf_schema(0)
+      if schema.result[1].name == "none" then
+        return ""
+      end
+      return schema.result[1].name
+    end
+
     local c = {
       vim_mode = {
         provider = {
@@ -279,6 +287,20 @@ local M = {
         priority = 3,
         truncate_hide = true
       },
+      schema = {
+        provider = get_schema,
+        hl = {
+          bg = "line_bg"
+        },
+        -- icon = {
+        --   str = icons.virtualenv,
+        --   hl = {
+        --     fg = "orange"
+        --   }
+        -- },
+        priority = 3,
+        truncate_hide = true
+      },
       file_type = {
         provider = {
           name = "file_type",
@@ -366,6 +388,7 @@ local M = {
     local right = {
       c.inverse_separator,
       c.virtualenv,
+      c.schema,
       c.file_type,
       c.position,
       c.line_percentage,
