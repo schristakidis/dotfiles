@@ -1,0 +1,3 @@
+#!/bin/bash
+
+$HOME/.dotfiles/bin/auto_monitors --double

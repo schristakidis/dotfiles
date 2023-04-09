@@ -2,9 +2,22 @@
 
 from subprocess import run, Popen
 from pathlib import Path
+from copy import deepcopy
 import os
 import argparse
+import logging
 import pprint
+
+from os.path import expanduser
+home = expanduser("~")
+
+logging.basicConfig(
+    filename=os.path.join(os.path.expanduser("~"), ".cache/auto_monitors.log"),
+    filemode='a',
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%H:%M:%S',
+    level=logging.DEBUG
+)
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -32,14 +45,17 @@ def get_bsp_desktops():
     setup = {}
     cmd = 'bspc query --monitors --names'
     monitors = _get_bspc_output(cmd)
+    logging.info(f"BSP MONITORS: {monitors}")
 
     for monitor in monitors:
         if '.' in monitor:
             monitor = '%' + monitor
         cmd = f'bspc query --desktops -m {monitor}'
+        logging.info(cmd)
         desktops = _get_bspc_output(cmd)
         setup[monitor] = desktops
 
+    logging.info(f"BSP DESKTOPS: {setup}")
     return setup
 
 
@@ -91,11 +107,15 @@ def relocate_desktops(screen1, screen2):
 
 
 def remove_monitor(solo_monitor):
+    logging.info('Removing Monitor')
     setup = get_bsp_desktops()
+
     if len(setup) == 1:
+        logging.info('Nothing to do')
         return
 
     removed = [m for m in setup.keys() if m != solo_monitor][0]
+    logging.info(f"Removed {removed}")
 
     cmd = f"bspc monitor {removed} -a Desktop"
     run(cmd.split())
@@ -109,15 +129,8 @@ def remove_monitor(solo_monitor):
 
 
 def add_monitor(screen1, screen2):
+    logging.info(f'Adding monitor {screen1} {screen2}')
     setup = get_bsp_desktops()
-    try:
-        with open('/tmp/auto_monitors.logs', 'a') as f:
-            f.write(str(setup))
-            f.write('\n')
-            f.write(f'{screen1} {screen2}')
-            f.write('\n')
-    except Exception:
-        pass
 
     desktops_1 = status.get(screen1, [])
     desktops_2 = status.get(screen2, [])
@@ -150,6 +163,8 @@ def add_monitor(screen1, screen2):
 
 
 def set_workspaces(status, multi=False, auto=False):
+    logging.info(f'Status: {status}')
+    log_current_profile()
     laptop = status['laptop']
     monitors = status['monitors']
 
@@ -169,6 +184,7 @@ def set_workspaces(status, multi=False, auto=False):
     if multi:
         screen2 = [name for name in monitors if name != screen1][0]
 
+    logging.info(f'Setting workspaces: {screen1} {screen2}')
     env['_bspwm_first_screen'] = screen1
     if screen2:
         env['_bspwm_second_screen'] = screen2
@@ -178,13 +194,27 @@ def set_workspaces(status, multi=False, auto=False):
 
     relocate_desktops(screen1, screen2)
 
+    logging.info(f"First: {env['_bspwm_first_screen']}")
+    logging.info(
+        f"Second: {env.get('_bspwm_second_screen')} {env.get('_bspwm_dot_second_screen')}"  # noqa
+    )
     if multi:
-        run((MULTI_SETUP,), capture_output=False, env=env)
+        logging.info('Multi setup')
+        err = run((MULTI_SETUP,), capture_output=False, env=env) #.stderr.decode()
+        if err:
+            logging.error(err)
     else:
-        run((SINGLE_SETUP,), capture_output=False, env=env)
+        logging.info('Single setup')
+        env_single = deepcopy(env)
+        if env['_bspwm_first_screen'] == 'eDP-1-1':
+            env_single['_bspwm_first_screen'] = 'MONITOR'
+        err = run((SINGLE_SETUP,), capture_output=False, env=env_single) #.sderr.decode()
+        if err:
+            logging.error(err)
 
     polybar = str(DOTDIR.joinpath('polybar/launch_polybar.sh'))
-    run(polybar, capture_output=False, env=env)
+    logging.info('Launching Polybar')
+    run(polybar, capture_output=False, env=env) # .stderr.decode()
 
     # sleep(2)
     # cm = "xdo raise -n polybar"
@@ -193,7 +223,17 @@ def set_workspaces(status, multi=False, auto=False):
     Popen(FEH.split())
 
 
+def log_current_profile():
+    detected = run(
+        ['autorandr', '--detected'], capture_output=True
+    ).stdout.decode().strip()
+    logging.info(f"Detected Profile: {detected}")
+
+
 def print_env(status):
+    logging.info('Getting status')
+    log_current_profile()
+    logging.info(status)
     if status['laptop']:
         print('_laptop=1')
     else:
@@ -216,6 +256,9 @@ if __name__ == '__main__':
     args = parser.parse_args()
     status = get_monitors()
 
+    logging.info('------------------------')
+    logging.info(f'Running: {args}')
+
     if args.export:
         print_env(status)
     else:
@@ -227,3 +270,5 @@ if __name__ == '__main__':
             set_workspaces(status, multi=True)
         else:
             set_workspaces(status, auto=True)
+
+    logging.info('------------------------')
