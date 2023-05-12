@@ -136,7 +136,7 @@ local M = {
     local search_dotfiles = function()
       builtin.find_files({
         prompt_title = "< VimRC >",
-        cwd = "$HOME/.dotfiles/vim"
+        cwd = "$HOME/.dotfiles/nvim"
       })
     end
 
