@@ -1,0 +1,230 @@
+#!/bin/python
+
+import subprocess
+import json
+from subprocess import run, Popen
+from pathlib import Path
+from copy import deepcopy
+import os
+import argparse
+import logging
+import pprint
+
+from os.path import expanduser
+home = expanduser("~")
+
+logging.basicConfig(
+    filename=os.path.join(os.path.expanduser("~"), ".cache/hypr_monitors.log"),
+    filemode='a',
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%H:%M:%S',
+    level=logging.DEBUG
+)
+
+pp = pprint.PrettyPrinter(indent=4)
+
+DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
+WAYBAR_TEMPLATE = DOTDIR.joinpath('waybar/workspace_template.json')
+WAYBAR_DEST = DOTDIR.joinpath('waybar/workspaces.jsonc')
+
+
+HYPR_MONITOR_CONF = DOTDIR.joinpath('hypr/monitors.conf')
+HYPR_MONITOR_CONF = '/tmp/monitors.conf'
+
+
+def write_hypr_conf(conf):
+    with open(HYPR_MONITOR_CONF, 'w') as f:
+        f.writelines(conf)
+
+
+def get_simple_monitor_info(mon):
+    m_info = {
+        'name': mon['name'],
+        'res': f"{mon['width']}x{mon['height']}@{int(mon['refreshRate'])}"
+    }
+    logging.info(f'Monitor info: {m_info}')
+    return m_info
+
+
+def create_single_setup(name, res):
+    hypr_conf = [f"monitor = {name},{res},auto,1"]
+
+    write_hypr_conf(hypr_conf)
+
+    with open(WAYBAR_TEMPLATE) as f:
+        waybar_conf = json.load(f)
+
+    workspaces = waybar_conf['wlr/workspaces']
+    persistent = workspaces['persistent_workspaces']
+    workspaces['persistent_workspaces'] = {
+        k: [name] for k in persistent.keys()
+    }
+
+    with open(WAYBAR_DEST, 'w') as f:
+        waybar_conf = json.dump(waybar_conf, f)
+
+
+def get_monitors():
+    cmd = 'hyprctl monitors -j'
+    output = run(cmd.split(), text=True, capture_output=True).stdout
+    monitors = json.loads(output)
+    logging.info(f'Current Monitors: {monitors}')
+
+    if len(monitors) == 1:
+        create_single_setup(**get_simple_monitor_info(monitors[0]))
+
+    reload()
+    return
+
+    laptop = False
+    monitors = {}
+
+    for m in mons[2:]:
+        if not m:
+            continue
+
+        laptop_monitor = False
+
+        monitor = [
+            m for m in m.split(':')[1].strip().split(' ') if m and m != '*'
+        ]
+
+        name = monitor[0]
+        info = monitor[-1]
+        status = False
+        if 'enabled' in info:
+            status = True
+
+        if 'eDP' in name:
+            laptop = name
+            laptop_monitor = True
+
+        monitors[name] = {'enabed': status, 'laptop': laptop_monitor}
+
+    enabled_monitors = {name: m for name, m in monitors.items() if m['enabed']}
+
+    status = {
+        'laptop': laptop,
+        'monitors': monitors,
+        'enabled_monitors': enabled_monitors,
+        'multihead': len(enabled_monitors) > 1
+    }
+
+    return status
+
+
+def set_workspaces(status, multi=False, auto=False):
+    logging.info(f'Status: {status}')
+    log_current_profile()
+    laptop = status['laptop']
+    monitors = status['monitors']
+
+    if auto:
+        multi = status['multihead']
+
+    screen1 = None
+    screen2 = None
+
+    env = os.environ.copy()
+
+    if laptop:
+        screen1 = laptop
+    else:
+        screen1 = [name for name in monitors if '2' not in name][0]
+
+    if multi:
+        screen2 = [name for name in monitors if name != screen1][0]
+
+    logging.info(f'Setting workspaces: {screen1} {screen2}')
+    env['_bspwm_first_screen'] = screen1
+    if screen2:
+        env['_bspwm_second_screen'] = screen2
+        env['_bspwm_dot_second_screen'] = screen2
+        if '.' in screen2:
+            env['_bspwm_dot_second_screen'] = '%' + screen2
+
+    relocate_desktops(screen1, screen2)
+
+    logging.info(f"First: {env['_bspwm_first_screen']}")
+    logging.info(
+        f"Second: {env.get('_bspwm_second_screen')} {env.get('_bspwm_dot_second_screen')}"  # noqa
+    )
+    if multi:
+        logging.info('Multi setup')
+        err = run((MULTI_SETUP,), capture_output=False, env=env) #.stderr.decode()
+        if err:
+            logging.error(err)
+    else:
+        logging.info('Single setup')
+        env_single = deepcopy(env)
+        if env['_bspwm_first_screen'] == 'eDP-1-1':
+            env_single['_bspwm_first_screen'] = 'MONITOR'
+        err = run((SINGLE_SETUP,), capture_output=False, env=env_single) #.sderr.decode()
+        if err:
+            logging.error(err)
+
+    polybar = str(DOTDIR.joinpath('polybar/launch_polybar.sh'))
+    logging.info('Launching Polybar')
+    run(polybar, capture_output=False, env=env) # .stderr.decode()
+
+    # sleep(2)
+    # cm = "xdo raise -n polybar"
+    # run(cm.split())
+
+    Popen(FEH.split())
+
+
+def log_current_profile():
+    detected = run(
+        ['autorandr', '--detected'], capture_output=True
+    ).stdout.decode().strip()
+    logging.info(f"Detected Profile: {detected}")
+
+
+def print_env(status):
+    logging.info('Getting status')
+    log_current_profile()
+    logging.info(status)
+    if status['laptop']:
+        print('_laptop=1')
+    else:
+        print('_laptop=')
+
+    if status['multihead']:
+        print('_multihead=1')
+    else:
+        print('_multihead=')
+
+
+def reload():
+    cmd = 'hyprctl reload'
+    run(cmd.split())
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='BSPWM Monitor helper')
+
+    parser.add_argument('--single', action="store_true", default=False)
+    parser.add_argument('--mirror', action="store_true", default=False)
+    parser.add_argument('--double', action="store_true", default=False)
+    parser.add_argument('--export', action="store_true", default=False)
+
+    args = parser.parse_args()
+    status = get_monitors()
+    #
+    # logging.info('------------------------')
+    # logging.info(f'Running: {args}')
+    #
+    # if args.export:
+    #     print_env(status)
+    # else:
+    #     if args.mirror:
+    #         setup = get_bsp_desktops()
+    #         pp.pprint(status)
+    #         pp.pprint(setup)
+    #     elif args.double:
+    #         set_workspaces(status, multi=True)
+    #     else:
+    #         set_workspaces(status, auto=True)
+    #
+    # logging.info('------------------------')

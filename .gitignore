@@ -3,6 +3,8 @@ vim/sessions
 !vim/vundle/.gitkeep
 tmux/plugins/*
 !tmux/plugins/.gitkeep
+tmp/*
+!tmp/.gitkeep
 zsh/local/*
 zsh/.zinit
 !zsh/local/.gitkeep.zsh

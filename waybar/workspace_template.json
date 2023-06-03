@@ -1,0 +1,35 @@
+{
+  "wlr/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "on-click": "activate",
+    "active-only": false,
+    "sort-by-number": true,
+    "persistent_workspaces": {
+      "1": ["DP-3"],
+      "2": ["DP-3"],
+      "3": ["DP-3"],
+      "4": ["DP-3"],
+      "5": ["DP-3"],
+      "6": ["eDP-1"],
+      "7": ["eDP-1"],
+      "8": ["eDP-1"],
+      "9": ["eDP-1"],
+      "10": ["eDP-1"]
+    },
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": "",
+      "5": "奈",
+      "6": "",
+      "7": "",
+      "8": "",
+      "9": "",
+      "10": "",
+      "urgent": ""
+    },
+    "format": "{name}: {icon} "
+  }
+}
