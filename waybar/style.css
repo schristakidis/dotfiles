@@ -27,8 +27,8 @@ tooltip label{
 
 #workspaces button {
     padding: 5px;
-    color: #a13244;
-    /* color: #313244; */
+    /* color: #a13244; */
+    color: #313244;
     margin-right: 5px;
 }
 
@@ -37,8 +37,8 @@ tooltip label{
 }
 
 #workspaces button.focused {
-    /* color: #a6adc8; */
-    color: #86adc8;
+    color: #a6adc8;
+    /* color: #86adc8; */
     background: #eba0ac;
     border-radius: 10px;
 }
