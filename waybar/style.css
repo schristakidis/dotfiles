@@ -27,21 +27,19 @@ tooltip label{
 
 #workspaces button {
     padding: 5px;
-    /* color: #a13244; */
-    color: #313244;
+    color: #09496e;
     margin-right: 5px;
 }
 
 #workspaces button.active {
-    color: #a6adc8;
+    color: #7a2b12;
 }
 
-#workspaces button.focused {
-    color: #a6adc8;
-    /* color: #86adc8; */
-    background: #eba0ac;
-    border-radius: 10px;
+
+#workspaces button.persistent {
+    color: #313244;
 }
+
 
 #workspaces button.urgent {
     color: #11111b;
