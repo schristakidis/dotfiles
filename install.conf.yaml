@@ -24,6 +24,9 @@
         ~/.config/rofi: rofi
         ~/.config/picom: picom
         ~/.config/fontconfig: fontconfig
+        ~/.config/hypr: hypr
+        ~/.config/waybar: waybar
+        ~/.config/wofi: wofi
 
 - shell:
         - 
@@ -40,7 +43,4 @@
           stdout: true
         -
           command: git clone https://github.com/pyenv/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
-          stdout: true
-        -
-          command: mkdir -p ~/.dotbins && git clone git@github.com:schristakidis/st.git  ~/.dotbins/st
           stdout: true
