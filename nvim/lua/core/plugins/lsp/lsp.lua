@@ -79,7 +79,7 @@ local on_attach = function(_, bufnr)
         update_in_insert = false,
     })
 
-    local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+    local signs = { Error = " ", Warn = "", Hint = " ", Info = " " }
 
     for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
