@@ -1,10 +1,7 @@
 {
-  "wlr/workspaces": {
-    "disable-scroll": true,
+  "hyprland/workspaces": {
     "all-outputs": false,
-    "on-click": "activate",
     "active-only": false,
-    "sort-by-number": true,
     "persistent_workspaces": {
       "1": ["DP-3"],
       "2": ["DP-3"],

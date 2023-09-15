@@ -33,15 +33,19 @@ tooltip label{
     margin-right: 2px;
 }
 
+#workspaces button.empty {
+    color: #313244;
+}
+
 #workspaces button.active {
     color: #212121;
     background:  #bd93f9;
 }
 
 
-#workspaces button.persistent {
-    color: #313244;
-}
+/* #workspaces button.persistent { */
+/*     color: #313244; */
+/* } */
 
 
 #workspaces button.urgent {

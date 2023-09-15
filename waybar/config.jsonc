@@ -8,7 +8,7 @@
     "height": 20,
     "modules-left": [
         "custom/launch_wofi",
-        "wlr/workspaces"
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "cpu",

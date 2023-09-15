@@ -51,6 +51,7 @@ class HMonitors:
         self.waybar_conf = None
 
     def run(self):
+        self.kill_waybar()
         self.get_monitors()
         if len(self.monitors) == 1:
             print('Single')
@@ -64,6 +65,10 @@ class HMonitors:
         self.write_hypr_conf()
         self.write_waybar_conf()
         reload()
+
+    def kill_waybar(self):
+        cmd = 'pkill waybar'
+        run(cmd.split())
 
     def get_monitors(self):
         cmd = 'hyprctl monitors -j'
@@ -129,7 +134,7 @@ class HMonitors:
         with open(WAYBAR_TEMPLATE) as f:
             self.waybar_conf = json.load(f)
 
-        workspaces = self.waybar_conf['wlr/workspaces']
+        workspaces = self.waybar_conf['hyprland/workspaces']
 
         for i in range(1, 6):
             workspaces['persistent_workspaces'][str(i)] = [first_monitor]
