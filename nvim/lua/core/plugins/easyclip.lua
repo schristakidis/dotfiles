@@ -14,7 +14,7 @@ local M = {
     vim.g.yoinkSwapClampAtEnds = 0
     vim.g.yoinkAutoFormatPaste = 1
   end,
-  laz = false,
+  lazy = false,
   config = function()
     vim.keymap.set("n", "gm", "m")
     vim.keymap.set({ "x", "n" }, "m", "d")

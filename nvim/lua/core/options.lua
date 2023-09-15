@@ -82,7 +82,7 @@ vim.api.nvim_create_autocmd(
 })
 
 
-if not vim.env.SSH_TTY then
+if not vim.env.SSH_TTY and not vim.env.XDG_SESSION_TYPE == 'wayland' then
   vim.cmd([[ let g:clipboard = {
       \ 'name': 'xsel_override',
       \ 'copy': {
