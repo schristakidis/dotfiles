@@ -178,6 +178,8 @@ for _, lsp in pairs(servers) do
         cfg.capabilities = get_capabilities()
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
+    elseif lsp == "gopls" then
+        default_opts.settings = require('core.plugins.lsp.servers.gopls').get_settings()
     end
 
     if enable then
@@ -201,10 +203,13 @@ null_ls.setup({
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.formatting.isort,
         null_ls.builtins.formatting.jq,
+        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.goimports,
     }
 })
 
 require("mason-null-ls").setup({
     ensure_installed = { "yapf", "jq", "xmllint", "isort" },
+    automatic_installation = true,
     automatic_setup = false
 })
