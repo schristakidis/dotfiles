@@ -30,8 +30,12 @@ return {
   { "gennaro-tedesco/nvim-jqx", ft = { "json", "yaml" } },
   {
     "L3MON4D3/LuaSnip",
-    version = "1.*",
-    build = "make install_jsregexp"
+    dependencies = { "rafamadriz/friendly-snippets" },
+    version = "2.*",
+    build = "make install_jsregexp",
+    config = function()
+        require("luasnip.loaders.from_vscode").lazy_load()
+    end
   },
   { 'simrat39/symbols-outline.nvim', config = true,  cmd = "SymbolsOutline" },
   { 'Vimjas/vim-python-pep8-indent' },

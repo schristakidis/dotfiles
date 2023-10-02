@@ -3,8 +3,10 @@ local go_settings = {
         completeUnimported = true,
         usePlaceholders = true,
         analyses = {
-            unusedparams = true
-        }
+            unusedparams = true,
+            shadow = true,
+        },
+        staticcheck = true,
     }
 }
 
