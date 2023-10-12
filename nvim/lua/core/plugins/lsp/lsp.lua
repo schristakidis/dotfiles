@@ -175,6 +175,7 @@ for _, lsp in pairs(servers) do
             cfg2.on_attach(_, bufnr)
             on_attach(_, bufnr)
         end
+        cfg.filetypes = { "yaml", "yaml.docker-compose", "helm" }
         cfg.capabilities = get_capabilities()
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
