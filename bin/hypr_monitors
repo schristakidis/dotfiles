@@ -123,6 +123,7 @@ class HMonitors:
         self.move_workspaces(6, 10, second['name'])
 
     def hypr_monitor_conf(self, name, res, start, end):
+        res = 'highrr'
         self.hypr_conf_monitors += [f"monitor = {name},{res},auto,1"]
 
         for i in range(start, end+1):
