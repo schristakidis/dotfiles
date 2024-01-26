@@ -1,32 +1,29 @@
-# Colors (One Dark)
 colors:
-  # Default colors
   primary:
-    background: '#282c34'
-    foreground: '#abb2bf'
+    foreground: '#ffffff'
+    background: '#2f2f2f'
 
-      # Normal colors
   normal:
     # NOTE: Use '#131613' for the `black` color if you'd like to see
     # black text on the background.
-    black:   '#282c34'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
-    white:   '#abb2bf'
+    black:   '#141a1B'
+    red:     '#cd3f45'
+    green:   '#9fca56'
+    yellow:  '#e6cd69'
+    blue:    '#55b5db'
+    magenta: '#a074c4'
+    cyan:    '#16a085'
+    white:   '#d6d6d6'
 
   # Bright colors
   bright:
-    black:   '#5c6370'
-    red:     '#e06c75'
-    green:   '#98c379'
-    yellow:  '#d19a66'
-    blue:    '#61afef'
-    magenta: '#c678dd'
-    cyan:    '#56b6c2'
+    black:   '#41535B'
+    red:     '#cd3f45'
+    green:   '#9fca56'
+    yellow:  '#e6cd69'
+    blue:    '#55b5db'
+    magenta: '#a074c4'
+    cyan:    '#16a085'
     white:   '#ffffff'
 
 

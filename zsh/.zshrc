@@ -63,7 +63,6 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-completions \
   PZT::modules/utility \
   as"completion" OMZP::pip/_pip \
-  as"completion" OMZP::docker/_docker \
   as"completion" OMZP::docker-compose/_docker-compose \
   as"completion" OMZP::httpie/_httpie \
   as"completion" OMZP::helm \

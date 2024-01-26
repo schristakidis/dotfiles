@@ -21,6 +21,7 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin:$CARGOPATH"
 
 export TFENV_CONFIG_DIR="$XDG_CONFIG_HOME/tfenv"
+export PATH=$PATH:/usr/local/go/bin
 
 export EDITOR='nvim'
 export VISUAL='st nvim'

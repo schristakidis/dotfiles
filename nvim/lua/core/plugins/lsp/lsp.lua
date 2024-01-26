@@ -9,7 +9,7 @@ local servers = {
     "terraformls",
     "yamlls",
     "vimls",
-    "phpactor",
+    -- "phpactor",
     "gopls"
 }
 

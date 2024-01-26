@@ -1,4 +1,4 @@
-vim.g.python3_host_prog = "~/.virtualenvs/neovim39/bin/python"
+vim.g.python3_host_prog = "~/.pyenv/versions/neovim/bin/python"
 
 vim.opt.number = true
 
