@@ -26,9 +26,6 @@ set $menu rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command "
 # Add --to-code to bindsym, support for non-latin layouts
 set $bindsym bindsym --to-code
 
-# Volume notification
-set $volume_bar /usr/share/sway/scripts/volume-notify.sh
-
 # Brightness notification
 set $brightness_bar /usr/share/sway/scripts/brightness-notify.sh
 
@@ -37,20 +34,12 @@ set $brightness_step bash -c 'echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(li
 set $brightness_up light -r -A $($brightness_step) && $brightness_bar
 set $brightness_down light -r -U $($brightness_step) && $brightness_bar
 
-# Volume control
-set $volume_down pulsemixer --change-volume -5 && $volume_bar
-set $volume_up pulsemixer --change-volume +5 && $volume_bar
-set $volume_mute pulsemixer --toggle-mute && $volume_bar
-
 # clipboard history
 set $clipboard cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
 set $clipboard-del cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
 
 # bluetooth menu
 set $bluetooth $flock $term_float bluetuith
-
-# Pulseaudo command
-set $pulseaudio $term_float pulsemixer
 
 # calendar application
 set $calendar $term_float calcurse
@@ -124,3 +113,7 @@ set $calendar_daemon 'calcurse --daemon'
 
 # Notifications from Swappy
 set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
+
+set $lock $HOME/.config/swaylock/lock.sh
+
+set $sway_scripts $HOME/.dotfiles/sway/scripts

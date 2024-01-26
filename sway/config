@@ -5,6 +5,7 @@
 # Read `man 5 sway` for a complete reference.
 
 # Styles
+# default_border pixel 1
 set $theme /usr/share/themes/yaru-sway
 
 # theme variables
@@ -14,7 +15,7 @@ include $theme/variables
 # include /etc/sway/variables
 
 # User variables
-include $HOME/.config/sway/variables.d/*.conf
+include $HOME/.config/sway/variables
 
 # include /etc/sway/outputs/*.conf
 # include /etc/sway/inputs/*.conf
@@ -35,3 +36,11 @@ include $HOME/.config/sway/config.d/*.conf
 # Include nwg-displays config's (if exists)
 include $HOME/.config/sway/outputs
 include $HOME/.config/sway/workspaces
+
+# font pango:monospace 0.001
+# titlebar_border_thickness 0
+# titlebar_padding 0
+
+default_orientation horizontal
+workspace_layout default
+smart_borders on

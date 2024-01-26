@@ -1,0 +1,11 @@
+workspace 1 output $main_monitor
+workspace 2 output $main_monitor
+workspace 3 output $main_monitor
+workspace 4 output $main_monitor
+workspace 5 output $main_monitor
+workspace 6 output $second_monitor
+workspace 7 output $second_monitor
+workspace 8 output $second_monitor
+workspace 9 output $second_monitor
+workspace 10 output $second_monitor
+
