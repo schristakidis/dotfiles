@@ -13,6 +13,7 @@
         ~/.gitconfig: git/gitconfig
         ~/.config/powerline: powerline 
         ~/.config/alacritty: alacritty
+        ~/.config/sway: sway
         ~/.config/i3: i3
         ~/.config/sxhkd: sxhkd
         ~/.config/dunst: dunst
