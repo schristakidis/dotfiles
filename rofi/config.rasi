@@ -1,22 +1,22 @@
 configuration {
-	modi: "drun,window,run";
-	combi-modi: "drun, window";
-	show-icons: true;
-	sidebar-mode: true;
-	fullscreen: true;
-	display-drun: " ";
-	display-run: " ";
-	display-window: " ";
-	
-	/* Key bindings: */
-	kb-mode-next: "Alt+l";
-	kb-mode-previous: "Alt+h";
-	/* kb-move-word-back: "Control+b"; */
-	/* kb-move-word-forward: "Control+w"; */
-	/* kb-move-char-back: "Control+h"; */
-	/* kb-move-char-forward: "Control+l"; */
-	/* kb-clear-line: ""; */
-	/* kb-remove-char-back: ""; */
+    modi: "drun,window,run";
+    combi-modi: "drun, window";
+    show-icons: true;
+    sidebar-mode: true;
+    fullscreen: true;
+    display-drun: " ";
+    display-run: " ";
+    display-window: " ";
+
+    /* Key bindings: */
+    kb-mode-next: "Alt+l";
+    kb-mode-previous: "Alt+h";
+    /* kb-move-word-back: "Control+b"; */
+    /* kb-move-word-forward: "Control+w"; */
+    /* kb-move-char-back: "Control+h"; */
+    /* kb-move-char-forward: "Control+l"; */
+    /* kb-clear-line: ""; */
+    /* kb-remove-char-back: ""; */
 }
 
 @theme "themes/rounded-nord-dark.rasi"
