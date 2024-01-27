@@ -1,0 +1,145 @@
+/* @keyframes blink-warning { */
+/*     70% { */
+/*         color: @wm_icon_bg; */
+/*     } */
+/**/
+/*     to { */
+/*         color: @wm_icon_bg; */
+/*         background-color: @warning_color; */
+/*     } */
+/* } */
+
+@keyframes blink-critical {
+    70% {
+        color: @wm_icon_bg;
+    }
+
+    to {
+        color: @wm_icon_bg;
+        background-color: @error_color;
+    }
+}
+
+* {
+    border: none;
+    border-radius: 4;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+#window {
+    margin-left: 10px;
+}
+
+window#waybar {
+    margin-left: 10px;
+    border-radius: 0;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    opacity: 0.7;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+tooltip {
+    background: #1e1e2e;
+    opacity: 0.8;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #11111b;
+}
+
+tooltip label{
+    color: #cdd6f4;
+}
+
+#workspaces button {
+    padding: 0 0.5em;
+    margin: 4px 3px;
+    color: #a6adc8;
+}
+
+#workspaces button.focused {
+    color: #212121;
+    background:  #bd93f9;
+}
+
+#workspaces button.urgent {
+    color: #11111b;
+    background: #a6e3a1;
+    border-radius: 10px;
+}
+
+#workspaces button:hover {
+    background: #11111b;
+    color: #cdd6f4;
+    border-radius: 10px;
+}
+
+#mode {
+    background: @background_color;
+}
+
+#clock,
+#custom-playerctl,
+#custom-power,
+#custom-scratchpad,
+#custom-weather,
+#custom-wlsunset,
+#custom-clipboard,
+#custom-menu,
+#custom-dnd,
+#battery,
+#backlight,
+#cpu,
+#language,
+#memory,
+#network,
+#bluetooth,
+#pulseaudio,
+#tray,
+#temperature
+#mode,
+#idle_inhibitor {
+    opacity: 0.8;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 4px 3px;
+}
+
+#battery {
+    /* animation-timing-function: linear; */
+    /* animation-iteration-count: infinite; */
+    /* animation-direction: alternate; */
+}
+
+#battery.warning {
+    color: @warning_color;
+}
+
+#battery.critical {
+    color: @error_color;
+}
+
+/* #battery.warning.discharging { */
+/*     animation-name: blink-warning; */
+/*     animation-duration: 3s; */
+/* } */
+
+#battery.critical.discharging {
+    /* animation-name: blink-critical; */
+    /* animation-duration: 2s; */
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#tray {
+    padding-left: 10px;
+    padding-right: 10px;
+}

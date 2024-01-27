@@ -10,3 +10,10 @@
 - pyright
 - yaml-language-server
 - vscode-langservers-extracted
+
+## Waybar
+```sh
+cd waybar
+ln -s <sway|hypr>/config.jsonc config.jsonc
+ln -s <sway|hypr>/style.css style.css
+```

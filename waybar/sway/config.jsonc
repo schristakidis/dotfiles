@@ -14,21 +14,23 @@
     "modules-right": [
         "custom/weather",
         "custom/playerctl",
-        "custom/scratchpad",
+        // "custom/scratchpad",
         "idle_inhibitor",
         "custom/dnd",
         "sway/language",
         "custom/clipboard",
         "cpu",
         "memory",
+        // "temperature",
+        "backlight",
         "battery",
-        "network",
-        "bluetooth",
+        // "network",
+        // "bluetooth",
         "pulseaudio",
         "pulseaudio#microphone",
         "clock",
-        "custom/power",
-        "tray"
+        "tray",
+        "custom/power"
     ],
     "sway/workspaces": {
         "disable-scroll": true,
@@ -70,10 +72,7 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        },
-        "tooltip": true,
-        "tooltip-format-activated": "power-saving disabled",
-        "tooltip-format-deactivated": "power-saving enabled"
+        }
     },
     "pulseaudio": {
         "format": "{icon}  {volume}%",
@@ -94,23 +93,46 @@
         },
         "tooltip-format": "{icon}  {volume}% ",
 
-        "on-click": "~/.dotfiles/sway/scripts/swaymixer",
-        "on-click-middle": "~/.dotfiles/waybar_sway/scripts/sway_volume --toggle",
+        "on-click": "~/.config/waybar/scripts/swaymixer",
+        "on-click-middle": "~/.config/waybar/scripts/sway_volume --toggle",
         "on-click-right": "swaymsg exec pavucontrol",
-        "on-scroll-up": "~/.dotfiles/waybar_sway/scripts/sway_volume --inc",
-        "on-scroll-down": "~/.dotfiles/waybar_sway/scripts/sway_volume --dec"
+        "on-scroll-up": "~/.config/waybar/scripts/sway_volume --inc",
+        "on-scroll-down": "~/.config/waybar/scripts/sway_volume --dec"
     },
     "pulseaudio#microphone": {
         "format": "{format_source} ",
         "format-source": "",
         "format-source-muted": "",
-        "on-click": "~/.dotfiles/waybar_sway/scripts/sway_volume --toggle-mic",
+        "on-click": "~/.config/waybar/scripts/sway_volume --toggle-mic",
         "on-click-right": "swaymsg exec pavucontrol",
-        "on-scroll-up": "~/.dotfiles/waybar_sway/scripts/sway_volume --mic-inc",
-        "on-scroll-down": "~/.dotfiles/waybar_sway/scripts/sway_volume --mic-dec",
+        "on-scroll-up": "~/.config/waybar/scripts/sway_volume --mic-inc",
+        "on-scroll-down": "~/.config/waybar/scripts/sway_volume --mic-dec",
         "scroll-step": 5,
         "tooltip": true,
         "tooltip-format": " at {volume}%"
+    },
+    "temperature": {
+        "thermal-zone": 1,
+        "format": "",
+        "format-alt-click": "click-right",
+        "format-alt": " {temperatureC}°C",
+        "critical-threshold": 70,
+        "hwmon-path":  "/sys/devices/virtual/thermal/thermal_zone5/hwmon4/temp1_input",
+        "format-critical": " {temperatureC}°C",
+        "on-click": "foot --fullscreen --title btop sh -c 'btop'"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon}",
+        "format-alt-click": "click-right",
+        "format-alt": "{icon} {percent}%",
+        "format-icons": [
+            "󰃞",
+            "󰃟",
+            "󰃠"
+        ],
+        "on-scroll-up": "~/.config/waybar/scripts/brightness --inc",
+        "on-scroll-down": "~/.config/waybar/scripts/brightness --dec"
     },
     "battery": {
         "format": "{icon}",
@@ -150,11 +172,12 @@
         "tooltip-format": "{}"
     },
     "clock": {
-        "format": "{:%e %b %H:%M}",
+        "format": "{:%H:%M}",
+        "tooltip-format": "{: %A, %e %B %Y}",
+        "format-alt-click": "click-right",
+        "format-alt": "{:%e %b %H:%M}",
         "tooltip": true,
-        "tooltip-format": "{:%d.%m.%Y %H:%M}",
-        "interval": 5,
-        "on-click": "swaymsg exec \\$calendar"
+        "on-click": "swaymsg exec \"alacritty --class floating_cal -e calcurse\""
     },
     "cpu": {
         "interval": 5,
@@ -163,7 +186,7 @@
             "warning": 70,
             "critical": 90
         },
-        "on-click": "swaymsg exec \\$term_float htop"
+        "on-click": "swaymsg exec \"alacritty -o window.startup_mode=Fullscreen --title btop -e btop\""
     },
     "memory": {
         "interval": 30,
@@ -172,7 +195,7 @@
             "warning": 70,
             "critical": 90
         },
-        "on-click": "swaymsg exec \\$term_float htop"
+        "on-click": "swaymsg exec \"alacritty -o window.startup_mode=Fullscreen --title btop -e btop\""
     },
     "custom/wf-recorder": {
         "interval": "once",
@@ -221,7 +244,7 @@
         "format": "{icon} {}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "~/.dotfiles/waybar_sway/scripts/weather.py",
+        "exec": "~/.config/waybar/scripts/weather.py",
         "return-type": "json",
         "format-icons": {
             "Unknown": "✨",
