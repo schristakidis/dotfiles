@@ -66,8 +66,6 @@ listview {
     margin:     12px 0 0;
     lines:      8;
     columns:    1;
-
-    fixed-height: false;
 }
 
 element {

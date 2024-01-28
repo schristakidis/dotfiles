@@ -13,6 +13,7 @@
     ],
     "modules-right": [
         "custom/weather",
+        "custom/wlsunset",
         "custom/playerctl",
         // "custom/scratchpad",
         "idle_inhibitor",
@@ -268,17 +269,32 @@
             "VeryCloudy": ""
         }
     },
-    "custom/scratchpad": {
+    // "custom/scratchpad": {  # causes cpu load
+    //     "interval": "once",
+    //     "return-type": "json",
+    //     "format": "{icon}",
+    //     "format-icons": {
+    //         "one": "",
+    //         "many": ""
+    //     },
+    //     "exec": "/bin/bash /usr/share/sway/scripts/scratchpad.sh; pkill -RTMIN+7 waybar",
+    //     "on-click": "swaymsg 'scratchpad show'",
+    //     "signal": 7
+    // },
+    "custom/wlsunset": {
         "interval": "once",
+        "tooltip": true,
+        "tooltip-format": "{tooltip}",
         "return-type": "json",
         "format": "{icon}",
         "format-icons": {
-            "one": "",
-            "many": ""
+            "on": "",
+            "off": ""
         },
-        "exec": "/bin/bash /usr/share/sway/scripts/scratchpad.sh; pkill -RTMIN+7 waybar",
-        "on-click": "swaymsg 'scratchpad show'",
-        "signal": 7
+        "exec": "location=off ~/.config/waybar/scripts/sunset.sh",
+        "on-click": "~/.config/waybar/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
+        "exec-if": "~/.config/waybar/scripts/sunset.sh  check",
+        "signal": 6
     },
     "tray": {
         "icon-size": 21,

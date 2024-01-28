@@ -63,16 +63,15 @@ set $polkit_agent /usr/bin/mate-polkit &
 set $wlsunset '[ -x "$(command -v wlsunset)" ] && ~/.config/sway/scripts/sunset.sh "on"'
 
 # Autotiling script
-set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling -w 1 3 5 7 9'
-
-# switch between top-level containers (windows) in a workspace
-set $switch_toplevel '[ -f /usr/share/sway/scripts/switch-top-level.py ] && /usr/share/sway/scripts/switch-top-level.py'
+# set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling -w 1 3 5 7 9'
+# for master layout. Enable autotiling in startup scripts
+# set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling --limit 2
 
 # Automatic workspace names
 set $autoname_workspaces '[ -f /usr/share/sway/scripts/autoname-workspaces.py ] && /usr/share/sway/scripts/autoname-workspaces.py'
 
 # restart kanshi https://github.com/emersion/kanshi/issues/43#issuecomment-531679213
-set $kanshi '[ -x "$(command -v kanshi)" ] && pkill kanshi; exec kanshi'
+# set $kanshi '[ -x "$(command -v kanshi)" ] && pkill kanshi; exec kanshi'
 
 # Start PCmanFM as a daemon
 set $pcmanfm_daemon '[ -x "$(command -v pcmanfm)" ] && pcmanfm -d'
