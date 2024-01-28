@@ -25,7 +25,7 @@ set $menu rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command "
 set $bindsym bindsym --to-code
 
 # Brightness notification
-set $brightness_bar $XDG_CONFIG_HOME/sway/scripts/brightness-notify.sh
+set $brightness_bar ~/.config/sway/scripts/brightness-notify.sh
 
 # brightness control
 set $brightness_step bash -c 'echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))'
