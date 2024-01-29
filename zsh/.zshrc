@@ -63,14 +63,13 @@ zinit wait lucid light-mode for \
       zsh-users/zsh-completions \
   PZT::modules/utility \
   as"completion" OMZP::pip/_pip \
+  as"completion" OMZP::docker/completions/_docker \
   as"completion" OMZP::docker-compose/_docker-compose \
   as"completion" OMZP::httpie/_httpie \
-  as"completion" OMZP::helm \
-  as"completion" OMZP::kubectl \
   OMZP::fasd
 
-zplugin ice as"program" pick"bin/git-dsf"
-zplugin light zdharma-continuum/zsh-diff-so-fancy
+zinit ice as"program" pick"bin/git-dsf"
+zinit light zdharma-continuum/zsh-diff-so-fancy
 
 zinit load softmoth/zsh-vim-mode
 
@@ -108,3 +107,6 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/.dotfiles/zsh/.p10k.zsh ]] || source ~/.dotfiles/zsh/.p10k.zsh
+#
+# for completions move the _completions_file to .local/share/zinit/completions/
+autoload -U compinit && compinit

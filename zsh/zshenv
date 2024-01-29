@@ -1,4 +1,5 @@
 export DOTDIR=$HOME/.dotfiles
+export ZSH_CACHE_DIR=$HOME/.local/share/zinit/
 export ZDOTDIR=$DOTDIR/zsh
 export DOT_BIN=$DOTDIR/bin
 export PATH="$DOT_BIN:$PATH"
