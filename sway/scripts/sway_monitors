@@ -1,0 +1,117 @@
+#!/bin/python
+
+import json
+from subprocess import run
+from pathlib import Path
+import os
+import argparse
+import logging
+import pprint
+
+from os.path import expanduser
+home = expanduser("~")
+
+logging.basicConfig(
+    filename=os.path.join(os.path.expanduser("~"), ".cache/sway_monitors.log"),
+    filemode='a',
+    format='%(asctime)s %(levelname)s %(message)s',
+    datefmt='%H:%M:%S',
+    level=logging.DEBUG
+)
+
+pp = pprint.PrettyPrinter(indent=4)
+
+DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
+WAYBAR_TEMPLATE = DOTDIR.joinpath('waybar/workspace_sway_template.json')
+WAYBAR_DEST = DOTDIR.joinpath('tmp/workspaces.jsonc')
+
+
+def reload():
+    cmd = 'systemctl --user restart waybar'
+    run(cmd.split())
+
+
+class HMonitors:
+    def __init__(self, single):
+        self.single = single
+        self.waybar_conf = None
+
+    def run(self):
+        self.get_monitors()
+        if len(self.monitors) == 1:
+            print('Single')
+            self.single_setup()
+        elif self.single:
+            print('Forced')
+            self.force_single_setup()
+        else:
+            print('Multi')
+            self.multi_setup()
+        self.write_waybar_conf()
+        reload()
+
+    def kill_waybar(self):
+        cmd = 'pkill waybar'
+        run(cmd.split())
+
+    def get_monitors(self):
+        cmd = 'swaymsg -t get_outputs -r'
+        output = run(cmd.split(), text=True, capture_output=True).stdout
+        monitors = json.loads(output)
+        self.monitors = [m['name'] for m in monitors]
+        logging.info(f'Current Monitors: {self.monitors}')
+
+    def single_setup(self):
+        logging.info('Singe Setup')
+        self.create_waybar_conf(self.monitors[0], self.monitors[0])
+
+    def get_order(self):
+        mon1 = self.monitors[0]
+        mon2 = self.monitors[1]
+
+        if mon1 == 'eDP-1':
+            second = mon1
+            first = mon2
+        else:
+            first = mon1
+            second = mon2
+
+        return first, second
+
+    def force_single_setup(self):
+        logging.info('Forcing Singe Setup')
+
+        _, second = self.get_order()
+
+        self.create_waybar_conf(second, second)
+
+    def multi_setup(self):
+        logging.info('Multi setup')
+        first, second = self.get_order()
+
+        self.create_waybar_conf(first, second)
+
+    def create_waybar_conf(self, first_monitor, second_monitor):
+        with open(WAYBAR_TEMPLATE) as f:
+            self.waybar_conf = json.load(f)
+
+        workspaces = self.waybar_conf['sway/workspaces']
+
+        for i in range(1, 6):
+            workspaces['persistent_workspaces'][str(i)] = [first_monitor]
+
+        for i in range(6, 11):
+            workspaces['persistent_workspaces'][str(i)] = [second_monitor]
+
+    def write_waybar_conf(self):
+        with open(WAYBAR_DEST, 'w') as f:
+            json.dump(self.waybar_conf, f)
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='BSPWM Monitor helper')
+
+    parser.add_argument('--single', action="store_true", default=False)
+
+    args = parser.parse_args()
+    HMonitors(args.single).run()

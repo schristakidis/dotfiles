@@ -33,10 +33,9 @@
         "tray",
         "custom/power"
     ],
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": false
-    },
+    "include": [
+        "~/.dotfiles/tmp/workspaces.jsonc"
+    ],
     "sway/language": {
         "format": " {}",
         "min-length": 5,
@@ -236,8 +235,8 @@
             "default": "",
             "dnd": ""
         },
-        "on-click": "makoctl mode | grep 'do-not-disturb' && makoctl mode -r do-not-disturb || makoctl mode -a do-not-disturb; pkill -RTMIN+11 waybar",
-        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"Notification mode: %s\"}' $(makoctl mode | grep -q 'do-not-disturb' && echo dnd || echo default) $(makoctl mode | tail -1)",
+        "on-click": "dunstctl set-paused toggle; pkill -RTMIN+11 waybar",
+        "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"DND mode: %s\"}' $(dunstctl is-paused | grep -q 'true' && echo dnd || echo default) $(dunstctl is-paused)",
         "signal": 11
     },
     "custom/weather": {

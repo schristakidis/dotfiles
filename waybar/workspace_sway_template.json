@@ -1,5 +1,5 @@
 {
-  "hyprland/workspaces": {
+  "sway/workspaces": {
     "all-outputs": false,
     "active-only": false,
     "persistent_workspaces": {
@@ -27,6 +27,7 @@
       "10": "",
       "urgent": ""
     },
-    "format": "{name}: {icon} "
+    "format": "{name}: {icon} ",
+    "signal": 13
   }
 }

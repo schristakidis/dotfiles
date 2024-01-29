@@ -26,6 +26,9 @@
     min-height: 0;
     margin: 0;
     padding: 0;
+    font-family: "JetBrainsMono NF";
+    font-weight: bold;
+    font-size: 14px;
 }
 
 #window {
@@ -61,6 +64,10 @@ tooltip label{
     padding: 0 0.5em;
     margin: 4px 3px;
     color: #a6adc8;
+}
+
+#workspaces button.persistent {
+    color: #313244;
 }
 
 #workspaces button.focused {
