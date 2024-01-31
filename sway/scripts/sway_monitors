@@ -1,12 +1,16 @@
 #!/bin/python
 
+import i3ipc
 import json
 from subprocess import run
 from pathlib import Path
+import sys
 import os
 import argparse
 import logging
 import pprint
+import signal
+from time import time
 
 from os.path import expanduser
 home = expanduser("~")
@@ -32,7 +36,7 @@ def reload():
 
 
 class HMonitors:
-    def __init__(self, single):
+    def __init__(self, single=False):
         self.single = single
         self.waybar_conf = None
 
@@ -108,10 +112,37 @@ class HMonitors:
             json.dump(self.waybar_conf, f)
 
 
+def die(ipc):
+    ipc.main_quit()
+    sys.exit(0)
+
+
+def watch():
+    ipc = i3ipc.Connection()
+    last_change = None
+
+    for sig in [signal.SIGINT, signal.SIGTERM]:
+        signal.signal(sig, lambda signal, frame: die(ipc))
+
+    def w_event_handler(ipc, e):
+        nonlocal last_change
+        if e.change == 'move':
+            if not last_change or time() - last_change > 2:
+                last_change = time()
+                HMonitors().run()
+
+    ipc.on("workspace", w_event_handler)
+    ipc.main()
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='BSPWM Monitor helper')
 
     parser.add_argument('--single', action="store_true", default=False)
+    parser.add_argument('--watch', action="store_true", default=False)
 
     args = parser.parse_args()
-    HMonitors(args.single).run()
+    if args.watch:
+        watch()
+    else:
+        HMonitors(args.single).run()
