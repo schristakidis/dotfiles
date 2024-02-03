@@ -31,8 +31,14 @@
     font-size: 14px;
 }
 
+/* #window { */
+/*     margin-left: 10px; */
+/* } */
+
 #window {
-    margin-left: 10px;
+    border-radius: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 window#waybar {
@@ -142,6 +148,29 @@ tooltip label{
     /* animation-duration: 2s; */
 }
 
+#workspaces {
+    padding-right: 0px;
+    padding-left: 5px;
+}
+
+#custom-power_profile, #battery, #temperature{
+    color: #a6e3a1;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio {
+    color: #89b4fa;
+    border-left: 0px;
+    border-right: 0px;
+}
+
+#pulseaudio.microphone {
+    color: #cba6f7;
+    border-left: 0px;
+    border-right: 0px;
+}
+
 label:focus {
     background-color: #000000;
 }
@@ -149,4 +178,15 @@ label:focus {
 #tray {
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#battery {
+    color: #a6e3a1;
+    border-left: 0px;
+}
+
+#custom-menu {
+    color: #89b4fa;
+    margin-left: 10px;
+    border-right: 0px;
 }
