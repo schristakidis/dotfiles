@@ -1,0 +1,51 @@
+#!/usr/bin/env sh
+
+## General exports
+export XDG_CURRENT_DESKTOP=sway
+export XDG_SESSION_DESKTOP=sway
+export XDG_SESSION_TYPE=wayland
+
+# Check if system is running in virtual machine
+case "$(systemd-detect-virt)" in
+qemu)
+  export WLR_RENDERER=pixman
+  ;&
+qemu|kvm|oracle)
+  export WLR_NO_HARDWARE_CURSORS=1
+  ;;
+esac
+
+# Apply Nvidia-specific variables
+if [ -d /sys/module/nvidia ] && [ ! -d /sys/module/amdgpu ] && [ ! -d /sys/module/i915 ]; then
+    export WLR_NO_HARDWARE_CURSORS=1
+    export GBM_BACKEND=nvidia-drm
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export LIBVA_DRIVER_NAME=nvidia
+fi
+
+## Load system environment customizations
+if [ -d /etc/environment.d ]; then
+    set -o allexport
+    for f in /etc/environment.d/*.conf; do
+        # shellcheck source=/dev/null
+        . "$f"
+    done
+    set +o allexport
+fi
+
+## Load user environment customizations
+if [ -d "${XDG_CONFIG_HOME:-$HOME/.config/sway}/environment.d" ]; then
+    set -o allexport
+    for i in "${XDG_CONFIG_HOME:-$HOME/.config/sway}/environment.d"/*.conf; do
+        # shellcheck source=/dev/null
+        . "$i"
+    done
+    set +o allexport
+fi
+
+# Check if Nvidia driver installed, start Sway and send output to the journal
+if [ -d /sys/module/nvidia ]; then
+    exec systemd-cat -- /usr/bin/sway --unsupported-gpu $@
+else
+    exec systemd-cat -- /usr/bin/sway $@
+fi

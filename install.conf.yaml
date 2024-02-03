@@ -11,10 +11,13 @@
         ~/.vimrc: vim/vimrc
         ~/.config/nvim: nvim
         ~/.gitconfig: git/gitconfig
-        ~/.config/powerline: powerline 
         ~/.config/alacritty: alacritty
         ~/.config/sway: sway
-        ~/.config/i3: i3
+        ~/.config/swayidle: swayidle
+        ~/.config/swaylock: swaylock
+        ~/.config/nwg-drawer: nwg-drawer
+        ~/.config/nwg-look: nwg-look
+        ~/.config/nwg-bar: nwg-bar
         ~/.config/sxhkd: sxhkd
         ~/.config/dunst: dunst
         ~/.config/bspwm: bspwm
@@ -32,6 +35,9 @@
 - shell:
         - 
           command: git submodule update --init --recursive
+          stdout: true
+        -
+          command: bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
           stdout: true
         -
           command: ~/.dotfiles/resources/fonts/install.sh

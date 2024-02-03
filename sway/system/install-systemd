@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# https://github.com/alebastr/sway-systemd/tree/main
+#
+
+git clone https://github.com/alebastr/sway-systemd.git /tmp/sway-systemd
+cp /tmp/sway-systemd/units/*.target $XDG_CONFIG_HOME/systemd/user/
+
+mkdir -p $XDG_CONFIG_HOME/sway-systemd
+cp /tmp/sway-systemd/src/* $XDG_CONFIG_HOME/sway-systemd/
+
+systemctl --user daemon-reload
