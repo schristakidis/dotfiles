@@ -3,7 +3,7 @@ local M = {
   dependencies = {
     "onsails/lspkind-nvim",
     'ray-x/lsp_signature.nvim',
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     "nvim-lua/plenary.nvim",
     'b0o/SchemaStore.nvim',
     'someone-stole-my-name/yaml-companion.nvim',
