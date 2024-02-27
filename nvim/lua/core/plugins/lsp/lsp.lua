@@ -9,6 +9,7 @@ local servers = {
     "terraformls",
     "yamlls",
     "vimls",
+    "jsonls",
     -- "phpactor",
     "gopls"
 }
@@ -204,7 +205,6 @@ null_ls.setup({
         }),
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.jq,
         null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports,
         null_ls.builtins.formatting.golines,
