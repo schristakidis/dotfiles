@@ -93,7 +93,10 @@ class HMonitors:
         logging.info('Multi setup')
         first, second = self.get_order()
 
-        self.create_waybar_conf(first, second)
+        if 'eDP-1' in self.monitors:
+            self.create_waybar_conf(first, second)
+        else:
+            self.create_waybar_conf(second, first)
 
     def create_waybar_conf(self, first_monitor, second_monitor):
         with open(WAYBAR_TEMPLATE) as f:
