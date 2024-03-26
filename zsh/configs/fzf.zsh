@@ -94,6 +94,16 @@ flpass() {
     # lpass logout -f
 }
 
+
+fpass() {
+    local prefix
+    prefix="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+    choice="$(find -L "$prefix" \
+        -name "*.gpg" -type f | \
+        sed -e "s#${prefix}/\{0,1\}##" -e 's#\.gpg##' -e 's#\\#\\\\#' | sort | fzf)"
+    pass show -c $choice
+}
+
 fh() {
     print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
