@@ -3,6 +3,7 @@ M = {
   dependencies = {
     'nvim-neotest/nvim-nio',
     'nvim-neotest/neotest-python',
+    "nvim-neotest/neotest-go",
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
     "antoinemadec/FixCursorHold.nvim",
@@ -12,7 +13,8 @@ M = {
       adapters = {
         require("neotest-python")({
           python = "python"
-        })
+        }),
+        require("neotest-go")
       }
     })
 

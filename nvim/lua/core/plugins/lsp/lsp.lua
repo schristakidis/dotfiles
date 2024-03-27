@@ -9,6 +9,7 @@ local servers = {
     "terraformls",
     "yamlls",
     "vimls",
+    "jsonls",
     -- "phpactor",
     "gopls"
 }
@@ -79,7 +80,7 @@ local on_attach = function(_, bufnr)
         update_in_insert = false,
     })
 
-    local signs = { Error = " ", Warn = "", Hint = " ", Info = " " }
+    local signs = { Error = " ", Warn = "", Hint = " ", Info = "" }
 
     for type, icon in pairs(signs) do
         local hl = "DiagnosticSign" .. type
@@ -190,6 +191,7 @@ end
 
 
 local null_ls = require("null-ls")
+local augroup = vim.api.nvim_create_augroup("GoLspFormatting", {})
 
 null_ls.setup({
     sources = {
@@ -203,10 +205,26 @@ null_ls.setup({
         }),
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.jq,
-        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports,
-    }
+        null_ls.builtins.formatting.golines,
+    },
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({
+                group = augroup,
+                buffer = bufnr,
+            })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                pattern = { '*.go'},
+                group = augroup,
+                -- buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                end
+            })
+        end
+    end,
 })
 
 require("mason-null-ls").setup({
