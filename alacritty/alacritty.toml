@@ -1,4 +1,12 @@
-import = ["~/.config/alacritty/colors.toml", "~/.config/alacritty/fonts.toml"]
+import = [
+    "~/.config/alacritty/fonts.toml",
+    # "~/.config/alacritty/onedark.toml",
+    # "~/.config/alacritty/catppuccin-latte.toml",
+    # "~/.config/alacritty/catppuccin-frappe.toml",
+    "~/.config/alacritty/catppuccin-macchiato.toml",
+    # "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
 live_config_reload = true
 
 [cursor]
