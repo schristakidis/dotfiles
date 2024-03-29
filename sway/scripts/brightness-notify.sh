@@ -1,7 +1,8 @@
 #!/bin/sh
 
 VALUE=$(light -G | cut -d'.' -f1)
-TEXT="Brightness: ${VALUE}%"
+# TEXT="Brightness: ${VALUE}%"
+TEXT="Brightness "
 
 notify-send \
     --expire-time 800 \

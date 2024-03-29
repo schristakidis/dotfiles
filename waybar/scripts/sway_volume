@@ -1,6 +1,6 @@
 #!/bin/bash
 
-volume_bar=/usr/share/sway/scripts/volume-notify.sh
+volume_bar=$HOME/.dotfiles/sway/scripts/volume-notify.sh
 iDIR="$HOME/.dotfiles/waybar/icons"
 
 # Get Volume

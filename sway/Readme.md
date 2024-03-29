@@ -48,7 +48,7 @@ Python:
 ```sh
 ./install-systemd
 sudo cp start-sway /usr/bin
-cp system/custom-sway.session /usr/share/wayland-sessions/
+cp system/custom-sway.desktop /usr/share/wayland-sessions/
 ```
 
 ### User Services

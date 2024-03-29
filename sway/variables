@@ -27,10 +27,8 @@ set $bindsym bindsym --to-code
 # Brightness notification
 set $brightness_bar ~/.config/sway/scripts/brightness-notify.sh
 
-# brightness control
-set $brightness_step bash -c 'echo $(( $(light -Mr) / 100 * 5 < 1 ? 1 : $(( $(light -Mr) / 100 * 5 )) ))'
-set $brightness_up light -r -A $($brightness_step) && $brightness_bar
-set $brightness_down light -r -U $($brightness_step) && $brightness_bar
+set $brightness_up brightnessctl set 10%+  && ~/.config/sway/scripts/brightness-notify.sh
+set $brightness_down brightnessctl set 10%-  && ~/.config/sway/scripts/brightness-notify.sh
 
 # workspace names
 set $ws1 number 1
@@ -57,7 +55,8 @@ set $screenshot_selection $pipe_selection | $swappy && $notify_paste
 set $screenshot_active $pipe_active | $swappy && $notify_paste
 
 # PolicyKit agent
-set $polkit_agent /usr/bin/mate-polkit &
+# set $polkit_agent /usr/bin/mate-polkit &  # that's for ubuntu
+set $polkit_agent /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 # Night color
 set $wlsunset '[ -x "$(command -v wlsunset)" ] && ~/.config/sway/scripts/sunset.sh "on"'
@@ -90,6 +89,6 @@ set $watch_playerctl '[ -x "$(command -v playerctl)" ] && pkill playerctl; playe
 set $calendar_daemon 'calcurse --daemon'
 
 # Notifications from Swappy
-set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
+# set $swappy_notify '[ -x "$(command -v swappy)" ] && /usr/share/sway/scripts/screenshot-notify.sh'
 
 set $lock $HOME/.config/swaylock/lock.sh
