@@ -1,4 +1,4 @@
-exec sway-monitors
+exec ~/.bin/sway-monitors
 
 # theme variables
 include $HOME/.config/sway/theme/variables

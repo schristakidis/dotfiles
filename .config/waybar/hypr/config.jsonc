@@ -102,10 +102,10 @@
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "",
-        "on-click": "sway_volume --toggle",
-        "on-click-right": "hypr_mixer",
-        "on-scroll-up": "sway_volume --inc",
-        "on-scroll-down": "sway_volume --dec",
+        "on-click": "~/.bin/sway_volume --toggle",
+        "on-click-right": "~/.bin/hypr_mixer",
+        "on-scroll-up": "~/.bin/sway_volume --inc",
+        "on-scroll-down": "~/.bin/sway_volume --dec",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -127,10 +127,10 @@
         "format": "{format_source}",
         "format-source": "",
         "format-source-muted": "",
-        "on-click": "sway_volume --toggle-mic",
+        "on-click": "~/.bin/sway_volume --toggle-mic",
         "on-click-right": "pavucontrol",
-        "on-scroll-up": "sway_volume --mic-inc",
-        "on-scroll-down": "sway_volume --mic-dec",
+        "on-scroll-up": "~/.bin/sway_volume --mic-inc",
+        "on-scroll-down": "~/.bin/sway_volume --mic-dec",
         "scroll-step": 5,
         "tooltip": true,
         "tooltip-format": " at {volume}%"
@@ -145,8 +145,8 @@
             "󰃟",
             "󰃠"
         ],
-        "on-scroll-up": "brightness.sh --inc",
-        "on-scroll-down": "brightness.sh --dec"
+        "on-scroll-up": "~/.bin/brightness.sh --inc",
+        "on-scroll-down": "~/.bin/brightness.sh --dec"
     },
     "tray": {
         "icon-size": 16,
@@ -154,8 +154,8 @@
     },
     "custom/updates": {
         "format": "{}",
-        "exec": "update-sys",
-        "on-click": "update-sys update",
+        "exec": "~/.bin/update-sys",
+        "on-click": "~/.bin/update-sys update",
         "interval": 300,
         "tooltip": true
     },
@@ -169,7 +169,7 @@
         "format": "{icon} {}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "weather.py",
+        "exec": "~/.bin/weather.py",
         "return-type": "json",
         "format-icons": {
             "Unknown": "✨",

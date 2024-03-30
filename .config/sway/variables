@@ -3,6 +3,8 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 
+set $bin_path ~/.bin
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -12,7 +14,7 @@ set $right l
 
 # Your preferred terminal emulator
 set $term alacritty
-set $term_cwd $term --working-directory "$(swaycwd.sh 2>/dev/null || echo $HOME)"
+set $term_cwd $term --working-directory "$($bin_path/swaycwd.sh 2>/dev/null || echo $HOME)"
 set $term_float $term --class floating_shell
 
 
@@ -22,8 +24,8 @@ set $menu rofi -show combi -combi-modi "drun,run" -terminal $term -ssh-command "
 # Add --to-code to bindsym, support for non-latin layouts
 set $bindsym bindsym --to-code
 
-set $brightness_up brightness.sh --inc
-set $brightness_down brightness.sh --dec
+set $brightness_up $bin_path/brightness.sh --inc
+set $brightness_down $bin_path/brightness.sh --dec
 
 # workspace names
 set $ws1 number 1
@@ -54,7 +56,7 @@ set $screenshot_active $pipe_active | $swappy && $notify_paste
 set $polkit_agent /usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
 # Night color
-set $wlsunset '[ -x "$(command -v wlsunset)" ] && sunset.sh "on"'
+set $wlsunset '[ -x "$(command -v wlsunset)" ] && $bin_path/sunset.sh "on"'
 
 # Autotiling script
 # set $autotiling '[ -x "$(command -v autotiling)" ] && autotiling -w 1 3 5 7 9'
