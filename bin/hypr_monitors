@@ -22,7 +22,7 @@ logging.basicConfig(
 pp = pprint.PrettyPrinter(indent=4)
 
 DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
-WAYBAR_TEMPLATE = DOTDIR.joinpath('waybar/workspace_template.json')
+WAYBAR_TEMPLATE = DOTDIR.joinpath('.config/waybar/workspace_template.json')
 WAYBAR_DEST = DOTDIR.joinpath('tmp/workspaces.jsonc')
 
 
