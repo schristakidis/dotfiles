@@ -54,7 +54,7 @@ zinit wait'0' lucid light-mode for \
 
 zinit wait lucid light-mode for \
  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
- atload"fast-theme $HOME/.dotfiles/fsh/mytheme.ini >/dev/null" \
+ atload"fast-theme $HOME/.dotfiles/resources/fsh/mytheme.ini >/dev/null" \
       zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
   atload"bindkey '^ ' autosuggest-accept" \
@@ -82,7 +82,7 @@ zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
 zinit ice lucid wait"1"
-zinit snippet $HOME/.dotfiles/zsh/virtual.zsh
+zinit snippet $HOME/.config/zsh/virtual.zsh
 
 for zsh_source in $ZDOTDIR/configs/*.zsh; do
     source $zsh_source
@@ -106,7 +106,7 @@ zstyle ':completion:*' menu select
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/.dotfiles/zsh/.p10k.zsh ]] || source ~/.dotfiles/zsh/.p10k.zsh
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 #
 # for completions move the _completions_file to .local/share/zinit/completions/
 autoload -U compinit && compinit

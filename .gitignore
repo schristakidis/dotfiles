@@ -1,5 +1,8 @@
 tmp/*
 !tmp/.gitkeep
+.config/tmux/plugins/*
+
+!.config/tmux/plugins/.gitkeep
 .config/zsh/local/*
 .config/zsh/.zinit
 !.config/zsh/local/.gitkeep.zsh

@@ -3,7 +3,7 @@
 
 ^/README.*
 ^/Readme.*
-tmp
-wiki
-bin
-resources
+/tmp
+/wiki
+/bin
+/resources

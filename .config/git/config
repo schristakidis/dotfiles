@@ -18,15 +18,12 @@
 	email = athanasios.christakidis@motionpicturesolutions.com
 [core]
 	editor = nvim
-	excludesfile = ~/.dotfiles/git/gitignore_global
+	excludesfile = ~/.config/git/ignore
 [merge]
 	tool = neovim -d
 [push]
 	default = simple
     autoSetupRemote = true
-[init]
-	templatedir = ~/.dotfiles/git/git_template
-	defaultBranch = master
 [color]
 	diff = auto
 	status = auto
