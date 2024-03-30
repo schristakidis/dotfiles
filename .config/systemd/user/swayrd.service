@@ -1,1 +1,15 @@
-/home/achristakidis/.dotfiles/sway/system/systemd/./swayrd.service
+[Unit]
+Description=Window switcher for Sway
+Documentation=https://sr.ht/~tsdh/swayr/
+PartOf=sway-session.target
+After=sway-session.target
+
+[Service]
+Type=simple
+Environment=RUST_BACKTRACE=1
+# Environment=RUST_LOG=swayr=debug
+ExecStart=/usr/bin/swayrd
+Restart=on-failure
+
+[Install]
+WantedBy=sway-session.target

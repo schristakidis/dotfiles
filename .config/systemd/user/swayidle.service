@@ -1,1 +1,12 @@
-/home/achristakidis/.dotfiles/sway/system/systemd/./swayidle.service
+[Unit]
+Description=Idle manager for Wayland
+Documentation=man:swayidle(1)
+PartOf=graphical-session.target
+ConditionPathExists=/usr/bin/swayidle
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/swayidle
+
+[Install]
+WantedBy=sway-session.target
