@@ -1,0 +1,15 @@
+#!/bin/bash
+
+copy() {
+    cliphist list | rofi -config ~/.config/rofi/clip.rasi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy
+}
+
+delete () {
+    cliphist list | rofi -config ~/.config/rofi/clip.rasi -dmenu -font "$gui-font" -p "Select item to delete" -lines 10 -width 35 | cliphist delete
+}
+
+if [[ "$1" == "--delete" ]]; then
+    delete
+else
+    copy
+fi

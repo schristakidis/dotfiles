@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+id=$(hyprctl clients -j | grep "special:pmixer")
+
+if [ "$id" == "" ]
+ then
+    alacritty --class pmixer,pmixer -e pulsemixer &
+    hyprctl dispatch  togglespecialworkspace pmixer
+ else
+    hyprctl dispatch togglespecialworkspace pmixer
+fi

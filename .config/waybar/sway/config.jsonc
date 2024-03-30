@@ -46,8 +46,8 @@
         "format": "",
         "interval": "once",
         "return-type": "json",
-        "on-click": "swaymsg -q exec ~/.config/sway/scripts/clipmenu; pkill -RTMIN+9 waybar",
-        "on-click-right": "swaymsg -q \"exec ~/.config/sway/scripts/clipmenu --delete\"; pkill -RTMIN+9 waybar",
+        "on-click": "swaymsg -q exec clipmenu; pkill -RTMIN+9 waybar",
+        "on-click-right": "swaymsg -q \"exec clipmenu --delete\"; pkill -RTMIN+9 waybar",
         "on-click-middle": "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar",
         "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\r(Mid click to clear)'",
         "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
@@ -93,20 +93,20 @@
         },
         "tooltip-format": "{icon}  {volume}% ",
 
-        "on-click": "~/.config/waybar/scripts/swaymixer",
-        "on-click-middle": "~/.config/waybar/scripts/sway_volume --toggle",
+        "on-click": "swaymixer",
+        "on-click-middle": "sway_volume --toggle",
         "on-click-right": "swaymsg exec pavucontrol",
-        "on-scroll-up": "~/.config/waybar/scripts/sway_volume --inc",
-        "on-scroll-down": "~/.config/waybar/scripts/sway_volume --dec"
+        "on-scroll-up": "sway_volume --inc",
+        "on-scroll-down": "sway_volume --dec"
     },
     "pulseaudio#microphone": {
         "format": "{format_source} ",
         "format-source": "",
         "format-source-muted": "",
-        "on-click": "~/.config/waybar/scripts/sway_volume --toggle-mic",
+        "on-click": "sway_volume --toggle-mic",
         "on-click-right": "swaymsg exec pavucontrol",
-        "on-scroll-up": "~/.config/waybar/scripts/sway_volume --mic-inc",
-        "on-scroll-down": "~/.config/waybar/scripts/sway_volume --mic-dec",
+        "on-scroll-up": "sway_volume --mic-inc",
+        "on-scroll-down": "sway_volume --mic-dec",
         "scroll-step": 5,
         "tooltip": true,
         "tooltip-format": " at {volume}%"
@@ -131,8 +131,8 @@
             "󰃟",
             "󰃠"
         ],
-        "on-scroll-up": "~/.config/waybar/scripts/brightness --inc",
-        "on-scroll-down": "~/.config/waybar/scripts/brightness --dec"
+        "on-scroll-up": "brightness.sh --inc",
+        "on-scroll-down": "brightness.sh --dec"
     },
     "battery": {
         "format": "{icon}",
@@ -244,7 +244,7 @@
         "format": "{icon} {}",
         "tooltip": true,
         "interval": 3600,
-        "exec": "~/.config/waybar/scripts/weather.py",
+        "exec": "weather.py",
         "return-type": "json",
         "format-icons": {
             "Unknown": "✨",
@@ -290,9 +290,9 @@
             "on": "",
             "off": ""
         },
-        "exec": "location=off ~/.config/waybar/scripts/sunset.sh",
-        "on-click": "~/.config/waybar/scripts/sunset.sh toggle; pkill -RTMIN+6 waybar",
-        "exec-if": "~/.config/waybar/scripts/sunset.sh  check",
+        "exec": "location=off sunset.sh",
+        "on-click": "sunset.sh toggle; pkill -RTMIN+6 waybar",
+        "exec-if": "sunset.sh  check",
         "signal": 6
     },
     "tray": {

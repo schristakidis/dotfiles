@@ -102,10 +102,10 @@
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "",
-        "on-click": "~/.config/waybar/scripts/volume --toggle",
-        "on-click-right": "~/.config/waybar/scripts/wpmixer",
-        "on-scroll-up": "~/.config/waybar/scripts/volume --inc",
-        "on-scroll-down": "~/.config/waybar/scripts/volume --dec",
+        "on-click": "sway_volume --toggle",
+        "on-click-right": "hypr_mixer",
+        "on-scroll-up": "sway_volume --inc",
+        "on-scroll-down": "sway_volume --dec",
         "scroll-step": 5,
         "format-icons": {
             "headphone": "",
@@ -127,10 +127,10 @@
         "format": "{format_source}",
         "format-source": "",
         "format-source-muted": "",
-        "on-click": "~/.config/waybar/scripts/volume --toggle-mic",
+        "on-click": "sway_volume --toggle-mic",
         "on-click-right": "pavucontrol",
-        "on-scroll-up": "~/.config/waybar/scripts/volume --mic-inc",
-        "on-scroll-down": "~/.config/waybar/scripts/volume --mic-dec",
+        "on-scroll-up": "sway_volume --mic-inc",
+        "on-scroll-down": "sway_volume --mic-dec",
         "scroll-step": 5,
         "tooltip": true,
         "tooltip-format": " at {volume}%"
@@ -145,8 +145,8 @@
             "󰃟",
             "󰃠"
         ],
-        "on-scroll-up": "~/.config/waybar/scripts/brightness --inc",
-        "on-scroll-down": "~/.config/waybar/scripts/brightness --dec"
+        "on-scroll-up": "brightness.sh --inc",
+        "on-scroll-down": "brightness.sh --dec"
     },
     "tray": {
         "icon-size": 16,
@@ -154,8 +154,8 @@
     },
     "custom/updates": {
         "format": "{}",
-        "exec": "~/.config/waybar/scripts/update-sys",
-        "on-click": "~/.config/waybar/scripts/update-sys update",
+        "exec": "update-sys",
+        "on-click": "update-sys update",
         "interval": 300,
         "tooltip": true
     },
@@ -165,12 +165,33 @@
     },
 
     "custom/weather": {
-        //shows the current weather and forecast
-        "tooltip" : true,
-        "format" : "{}",
-        "interval" : 30,
-        "exec" : "~/.config/waybar/scripts/waybar-wttr-c.py",
-        "return-type" : "json"
+        "icon-size": 42,
+        "format": "{icon} {}",
+        "tooltip": true,
+        "interval": 3600,
+        "exec": "weather.py",
+        "return-type": "json",
+        "format-icons": {
+            "Unknown": "✨",
+            "Cloudy": "",
+            "Fog": "🌫",
+            "HeavyRain": "🌧",
+            "HeavyShowers": "🌧",
+            "HeavySnow": "❄️",
+            "HeavySnowShowers": "❄️",
+            "LightRain": "🌦",
+            "LightShowers": "🌦",
+            "LightSleet": "🌧",
+            "LightSleetShowers": "🌧",
+            "LightSnow": "🌨",
+            "LightSnowShowers": "🌨",
+            "PartlyCloudy": "⛅️",
+            "Sunny": "☀️",
+            "ThunderyHeavyRain": "🌩",
+            "ThunderyShowers": "⛈",
+            "ThunderySnowShowers": "⛈",
+            "VeryCloudy": ""
+        }
     },
     "temperature": {
         "thermal-zone": 1,
