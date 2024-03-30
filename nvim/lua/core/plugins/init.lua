@@ -45,5 +45,10 @@ return {
   { 'mzlogin/vim-markdown-toc',      ft = 'markdown' },
   'dhruvasagar/vim-table-mode',
   { 'iamcco/markdown-preview.nvim', build = "cd app && yarn install" },
-  { "ellisonleao/glow.nvim",        config = true,                   cmd = "Glow" }
+  { "ellisonleao/glow.nvim",        config = true,                   cmd = "Glow" },
+  {
+    "vhyrro/luarocks.nvim",
+    priority = 1000,
+    config = true
+   }
 }

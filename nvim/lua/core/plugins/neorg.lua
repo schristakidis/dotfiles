@@ -1,17 +1,22 @@
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     pattern = { "*.norg" },
-    command = "set conceallevel=3"
+    callback = function()
+        vim.opt.ft = 'norg'
+        vim.opt_local.conceallevel = 3
+    end,
 })
+
 
 M = {
     'nvim-neorg/neorg',
     dependencies = {
-        "nvim-lua/plenary.nvim"
+        "luarocks.nvim"
     },
     ft = "norg",
     lazy = false,
     -- cmd = "Neorg",
-    build = ":Neorg sync-parsers",
+    versions = "*",
+    -- config = true,
     opts = {
         load = {
             ["core.defaults"] = {}, -- Loads default behaviour
