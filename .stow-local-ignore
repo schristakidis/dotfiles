@@ -1,0 +1,9 @@
+\.git
+\.gitignore
+
+^/README.*
+^/Readme.*
+tmp
+wiki
+bin
+resources

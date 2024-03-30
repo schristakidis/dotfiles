@@ -46,7 +46,7 @@ Python:
 
 ## Setup Sway
 ```sh
-./install-systemd
+# ./install-systemd
 sudo cp start-sway /usr/bin
 cp system/custom-sway.desktop /usr/share/wayland-sessions/
 ```
