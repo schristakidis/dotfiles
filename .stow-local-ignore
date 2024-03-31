@@ -3,6 +3,7 @@
 
 ^/README.*
 ^/Readme.*
+^/install.md
 /tmp
 /wiki
 /old_scripts

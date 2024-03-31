@@ -44,7 +44,15 @@ return {
   { 'plasticboy/vim-markdown',       ft = 'markdown' },
   { 'mzlogin/vim-markdown-toc',      ft = 'markdown' },
   'dhruvasagar/vim-table-mode',
-  { 'iamcco/markdown-preview.nvim', build = "cd app && yarn install" },
+  {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      build = "cd app && yarn install",
+      init = function()
+          vim.g.mkdp_filetypes = { "markdown" }
+      end,
+      ft = { "markdown" },
+  },
   { "ellisonleao/glow.nvim",        config = true,                   cmd = "Glow" },
   {
     "vhyrro/luarocks.nvim",
