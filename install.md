@@ -171,7 +171,8 @@
     - wireplumber
     - xdg-desktop-portal-wlr
     - xdg-desktop-portal-gtk
-    - yaru-remix-gtk-theme
+    - yaru-gtk-theme
+    - yaru-icon-theme
     - yaru-remix-icon-theme
     - ydotool
     - python-dbus-next
@@ -179,7 +180,23 @@
     - python-psutil
     - python-tenacity
     - python-xlib
+    - python-requests
+    - checkupdates-with-aur
 
 ## Install Hyperland
 ### Dependencies
     The same with sway but remove `xdg-desktop-portal-wlr` and install `xdg-desktop-portal-hyprland`
+
+## Misc
+### Set default applications
+Crate a file `.config/mimeapps.list`
+```
+[Default Applications]
+application/pdf=org.gnome.Evince.desktop;
+application/xhtml+xml=firefox.desktop;org.gnome.Epiphany.desktop;
+text/html=firefox.desktop;org.gnome.Epiphany.desktop;
+text/xml=firefox.desktop;
+x-scheme-handler/http=firefox.desktop;org.gnome.Epiphany.desktop;
+x-scheme-handler/https=firefox.desktop;org.gnome.Epiphany.desktop;
+```
+

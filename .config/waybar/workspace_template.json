@@ -11,11 +11,21 @@
       "class<firefox>": "",
       "class<firefox> title<.*github.*>": "",
       "class<firefox> title<.*gitlab.*>": "",
-      "vim": "",
-      "alacritty": ""
+      "title<.*nvim.*>": "",
+      "class<Alacritty>": "",
+      "class<Slack>": "",
+      "title<Microsoft Teams.*>": "\ue533",
+      "class<Thunderbird>": "\uf0e0"
     },
     "format": "{name}: {windows} ",
     "format-window-separator": " ",
     "window-rewrite-default": ""
+  },
+  "hyprland/window": {
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "🌎 $1",
+      "(.*) - Slack": "  $1"
+    },
+    "separate-outputs": true
   }
 }

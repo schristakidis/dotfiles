@@ -1,12 +1,12 @@
 [
  {
    "label": "Lock",
-   "exec": "swaymsg exec ~/.config/swaylock/lock.sh",
+   "exec": "hyprctl dispatch exec ~/.config/swaylock/lock.sh",
    "icon": "system-lock-screen"
  },
  {
    "label": "Logout",
-   "exec": "swaymsg exit",
+   "exec": "hyprctl dispatch exit",
    "icon": "system-log-out"
  },
  {

@@ -67,11 +67,16 @@ tooltip label{
 }
 
 #custom-launch_wofi,
+#custom-menu,
 #custom-lock_screen,
 #custom-light_dark,
 #custom-power_btn,
+#custom-power,
 #custom-power_profile,
 #custom-weather,
+#custom-dnd,
+#custom-clipboard,
+#custom-wlsunset,
 #custom-myhyprv,
 #window,
 #cpu,
@@ -91,6 +96,13 @@ tooltip label{
     padding: 0px 8px;
     margin: 0px 3px;
     border: 0px;
+}
+
+#idle_inhibitor {
+    opacity: 0.8;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin: 4px 3px;
 }
 
 #custom-launch_wofi {
@@ -153,4 +165,10 @@ tooltip label{
 #battery {
     color: #a6e3a1;
     border-left: 0px;
+}
+
+#custom-menu {
+    color: #89b4fa;
+    margin-left: 10px;
+    border-right: 0px;
 }
