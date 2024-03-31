@@ -65,6 +65,7 @@
     - ttf-font-awesome
     - ttf-jetbrains-mono-nerd
     - noto-fonts-emoji
+    - ttf-nerd-fonts-symbols-mono
 
 ## Nvidia
 - Install drivers
@@ -178,3 +179,7 @@
     - python-psutil
     - python-tenacity
     - python-xlib
+
+## Install Hyperland
+### Dependencies
+    The same with sway but remove `xdg-desktop-portal-wlr` and install `xdg-desktop-portal-hyprland`
