@@ -200,3 +200,34 @@ x-scheme-handler/http=firefox.desktop;org.gnome.Epiphany.desktop;
 x-scheme-handler/https=firefox.desktop;org.gnome.Epiphany.desktop;
 ```
 
+### Firefox pseudo fullscreen
+Set in `about:config` `full-screen-api.ignore-widgets` to `true`
+
+
+### MPS VPN
+```sh
+pyenv virtualenv 3.11.8 opensso
+pyenc activate opensso
+pip install openconnect-sso
+pip install requests==2.28.2
+```
+
+Add these at `~/.pyenv/versions/opensso/lib/python3.11/site-packages/openconnect_sso/app.py`
+```python
+import requests
+requests.packages.urllib3.util.ssl_.DEFAULT_CIPHERS += ':!DH'
+```
+
+Also comment out the lines for the totp `if credentials and not credentials.totp`
+
+In `~/.config/openconnect-sso/config.toml` change the otp sections to
+```
+[[auto_fill_rules."https://*"]]
+selector = "input[data-report-event=Signin_Submit]"
+action = "click"
+
+[[auto_fill_rules."https://*"]]
+selector = "input[type=tel]"
+fill = "totp"
+```
+

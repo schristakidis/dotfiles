@@ -57,6 +57,22 @@
         "exec": "printf '{\"alt\":\"%s\",\"tooltip\":\"DND mode: %s\"}' $(dunstctl is-paused | grep -q 'true' && echo dnd || echo default) $(dunstctl is-paused)",
         "signal": 11
     },
+    "custom/playerctl": {
+        "interval": "once",
+        "tooltip": true,
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "Playing": "",
+            "Paused": ""
+        },
+        "exec": "playerctl metadata --format '{\"alt\": \"{{status}}\", \"tooltip\": \"{{playerName}}:  {{markup_escape(title)}} - {{markup_escape(artist)}}\" }'",
+        "on-click": "playerctl play-pause; pkill -RTMIN+5 waybar",
+        "on-click-right": "playerctl next; pkill -RTMIN+5 waybar",
+        "on-scroll-up": "playerctl position 10+; pkill -RTMIN+5 waybar",
+        "on-scroll-down": "playerctl position 10-; pkill -RTMIN+5 waybar",
+        "signal": 5
+    },
     "custom/power_btn": {
         "format": "",
         "on-click": "sh -c '(sleep 0.5s; wlogout --protocol layer-shell)' & disown",
@@ -205,7 +221,7 @@
         "format-alt-click": "click-right",
         "format-alt": "{:%e %b %H:%M}",
         "tooltip": true,
-        "on-click": "alacritty --class floating_cal -e calcurse"
+        "on-click": "~/.bin/hypr_cal"
     },
     "custom/wlsunset": {
         "interval": "once",

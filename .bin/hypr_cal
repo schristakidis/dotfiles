@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+id=$(hyprctl clients -j | grep "special:cal")
+
+if [ "$id" == "" ]
+ then
+    alacritty --class floating_cal -e calcurse &
+    hyprctl dispatch  togglespecialworkspace cal
+ else
+    hyprctl dispatch togglespecialworkspace cal
+fi
+
