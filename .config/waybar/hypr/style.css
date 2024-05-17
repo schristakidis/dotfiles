@@ -13,6 +13,11 @@ window#waybar {
     opacity: 0.7;
 }
 
+window#waybar.fullscreen #window {
+    background-color: #ae1e2e;
+    /* color: #ae1e2e; */
+}
+
 tooltip {
     background: #1e1e2e;
     opacity: 0.8;

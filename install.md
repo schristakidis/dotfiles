@@ -198,7 +198,11 @@ text/html=firefox.desktop;org.gnome.Epiphany.desktop;
 text/xml=firefox.desktop;
 x-scheme-handler/http=firefox.desktop;org.gnome.Epiphany.desktop;
 x-scheme-handler/https=firefox.desktop;org.gnome.Epiphany.desktop;
+application/msword=libreoffice-writer.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop
 ```
+
+The default file can be found at `/usr/share/applications/mimeinfo.cache`
 
 ### Firefox pseudo fullscreen
 Set in `about:config` `full-screen-api.ignore-widgets` to `true`
@@ -231,3 +235,12 @@ selector = "input[type=tel]"
 fill = "totp"
 ```
 
+### Tmux and 1password
+Add in `~/.config/tmux/plugins/tmux-1password/scripts/utils/clipboard.sh`
+```
+elif [[ "$(uname)" == "Linux" ]] && cmd::exists "wl-copy"; then
+echo -n "$1" | wl-copy
+
+elif [[ "$(uname)" == "Linux" ]] && cmd::exists "wl-copy"; then
+tmux run-shell -b "sleep $SEC && wl-copy -c"
+```

@@ -29,6 +29,7 @@
         "backlight",
         "tray",
         "custom/updates",
+        "hyprland/language",
         "clock",
         "custom/power"
     ],
@@ -284,5 +285,10 @@
             "deactivated": "󰛑 "
         },
         "tooltip": true
+    },
+    "hyprland/language": {
+        "format": "{}",
+        "format-en": "EN",
+        "format-gr": "GR"
     }
 }

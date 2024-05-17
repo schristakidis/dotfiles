@@ -32,7 +32,7 @@ local M = {
       "--line-number",
       "--column",
       "--smart-case",
-      "-."
+      "--hidden"
     }
     telescope.setup({
       extensions = {

@@ -7,7 +7,7 @@
       "DP-3": [1, 2, 3, 4, 5]
     },
     "window-rewrite": {
-      "title<.*youtube.*>": "",
+      "title<.*youtube.*>": "󰗃",
       "class<firefox>": "",
       "class<firefox> title<.*github.*>": "",
       "class<firefox> title<.*gitlab.*>": "",
