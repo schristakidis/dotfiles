@@ -23,7 +23,7 @@ local M = {
         ["<C-c>"] = "actions.cd",
         ["~"] = "actions.open_terminal",
         ["."] = "actions.toggle_hidden",
-        ["<C-y>"] = "actions.copy_entry_path",
+        -- ["<C-y>"] = "actions.copy_entry_path",
       },
     })
   end,

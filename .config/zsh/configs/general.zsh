@@ -82,3 +82,5 @@ bindkey "^f" forward-word
 bindkey "^b" backward-word
 
 export AWS_PROFILE=staging
+
+eval "$(zoxide init --cmd cd zsh)"
