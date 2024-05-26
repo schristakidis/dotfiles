@@ -11,7 +11,8 @@ local servers = {
     "vimls",
     "jsonls",
     -- "phpactor",
-    "gopls"
+    "gopls",
+    "helm_ls",
 }
 
 require("mason").setup()
@@ -171,17 +172,23 @@ for _, lsp in pairs(servers) do
         }
     elseif lsp == "yamlls" then
         local cfg = require("yaml-companion").setup()
-        local cfg2 = require("yaml-companion").setup()
         cfg.on_attach = function(_, bufnr)
-            cfg2.on_attach(_, bufnr)
             on_attach(_, bufnr)
         end
-        cfg.filetypes = { "yaml", "yaml.docker-compose", "helm" }
+        cfg.filetypes = { "yaml", "yaml.docker-compose" }
         cfg.capabilities = get_capabilities()
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
     elseif lsp == "gopls" then
         default_opts.settings = require('core.plugins.lsp.servers.gopls').get_settings()
+    elseif lsp == "helm_ls" then
+        default_opts.settings = {
+            ['helm-ls'] = {
+                yamlls = {
+                    path = "yaml-language-server",
+                }
+            }
+        }
     end
 
     if enable then

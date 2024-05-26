@@ -12,7 +12,7 @@ local M = {
     local gps = require("nvim-gps")
 
     local icons = {
-      virtualenv = '🐍',
+      virtualenv = '󰌠',
     }
 
     local onedark_colors = {
