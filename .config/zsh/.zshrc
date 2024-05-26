@@ -9,13 +9,13 @@ fi
 # ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # ### Added by Zinit's installer
-# if [[ ! -f $ZINIT_DIR/zinit.zsh ]]; then
-#     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-#     command mkdir -p "$ZINIT_DIR" && command chmod g-rwX "$ZINIT_DIR"
-#     command git clone https://github.com/zdharma/zinit "$ZINIT_DIR" && \
-#         print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-#         print -P "%F{160}▓▒░ The clone has failed.%f%b"
-# fi
+if [[ ! -d "$ZINIT_HOME" ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$(dirname $ZINIT_HOME)"
+    command git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
 source "$ZINIT_HOME/zinit.zsh"
 ZSH_AUTOSUGGEST_HISTORY_IGNORE="(cd|k exec|k logs) *"
@@ -105,8 +105,11 @@ zstyle ':prezto:*:*' color 'yes'
 zstyle ':completion:*' menu select
 zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=34}:${(s.:.)LS_COLORS}")'
 
-# To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 #
 # for completions move the _completions_file to .local/share/zinit/completions/
 autoload -U compinit && compinit
+
+eval "$(zoxide init --cmd cd zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh

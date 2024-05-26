@@ -18,7 +18,13 @@ return {
     end
   },
   {
-    'declancm/maximize.nvim', config = true
+    'declancm/maximize.nvim',
+    config = function ()
+        require('maximize').setup()
+        vim.keymap.set({ "i", "n" }, "<leader>z", function ()
+            require('maximize').toggle()
+        end)
+    end
   },
 
   -- git
