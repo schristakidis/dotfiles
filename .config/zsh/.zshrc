@@ -53,8 +53,8 @@ zinit wait'0' lucid light-mode for \
     OMZP::istioctl
 
 zinit wait lucid light-mode for \
- atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
- atload"fast-theme $HOME/.dotfiles/resources/fsh/mytheme.ini >/dev/null" \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay; eval $(zoxide init --cmd cd zsh)" \
+  atload"fast-theme $HOME/.dotfiles/resources/fsh/mytheme.ini >/dev/null" \
       zdharma-continuum/fast-syntax-highlighting \
   atload"_zsh_autosuggest_start" \
   atload"bindkey '^ ' autosuggest-accept" \
@@ -107,9 +107,9 @@ zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:
 
 #
 # for completions move the _completions_file to .local/share/zinit/completions/
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
 
-eval "$(zoxide init --cmd cd zsh)"
+# eval "$(zoxide init --cmd cd zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.dotfiles/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
