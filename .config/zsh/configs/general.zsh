@@ -3,15 +3,6 @@ if [[ -z "$LANG" ]]; then
 fi
 export LC_CTYPE=en_US.UTF-8
 
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
-
-# Set the list of directories that Zsh searches for programs.
-path=(
-    /usr/local/{bin,sbin}
-    $path
-)
-
 export TERM=screen-256color
 
 export GOPATH="$HOME/go"
@@ -57,10 +48,6 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
     source /usr/share/nvm/init-nvm.sh
 elif [ -f $HOME/.nvm/nvm.sh ]; then
     source $HOME/.nvm/nvm.sh
-fi
-
-if [ -f /usr/share/doc/pkgfile/command-not-found.zsh ]; then
-    source /usr/share/doc/pkgfile/command-not-found.zsh
 fi
 
 alias vim="nvim"

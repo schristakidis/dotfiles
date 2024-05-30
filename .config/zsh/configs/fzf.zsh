@@ -6,10 +6,6 @@ else
     source /usr/share/fzf/key-bindings.zsh 2> /dev/null
 fi
 
-if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
-    export PATH="$PATH:$HOME/.fzf/bin"
-fi
-
 export FZF_TMUX=1
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --color=always'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
