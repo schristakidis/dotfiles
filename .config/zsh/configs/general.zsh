@@ -55,9 +55,9 @@ alias tmux="TERM=xterm-256color tmux -2"
 alias k="kubectl"
 alias x="kubectx"
 
-alias reboot="sudo /usr/bin/systemctl reboot"
-alias poweroff="sudo /usr/bin/systemctl poweroff"
-alias halt="sudo /usr/bin/systemctl halt"
+alias reboot="/usr/bin/systemctl reboot"
+alias poweroff="/usr/bin/systemctl poweroff"
+alias halt="/usr/bin/systemctl halt"
 
 bindkey -v
 
