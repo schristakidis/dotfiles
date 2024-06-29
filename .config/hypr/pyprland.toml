@@ -1,0 +1,42 @@
+[pyprland]
+plugins = [
+    "fetch_client_menu",
+    "scratchpads",
+    "expose"
+]
+
+[scratchpads.pmixer]
+animation = "fromTop"
+command = "alacritty --class pamixer,pamixer -e pulsemixer"
+class = "pamixer"
+size ="40% 30%"
+position = "60% 2%"
+multi = false
+pinned = false
+lazy = true
+alt_toggle = true
+smart_focus = false
+
+[scratchpads.pavu]
+animation = "fromTop"
+command = "pavucontrol"
+class = "pavu"
+size ="40% 40%"
+position = "30% 30%"
+multi = false
+pinned = false
+lazy = true
+alt_toggle = true
+smart_focus = false
+
+[scratchpads.cal]
+animation = "fromTop"
+command = "alacritty --class cal,cal -e calcurse"
+class = "cal"
+size ="40% 30%"
+position = "60% 2%"
+multi = false
+pinned = false
+lazy = true
+alt_toggle = true
+smart_focus = false

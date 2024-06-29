@@ -186,6 +186,7 @@
 ## Install Hyperland
 ### Dependencies
     The same with sway but remove `xdg-desktop-portal-wlr` and install `xdg-desktop-portal-hyprland`
+    - pyprland
 
 ## Misc
 ### Set default applications

@@ -12,6 +12,7 @@
         "hyprland/window"
     ],
     "modules-right": [
+        "hyprland/submap",
         "custom/weather",
         "custom/wlsunset",
         "custom/playerctl",
@@ -158,9 +159,9 @@
     "pulseaudio": {
         "format": "{icon}",
         "format-muted": "",
-        "on-click": "~/.bin/hypr_mixer",
+        "on-click": "pypr toggle pmixer",
         "on-click-middle": "~/.bin/sway_volume --toggle",
-        "on-click-right": "swaymsg exec pavucontrol",
+        "on-click-right": "pypr toggle pavu",
         "on-scroll-up": "~/.bin/sway_volume --inc",
         "on-scroll-down": "~/.bin/sway_volume --dec",
         "scroll-step": 5,
@@ -217,12 +218,29 @@
         "tooltip": true
     },
     "clock": {
-        "format": "{:%H:%M}",
-        "tooltip-format": "{: %A, %e %B %Y}",
-        "format-alt-click": "click-right",
-        "format-alt": "{:%e %b %H:%M}",
-        "tooltip": true,
-        "on-click": "~/.bin/hypr_cal"
+        "format": "{:%H:%M}  ",
+        "format-alt": "{:%A %d %B (%R)}  ",
+        // "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            // "on-click-forward": "tz_up",
+            // "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
     "custom/wlsunset": {
         "interval": "once",
@@ -274,7 +292,7 @@
         "format-alt-click": "click-right",
         "format-alt": " {temperatureC}°C",
         "critical-threshold": 70,
-        "hwmon-path":  "/sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input",
+        "hwmon-path": "/sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input",
         "format-critical": " {temperatureC}°C",
         "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
     },
