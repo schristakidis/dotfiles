@@ -15,3 +15,5 @@ ffmpeg -i screen.png -vf "gblur=sigma=10, vignette=PI/5" -c:a copy screen-out.pn
 swaylock \
 --image screen-out.png \
 --daemonize
+
+1password --lock
