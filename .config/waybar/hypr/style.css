@@ -39,12 +39,14 @@ tooltip label{
 }
 
 #workspaces button.empty {
-    color: #313244;
+    /* color: #313244; */
+    color: #19496e;
 }
 
 #workspaces button.visible {
-    background: #11111b;
+    background: #4a111b;
     color: #cdd6f4;
+    border-radius: 10px;
 }
 
 #workspaces button.active {

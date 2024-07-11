@@ -185,8 +185,8 @@
 
 ## Install Hyperland
 ### Dependencies
-    The same with sway but remove `xdg-desktop-portal-wlr` and install `xdg-desktop-portal-hyprland`
-    - pyprland
+The same with sway but remove `xdg-desktop-portal-wlr` and install `xdg-desktop-portal-hyprland`
+- pyprland
 
 ## Misc
 ### Set default applications
@@ -237,6 +237,17 @@ fill = "totp"
 ```
 
 ### Tmux and 1password
+In `~/.config/tmux/plugins/tmux-1password/scripts/main.sh` change in fzp_opts ``execute`` to ``become``
+```sh
+local -ra fzf_opts=(
+    --no-multi
+    "--header=enter=password, ctrl-u=totp"
+    --bind "enter:become(echo pass,{+})+abort"
+    --bind "ctrl-u:become(echo totp,{+})+abort"
+)
+
+```
+
 Add in `~/.config/tmux/plugins/tmux-1password/scripts/utils/clipboard.sh`
 ```
 elif [[ "$(uname)" == "Linux" ]] && cmd::exists "wl-copy"; then
