@@ -182,6 +182,7 @@
     - python-xlib
     - python-requests
     - checkupdates-with-aur
+    - keyd
 
 ## Install Hyperland
 ### Dependencies
@@ -207,6 +208,24 @@ The default file can be found at `/usr/share/applications/mimeinfo.cache`
 
 ### Firefox pseudo fullscreen
 Set in `about:config` `full-screen-api.ignore-widgets` to `true`
+
+
+### Keyd
+https://github.com/rvaiya/keyd
+
+- install keyd
+- set the config file at ``/etc/keyd/default.conf``
+```
+[ids]
+
+*
+
+[main]
+
+# Maps capslock to escape when pressed and control when held.
+capslock = overload(control, esc)
+```
+- sudo systemctl enable --now keyd
 
 
 ### MPS VPN
