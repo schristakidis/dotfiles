@@ -47,9 +47,7 @@ return {
   { 'Vimjas/vim-python-pep8-indent' },
 
   -- markdown
-  { 'plasticboy/vim-markdown',       ft = 'markdown' },
   { 'mzlogin/vim-markdown-toc',      ft = 'markdown' },
-  'dhruvasagar/vim-table-mode',
   {
       "iamcco/markdown-preview.nvim",
       cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },

@@ -124,8 +124,11 @@ class HMonitors:
 
     def hypr_monitor_conf(self, name, res, start, end):
         res = 'highres'
+        # self.hypr_conf_monitors += [
+        #     f"monitor = {name},{res},auto,1,bitdepth,10"
+        # ]
         self.hypr_conf_monitors += [
-            f"monitor = {name},{res},auto,1,bitdepth,10"
+            f"monitor = {name},{res},auto,1"
         ]
 
         for i in range(start, end+1):
