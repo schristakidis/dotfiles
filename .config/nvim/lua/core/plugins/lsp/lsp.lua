@@ -223,11 +223,13 @@ null_ls.setup({
                 buffer = bufnr,
             })
             vim.api.nvim_create_autocmd("BufWritePre", {
-                pattern = { '*.go'},
+                -- pattern = { '*.go'},
                 group = augroup,
-                -- buffer = bufnr,
-                callback = function()
-                    vim.lsp.buf.format({ bufnr = bufnr })
+                buffer = bufnr,
+                callback = function(opts)
+                    if vim.bo[opts.buf].filetype == 'go' then
+                        vim.lsp.buf.format({ bufnr = bufnr })
+                    end
                 end
             })
         end
