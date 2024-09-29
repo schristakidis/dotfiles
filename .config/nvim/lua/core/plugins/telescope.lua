@@ -10,7 +10,7 @@ local M = {
     "nvim-telescope/telescope-file-browser.nvim",
     "nvim-telescope/telescope-ui-select.nvim",
     -- { 'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
   config = function()
     -- require('telescope').load_extension('fzy_native')
@@ -56,10 +56,10 @@ local M = {
           },
         },
         fzf = {
-          fuzzy = true, -- false will only do exact matching
+          fuzzy = true,                   -- false will only do exact matching
           override_generic_sorter = true, -- override the generic sorter
-          override_file_sorter = true, -- override the file sorter
-          case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+          override_file_sorter = true,    -- override the file sorter
+          case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
         },
         terraform_doc = {
           url_open_command = "xdg-open",
@@ -99,6 +99,7 @@ local M = {
           i = {
             ["<C-j>"] = actions.move_selection_next,
             ["<C-k>"] = actions.move_selection_previous,
+            ["<C-u>"] = false,
           },
           n = {
             ["v"] = actions.select_vertical
@@ -154,7 +155,7 @@ local M = {
 
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', '<C-p>', project_files, opts)
-    vim.keymap.set('n', '<C-f>', builtin.find_files, opts)
+    vim.keymap.set('n', '<C-f>', "<cmd>Telescope file_browser<CR>", opts)
     vim.keymap.set('n', '<C-b>', builtin.buffers, opts)
     vim.keymap.set('n', '<leader>vo', search_dotfiles, opts)
     vim.keymap.set('n', '<C-g>', git_grep, opts)

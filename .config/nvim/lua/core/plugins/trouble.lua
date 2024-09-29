@@ -4,15 +4,13 @@ M = {
     require('trouble').setup()
 
     local opts = { silent = true, noremap = true }
-    vim.keymap.set("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", opts)
+    vim.keymap.set("n", "<localleader>xw", "<cmd>Trouble diagnostics toggle<cr>", opts)
 
-    vim.keymap.set("n", "<leader>xx", "<cmd>Trouble document_diagnostics<cr>", opts)
+    vim.keymap.set("n", "<localleader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", opts)
 
-    vim.keymap.set("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opts)
+    vim.keymap.set("n", "<localleader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", opts)
 
-    vim.keymap.set("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opts)
-
-    vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<cr>", opts)
+    vim.keymap.set("n", "<localleader>xr", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", opts)
   end
 }
 

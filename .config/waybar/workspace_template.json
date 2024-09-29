@@ -15,7 +15,11 @@
       "class<Alacritty>": "",
       "class<Slack>": "",
       "title<Microsoft Teams.*>": "\ue533",
-      "class<Thunderbird>": "\uf0e0"
+      "class<Thunderbird>": "\uf0e0",
+      "class<org.pwmt.zathura>": "",
+      "class<mps_vpn>": "",
+      "class<calibre.*>": "",
+      "class<org.gnome.Nautilus>": ""
     },
     "format": "{name}: {windows} ",
     "format-window-separator": " ",
