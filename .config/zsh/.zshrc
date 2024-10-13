@@ -46,6 +46,14 @@ then
     done
 fi
 
+zvm_config() {
+    ZVM_CURSOR_STYLE_ENABLED=false
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+}
+
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+
 zinit wait lucid light-mode for \
     as"program" \
     pick"bin/git-dsf" \
@@ -57,7 +65,6 @@ zinit wait lucid light-mode for \
         && bindkey '^[OA' history-substring-search-up \
         && bindkey '^[OB' history-substring-search-down" \
             zsh-users/zsh-history-substring-search \
-    softmoth/zsh-vim-mode \
     atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
     atload'zstyle ":\completion:*" list-colors “${(s.:.)LS_COLORS}”' \
