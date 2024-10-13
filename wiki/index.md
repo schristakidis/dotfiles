@@ -2,12 +2,10 @@
 
 ## [VIM](VIM)
 - [Plugins](vim/plugins/Plugins.md)
-- [Setup](vim/setup.md)
-- [Notes](vim/notes.md)
+- [Spelling](vim/Spelling.md)
 
 ## TMUX
 - [Plugins](tmux/Plugins.md)
-- [Clipboard](tmux/clipboard.md)
 - [Terminal Bindings](tmux/terminal_bindings.md)
 
 ## LINUX
@@ -15,10 +13,8 @@
 - [Troubleshooting](linux/Troubleshooting.md)
 - [General](linux/General.md)
 - [Gaming](linux/Gaming.md)
-
-## BSPWM
-- [Requirements](bspwm/requirements.md)
-- [Misc](bspwm/misc.md)
+- [Clipboard](linux/Clipboard.md)
+- [Misc](linux/misc.md)
 
 ## DevOps
 - [kubernetes](devops/kubernetes.md)
