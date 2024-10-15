@@ -259,7 +259,7 @@
     },
     "custom/weather": {
         "icon-size": 42,
-        "format": "{icon} {}",
+        "format": "{icon} {0}",
         "tooltip": true,
         "interval": 3600,
         "exec": "~/.bin/weather.py",
