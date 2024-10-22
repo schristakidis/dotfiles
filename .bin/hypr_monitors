@@ -95,8 +95,10 @@ class HMonitors:
             second = mon1
             first = mon2
         else:
-            first = mon1
-            second = mon2
+            second = mon1
+            first = mon2
+            # first = mon1
+            # second = mon2
 
         return first, second
 

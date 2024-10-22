@@ -3,9 +3,9 @@ return {
   { 'Valloric/ListToggle' },
   { 'tpope/vim-unimpaired' },
   { 'godlygeek/tabular' },
-  { 'kyazdani42/nvim-web-devicons',       config = true },
+  { 'kyazdani42/nvim-web-devicons', config = true },
   { 'nvim-lua/popup.nvim' },
-  { "kylechui/nvim-surround",             version = "*", config = true },
+  { "kylechui/nvim-surround", version = "*", config = true },
   { "lukas-reineke/indent-blankline.nvim" },
   { 'lambdalisue/suda.vim' },
 
@@ -19,11 +19,11 @@ return {
   },
   {
     'declancm/maximize.nvim',
-    config = function ()
-        require('maximize').setup()
-        vim.keymap.set({ "i", "n" }, "<leader>z", function ()
-            require('maximize').toggle()
-        end)
+    config = function()
+      require('maximize').setup()
+      vim.keymap.set({ "i", "n" }, "<leader>z", function()
+        require('maximize').toggle()
+      end)
     end
   },
 
@@ -31,7 +31,7 @@ return {
   "tpope/vim-fugitive",
 
   -- programming
-  { 'numToStr/Comment.nvim',    config = true },
+  { 'numToStr/Comment.nvim', config = true },
   'sheerun/vim-polyglot',
   { "gennaro-tedesco/nvim-jqx", ft = { "json", "yaml" } },
   {
@@ -40,28 +40,37 @@ return {
     version = "2.*",
     build = "make install_jsregexp",
     config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
+      require("luasnip.loaders.from_vscode").lazy_load()
     end
   },
-  { 'simrat39/symbols-outline.nvim', config = true,  cmd = "SymbolsOutline" },
+  { 'simrat39/symbols-outline.nvim', config = true, cmd = "SymbolsOutline" },
   { 'Vimjas/vim-python-pep8-indent' },
+  {
+    "rmagatti/goto-preview",
+    event = "BufEnter",
+    config = function()
+      require('goto-preview').setup {
+        default_mappings = true,
+      }
+    end
+  },
 
   -- markdown
-  { 'mzlogin/vim-markdown-toc',      ft = 'markdown' },
+  { 'mzlogin/vim-markdown-toc', ft = 'markdown' },
   {
-      "iamcco/markdown-preview.nvim",
-      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-      build = "cd app && yarn install",
-      init = function()
-          vim.g.mkdp_filetypes = { "markdown" }
-      end,
-      ft = { "markdown" },
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    build = "cd app && yarn install",
+    init = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
   },
-  { "ellisonleao/glow.nvim",        config = true,                   cmd = "Glow" },
+  { "ellisonleao/glow.nvim", config = true, cmd = "Glow" },
   {
     "vhyrro/luarocks.nvim",
     priority = 1000,
     config = true
-   },
- { 'tpope/vim-repeat' }
+  },
+  { 'tpope/vim-repeat' }
 }
