@@ -9,3 +9,5 @@ tmp/*
 .config/nvim/lua/.luarc.json
 .config/waybar/config.jsonc
 .config/waybar/style.css
+.config/hypr/env_nvidia.conf
+.config/hypr/carD
