@@ -1,7 +1,7 @@
 [
  {
    "label": "Lock",
-   "exec": "hyprctl dispatch exec ~/.config/swaylock/lock.sh",
+   "exec": "hyprctl dispatch exec ~/.config/hypr/lock.sh",
    "icon": "system-lock-screen"
  },
  {

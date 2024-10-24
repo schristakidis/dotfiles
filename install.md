@@ -184,6 +184,8 @@
     - checkupdates-with-aur
     - keyd
     - swaync
+    - hyprlock
+    - hypridle
 
 ## Install Hyperland
 ### Dependencies
