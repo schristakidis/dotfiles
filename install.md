@@ -183,6 +183,7 @@
     - python-requests
     - checkupdates-with-aur
     - keyd
+    - swaync
 
 ## Install Hyperland
 ### Dependencies

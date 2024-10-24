@@ -89,9 +89,7 @@ tooltip label{
 #window,
 #cpu,
 #disk,
-#custom-updates,
 #memory,
-#clock,
 #battery,
 #pulseaudio,
 #network,
@@ -102,6 +100,18 @@ tooltip label{
     background: #1e1e2e;
     opacity: 0.8;
     padding: 0px 8px;
+    margin: 0px 3px;
+    border: 0px;
+}
+
+#clock,
+#language,
+#custom-updates,
+#custom-notification,
+#backlight {
+    background: #1e1e2e;
+    opacity: 0.8;
+    padding: 0px 3px;
     margin: 0px 3px;
     border: 0px;
 }

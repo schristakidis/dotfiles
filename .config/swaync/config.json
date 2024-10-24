@@ -1,0 +1,89 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "positionX": "right",
+  "positionY": "top",
+  "control-center-margin-bottom": 20,
+  "control-center-margin-left": 0,
+  "control-center-margin-right": 10,
+  "control-center-margin-top": 20,
+  "control-center-width": 500,
+  "control-center-height": 600,
+  "fit-to-screen": false,
+  "control-center-layer": "overlay",
+  "cssPriority": "user",
+  "notification-icon-size": 40,
+  "notification-body-image-height": 100,
+  "notification-body-image-width": 200,
+  "notification-inline-replies": true,
+  "notification-window-width": 400,
+  "image-visibility": "when-available",
+  "timeout": 10,
+  "timeout-low": 5,
+  "timeout-critical": 0,
+  "transition-time": 100,
+  "hide-on-action": true,
+  "hide-on-clear": true,
+  "script-fail-notify": true,
+  "keyboard-shortcuts": true,
+  "widgets": [
+    "inhibitors",
+    "title",
+    "notifications",
+    "buttons-grid",
+    "mpris",
+    "volume",
+    "dnd"
+  ],
+  "widget-config": {
+    "buttons-grid": {
+      "actions": [
+        {
+          "active": false,
+          "command": "notify-send 'hey'",
+          "label": "󰤄",
+          "type": "toggle",
+          "update_command": "notify-send 'Hi'"
+        },
+        {
+          "active": false,
+          "command": "swaync-client -d",
+          "label": "",
+          "type": "toggle"
+        },
+        {
+          "active": false,
+          "command": "obs",
+          "label": "󰄀",
+          "type": "button"
+        },
+        {
+          "active": false,
+          "command": "obs",
+          "label": "󰕧",
+          "type": "button"
+        },
+        {
+          "active": false,
+          "command": "swaync-client -t",
+          "label": "",
+          "type": "toggle"
+        }
+      ]
+    },
+    "mpris": {
+      "image-radius": 12,
+      "image-size": 96
+    },
+    "title": {
+      "text": "Notifications",
+      "button-text": "󰎟 Clear",
+      "clear-all-button": true
+    },
+    "volume": {
+      "label": "",
+      "show-per-app": true,
+      "show-per-app-icon": true,
+      "show-per-app-label": true
+    }
+  }
+}
