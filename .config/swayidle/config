@@ -1,6 +1,7 @@
-timeout 540 'brightnessctl -s && brightnessctl set 50%-' resume 'brightnessctl -r'
-timeout 600 ~/.config/swaylock/lock.sh
+timeout 540 'brightnessctl -s set 10' resume 'brightnessctl -r'
+timeout 600 ~/.config/hypr/lock.sh
 timeout 660 'hyprctl dispatcher dpms off' resume 'hyprctl dispatcher dpms on'
+# timeout 3600 'systemctl suspend'
 before-sleep 'playerctl pause'
-before-sleep ~/.config/swaylock/lock.sh
-lock ~/.config/swaylock/lock.sh
+before-sleep ~/.config/hypr/lock.sh
+lock ~/.config/hypr/lock.sh
