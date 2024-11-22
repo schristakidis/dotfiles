@@ -171,12 +171,34 @@ for _, lsp in pairs(servers) do
             },
         }
     elseif lsp == "yamlls" then
-        local cfg = require("yaml-companion").setup()
-        cfg.on_attach = function(_, bufnr)
-            on_attach(_, bufnr)
-        end
-        cfg.filetypes = { "yaml", "yaml.docker-compose" }
-        cfg.capabilities = get_capabilities()
+        local cfg = require("yaml-companion").setup({
+            capabilities = get_capabilities(),
+            on_new_config = function(new_config)
+              new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+                "force",
+                new_config.settings.yaml.schemas or {},
+                require("schemastore").yaml.schemas()
+              )
+            end,
+            settings = {
+              redhat = { telemetry = { enabled = false } },
+              yaml = {
+                keyOrdering = false,
+                format = {
+                  enable = true,
+                },
+                validate = true,
+                schemaStore = {
+                  -- Must disable built-in schemaStore support to use
+                  -- schemas from SchemaStore.nvim plugin
+                  enable = false,
+                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                  url = "",
+                },
+                schemas = require('schemastore').yaml.schemas(),
+              },
+            },
+          })
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
     elseif lsp == "gopls" then
