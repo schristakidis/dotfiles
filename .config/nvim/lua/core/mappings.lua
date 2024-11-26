@@ -32,3 +32,19 @@ map("n", "<C-a>", "ggVG")
 -- map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 -- \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 -- \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
+vim.api.nvim_create_user_command(
+    'YamlSchemas',
+    function()
+        require('user.additional-schemas').init()
+    end,
+    { nargs = 0 }
+)
+
+vim.api.nvim_create_user_command(
+    'YamlSchemaAuto',
+    function()
+        require('user.additional-schemas').init_advanced()
+    end,
+    { nargs = 0 }
+)
