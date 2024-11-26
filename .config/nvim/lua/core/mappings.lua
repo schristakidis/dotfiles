@@ -48,3 +48,12 @@ vim.api.nvim_create_user_command(
     end,
     { nargs = 0 }
 )
+
+vim.keymap.set(
+    'n', '<leader>s',
+    function()
+        require('user.additional-schemas').init_advanced()
+    end,
+    { noremap = true, silent = true }
+)
+
