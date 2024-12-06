@@ -13,7 +13,7 @@ map({ "n", "x" }, "q:", "<Nop>")
 map("n", "<Space>", ":nohlsearch<Bar>:echo<CR>", { silent = true })
 
 -- Copy to primary registry'
-map("v", "C-c", "\"*y")
+map("v", "<A-c>", "\"+y")
 -- map("v", "<A-p>", "\"+y")
 map({ "n", "v" }, "<A-p>", "\"+p")
 -- Select all text

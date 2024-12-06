@@ -172,7 +172,6 @@ for _, lsp in pairs(servers) do
         }
     elseif lsp == "yamlls" then
         local cfg = require("yaml-companion").setup({
-            capabilities = get_capabilities(),
             on_new_config = function(new_config)
               new_config.settings.yaml.schemas = vim.tbl_deep_extend(
                 "force",
@@ -199,6 +198,7 @@ for _, lsp in pairs(servers) do
               },
             },
           })
+        cfg['capabilities'] = get_capabilities()
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
     elseif lsp == "gopls" then
