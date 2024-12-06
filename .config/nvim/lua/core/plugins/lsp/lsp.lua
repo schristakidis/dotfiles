@@ -73,12 +73,25 @@ local on_attach = function(_, bufnr)
     --
     -- vim.keymap.set('n', '<space>p', PeekDefinition, opts)
 
-    -- UI
-    vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = false,
+    vim.diagnostic.config({
+        -- virtual_text = false,
+        virtual_text = {
+            source = false,
+            prefix = '■',
+            -- Only show virtual text matching the given severity
+            severity = {
+                -- Specify a range of severities
+                min = vim.diagnostic.severity.ERROR,
+            },
+        },
+        float = {
+            source = "if_many",
+            border = 'rounded',
+        },
         signs = true,
         underline = true,
         update_in_insert = false,
+        severity_sort = true,
     })
 
     local signs = { Error = " ", Warn = "", Hint = " ", Info = "" }
@@ -179,6 +192,10 @@ for _, lsp in pairs(servers) do
                 require("schemastore").yaml.schemas()
               )
             end,
+            lspconfig = {
+                on_attach = on_attach,
+                capabilities = get_capabilities()
+            },
             settings = {
               redhat = { telemetry = { enabled = false } },
               yaml = {
@@ -198,7 +215,6 @@ for _, lsp in pairs(servers) do
               },
             },
           })
-        cfg['capabilities'] = get_capabilities()
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
     elseif lsp == "gopls" then
@@ -212,7 +228,6 @@ for _, lsp in pairs(servers) do
             }
         }
     end
-
     if enable then
         require('lspconfig')[lsp].setup(default_opts)
     end
