@@ -11,6 +11,8 @@ map({ "n", "x" }, "q:", "<Nop>")
 -- nnoremap <C-u> <C-u>zz
 
 map("n", "<Space>", ":nohlsearch<Bar>:echo<CR>", { silent = true })
+map("n", "<space><space>x", "<cmd>source %<CR>")
+map("v", "<space>x", ":lua<CR>")
 
 -- Copy to primary registry'
 map("v", "<A-c>", "\"+y")

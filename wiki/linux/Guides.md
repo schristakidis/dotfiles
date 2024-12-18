@@ -9,6 +9,9 @@
 * [Set Keyboard Languages](#set-keyboard-languages)
 * [Change CAPS key](#change-caps-key)
 * [Add certificate](#add-certificate)
+* [Intel Hardware acceleration](#intel-hardware-acceleration)
+    * [Install](#install)
+    * [firefox](#firefox)
 
 <!-- vim-markdown-toc -->
 ## Default Applications
@@ -71,3 +74,26 @@ setxkbmap -option caps:ctrl_modifier
 sudo cp crt /etc/ca-certificates/trust-source/anchors
 sudo trust extract-compat
 ```
+
+
+## Intel Hardware acceleration
+
+[arch-wiki](https://wiki.archlinux.org/title/Hardware_video_acceleration)
+
+### Install
+* intel-media-driver
+* libva-utils
+* intel-gpu-tools (for monitoring)
+
+Run ``vainfo`` to check
+Monitor
+```sh
+sudo intel_gpu_tool 
+```
+
+### firefox
+
+if video is not decoded in gpu try setting in ``about:config``
+
+* media.ffmpeg.vaapi.enabled to true
+* gfx.webrender.all to true
