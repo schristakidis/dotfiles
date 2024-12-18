@@ -1,14 +1,14 @@
 #!/bin/python
 
-import json
-from subprocess import run
-from pathlib import Path
-import os
 import argparse
+import json
 import logging
+import os
 import pprint
-
 from os.path import expanduser
+from pathlib import Path
+from subprocess import run
+
 home = expanduser("~")
 
 logging.basicConfig(
@@ -25,7 +25,6 @@ DOTDIR = Path(os.environ.get('DOTDIR', '.dotfiles'))
 WAYBAR_TEMPLATE = DOTDIR.joinpath('.config/waybar/workspace_template.json')
 WAYBAR_DEST = DOTDIR.joinpath('tmp/workspaces.jsonc')
 
-
 HYPR_MONITOR_CONF = DOTDIR.joinpath('tmp/monitors.conf')
 
 
@@ -35,6 +34,7 @@ def get_simple_monitor_info(mon):
         'res': f"{mon['width']}x{mon['height']}@{int(mon['refreshRate'])}",
         'laptop': 'eDP-1' in mon['name']
     }
+    pp.pprint(m_info)
     return m_info
 
 
@@ -44,21 +44,31 @@ def reload():
 
 
 class HMonitors:
-    def __init__(self, single):
+    def __init__(self, single, dock, reverse, reverse_workspaces, once):
         self.single = single
         self.hypr_conf_workspaces = []
         self.hypr_conf_monitors = []
         self.waybar_conf = None
+        self.dock = dock
+        self.reverse = reverse
+        self.reverse_workspaces = reverse_workspaces
+        self.once = once
 
     def run(self):
+        self._run()
+        if self.once or self.single or self.dock:
+            return
+
+        self.hypr_conf_workspaces = []
+        self.hypr_conf_monitors = []
+        self._run()
+
+    def _run(self):
         self.kill_waybar()
         self.get_monitors()
         if len(self.monitors) == 1:
             print('Single')
             self.single_setup()
-        elif self.single:
-            print('Forced')
-            self.force_single_setup()
         else:
             print('Multi')
             self.multi_setup()
@@ -73,8 +83,59 @@ class HMonitors:
     def get_monitors(self):
         cmd = 'hyprctl monitors -j'
         output = run(cmd.split(), text=True, capture_output=True).stdout
-        self.monitors = json.loads(output)
+        monitors = json.loads(output)
+        if self.dock:
+            self.monitors = [mon for mon in monitors if mon['name'] != 'eDP-1']
+            self.disabled_monitors = [
+                mon for mon in monitors if mon['name'] == 'eDP-1'
+            ]
+        elif self.single:
+            self.monitors = [mon for mon in monitors if mon['name'] == 'eDP-1']
+            self.disabled_monitors = [
+                mon for mon in monitors if mon['name'] != 'eDP-1'
+            ]
+        else:
+            self.monitors = monitors
+            self.disabled_monitors = []
+
+        print('----Monitors---')
+        pp.pprint([m['name'] for m in self.monitors])
+        print('----To Disable------')
+        pp.pprint([m['name'] for m in self.disabled_monitors])
         logging.info(f'Current Monitors: {self.monitors}')
+        logging.info(f'To Disable Monitors: {self.disabled_monitors}')
+
+    def get_order(self):
+        mon1 = get_simple_monitor_info(self.monitors[0])
+        mon2 = get_simple_monitor_info(self.monitors[1])
+
+        left_workspaces = {'start': 1, 'end': 5}
+
+        right_workspaces = {'start': 6, 'end': 10}
+
+        if mon1['laptop']:
+            left = mon1
+            left['workspaces'] = right_workspaces
+            right = mon2
+            right['workspaces'] = left_workspaces
+        elif mon2['laptop']:
+            left = mon2
+            left['workspaces'] = right_workspaces
+            right = mon1
+            right['workspaces'] = left_workspaces
+        else:
+            left = mon1
+            left['workspaces'] = left_workspaces
+            right = mon2
+            right['workspaces'] = right_workspaces
+
+        if self.reverse:
+            left, right = right, left
+
+        if self.reverse_workspaces:
+            left['workspaces'], right['workspaces'] = right['workspaces'], left['workspaces']  # noqa
+
+        return left, right
 
     def single_setup(self):
         logging.info('Singe Setup')
@@ -83,78 +144,87 @@ class HMonitors:
         logging.info(f'Monitor info: {m_info}')
 
         self.hypr_monitor_conf(m_info['name'], m_info['res'], 1, 10)
-        self.create_waybar_conf(m_info['name'], m_info['name'])
+        for disable in self.disabled_monitors:
+            self.hypr_conf_monitors += [f"monitor = {disable['name']},disable"]
+
+        self.create_waybar_conf(m_info, m_info)
 
         self.move_workspaces(1, 10, m_info['name'])
 
-    def get_order(self):
-        mon1 = get_simple_monitor_info(self.monitors[0])
-        mon2 = get_simple_monitor_info(self.monitors[1])
-
-        if mon1['laptop']:
-            second = mon1
-            first = mon2
-        else:
-            second = mon1
-            first = mon2
-            # first = mon1
-            # second = mon2
-
-        return first, second
-
-    def force_single_setup(self):
-        logging.info('Forcing Singe Setup')
-
-        first, second = self.get_order()
-
-        self.hypr_monitor_conf(second['name'], second['res'], 1, 10)
-        self.hypr_conf_monitors += [f"monitor = {first['name']},disable"]
-
-        self.create_waybar_conf(second['name'], second['name'])
-        self.move_workspaces(1, 10, second['name'])
-
     def multi_setup(self):
         logging.info('Multi setup')
-        first, second = self.get_order()
+        left, right = self.get_order()
+        print('--------------')
+        print(left['name'], right['name'])
 
-        self.hypr_monitor_conf(first['name'], first['res'], 1, 5)
-        self.hypr_monitor_conf(second['name'], second['res'], 6, 10)
+        self.hypr_monitor_conf(
+            left['name'], left['res'],
+            left['workspaces']['start'],
+            left['workspaces']['end']
+        )
+        self.hypr_monitor_conf(
+            right['name'], right['res'],
+            right['workspaces']['start'],
+            right['workspaces']['end'],
+            'auto-right'
+        )
 
-        self.create_waybar_conf(first['name'], second['name'])
-        self.move_workspaces(1, 5, first['name'])
-        self.move_workspaces(6, 10, second['name'])
+        for disable in self.disabled_monitors:
+            self.hypr_conf_monitors += [f"monitor = {disable['name']},disable"]
 
-    def hypr_monitor_conf(self, name, res, start, end):
+        self.create_waybar_conf(left, right)
+        self.move_workspaces(
+            left['workspaces']['start'],
+            left['workspaces']['end'],
+            left['name']
+        )
+        self.move_workspaces(
+            right['workspaces']['start'],
+            right['workspaces']['end'],
+            right['name']
+        )
+
+    def hypr_monitor_conf(self, name, res, start, end, pos='0x0'):
         res = 'highres'
         # self.hypr_conf_monitors += [
         #     f"monitor = {name},{res},auto,1,bitdepth,10"
         # ]
-        self.hypr_conf_monitors += [
-            f"monitor = {name},{res},auto,1"
-        ]
+        self.hypr_conf_monitors += [f"monitor = {name},{res},{pos},1"]
 
-        for i in range(start, end+1):
+        for i in range(start, end + 1):
             self.hypr_conf_workspaces.append(
                 f"workspace = {i}, monitor:{name}"
             )
 
-    def create_waybar_conf(self, first_monitor, second_monitor):
+    def create_waybar_conf(self, left, right):
         with open(WAYBAR_TEMPLATE) as f:
             self.waybar_conf = json.load(f)
 
         workspaces = self.waybar_conf['hyprland/workspaces']
 
         persistent = {}
+        first_monitor = left['name']
+        second_monitor = right['name']
         if first_monitor == second_monitor:
             persistent[first_monitor] = [w for w in range(1, 11)]
         else:
-            persistent[first_monitor] = [w for w in range(1, 6)]
-            persistent[second_monitor] = [w for w in range(6, 11)]
+            persistent[first_monitor] = [
+                w for w in range(
+                    left['workspaces']['start'],
+                    left['workspaces']['end'] + 1
+                )
+            ]
+            persistent[second_monitor] = [
+                w for w in range(
+                    right['workspaces']['start'],
+                    right['workspaces']['end'] + 1
+                )
+            ]
 
         workspaces['persistent-workspaces'] = persistent
 
     def move_workspaces(self, first, last, monitor):
-        for workspace in range(first, last+1):
+        for workspace in range(first, last + 1):
             cmd = f'hyprctl dispatch moveworkspacetomonitor {workspace} {monitor}'  # noqa
             print(cmd)
             run(cmd.split())
@@ -171,12 +241,15 @@ class HMonitors:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='BSPWM Monitor helper')
+    parser = argparse.ArgumentParser(description='Hypr Monitor helper')
 
     parser.add_argument('--single', action="store_true", default=False)
-    # parser.add_argument('--multi', action="store_true", default=False)
-    # parser.add_argument('--double', action="store_true", default=False)
-    # parser.add_argument('--export', action="store_true", default=False)
+    parser.add_argument('--dock', action="store_true", default=False)
+    parser.add_argument('--reverse', action="store_true", default=False)
+    parser.add_argument('--reversew', action="store_true", default=False)
+    parser.add_argument('--once', action="store_true", default=False)
 
     args = parser.parse_args()
-    HMonitors(args.single).run()
+    HMonitors(
+        args.single, args.dock, args.reverse, args.reversew, args.once
+    ).run()

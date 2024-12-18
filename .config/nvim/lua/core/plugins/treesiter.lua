@@ -13,7 +13,7 @@ local M = {
         require("nvim-treesitter.configs").setup({
             ensure_installed = {
                 "c", "lua", "vim", "vimdoc", "query", "python", "go", "terraform", "yaml",
-                "dockerfile", "json", "markdown", "norg"
+                "dockerfile", "json", "markdown", "norg", "markdown_inline"
             },
             ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
             sync_install = false,
