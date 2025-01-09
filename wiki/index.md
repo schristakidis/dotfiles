@@ -21,6 +21,7 @@
 - [docker](devops/docker.md)
 - [git](devops/git.md)
 - [helm](devops/helm.md)
+- [misc](devops/misc.md)
 
 ## MPS
 - [certs](mps/certs.md)
