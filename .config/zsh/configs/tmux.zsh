@@ -1,4 +1,4 @@
-alias tmux="TERM=xterm-256color tmux -2"
+alias tmux="TERM=screen-256color tmux -2"
 
 _tmux_orientation() {
     width=$(tmux display -p '#{pane_width}')

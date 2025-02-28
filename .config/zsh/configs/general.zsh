@@ -3,7 +3,7 @@ if [[ -z "$LANG" ]]; then
 fi
 export LC_CTYPE=en_US.UTF-8
 
-export TERM=screen-256color
+# export TERM=screen-256color
 
 export GOPATH="$HOME/go"
 export CARGOPATH="$HOME/.cargo/bin"

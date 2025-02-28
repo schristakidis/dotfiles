@@ -1,90 +1,53 @@
 local catppuccin = require("catppuccin")
 
-catppuccin.setup({
-  dim_inactive = {
-    enabled = true,
-    shade = "dark",
-    percentage = 0.15,
-  },
-  transparent_background = false,
-  term_colors = true,
-  compile = {
-    enabled = true,
-    path = vim.fn.stdpath("cache") .. "/catppuccin",
-    suffix = "_compiled",
-  },
-  styles = {
-    comments = { "italic" },
-    conditionals = { "italic" },
-    loops = {},
-    functions = {},
-    keywords = {},
-    strings = {},
-    variables = {},
-    numbers = {},
-    booleans = {},
-    properties = {},
-    types = {},
-    operators = {},
-  },
-  integrations = {
-    treesitter = true,
-    native_lsp = {
-      enabled = true,
-      virtual_text = {
-        errors = { "italic" },
-        hints = { "italic" },
-        warnings = { "italic" },
-        information = { "italic" },
-      },
-      underlines = {
-        errors = { "underline" },
-        hints = { "underline" },
-        warnings = { "underline" },
-        information = { "underline" },
-      },
+require("catppuccin").setup({
+    flavour = "macchiato",
+    background = {
+        light = "latte",
+        dark = "macchiato",
     },
-    coc_nvim = false,
-    lsp_trouble = false,
-    cmp = true,
-    lsp_saga = false,
-    gitgutter = true,
-    gitsigns = true,
-    telescope = true,
-    nvimtree = {
-      enabled = false,
-      show_root = true,
-      transparent_panel = false,
+    transparent_background = false, -- disables setting the background color.
+    show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+    term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+    dim_inactive = {
+        enabled = false, -- dims the background color of inactive window
+        shade = "dark",
+        percentage = 0.15, -- percentage of the shade to apply to the inactive window
     },
-    dap = {
-      enabled = true,
-      enable_ui = true, -- enable nvim-dap-ui
+    no_italic = false, -- Force no italic
+    no_bold = false, -- Force no bold
+    no_underline = false, -- Force no underline
+    styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+        comments = { "italic" }, -- Change the style of comments
+        conditionals = { "italic" },
+        loops = { "italic" },
+        functions = { "italic" },
+        keywords = {},
+        strings = {},
+        variables = {},
+        numbers = {},
+        booleans = {},
+        properties = {},
+        types = {},
+        operators = {},
+        -- miscs = {}, -- Uncomment to turn off hard-coded styles
     },
-    neotree = {
-      enabled = true,
-      show_root = true,
-      transparent_panel = false,
+    color_overrides = {},
+    custom_highlights = {},
+    default_integrations = true,
+    integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        notify = false,
+        mini = {
+            enabled = true,
+            indentscope_color = "",
+        },
+        -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
     },
-    which_key = true,
-    indent_blankline = {
-      enabled = true,
-      colored_indent_levels = false,
-    },
-    dashboard = false,
-    neogit = true,
-    vim_sneak = false,
-    fern = false,
-    barbar = false,
-    bufferline = false,
-    markdown = true,
-    lightspeed = false,
-    ts_rainbow = false,
-    hop = false,
-    notify = true,
-    telekasten = false,
-    symbols_outline = true,
-    mini = true,
-    fidget = false,
-  },
 })
-vim.cmd([[colorscheme catppuccin-macchiato]])
+
+-- -- setup must be called before loading
+vim.cmd.colorscheme "catppuccin"
