@@ -26,6 +26,7 @@ return {
       end)
     end
   },
+  "tpope/vim-obsession",
 
   -- git
   "tpope/vim-fugitive",
