@@ -36,14 +36,12 @@ for zsh_source in $ZDOTDIR/configs/*.zsh; do
     source $zsh_source
 done
 
-if [ -d $ZDOTDIR/local ]
-then
-    for zsh_source in "$(ls $ZDOTDIR/local)"; do
-        if [[ $zsh_source =~ \.zsh$ ]]
-        then
-            source $ZDOTDIR/local/$zsh_source
-        fi
-    done
+if [ -d "$ZDOTDIR/local" ]; then
+  for zsh_source in "$ZDOTDIR/local"/*.zsh; do
+    if [ -f "$zsh_source" ]; then
+      source "$zsh_source"
+    fi
+  done
 fi
 
 zvm_config() {

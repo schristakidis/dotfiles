@@ -21,7 +21,7 @@ require("catppuccin").setup({
         comments = { "italic" }, -- Change the style of comments
         conditionals = { "italic" },
         loops = { "italic" },
-        functions = { "italic" },
+        functions = {},
         keywords = {},
         strings = {},
         variables = {},

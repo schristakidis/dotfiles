@@ -63,6 +63,7 @@ local M = {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,
         },
+        ["<A-y>"] = require('minuet').make_cmp_map(),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
