@@ -13,7 +13,7 @@ o.termguicolors = true
 
 o.smartindent = true               -- Makes indenting smart
 o.autoindent = true                -- Good auto indent
-o.laststatus = 3                   -- Always display the status line
+o.laststatus = 2                   -- Always display the status line
 o.cursorline = true                -- Enable highlighting of the current line
 o.background = "dark"              -- tell vim what the background color looks like
 o.backup = false
