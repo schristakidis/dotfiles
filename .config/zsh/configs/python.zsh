@@ -11,5 +11,11 @@ function pyclean() {
 	find ${ZSH_PYCLEAN_PLACES} -type d -name "_trial_temp" -exec rm -rv {} +
 }
 
+function tfclean() {
+    ZSH_TFCLEAN_PLACES=${*:-'.'}
+    find ${ZSH_TFCLEAN_PLACES} -type d -name ".terraform.lock.hcl" -delete
+    find ${ZSH_TFCLEAN_PLACES} -type d -name ".terraform" -exec rm -rvf {} +
+}
+
 # Grep among .py files
 alias pygrep='grep --include="*.py"'
