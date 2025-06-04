@@ -88,18 +88,31 @@ local on_attach = function(_, bufnr)
             source = "if_many",
             border = 'rounded',
         },
-        signs = true,
+        signs = {
+            text = {
+                [vim.diagnostic.severity.ERROR] = " ",
+                [vim.diagnostic.severity.WARN] = " ",
+                [vim.diagnostic.severity.INFO] = "󰋼 ",
+                [vim.diagnostic.severity.HINT] = "󰌵 ",
+            },
+            numhl = {
+                [vim.diagnostic.severity.ERROR] = "",
+                [vim.diagnostic.severity.WARN] = "",
+                [vim.diagnostic.severity.HINT] = "",
+                [vim.diagnostic.severity.INFO] = "",
+            },
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
     })
 
-    local signs = { Error = " ", Warn = "", Hint = " ", Info = "" }
+    -- local signs = { Error = " ", Warn = "", Hint = " ", Info = "" }
 
-    for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    end
+    -- for type, icon in pairs(signs) do
+    --     local hl = "DiagnosticSign" .. type
+    --     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+    -- end
 
     -- vim.api.nvim_create_autocmd("CursorHold", {
     --     buffer = bufnr,
@@ -186,35 +199,35 @@ for _, lsp in pairs(servers) do
     elseif lsp == "yamlls" then
         local cfg = require("yaml-companion").setup({
             on_new_config = function(new_config)
-              new_config.settings.yaml.schemas = vim.tbl_deep_extend(
-                "force",
-                new_config.settings.yaml.schemas or {},
-                require("schemastore").yaml.schemas()
-              )
+                new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+                    "force",
+                    new_config.settings.yaml.schemas or {},
+                    require("schemastore").yaml.schemas()
+                )
             end,
             lspconfig = {
                 on_attach = on_attach,
                 capabilities = get_capabilities()
             },
             settings = {
-              redhat = { telemetry = { enabled = false } },
-              yaml = {
-                keyOrdering = false,
-                format = {
-                  enable = true,
+                redhat = { telemetry = { enabled = false } },
+                yaml = {
+                    keyOrdering = false,
+                    format = {
+                        enable = true,
+                    },
+                    validate = true,
+                    schemaStore = {
+                        -- Must disable built-in schemaStore support to use
+                        -- schemas from SchemaStore.nvim plugin
+                        enable = false,
+                        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                        url = "",
+                    },
+                    schemas = require('schemastore').yaml.schemas(),
                 },
-                validate = true,
-                schemaStore = {
-                  -- Must disable built-in schemaStore support to use
-                  -- schemas from SchemaStore.nvim plugin
-                  enable = false,
-                  -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                  url = "",
-                },
-                schemas = require('schemastore').yaml.schemas(),
-              },
             },
-          })
+        })
         require("lspconfig")["yamlls"].setup(cfg)
         enable = false
     elseif lsp == "gopls" then

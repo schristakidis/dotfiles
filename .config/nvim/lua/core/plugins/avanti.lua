@@ -49,13 +49,17 @@ M.opts = {
     support_paste_from_clipboard = false,
     disable_virtual_text_prompt = true,
   },
-  hints = {enabled = false},
-  gemini = {
-    -- @see https://ai.google.dev/gemini-api/docs/models/gemini
-    model = "gemini-2.0-flash",
-    temperature = 0,
-    max_tokens = 4096,
-  },
+  hints = { enabled = false },
+  providers = {
+    gemini = {
+      -- @see https://ai.google.dev/gemini-api/docs/models/gemini
+      model = "gemini-2.0-flash",
+      extra_request_body = {
+        temperature = 0,
+        max_tokens = 4096,
+      }
+    },
+  }
 }
 
 return M
