@@ -1,24 +1,3 @@
-local servers = {
-    -- "docker_compose_language_service",
-    "bashls",
-    "pyright",
-    "pylsp",
-    "dockerls",
-    "jsonls",
-    "lua_ls",
-    "terraformls",
-    "yamlls",
-    "vimls",
-    "jsonls",
-    -- "phpactor",
-    "gopls",
-    "helm_ls",
-}
-
-
-
--- Lsp capabilities and on_attach {{{
--- Here we grab default Neovim capabilities and extend them with ones we want on top
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.foldingRange = {
@@ -39,13 +18,43 @@ require("mason").setup()
 vim.lsp.enable('pyright')
 vim.lsp.enable('pylsp')
 vim.lsp.enable('lua_ls')
--- local cfg = require("yaml-companion").setup()
--- local cfg = require("yaml-companion").setup()
--- vim.lsp.config.yamllss = cfg
--- vim.lsp.enable('yamllss')
--- local cfg = require("schema-companion").setup_client()
--- vim.lsp.config.yamllss = cfg
-vim.lsp.enable('yamlls')
+vim.lsp.enable('terraformls')
+vim.lsp.enable('bashls')
+vim.lsp.enable('dockerls')
+vim.lsp.enable('helmls')
+vim.lsp.enable('gopls')
+
+local cfg = require("yaml-companion").setup({
+  on_new_config = function(new_config)
+    new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+      "force",
+      new_config.settings.yaml.schemas or {},
+      require("schemastore").yaml.schemas()
+    )
+  end,
+  lspconfig = {
+    capabilities = capabilities
+  },
+  settings = {
+    redhat = { telemetry = { enabled = false } },
+    yaml = {
+      keyOrdering = false,
+      format = {
+        enable = true,
+      },
+      validate = true,
+      schemaStore = {
+        -- Must disable built-in schemaStore support to use
+        -- schemas from SchemaStore.nvim plugin
+        enable = false,
+        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+        url = "",
+      },
+      schemas = require('schemastore').yaml.schemas(),
+    },
+  },
+})
+require("lspconfig")["yamlls"].setup(cfg)
 
 vim.diagnostic.config({
   virtual_lines = false,
@@ -53,11 +62,12 @@ vim.diagnostic.config({
   virtual_text = {
     source = false,
     prefix = '■',
+    current_line = true,
     -- Only show virtual text matching the given severity
-    severity = {
-      -- Specify a range of severities
-      min = vim.diagnostic.severity.ERROR,
-    },
+    -- severity = {
+    --   -- Specify a range of severities
+    --   min = vim.diagnostic.severity.ERROR,
+    -- },
   },
   underline = true,
   update_in_insert = false,
@@ -112,8 +122,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 
     vim.keymap.set('n', '<leader>ss', function() require('telescope.builtin').lsp_document_symbols() end, bufopts)
-    vim.keymap.set('n', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
-    vim.keymap.set('v', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
+    -- vim.keymap.set('n', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
+    -- vim.keymap.set('v', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
 
     vim.keymap.set('n', '<localleader>ll', vim.cmd.LspRestart, bufopts)
     vim.keymap.set('n', '<localleader>li', vim.cmd.LspInfo, bufopts)
@@ -129,183 +139,162 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
+-- local null_ls = require("null-ls")
+-- local augroup = vim.api.nvim_create_augroup("GoLspFormatting", {})
 
+-- null_ls.setup({
+--     sources = {
+--         -- null_ls.builtins.diagnostics.flake8.with({
+--         --     diagnostic_config = {
+--         --         virtual_text = false,
+--         --     }
+--         -- })
+--         -- null_ls.builtins.formatting.yapf.with({
+--         --     extra_args = { "--style", "facebook" }
+--         -- }),
+--         null_ls.builtins.code_actions.gitsigns,
+--         null_ls.builtins.formatting.isort,
+--         null_ls.builtins.formatting.gofumpt,
+--         null_ls.builtins.formatting.goimports,
+--         null_ls.builtins.formatting.golines,
+--     },
+--     on_attach = function(client, bufnr)
+--         if client.supports_method("textDocument/formatting") then
+--             vim.api.nvim_clear_autocmds({
+--                 group = augroup,
+--                 buffer = bufnr,
+--             })
+--             vim.api.nvim_create_autocmd("BufWritePre", {
+--                 -- pattern = { '*.go'},
+--                 group = augroup,
+--                 buffer = bufnr,
+--                 callback = function(opts)
+--                     if vim.bo[opts.buf].filetype == 'go' then
+--                         vim.lsp.buf.format({ bufnr = bufnr })
+--                     end
+--                 end
+--             })
+--         end
+--     end,
+-- })
+--
+-- require("mason-null-ls").setup({
+--     ensure_installed = { "yapf", "jq", "xmllint", "isort" },
+--     automatic_installation = true,
+--     automatic_setup = false
+-- })
 
-
--- for _, lsp in pairs(servers) do
---     local default_opts = make_config()
---     local enable = true
---     elseif lsp == "jsonls" then
---         default_opts.settings = {
---             json = {
---                 schemas = require('schemastore').json.schemas(),
---                 validate = { enable = true }
---             },
---         }
---     elseif lsp == "yamlls" then
---         local cfg = require("yaml-companion").setup({
---             on_new_config = function(new_config)
---                 new_config.settings.yaml.schemas = vim.tbl_deep_extend(
---                     "force",
---                     new_config.settings.yaml.schemas or {},
---                     require("schemastore").yaml.schemas()
---                 )
---             end,
---             lspconfig = {
---                 on_attach = on_attach,
---                 capabilities = get_capabilities()
---             },
---             settings = {
---                 redhat = { telemetry = { enabled = false } },
---                 yaml = {
---                     keyOrdering = false,
---                     format = {
---                         enable = true,
---                     },
---                     validate = true,
---                     schemaStore = {
---                         -- Must disable built-in schemaStore support to use
---                         -- schemas from SchemaStore.nvim plugin
---                         enable = false,
---                         -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
---                         url = "",
---                     },
---                     schemas = require('schemastore').yaml.schemas(),
---                 },
---             },
---         })
---         require("lspconfig")["yamlls"].setup(cfg)
---         enable = false
---     elseif lsp == "gopls" then
---         default_opts.settings = require('core.plugins.lsp.servers.gopls').get_settings()
---     elseif lsp == "helm_ls" then
---         default_opts.settings = {
---             ['helm-ls'] = {
---                 yamlls = {
---                     path = "yaml-language-server",
---                 }
---             }
---         }
+-- vim.api.nvim_create_user_command("LspInfo", function()
+--   vim.cmd("silent checkhealth vim.lsp")
+-- end, {
+--   desc = "Get all the information about all LSP attached",
+-- })
+--
+-- vim.api.nvim_create_user_command("LspStart", function()
+--   vim.cmd.e()
+-- end, { desc = "Starts LSP clients in the current buffer" })
+--
+-- vim.api.nvim_create_user_command("LspStop", function(opts)
+--   for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+--     if opts.args == "" or opts.args == client.name then
+--       client:stop(true)
+--       vim.notify(client.name .. ": stopped")
 --     end
---     if enable then
---         require('lspconfig')[lsp].setup(default_opts)
+--   end
+-- end, {
+--   desc = "Stop all LSP clients or a specific client attached to the current buffer.",
+--   nargs = "?",
+--   complete = function(_, _, _)
+--     local clients = vim.lsp.get_clients({ bufnr = 0 })
+--     local client_names = {}
+--     for _, client in ipairs(clients) do
+--       table.insert(client_names, client.name)
 --     end
--- end
+--     return client_names
+--   end,
+-- })
+--
+-- vim.api.nvim_create_user_command("LspRestart", function()
+--   local detach_clients = {}
+--   for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+--     client:stop(true)
+--     if vim.tbl_count(client.attached_buffers) > 0 then
+--       detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
+--     end
+--   end
+--   local timer = vim.uv.new_timer()
+--   if not timer then
+--     return vim.notify("Servers are stopped but havent been restarted")
+--   end
+--   timer:start(
+--     100,
+--     50,
+--     vim.schedule_wrap(function()
+--       for name, client in pairs(detach_clients) do
+--         local client_id = vim.lsp.start(client[1].config, { attach = false })
+--         if client_id then
+--           for _, buf in ipairs(client[2]) do
+--             vim.lsp.buf_attach_client(buf, client_id)
+--           end
+--           vim.notify(name .. ": restarted")
+--         end
+--         detach_clients[name] = nil
+--       end
+--       if next(detach_clients) == nil and not timer:is_closing() then
+--         timer:close()
+--       end
+--     end)
+--   )
+-- end, {
+--   desc = "Restart all the language client(s) attached to the current buffer",
+-- })
+--
+-- vim.api.nvim_create_user_command("LspLog", function()
+--   vim.cmd.vsplit(vim.lsp.log.get_filename())
+-- end, {
+--   desc = "Get all the lsp logs",
+-- })
+--
+local function check_lsp_capabilities()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
-
-local null_ls = require("null-ls")
-local augroup = vim.api.nvim_create_augroup("GoLspFormatting", {})
-
-null_ls.setup({
-    sources = {
-        -- null_ls.builtins.diagnostics.flake8.with({
-        --     diagnostic_config = {
-        --         virtual_text = false,
-        --     }
-        -- })
-        null_ls.builtins.formatting.yapf.with({
-            extra_args = { "--style", "facebook" }
-        }),
-        null_ls.builtins.code_actions.gitsigns,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.gofumpt,
-        null_ls.builtins.formatting.goimports,
-        null_ls.builtins.formatting.golines,
-    },
-    on_attach = function(client, bufnr)
-        if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({
-                group = augroup,
-                buffer = bufnr,
-            })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-                -- pattern = { '*.go'},
-                group = augroup,
-                buffer = bufnr,
-                callback = function(opts)
-                    if vim.bo[opts.buf].filetype == 'go' then
-                        vim.lsp.buf.format({ bufnr = bufnr })
-                    end
-                end
-            })
-        end
-    end,
-})
-
-require("mason-null-ls").setup({
-    ensure_installed = { "yapf", "jq", "xmllint", "isort" },
-    automatic_installation = true,
-    automatic_setup = false
-})
-
-vim.api.nvim_create_user_command("LspInfo", function()
-  vim.cmd("silent checkhealth vim.lsp")
-end, {
-  desc = "Get all the information about all LSP attached",
-})
-
-vim.api.nvim_create_user_command("LspStart", function()
-  vim.cmd.e()
-end, { desc = "Starts LSP clients in the current buffer" })
-
-vim.api.nvim_create_user_command("LspStop", function(opts)
-  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    if opts.args == "" or opts.args == client.name then
-      client:stop(true)
-      vim.notify(client.name .. ": stopped")
+    if #clients == 0 then
+        print("No LSP clients attached")
+        return
     end
-  end
-end, {
-  desc = "Stop all LSP clients or a specific client attached to the current buffer.",
-  nargs = "?",
-  complete = function(_, _, _)
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
-    local client_names = {}
+
     for _, client in ipairs(clients) do
-      table.insert(client_names, client.name)
-    end
-    return client_names
-  end,
-})
+        print("Capabilities for " .. client.name .. ":")
+        local caps = client.server_capabilities
 
-vim.api.nvim_create_user_command("LspRestart", function()
-  local detach_clients = {}
-  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
-    client:stop(true)
-    if vim.tbl_count(client.attached_buffers) > 0 then
-      detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
-    end
-  end
-  local timer = vim.uv.new_timer()
-  if not timer then
-    return vim.notify("Servers are stopped but havent been restarted")
-  end
-  timer:start(
-    100,
-    50,
-    vim.schedule_wrap(function()
-      for name, client in pairs(detach_clients) do
-        local client_id = vim.lsp.start(client[1].config, { attach = false })
-        if client_id then
-          for _, buf in ipairs(client[2]) do
-            vim.lsp.buf_attach_client(buf, client_id)
-          end
-          vim.notify(name .. ": restarted")
+        local capability_list = {
+            { "Completion",                caps.completionProvider },
+            { "Hover",                     caps.hoverProvider },
+            { "Signature Help",            caps.signatureHelpProvider },
+            { "Go to Definition",          caps.definitionProvider },
+            { "Go to Declaration",         caps.declarationProvider },
+            { "Go to Implementation",      caps.implementationProvider },
+            { "Go to Type Definition",     caps.typeDefinitionProvider },
+            { "Find References",           caps.referencesProvider },
+            { "Document Highlight",        caps.documentHighlightProvider },
+            { "Document Symbol",           caps.documentSymbolProvider },
+            { "Workspace Symbol",          caps.workspaceSymbolProvider },
+            { "Code Action",               caps.codeActionProvider },
+            { "Code Lens",                 caps.codeLensProvider },
+            { "Document Formatting",       caps.documentFormattingProvider },
+            { "Document Range Formatting", caps.documentRangeFormattingProvider },
+            { "Rename",                    caps.renameProvider },
+            { "Folding Range",             caps.foldingRangeProvider },
+            { "Selection Range",           caps.selectionRangeProvider },
+        }
+
+        for _, cap in ipairs(capability_list) do
+            local status = cap[2] and "✓" or "✗"
+            print(string.format("  %s %s", status, cap[1]))
         end
-        detach_clients[name] = nil
-      end
-      if next(detach_clients) == nil and not timer:is_closing() then
-        timer:close()
-      end
-    end)
-  )
-end, {
-  desc = "Restart all the language client(s) attached to the current buffer",
-})
+        print("")
+    end
+end
 
-vim.api.nvim_create_user_command("LspLog", function()
-  vim.cmd.vsplit(vim.lsp.log.get_filename())
-end, {
-  desc = "Get all the lsp logs",
-})
-
+vim.api.nvim_create_user_command('LspCapabilities', check_lsp_capabilities, { desc = "Show LSP capabilities" })

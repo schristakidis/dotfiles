@@ -6,7 +6,9 @@ local M = {
     "nvim-treesitter/nvim-treesitter",
   },
   config = function()
-    require("go").setup()
+    require("go").setup({
+      diagnostic = false  -- otherwise it resets the custom diagnostic setup
+    })
   end,
   event = {"CmdlineEnter"},
   ft = {"go", 'gomod'},
