@@ -1,5 +1,6 @@
 local M = {
   "neovim/nvim-lspconfig",
+  -- "onsails/lspkind-nvim",
   dependencies = {
     "onsails/lspkind-nvim",
     'ray-x/lsp_signature.nvim',
@@ -7,10 +8,10 @@ local M = {
     "nvim-lua/plenary.nvim",
     'b0o/SchemaStore.nvim',
     'someone-stole-my-name/yaml-companion.nvim',
+    'cenk1cenk2/schema-companion.nvim',
     { 'williamboman/mason.nvim',           config = true },
-    { 'williamboman/mason-lspconfig.nvim', config = true },
     { 'jay-babu/mason-null-ls.nvim',       config = true },
-    { "folke/neodev.nvim",                 config = true },
+    { "folke/lazydev.nvim",                 config = true },
   },
   config = function()
     require("core.plugins.lsp.lsp")

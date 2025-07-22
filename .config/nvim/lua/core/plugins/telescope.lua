@@ -109,8 +109,22 @@ local M = {
     })
 
 
+  local function get_git_root()
+    local function is_git_repo()
+      vim.fn.system("git rev-parse --is-inside-work-tree")
 
+      return vim.v.shell_error == 0
+    end
 
+    local function get_root()
+      local dot_git_path = vim.fn.finddir(".git", ".;")
+      return vim.fn.fnamemodify(dot_git_path, ":h")
+    end
+
+    if is_git_repo() then
+        return get_root()
+    end
+  end
 
     local project_files = function()
       local opts = {}
@@ -119,19 +133,17 @@ local M = {
     end
 
     local git_grep = function()
-      local lsp = require 'lspconfig'
       builtin.grep_string({
         prompt_title = "< Git Grep >",
-        cwd = lsp.util.find_git_ancestor(vim.loop.cwd()),
+        cwd = get_git_root(),
         initial_mode = "insert"
       })
     end
 
     local git_live_grep = function()
-      local lsp = require 'lspconfig'
       require("telescope.builtin").live_grep({
         prompt_title = "< Git Live Grep >",
-        cwd = lsp.util.find_git_ancestor(vim.loop.cwd()),
+        cwd = get_git_root()
       })
     end
 

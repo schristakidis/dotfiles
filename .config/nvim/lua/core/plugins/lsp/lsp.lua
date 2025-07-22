@@ -15,35 +15,99 @@ local servers = {
     "helm_ls",
 }
 
-require("mason").setup()
-require("mason-lspconfig").setup {
-    ensure_installed = servers
+
+
+-- Lsp capabilities and on_attach {{{
+-- Here we grab default Neovim capabilities and extend them with ones we want on top
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = true,
+  lineFoldingOnly = true,
 }
 
+capabilities.textDocument.semanticTokens.multilineTokenSupport = true
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[e', function() vim.diagnostic.goto_prev { severity_limit = "Warning" } end, opts)
-vim.keymap.set('n', ']e', function() vim.diagnostic.goto_next { severity_limit = "Warning" } end, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+vim.lsp.config("*", {
+  capabilities = capabilities,
+})
+
+require("mason").setup()
 
 
-local on_attach = function(_, bufnr)
-    require('lsp_signature').on_attach()
+vim.lsp.enable('pyright')
+vim.lsp.enable('pylsp')
+vim.lsp.enable('lua_ls')
+-- local cfg = require("yaml-companion").setup()
+-- local cfg = require("yaml-companion").setup()
+-- vim.lsp.config.yamllss = cfg
+-- vim.lsp.enable('yamllss')
+-- local cfg = require("schema-companion").setup_client()
+-- vim.lsp.config.yamllss = cfg
+vim.lsp.enable('yamlls')
 
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+vim.diagnostic.config({
+  virtual_lines = false,
+  -- virtual_text = true,
+  virtual_text = {
+    source = false,
+    prefix = '■',
+    -- Only show virtual text matching the given severity
+    severity = {
+      -- Specify a range of severities
+      min = vim.diagnostic.severity.ERROR,
+    },
+  },
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = true,
+  },
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "󰅚 ",
+      [vim.diagnostic.severity.WARN] = "󰀪 ",
+      [vim.diagnostic.severity.INFO] = "󰋽 ",
+      [vim.diagnostic.severity.HINT] = "󰌶 ",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "ErrorMsg",
+      [vim.diagnostic.severity.WARN] = "WarningMsg",
+    },
+  },
+})
+
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    local bufnr = ev.buf
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if not client then
+      return
+    end
 
     -- Mappings.
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+
+    local opts = { noremap = true, silent = true }
+    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
+    vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = 1, float = true, severity = "WARN" }) end, opts)
+    vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count =-1, float = true, severity = "WARN" }) end, opts)
+    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
+    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count =-1, float = true }) end, opts)
+    vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+    vim.keymap.set("n", "<localleader>tv", function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end, opts)
 
     vim.keymap.set('n', '<leader>g', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<gk>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set('n', '<localleader>sh', vim.lsp.buf.signature_help, bufopts)
 
     vim.keymap.set('n', 'gR', vim.lsp.buf.references, bufopts)
 
@@ -51,200 +115,82 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
     vim.keymap.set('v', '=', function() vim.lsp.buf.format { timeout_ms = 2000, async = true } end, bufopts)
 
-    -- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-    --     vim.lsp.handlers.hover, {
-    --         -- Use a sharp border with `FloatBorder` highlights
-    --         border = "single"
-    --     }
-    -- )
+    vim.keymap.set('n', '<localleader>ll', vim.cmd.LspRestart, bufopts)
+    vim.keymap.set('n', '<localleader>li', vim.cmd.LspInfo, bufopts)
+
+    if client.server_capabilities.completionProvider then
+      vim.bo[bufnr].omnifunc = "v:lua.vim.lsp.omnifunc"
+    end
+
+    if client.server_capabilities.definitionProvider then
+      vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
+
+  end
+})
 
 
-    -- local function preview_location_callback(_, result)
-    --   if result == nil or vim.tbl_isempty(result) then
-    --     return nil
-    --   end
-    --   vim.lsp.util.preview_location(result[1])
-    -- end
-
-    -- function PeekDefinition()
-    --   local params = vim.lsp.util.make_position_params()
-    --   return vim.lsp.buf_request(0, 'textDocument/definition', params, preview_location_callback)
-    -- end
-    --
-    -- vim.keymap.set('n', '<space>p', PeekDefinition, opts)
-
-    vim.diagnostic.config({
-        -- virtual_text = false,
-        virtual_text = {
-            source = false,
-            prefix = '■',
-            -- Only show virtual text matching the given severity
-            severity = {
-                -- Specify a range of severities
-                min = vim.diagnostic.severity.ERROR,
-            },
-        },
-        float = {
-            source = "if_many",
-            border = 'rounded',
-        },
-        signs = {
-            text = {
-                [vim.diagnostic.severity.ERROR] = " ",
-                [vim.diagnostic.severity.WARN] = " ",
-                [vim.diagnostic.severity.INFO] = "󰋼 ",
-                [vim.diagnostic.severity.HINT] = "󰌵 ",
-            },
-            numhl = {
-                [vim.diagnostic.severity.ERROR] = "",
-                [vim.diagnostic.severity.WARN] = "",
-                [vim.diagnostic.severity.HINT] = "",
-                [vim.diagnostic.severity.INFO] = "",
-            },
-        },
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true,
-    })
-
-    -- local signs = { Error = " ", Warn = "", Hint = " ", Info = "" }
-
-    -- for type, icon in pairs(signs) do
-    --     local hl = "DiagnosticSign" .. type
-    --     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    -- end
-
-    -- vim.api.nvim_create_autocmd("CursorHold", {
-    --     buffer = bufnr,
-    --     callback = function()
-    --         local auto_opts = {
-    --             focusable = false,
-    --             close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-    --             border = 'rounded',
-    --             source = 'always',
-    --             prefix = ' ',
-    --             scope = 'cursor',
-    --         }
-    --         vim.diagnostic.open_float(nil, auto_opts)
-    --     end
-    -- })
-end
-
-local function get_capabilities()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
-    capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-    return capabilities
-end
-
-local function make_config()
-    return {
-        -- enable snippet support
-        capabilities = get_capabilities(),
-        -- map buffer local keybindings when the language server attaches
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 150,
-        }
-    }
-end
 
 
--- local function get_root_basename()
---     local lspconfig = require('lspconfig')
---
---     local root_pattern = lspconfig.util.root_pattern('.git')
---     local bufname = vim.api.nvim_buf_get_name(0)
---     -- Turned into a filename
---     local filename = lspconfig.util.path.is_absolute(bufname) and bufname or
---         lspconfig.util.path.join(vim.loop.cwd(), bufname)
---     -- Then the directory of the project
---     local project_dirname = root_pattern(filename) or lspconfig.util.path.dirname(filename)
---     -- And finally perform what is essentially a `basename` on this directory
---     return vim.fn.fnamemodify(lspconfig.util.find_git_ancestor(project_dirname), ':t')
+-- for _, lsp in pairs(servers) do
+--     local default_opts = make_config()
+--     local enable = true
+--     elseif lsp == "jsonls" then
+--         default_opts.settings = {
+--             json = {
+--                 schemas = require('schemastore').json.schemas(),
+--                 validate = { enable = true }
+--             },
+--         }
+--     elseif lsp == "yamlls" then
+--         local cfg = require("yaml-companion").setup({
+--             on_new_config = function(new_config)
+--                 new_config.settings.yaml.schemas = vim.tbl_deep_extend(
+--                     "force",
+--                     new_config.settings.yaml.schemas or {},
+--                     require("schemastore").yaml.schemas()
+--                 )
+--             end,
+--             lspconfig = {
+--                 on_attach = on_attach,
+--                 capabilities = get_capabilities()
+--             },
+--             settings = {
+--                 redhat = { telemetry = { enabled = false } },
+--                 yaml = {
+--                     keyOrdering = false,
+--                     format = {
+--                         enable = true,
+--                     },
+--                     validate = true,
+--                     schemaStore = {
+--                         -- Must disable built-in schemaStore support to use
+--                         -- schemas from SchemaStore.nvim plugin
+--                         enable = false,
+--                         -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+--                         url = "",
+--                     },
+--                     schemas = require('schemastore').yaml.schemas(),
+--                 },
+--             },
+--         })
+--         require("lspconfig")["yamlls"].setup(cfg)
+--         enable = false
+--     elseif lsp == "gopls" then
+--         default_opts.settings = require('core.plugins.lsp.servers.gopls').get_settings()
+--     elseif lsp == "helm_ls" then
+--         default_opts.settings = {
+--             ['helm-ls'] = {
+--                 yamlls = {
+--                     path = "yaml-language-server",
+--                 }
+--             }
+--         }
+--     end
+--     if enable then
+--         require('lspconfig')[lsp].setup(default_opts)
+--     end
 -- end
-
-local function is_python2()
-    local version = vim.api.nvim_exec([[echo system('python -V')]], true)
-    if string.find(version, "Python 2.") then
-        return true
-    else
-        return false
-    end
-end
-
-for _, lsp in pairs(servers) do
-    local default_opts = make_config()
-    local enable = true
-    if lsp == "lua_ls" then
-        default_opts.settings = require('core.plugins.lsp.servers.lua').get_settings()
-    elseif lsp == "pylsp" then
-        if is_python2() then
-            default_opts.settings = require('core.plugins.lsp.servers.python').get_pylsp_settings_2()
-        else
-            default_opts.settings = require('core.plugins.lsp.servers.python').get_pylsp_settings()
-        end
-    elseif lsp == "pyright" then
-        default_opts.settings = require('core.plugins.lsp.servers.python').get_pyright_settings()
-        if is_python2() then
-            enable = false
-        end
-    elseif lsp == "jsonls" then
-        default_opts.settings = {
-            json = {
-                schemas = require('schemastore').json.schemas(),
-                validate = { enable = true }
-            },
-        }
-    elseif lsp == "yamlls" then
-        local cfg = require("yaml-companion").setup({
-            on_new_config = function(new_config)
-                new_config.settings.yaml.schemas = vim.tbl_deep_extend(
-                    "force",
-                    new_config.settings.yaml.schemas or {},
-                    require("schemastore").yaml.schemas()
-                )
-            end,
-            lspconfig = {
-                on_attach = on_attach,
-                capabilities = get_capabilities()
-            },
-            settings = {
-                redhat = { telemetry = { enabled = false } },
-                yaml = {
-                    keyOrdering = false,
-                    format = {
-                        enable = true,
-                    },
-                    validate = true,
-                    schemaStore = {
-                        -- Must disable built-in schemaStore support to use
-                        -- schemas from SchemaStore.nvim plugin
-                        enable = false,
-                        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-                        url = "",
-                    },
-                    schemas = require('schemastore').yaml.schemas(),
-                },
-            },
-        })
-        require("lspconfig")["yamlls"].setup(cfg)
-        enable = false
-    elseif lsp == "gopls" then
-        default_opts.settings = require('core.plugins.lsp.servers.gopls').get_settings()
-    elseif lsp == "helm_ls" then
-        default_opts.settings = {
-            ['helm-ls'] = {
-                yamlls = {
-                    path = "yaml-language-server",
-                }
-            }
-        }
-    end
-    if enable then
-        require('lspconfig')[lsp].setup(default_opts)
-    end
-end
 
 
 local null_ls = require("null-ls")
@@ -291,3 +237,75 @@ require("mason-null-ls").setup({
     automatic_installation = true,
     automatic_setup = false
 })
+
+vim.api.nvim_create_user_command("LspInfo", function()
+  vim.cmd("silent checkhealth vim.lsp")
+end, {
+  desc = "Get all the information about all LSP attached",
+})
+
+vim.api.nvim_create_user_command("LspStart", function()
+  vim.cmd.e()
+end, { desc = "Starts LSP clients in the current buffer" })
+
+vim.api.nvim_create_user_command("LspStop", function(opts)
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if opts.args == "" or opts.args == client.name then
+      client:stop(true)
+      vim.notify(client.name .. ": stopped")
+    end
+  end
+end, {
+  desc = "Stop all LSP clients or a specific client attached to the current buffer.",
+  nargs = "?",
+  complete = function(_, _, _)
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    local client_names = {}
+    for _, client in ipairs(clients) do
+      table.insert(client_names, client.name)
+    end
+    return client_names
+  end,
+})
+
+vim.api.nvim_create_user_command("LspRestart", function()
+  local detach_clients = {}
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    client:stop(true)
+    if vim.tbl_count(client.attached_buffers) > 0 then
+      detach_clients[client.name] = { client, vim.lsp.get_buffers_by_client_id(client.id) }
+    end
+  end
+  local timer = vim.uv.new_timer()
+  if not timer then
+    return vim.notify("Servers are stopped but havent been restarted")
+  end
+  timer:start(
+    100,
+    50,
+    vim.schedule_wrap(function()
+      for name, client in pairs(detach_clients) do
+        local client_id = vim.lsp.start(client[1].config, { attach = false })
+        if client_id then
+          for _, buf in ipairs(client[2]) do
+            vim.lsp.buf_attach_client(buf, client_id)
+          end
+          vim.notify(name .. ": restarted")
+        end
+        detach_clients[name] = nil
+      end
+      if next(detach_clients) == nil and not timer:is_closing() then
+        timer:close()
+      end
+    end)
+  )
+end, {
+  desc = "Restart all the language client(s) attached to the current buffer",
+})
+
+vim.api.nvim_create_user_command("LspLog", function()
+  vim.cmd.vsplit(vim.lsp.log.get_filename())
+end, {
+  desc = "Get all the lsp logs",
+})
+
