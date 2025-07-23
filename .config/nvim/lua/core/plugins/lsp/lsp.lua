@@ -8,7 +8,7 @@ capabilities.textDocument.foldingRange = {
 capabilities.textDocument.semanticTokens.multilineTokenSupport = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config("*", {
+vim.lsp.config('*', {
   capabilities = capabilities,
 })
 
@@ -23,38 +23,11 @@ vim.lsp.enable('bashls')
 vim.lsp.enable('dockerls')
 vim.lsp.enable('helmls')
 vim.lsp.enable('gopls')
+vim.lsp.config('yamlls', require("schema-companion").setup_client({
+  -- your yaml language server configuration
+}))
 
-local cfg = require("yaml-companion").setup({
-  on_new_config = function(new_config)
-    new_config.settings.yaml.schemas = vim.tbl_deep_extend(
-      "force",
-      new_config.settings.yaml.schemas or {},
-      require("schemastore").yaml.schemas()
-    )
-  end,
-  lspconfig = {
-    capabilities = capabilities
-  },
-  settings = {
-    redhat = { telemetry = { enabled = false } },
-    yaml = {
-      keyOrdering = false,
-      format = {
-        enable = true,
-      },
-      validate = true,
-      schemaStore = {
-        -- Must disable built-in schemaStore support to use
-        -- schemas from SchemaStore.nvim plugin
-        enable = false,
-        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-        url = "",
-      },
-      schemas = require('schemastore').yaml.schemas(),
-    },
-  },
-})
-require("lspconfig")["yamlls"].setup(cfg)
+vim.lsp.enable('yamlls')
 
 vim.diagnostic.config({
   virtual_lines = false,

@@ -55,14 +55,6 @@ local function get_virtual_env()
   return venv .. ' '
 end
 
-local function get_schema()
-  local schema = require("yaml-companion").get_buf_schema(0)
-  if schema.result[1].name == "none" then
-    return ""
-  end
-  return schema.result[1].name
-end
-
 local config = {
   options = {
     theme = {
@@ -192,7 +184,12 @@ local config = {
         },
       },
       {
-        get_schema,
+        cond = function()
+          return package.loaded["schema-companion"]
+        end,
+        function()
+          return ("%s"):format(require("schema-companion.context").get_buffer_schema().name)
+        end,
         color = {
           bg = colors.line_bg
         },

@@ -4,7 +4,7 @@ local M = {
   dependencies = {
     'nvim-lua/plenary.nvim',
     'ANGkeith/telescope-terraform-doc.nvim',
-    'someone-stole-my-name/yaml-companion.nvim',
+    -- 'someone-stole-my-name/yaml-companion.nvim',
     "crispgm/telescope-heading.nvim",
     "nvim-telescope/telescope-symbols.nvim",
     "nvim-telescope/telescope-file-browser.nvim",
@@ -18,7 +18,7 @@ local M = {
     require('telescope').load_extension('terraform_doc')
     require('telescope').load_extension('ui-select')
     require('telescope').load_extension('heading')
-    require("telescope").load_extension("yaml_schema")
+    -- require("telescope").load_extension("yaml_schema")
 
     local telescope = require("telescope")
     local actions = require("telescope.actions")
