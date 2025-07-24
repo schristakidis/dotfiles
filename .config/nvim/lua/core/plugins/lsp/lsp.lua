@@ -100,7 +100,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set('n', '<leader>g', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, bufopts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({border = "rounded"}) end, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<localleader>sh', vim.lsp.buf.signature_help, bufopts)
