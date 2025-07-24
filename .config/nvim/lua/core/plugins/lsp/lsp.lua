@@ -24,7 +24,19 @@ vim.lsp.enable('dockerls')
 vim.lsp.enable('helmls')
 vim.lsp.enable('gopls')
 vim.lsp.config('yamlls', require("schema-companion").setup_client({
-  -- your yaml language server configuration
+  cmd = { 'yaml-language-server', '--stdio' },
+  filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
+  root_markers = { '.git' },
+  settings = {
+    redhat = { telemetry = { enabled = false } },
+    yaml = {
+      keyOrdering = false,
+      format = {
+        enable = true,
+      },
+      validate = true,
+    }
+  }
 }))
 
 vim.lsp.enable('yamlls')
@@ -79,11 +91,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = 1, float = true, severity = "WARN" }) end, opts)
-    vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count =-1, float = true, severity = "WARN" }) end, opts)
+    vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = -1, float = true, severity = "WARN" }) end, opts)
     vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
-    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count =-1, float = true }) end, opts)
+    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
-    vim.keymap.set("n", "<localleader>tv", function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end, opts)
+    vim.keymap.set("n", "<localleader>tv",
+      function() vim.diagnostic.config({ virtual_lines = not vim.diagnostic.config().virtual_lines }) end, opts)
 
     vim.keymap.set('n', '<leader>g', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, bufopts)
@@ -108,7 +121,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
     end
-
   end
 })
 
@@ -185,45 +197,45 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- })
 --
 local function check_lsp_capabilities()
-    local bufnr = vim.api.nvim_get_current_buf()
-    local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
 
-    if #clients == 0 then
-        print("No LSP clients attached")
-        return
+  if #clients == 0 then
+    print("No LSP clients attached")
+    return
+  end
+
+  for _, client in ipairs(clients) do
+    print("Capabilities for " .. client.name .. ":")
+    local caps = client.server_capabilities
+
+    local capability_list = {
+      { "Completion",                caps.completionProvider },
+      { "Hover",                     caps.hoverProvider },
+      { "Signature Help",            caps.signatureHelpProvider },
+      { "Go to Definition",          caps.definitionProvider },
+      { "Go to Declaration",         caps.declarationProvider },
+      { "Go to Implementation",      caps.implementationProvider },
+      { "Go to Type Definition",     caps.typeDefinitionProvider },
+      { "Find References",           caps.referencesProvider },
+      { "Document Highlight",        caps.documentHighlightProvider },
+      { "Document Symbol",           caps.documentSymbolProvider },
+      { "Workspace Symbol",          caps.workspaceSymbolProvider },
+      { "Code Action",               caps.codeActionProvider },
+      { "Code Lens",                 caps.codeLensProvider },
+      { "Document Formatting",       caps.documentFormattingProvider },
+      { "Document Range Formatting", caps.documentRangeFormattingProvider },
+      { "Rename",                    caps.renameProvider },
+      { "Folding Range",             caps.foldingRangeProvider },
+      { "Selection Range",           caps.selectionRangeProvider },
+    }
+
+    for _, cap in ipairs(capability_list) do
+      local status = cap[2] and "✓" or "✗"
+      print(string.format("  %s %s", status, cap[1]))
     end
-
-    for _, client in ipairs(clients) do
-        print("Capabilities for " .. client.name .. ":")
-        local caps = client.server_capabilities
-
-        local capability_list = {
-            { "Completion",                caps.completionProvider },
-            { "Hover",                     caps.hoverProvider },
-            { "Signature Help",            caps.signatureHelpProvider },
-            { "Go to Definition",          caps.definitionProvider },
-            { "Go to Declaration",         caps.declarationProvider },
-            { "Go to Implementation",      caps.implementationProvider },
-            { "Go to Type Definition",     caps.typeDefinitionProvider },
-            { "Find References",           caps.referencesProvider },
-            { "Document Highlight",        caps.documentHighlightProvider },
-            { "Document Symbol",           caps.documentSymbolProvider },
-            { "Workspace Symbol",          caps.workspaceSymbolProvider },
-            { "Code Action",               caps.codeActionProvider },
-            { "Code Lens",                 caps.codeLensProvider },
-            { "Document Formatting",       caps.documentFormattingProvider },
-            { "Document Range Formatting", caps.documentRangeFormattingProvider },
-            { "Rename",                    caps.renameProvider },
-            { "Folding Range",             caps.foldingRangeProvider },
-            { "Selection Range",           caps.selectionRangeProvider },
-        }
-
-        for _, cap in ipairs(capability_list) do
-            local status = cap[2] and "✓" or "✗"
-            print(string.format("  %s %s", status, cap[1]))
-        end
-        print("")
-    end
+    print("")
+  end
 end
 
 vim.api.nvim_create_user_command('LspCapabilities', check_lsp_capabilities, { desc = "Show LSP capabilities" })

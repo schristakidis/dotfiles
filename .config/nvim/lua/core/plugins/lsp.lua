@@ -7,9 +7,9 @@ local M = {
     "nvim-lua/plenary.nvim",
     'b0o/SchemaStore.nvim',
     -- 'someone-stole-my-name/yaml-companion.nvim',
-    { 'williamboman/mason.nvim',           config = true },
-    { "folke/lazydev.nvim",                 config = true },
-    { 'stevearc/conform.nvim', opts = {} }
+    { 'williamboman/mason.nvim', config = true },
+    { "folke/lazydev.nvim",      config = true },
+    { 'stevearc/conform.nvim',   opts = {} }
   },
   config = function()
     require("core.plugins.lsp.lsp")

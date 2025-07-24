@@ -55,6 +55,14 @@ local function get_virtual_env()
   return venv .. ' '
 end
 
+local function get_schema()
+  local schema = require("schema-companion.context").get_buffer_schema().name
+  if schema == "none" then
+    return ""
+  end
+  return schema:match("%w+")
+end
+
 local config = {
   options = {
     theme = {
@@ -184,12 +192,7 @@ local config = {
         },
       },
       {
-        cond = function()
-          return package.loaded["schema-companion"]
-        end,
-        function()
-          return ("%s"):format(require("schema-companion.context").get_buffer_schema().name)
-        end,
+        get_schema,
         color = {
           bg = colors.line_bg
         },
