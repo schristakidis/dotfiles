@@ -23,21 +23,21 @@ vim.lsp.enable('bashls')
 vim.lsp.enable('dockerls')
 vim.lsp.enable('helmls')
 vim.lsp.enable('gopls')
-vim.lsp.config('yamlls', require("schema-companion").setup_client({
-  cmd = { 'yaml-language-server', '--stdio' },
-  filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
-  root_markers = { '.git' },
-  settings = {
-    redhat = { telemetry = { enabled = false } },
-    yaml = {
-      keyOrdering = false,
-      format = {
-        enable = true,
-      },
-      validate = true,
-    }
-  }
-}))
+-- vim.lsp.config('yamlls', require("schema-companion").setup_client({
+--   cmd = { 'yaml-language-server', '--stdio' },
+--   filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
+--   root_markers = { '.git' },
+--   settings = {
+--     redhat = { telemetry = { enabled = false } },
+--     yaml = {
+--       keyOrdering = false,
+--       format = {
+--         enable = true,
+--       },
+--       validate = true,
+--     }
+--   }
+-- }))
 
 vim.lsp.enable('yamlls')
 

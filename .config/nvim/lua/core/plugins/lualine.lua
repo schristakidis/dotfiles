@@ -56,7 +56,7 @@ local function get_virtual_env()
 end
 
 local function get_schema()
-  local schema = require("schema-companion.context").get_buffer_schema().name
+  local schema = require("schema-companion").get_current_schemas()
   if schema == "none" then
     return ""
   end
