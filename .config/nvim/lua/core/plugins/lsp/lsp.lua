@@ -1,27 +1,26 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 capabilities.textDocument.foldingRange = {
-  dynamicRegistration = true,
-  lineFoldingOnly = true,
+	dynamicRegistration = true,
+	lineFoldingOnly = true,
 }
 
 capabilities.textDocument.semanticTokens.multilineTokenSupport = true
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-vim.lsp.config('*', {
-  capabilities = capabilities,
+vim.lsp.config("*", {
+	capabilities = capabilities,
 })
 
 require("mason").setup()
 
-
-vim.lsp.enable('pyright')
-vim.lsp.enable('pylsp')
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('terraformls')
-vim.lsp.enable('bashls')
-vim.lsp.enable('dockerls')
-vim.lsp.enable('helmls')
+vim.lsp.enable("pyright")
+vim.lsp.enable("pylsp")
+vim.lsp.enable("lua_ls")
+vim.lsp.enable("terraformls")
+vim.lsp.enable("bashls")
+vim.lsp.enable("dockerls")
+vim.lsp.enable("helmls")
 vim.lsp.enable('gopls')
 -- vim.lsp.config('yamlls', require("schema-companion").setup_client({
 --   cmd = { 'yaml-language-server', '--stdio' },
@@ -97,8 +96,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     local opts = { noremap = true, silent = true }
     vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = 1, float = true, severity = "WARN" }) end, opts)
-    vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = -1, float = true, severity = "WARN" }) end, opts)
+    vim.keymap.set('n', '[e', function() vim.diagnostic.jump({ count = 1, float = true, severity = {min = vim.diagnostic.severity.WARN }}) end, opts)
+		vim.keymap.set('n', ']e', function() vim.diagnostic.jump({ count = -1, float = true, severity = {min = vim.diagnostic.severity.WARN }}) end, opts)
     vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = 1, float = true }) end, opts)
     vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = -1, float = true }) end, opts)
     vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
@@ -109,6 +108,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', function() vim.lsp.buf.hover({ border = "rounded" }) end, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<leader>i', vim.lsp.buf.implementation, bufopts)
     vim.keymap.set('n', '<localleader>sh', vim.lsp.buf.signature_help, bufopts)
 
