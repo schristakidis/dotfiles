@@ -73,5 +73,10 @@ return {
     priority = 1000,
     config = true
   },
-  { 'tpope/vim-repeat' }
+  { 'tpope/vim-repeat' },
+  { 'norcalli/nvim-colorizer.lua',
+    config = function()
+      require('colorizer').setup()
+    end
+  }
 }
