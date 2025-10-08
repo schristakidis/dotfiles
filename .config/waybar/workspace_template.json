@@ -19,6 +19,7 @@
       "class<Alacritty>": "",
       "class<Slack>": "",
       "title<Microsoft Teams.*>": "󰊻",
+      "class<teams-for-linux>": "󰊻",
       "class<Thunderbird>": "\uf0e0",
       "class<org.pwmt.zathura>": "",
       "class<mps_vpn>": "",
