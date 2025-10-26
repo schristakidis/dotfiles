@@ -78,7 +78,6 @@ zinit wait lucid light-mode for \
     as"completion" OMZP::docker-compose/_docker-compose \
     as"completion" OMZP::httpie/_httpie \
     as"completion" OMZP::terraform/_terraform \
-    as"completion" OMZP::fd/_fd \
     OMZP::aws \
     OMZP::istioctl \
     OMZP::helm \
