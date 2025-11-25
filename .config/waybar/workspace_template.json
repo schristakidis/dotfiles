@@ -18,8 +18,6 @@
       "title<.*nvim.*>": "",
       "class<Alacritty>": "",
       "class<Slack>": "",
-      "title<Microsoft Teams.*>": "󰊻",
-      "class<teams-for-linux>": "󰊻",
       "class<org.mozilla.Thunderbird>": "\uf0e0",
       "class<org.pwmt.zathura>": "",
       "class<mps_vpn>": "",
@@ -27,7 +25,9 @@
       "class<org.gnome.Nautilus>": "",
       "class<1password>": "󰢁",
       "class<chromium>": "",
-      "title<.*Salesforce.*>": "󰢎"
+      "class<chromium> title<.*Salesforce.*>": "󰢎",
+      "title<Microsoft Teams.*>": "󰊻",
+      "class<teams-for-linux>": "󰊻"
     },
     "format": "{name}: {windows} ",
     "format-window-separator": " ",
