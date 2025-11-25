@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 
-# ZINIT_DIR="$HOME/.dotfiles/zsh/.zinit"
+ZINIT_LOCAL_PLUGIN="$HOME/.dotfiles/.config/zsh/plugins"
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 # ### Added by Zinit's installer
 if [[ ! -d "$ZINIT_HOME" ]]; then
@@ -51,6 +51,7 @@ zvm_config() {
 
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
+zinit snippet $ZINIT_LOCAL_PLUGIN/kubectl.zsh
 
 zinit wait lucid light-mode for \
     as"program" \
