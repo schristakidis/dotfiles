@@ -44,7 +44,10 @@ def reload():
 
 
 class HMonitors:
-    def __init__(self, single, dock, reverse, reverse_workspaces, once):
+    def __init__(
+        self, single, dock, reverse, reverse_workspaces, once, scaling,
+        resolution
+    ):
         self.single = single
         self.hypr_conf_workspaces = []
         self.hypr_conf_monitors = []
@@ -53,6 +56,8 @@ class HMonitors:
         self.reverse = reverse
         self.reverse_workspaces = reverse_workspaces
         self.once = once
+        self.scaling = scaling
+        self.resolution = resolution
 
     def run(self):
         self._run()
@@ -189,7 +194,12 @@ class HMonitors:
         # self.hypr_conf_monitors += [
         #     f"monitor = {name},{res},auto,1,bitdepth,10"
         # ]
-        self.hypr_conf_monitors += [f"monitor = {name},{res},{pos},1"]
+        if self.resolution:
+            res = self.resolution
+
+        self.hypr_conf_monitors += [
+            f"monitor = {name},{res},{pos},{self.scaling}"
+        ]
 
         for i in range(start, end + 1):
             self.hypr_conf_workspaces.append(
@@ -248,8 +258,11 @@ if __name__ == '__main__':
     parser.add_argument('--reverse', action="store_true", default=False)
     parser.add_argument('--reversew', action="store_true", default=False)
     parser.add_argument('--once', action="store_true", default=False)
+    parser.add_argument('--scaling', default=1)
+    parser.add_argument('--resolution', default='')
 
     args = parser.parse_args()
     HMonitors(
-        args.single, args.dock, args.reverse, args.reversew, args.once
+        args.single, args.dock, args.reverse, args.reversew, args.once,
+        args.scaling, args.resolution
     ).run()
