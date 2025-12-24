@@ -26,7 +26,7 @@ return {
     -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "yapf" },
+      -- python = { "isort", "yapf" },
       json = { "jq" },
       xml = { "xmllint" },
       terraform = { "terraform_fmt" },

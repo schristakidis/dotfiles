@@ -14,7 +14,8 @@ vim.lsp.config("*", {
 
 require("mason").setup()
 
-vim.lsp.enable("pyright")
+-- vim.lsp.enable("pyright")
+vim.lsp.enable("basedpyright")
 vim.lsp.enable("pylsp")
 vim.lsp.enable("lua_ls")
 vim.lsp.enable("terraformls")
@@ -22,6 +23,7 @@ vim.lsp.enable("bashls")
 vim.lsp.enable("dockerls")
 vim.lsp.enable("helmls")
 vim.lsp.enable('gopls')
+vim.lsp.enable('ruff')
 -- vim.lsp.config('yamlls', require("schema-companion").setup_client({
 --   cmd = { 'yaml-language-server', '--stdio' },
 --   filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab', 'yaml.helm-values' },
@@ -127,6 +129,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     if client.server_capabilities.definitionProvider then
       vim.bo[bufnr].tagfunc = "v:lua.vim.lsp.tagfunc"
+    end
+
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
     end
   end
 })
