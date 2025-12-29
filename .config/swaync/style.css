@@ -20,9 +20,9 @@
 }
 
 .notification-row:focus,
-.notification-row:hover {
-  background: @noti-bg-focus;
-}
+/* .notification-row:hover { */
+/*   background: @noti-bg-focus; */
+/* } */
 
 .notification {
   border-radius: 12px;
