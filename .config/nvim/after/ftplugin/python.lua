@@ -4,4 +4,4 @@ vo.shiftwidth = 4
 vo.softtabstop = 4
 vo.expandtab = true
 vo.completeopt = vo.completeopt - "preview"
-vo.colorcolumn = "80"
+vo.colorcolumn = "88"

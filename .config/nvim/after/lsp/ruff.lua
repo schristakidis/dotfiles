@@ -44,6 +44,7 @@ return {
 						"SIM",
 						-- isort
 						"I",
+						"FAST"
 					},
 				},
 				format = {

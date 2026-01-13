@@ -59,7 +59,8 @@ return {
         inlayHints = {
           variableTypes = false,
           functionReturnTypes = false,
-          genericTypes = false
+          genericTypes = false,
+          callArgumentNames = false
         },
         typeCheckingMode = "basic",
           diagnosticSeverityOverrides = {
