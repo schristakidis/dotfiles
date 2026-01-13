@@ -3,50 +3,6 @@ local pylsp_settings = {
     configurationSources = { "pycodestyle" },
     plugins = {
       jedi_completion = {
-        enabled = false
-      },
-      jedi_definition = {
-        enabled = false
-      },
-      jedi_hover = {
-        enabled = false
-      },
-      jedi_references = {
-        enabled = false
-      },
-      jedi_signature_help = {
-        enabled = false
-      },
-      jedi_symbols = {
-        enabled = false
-      },
-      mccabe = {
-        enabled = false
-      },
-      pycodestyle = {
-        enabled = true
-      },
-      pyflakes = {
-        enabled = false
-      },
-      pylint = {
-        enabled = false
-      },
-      rope_completion = {
-        enabled = false
-      },
-      yapf = {
-        enabled = false
-      }
-    }
-  }
-}
-
-local pylsp_settings2 = {
-  pylsp = {
-    configurationSources = { "pycodestyle" },
-    plugins = {
-      jedi_completion = {
         enabled = true
       },
       jedi_definition = {
@@ -68,7 +24,7 @@ local pylsp_settings2 = {
         enabled = false
       },
       pycodestyle = {
-        enabled = true
+        enabled = false
       },
       pyflakes = {
         enabled = true
@@ -96,16 +52,14 @@ local function is_python2()
   end
 end
 
-
-local settings = pylsp_settings
-
-if is_python2() then
-  settings = pylsp_settings2
+local filetypes = { 'python' }
+if not is_python2() then
+  filetypes = { 'nope' }
 end
 
 return {
   cmd = { 'pylsp' },
-  filetypes = { 'python' },
+  filetypes = filetypes,
   root_markers = {
     'pyproject.toml',
     'setup.py',
@@ -114,5 +68,5 @@ return {
     'Pipfile',
     '.git',
   },
-  settings = settings
+  settings = pylsp_settings
 }

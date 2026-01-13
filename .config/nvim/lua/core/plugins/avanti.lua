@@ -53,7 +53,8 @@ M.opts = {
   providers = {
     gemini = {
       -- @see https://ai.google.dev/gemini-api/docs/models/gemini
-      model = "gemini-2.0-flash",
+      endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+      model = "gemini-2.5-flash-lite",
       extra_request_body = {
         temperature = 0,
         max_tokens = 4096,
