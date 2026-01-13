@@ -13,6 +13,7 @@
     ],
     "modules-right": [
         "hyprland/submap",
+        "custom/idle_check",
         "custom/weather",
         "custom/wlsunset",
         "custom/playerctl",
@@ -295,6 +296,10 @@
         "hwmon-path": "/sys/devices/virtual/thermal/thermal_zone0/hwmon1/temp1_input",
         "format-critical": " {temperatureC}°C",
         "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
+    },
+    "custom/idle_check": {
+        "interval": 5,
+        "exec": "~/.bin/idle_check.sh"
     },
     "idle_inhibitor": {
         "format": "{icon}",
