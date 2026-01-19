@@ -44,17 +44,17 @@ vim.lsp.enable('yamlls')
 
 vim.diagnostic.config({
   virtual_lines = false,
-  -- virtual_text = true,
-  virtual_text = {
-    source = false,
-    prefix = '■',
-    current_line = true,
-    -- Only show virtual text matching the given severity
-    -- severity = {
-    --   -- Specify a range of severities
-    --   min = vim.diagnostic.severity.ERROR,
-    -- },
-  },
+  virtual_text = false,
+  -- virtual_text = {
+  --   source = false,
+  --   prefix = '■',
+  --   current_line = true,
+  --   -- Only show virtual text matching the given severity
+  --   -- severity = {
+  --   --   -- Specify a range of severities
+  --   --   min = vim.diagnostic.severity.ERROR,
+  --   -- },
+  -- },
   underline = true,
   update_in_insert = false,
   severity_sort = true,

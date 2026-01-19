@@ -37,17 +37,15 @@ local M = {
 
 		cmp.setup({
 			formatting = {
+				-- fields = { 'abbr', 'icon', 'kind', 'menu' },
+				fields = { 'abbr', 'kind' },
 				format = lspkind.cmp_format({
-					with_text = false,
-					maxwidth = 50,
-					mode = "symbol",
-					menu = {
-						buffer = "BUF",
-						rg = "RG",
-						nvim_lsp = "LSP",
-						path = "PATH",
-						luasnip = "SNIP",
-						calc = "CALC",
+					maxwidth = {
+						-- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+						-- can also be a function to dynamically calculate max width such as
+						-- menu = function() return math.floor(0.45 * vim.o.columns) end,
+						menu = 50, -- leading text (labelDetails)
+						abbr = 50, -- actual suggestion item
 					},
 				}),
 			},

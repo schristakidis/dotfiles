@@ -29,7 +29,7 @@ return {
       -- python = { "isort", "yapf" },
       json = { "jq" },
       xml = { "xmllint" },
-      terraform = { "terraform_fmt" },
+      -- terraform = { "terraform_fmt" },
       javascript = { "prettierd", "prettier", stop_after_first = true },
       go = { "gofumpt", "goimports", "golines" }
     },
