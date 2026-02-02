@@ -20,3 +20,7 @@ In ``about:config``
 ### Increase number of entries in search bar
 
 ``browser.urlbar.maxRichResults``
+
+### Ignore the new stupid share window feature
+
+``zen.window-sync.enabled = false``

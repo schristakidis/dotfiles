@@ -12,6 +12,7 @@
 * [Intel Hardware acceleration](#intel-hardware-acceleration)
     * [Install](#install)
     * [firefox](#firefox)
+* [Do not suspend on lid close](#do-not-suspend-on-lid-close)
 
 <!-- vim-markdown-toc -->
 ## Default Applications
@@ -97,3 +98,9 @@ if video is not decoded in gpu try setting in ``about:config``
 
 * media.ffmpeg.vaapi.enabled to true
 * gfx.webrender.all to true
+
+
+## Do not suspend on lid close
+
+Edit ```/etc/systemd/logind.conf```
+set ```HandleLidSwitch=ignore```
