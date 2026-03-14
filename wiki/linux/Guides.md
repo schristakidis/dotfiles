@@ -11,8 +11,9 @@
 * [Add certificate](#add-certificate)
 * [Intel Hardware acceleration](#intel-hardware-acceleration)
     * [Install](#install)
-    * [firefox](#firefox)
+    * [Firefox](#firefox)
 * [Do not suspend on lid close](#do-not-suspend-on-lid-close)
+* [local network DNS resolution](#local-network-dns-resolution)
 
 <!-- vim-markdown-toc -->
 ## Default Applications
@@ -92,7 +93,7 @@ Monitor
 sudo intel_gpu_tool 
 ```
 
-### firefox
+### Firefox
 
 if video is not decoded in gpu try setting in ``about:config``
 
@@ -104,3 +105,8 @@ if video is not decoded in gpu try setting in ``about:config``
 
 Edit ```/etc/systemd/logind.conf```
 set ```HandleLidSwitch=ignore```
+
+
+## local network DNS resolution
+
+[avahi](https://wiki.archlinux.org/title/Avahi)
