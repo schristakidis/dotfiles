@@ -11,3 +11,4 @@ tmp/*
 .config/waybar/style.css
 .config/hypr/env_nvidia.conf
 .config/hypr/carD
+.zsh_sessions/

@@ -44,7 +44,7 @@ history = 10000
 multiplier = 3
 
 [window]
-decorations = "full"
+decorations = "Buttonless"
 opacity = 1.0
 startup_mode = "Windowed"
 
@@ -55,6 +55,9 @@ lines = 25
 [window.padding]
 x = 6
 y = 6
+
+[selection]
+save_to_clipboard=true
 
 [general]
 

@@ -1,18 +1,18 @@
 [font]
-size = 11
+size = 14
 
 [font.bold]
-family = "terminal-font"
+family = "JetBrainsMono NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "terminal-font"
+family = "JetBrainsMono NF"
 style = "Bold Italic"
 
 [font.italic]
-family = "terminal-font"
+family = "JetBrainsMono NF"
 style = "Italic"
 
 [font.normal]
-family = "terminal-font"
+family = "JetBrainsMono NF"
 style = "Medium"
