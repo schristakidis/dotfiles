@@ -29,7 +29,7 @@ function icon_map() {
     icon_result=":airmail:"
     ;;
   "Alacritty")
-    icon_result=":alacritty:"
+    icon_result=":terminal:"
     ;;
   "Alfred")
     icon_result=":alfred:"

@@ -35,6 +35,10 @@ default-root-container-orientation = 'auto'
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # Fallback value (if you omit the key): on-focused-monitor-changed = []
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_window_focus_change FOCUSED_WINDOW=$AEROSPACE_WINDOW_ID FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE']
+
+
+# exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE']
 
 # You can effectively turn off macOS "Hide application" (cmd-h) feature by toggling this flag
 # Useful if you don't use this macOS feature, but accidentally hit cmd-h or cmd-alt-h key
@@ -52,7 +56,6 @@ persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 on-mode-changed = []
 
-exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE']
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
@@ -71,7 +74,8 @@ exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_w
     inner.horizontal = 10
     inner.vertical =   10
     outer.left =       0
-    outer.bottom =     20
+    outer.bottom =     0
+    # outer.top = 0
     outer.top = [
         { monitor."built-in" = 5 },
         { monitor."main" = 35 },
@@ -113,7 +117,7 @@ exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_w
     # '''
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
-    alt-slash = 'layout tiles horizontal vertical'
+    cmd-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#focus
@@ -164,7 +168,7 @@ exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_w
     cmd-enter = 'exec-and-forget open -n /Applications/Alacritty.app'
     cmd-f = 'exec-and-forget open -n /Applications/Zen.app'
     cmd-n = 'exec-and-forget open -a /System/Library/CoreServices/Finder.app'
-    cmd-space = 'fullscreen'
+    cmd-space = ['fullscreen', 'exec-and-forget sketchybar --trigger aerospace_fullscreen']
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
@@ -188,7 +192,13 @@ exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_w
     alt-shift-l = ['join-with right', 'mode main']
 
 [mode.close.binding]
+    r = ['reload-config', 'mode main']
     q = ['close', 'mode main']
+    h = ['join-with left', 'mode main']
+    j = ['join-with down', 'mode main']
+    k = ['join-with up', 'mode main']
+    l = ['join-with right', 'mode main']
+    t = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 
 
 # # Default space
@@ -247,5 +257,5 @@ exec-on-workspace-change = ['/bin/bash', '-c', 'sketchybar --trigger aerospace_w
 
 
 # Catch-all: refresh sketchybar icons whenever any new window appears
-[[on-window-detected]]
-run = 'exec-and-forget sleep 0.3 && sketchybar --trigger aerospace_workspace_change'
+# [[on-window-detected]]
+# run = 'exec-and-forget sleep 0.3 && sketchybar --trigger aerospace FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
