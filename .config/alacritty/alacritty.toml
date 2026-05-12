@@ -26,7 +26,7 @@ key = "Y"
 mods = "Control|Shift"
 
 [[hints.enabled]]
-command = "xdg-open"
+command = "open"
 hyperlinks = true
 post_processing = true
 persist = false

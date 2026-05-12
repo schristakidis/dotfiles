@@ -110,7 +110,7 @@ on-mode-changed = []
     # You can uncomment the following lines to open up terminal with alt + enter shortcut
     # (like in i3)
     # alt-enter = '''exec-and-forget osascript -e '
-    # tell application "Finder"
+    # tell application "Alacritty"
     #     do script
     #     activate
     # end tell'
@@ -170,6 +170,9 @@ on-mode-changed = []
     cmd-n = 'exec-and-forget open -a /System/Library/CoreServices/Finder.app'
     cmd-space = ['fullscreen', 'exec-and-forget sketchybar --trigger aerospace_fullscreen']
 
+    cmd-shift-m = 'exec-and-forget open -n /Applications/Alacritty.app --args -e $HOME/.config/tmux/plugins/tmux-1password/scripts/main.sh --class 1pass,1pass'
+
+
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'
 
@@ -192,7 +195,7 @@ on-mode-changed = []
     alt-shift-l = ['join-with right', 'mode main']
 
 [mode.close.binding]
-    r = ['reload-config', 'mode main']
+    r = ['reload-config', 'exec-and-forget sketchybar --reload', 'mode main']
     q = ['close', 'mode main']
     h = ['join-with left', 'mode main']
     j = ['join-with down', 'mode main']
@@ -240,8 +243,17 @@ on-mode-changed = []
 #
 # [[on-window-detected]]
 # if.app-id ='tv.plex.plexamp'
-# run = ['move-node-to-workspace 7']
+
 #
+#[[on-window-detected]]
+# if.app-id = 'com.apple.systempreferences'
+# if.app-name-regex-substring = 'settings'
+# if.window-title-regex-substring = 'substring'
+# if.workspace = 'workspace-name'
+# if.during-aerospace-startup = true
+# check-further-callbacks = true
+# run = ['layout floating', 'move-node-to-workspace S']  # The callback itself run = ['move-node-to-workspace 7']
+
 # # force certain workspaces to certain monitors
 [workspace-to-monitor-force-assignment]
 1 = 'main'                  # Monitor sequence number from left to right. 1-based indexing
@@ -249,11 +261,15 @@ on-mode-changed = []
 3 = 'main'                  # Non-main monitor in case when there are only two monitors
 4 = 'main'                  # Non-main monitor in case when there are only two monitors
 5 = 'main'
-6 = 'built-in'
+6 = [2, 'built-in']
 7 = [2,'built-in']
 8 = [2, 'built-in']
 9 = [2,'built-in']
-10 = [2, 'built-in']
+# 6  = 'built-in'
+# 7  = 'built-in'
+# 8  = 'built-in'
+# 9  = 'built-in'
+10 = 'built-in'
 
 
 # Catch-all: refresh sketchybar icons whenever any new window appears
