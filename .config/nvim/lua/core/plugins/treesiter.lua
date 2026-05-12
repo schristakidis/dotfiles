@@ -1,90 +1,102 @@
-local M = {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = "BufReadPost",
-    dependencies = {
-        "nvim-treesitter/nvim-treesitter-textobjects",
-        "RRethy/nvim-treesitter-endwise",
-        "mfussenegger/nvim-ts-hint-textobject",
-        "windwp/nvim-ts-autotag",
-        "nvim-treesitter/playground",
-    },
-    config = function()
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "c", "lua", "vim", "vimdoc", "query", "python", "go", "terraform", "yaml",
-                "dockerfile", "json", "markdown", "norg", "markdown_inline", "gotmpl"
-            },
-            ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
-            sync_install = false,
-            auto_install = true,
-            highlight = {
-                enable = true,             -- false will disable the whole extension
-                disable = { "c", "rust" }, -- list of language that will be disabled
-                custom_captures = {
-                    ["error"] = "Normal"
-                },
-                additional_vim_regex_highlighting = false,
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "gnn",
-                    node_incremental = "grn",
-                    scope_incremental = "grc",
-                    node_decremental = "grm",
-                },
-            },
-            endwise = {
-                enable = true,
-            },
-            indent = {
-                enable = true,
-                disable = { "python", "yaml" } -- python not working, yaml not sure
-            },
-            autopairs = { enable = true },
-            textobjects = {
-                select = {
-                    enable = true,
-                    -- Automatically jump forward to textobj, similar to targets.vim
-                    lookahead = true,
-                    keymaps = {
-                        -- You can use the capture groups defined in textobjects.scm
-                        ["af"] = "@function.outer",
-                        ["if"] = "@function.inner",
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@class.inner",
-                        ["al"] = "@loop.outer",
-                        ["il"] = "@loop.inner",
-                        ["ib"] = "@block.inner",
-                        ["ab"] = "@block.outer",
-                        ["ir"] = "@parameter.inner",
-                        ["ar"] = "@parameter.outer",
-                    },
-                },
-            },
-            playground = {
-                enable = true,
-                disable = {},
-                updatetime = 25,         -- Debounced time for highlighting nodes in the playground from source code
-                persist_queries = false, -- Whether the query persists across vim sessions
-                keybindings = {
-                    toggle_query_editor = 'o',
-                    toggle_hl_groups = 'i',
-                    toggle_injected_languages = 't',
-                    toggle_anonymous_nodes = 'a',
-                    toggle_language_display = 'I',
-                    focus_language = 'f',
-                    unfocus_language = 'F',
-                    update = 'R',
-                    goto_node = '<cr>',
-                    show_help = '?',
-                },
-            }
-        })
+vim.api.nvim_create_autocmd({ 'Filetype' }, {
+  callback = function(event)
+    -- make sure nvim-treesitter is loaded
+    local ok, nvim_treesitter = pcall(require, 'nvim-treesitter')
 
-        require("nvim-ts-autotag").setup()
-    end,
+    -- no nvim-treesitter, maybe fresh install
+    if not ok then return end
+
+    local parsers = require('nvim-treesitter.parsers')
+
+    if not parsers[event.match] or not nvim_treesitter.install then return end
+
+    local ft = vim.bo[event.buf].ft
+    local lang = vim.treesitter.language.get_lang(ft)
+    nvim_treesitter.install({ lang }):await(function(err)
+      if err then
+        vim.notify('Treesitter install error for ft: ' .. ft .. ' err: ' .. err)
+        return
+      end
+
+      pcall(vim.treesitter.start, event.buf)
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    end)
+  end,
+})
+
+local M = {
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        build = function()
+            if vim.fn.exists(':TSUpdate') == 2 then vim.cmd('TSUpdate') end
+        end,
+        -- event = "BufReadPost",
+        dependencies = {
+            -- "nvim-treesitter/nvim-treesitter-textobjects",
+            "RRethy/nvim-treesitter-endwise",
+            "mfussenegger/nvim-ts-hint-textobject",
+            "windwp/nvim-ts-autotag",
+            -- "nvim-treesitter/playground",
+        },
+        config = function(_, _)
+            local ensure_installed = {
+                "c", "lua", "vim", "vimdoc", "query", "python", "go", "terraform", "yaml",
+                "dockerfile", "json", "markdown", "markdown_inline", "gotmpl", "gowork", "gomod",
+                "gosum", "sql", "comment"
+            }
+            local ok, nvim_treesitter = pcall(require, 'nvim-treesitter')
+            if not ok then return end
+            nvim_treesitter.install(ensure_installed)
+        end,
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        event = 'VeryLazy',
+        branch = 'main',
+          init = function()
+            vim.g.no_plugin_maps = true
+          end,
+          config = function()
+            require("nvim-treesitter-textobjects").setup {
+              select = {
+                lookahead = true,
+                include_surrounding_whitespace = false,
+              },
+            }
+
+            vim.keymap.set({ "x", "o" }, "af", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@function.outer", "textobjects")
+            end)
+            vim.keymap.set({ "x", "o" }, "if", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@function.inner", "textobjects")
+            end)
+            vim.keymap.set({ "x", "o" }, "ac", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@class.outer", "textobjects")
+            end)
+            vim.keymap.set({ "x", "o" }, "ic", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@class.inner", "textobjects")
+            end)
+            vim.keymap.set({ "x", "o" }, "ab", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@block.outer", "textobjects")
+            end)
+            vim.keymap.set({ "x", "o" }, "ib", function()
+                require "nvim-treesitter-textobjects.select".select_textobject("@block.inner", "textobjects")
+            end)
+
+            vim.keymap.set({ "n", "x", "o" }, "[f", function()
+                require "nvim-treesitter-textobjects.move".goto_previous_start("@function.outer", "textobjects")
+            end)
+
+            vim.keymap.set({ "n", "x", "o" }, "]f", function()
+                require "nvim-treesitter-textobjects.move".goto_next_start("@function.outer", "textobjects")
+            end)
+
+          end,
+    }
 }
+
+
 
 return M
