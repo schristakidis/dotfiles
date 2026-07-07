@@ -255,7 +255,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--single', action="store_true", default=False)
     parser.add_argument('--dock', action="store_true", default=False)
-    parser.add_argument('--reverse', action="store_true", default=False)
+    parser.add_argument('--reverse', action="store_true", default=True)
     parser.add_argument('--reversew', action="store_true", default=False)
     parser.add_argument('--once', action="store_true", default=False)
     parser.add_argument('--scaling', default=1)
