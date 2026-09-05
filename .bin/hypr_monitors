@@ -235,7 +235,9 @@ class HMonitors:
 
     def move_workspaces(self, first, last, monitor):
         for workspace in range(first, last + 1):
-            cmd = f'hyprctl dispatch moveworkspacetomonitor {workspace} {monitor}'  # noqa
+            lua_cmd = f'hl.dsp.workspace.move({{{workspace}, monitor="{monitor}"}})'
+            # cmd = f'hyprctl dispatch moveworkspacetomonitor {workspace} {monitor}'  # noqa
+            cmd = f'hyprctl dispatch {lua_cmd}'
             print(cmd)
             run(cmd.split())
 

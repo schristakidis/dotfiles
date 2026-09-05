@@ -15,6 +15,7 @@
 - [Gaming](linux/Gaming.md)
 - [Clipboard](linux/Clipboard.md)
 - [Misc](linux/misc.md)
+- [SSH](linux/ssh.md)
 
 ## DevOps
 - [kubernetes](devops/kubernetes.md)

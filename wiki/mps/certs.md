@@ -60,6 +60,8 @@ xjgV+1ePRZc14AOlCcpiq0L5wsaAqrrUxypu9xpUFq6BJXyLcC85zrBfXiviqNNR
 -----END CERTIFICATE-----
 ```
 
+
+### Ubuntu
 * Copy the files to the correct location
  ```sh
 sudo cp mps_ca.crt mps_ca_inter.crt /usr/local/share/ca-certificates
@@ -70,3 +72,10 @@ sudo update-ca-certificates
 ```
 
 The output should indicate that 2 new certificates were added to the system
+
+
+### Arch
+```bash
+sudo cp your-ca.crt /etc/ca-certificates/trust-source/anchors/
+sudo update-ca-trust
+```
