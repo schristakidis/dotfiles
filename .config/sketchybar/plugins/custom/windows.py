@@ -58,7 +58,7 @@ def set_title():
     label = ''
     if focused_app:
         icon = ICON_MAP.get(focused_app['app-name'], focused_app['app-name'])
-        label = focused_app['window-title']
+        label = ' ' + focused_app['window-title'][:5]
         fullscreen = focused_app['window-is-fullscreen']
 
     # logger.info(f'{icon}: {label}')

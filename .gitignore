@@ -12,3 +12,4 @@ tmp/*
 .config/hypr/env_nvidia.conf
 .config/hypr/carD
 .zsh_sessions/
+.config/karabiner/automatic_backups/
