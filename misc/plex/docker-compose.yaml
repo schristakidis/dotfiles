@@ -4,13 +4,13 @@ services:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     network_mode: host
-    runtime: nvidia
+    # runtime: nvidia
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
       - VERSION=docker
-      - NVIDIA_VISIBLE_DEVICES=all
+      # - NVIDIA_VISIBLE_DEVICES=all
     volumes:
       - /home/sakis/.local/share/plex:/config
       - /home/sakis/Videos/Series:/tv
