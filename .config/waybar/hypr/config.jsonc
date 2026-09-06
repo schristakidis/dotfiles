@@ -94,10 +94,10 @@
         "format": "",
         "interval": "once",
         "return-type": "json",
-        "on-click": "hyprctl dispatch exec ~/.bin/clipmenu; pkill -RTMIN+9 waybar",
-        "on-click-right": "hyprctl dispatch -- exec ~/.bin/clipmenu --delete; pkill -RTMIN+9 waybar",
+        "on-click": "~/.bin/clipmenu; pkill -RTMIN+9 waybar",
+        "on-click-right": "~/.bin/clipmenu --delete; pkill -RTMIN+9 waybar",
         "on-click-middle": "rm -f ~/.cache/cliphist/db; pkill -RTMIN+9 waybar",
-        "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard\r(Mid click to clear)'",
+        "exec": "printf '{\"tooltip\":\"%s\"}' $(cliphist list | wc -l)' item(s) in the clipboard'",
         "exec-if": "[ -x \"$(command -v cliphist)\" ] && [ $(cliphist list | wc -l) -gt 0 ]",
         "signal": 9
     },
