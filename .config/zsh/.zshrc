@@ -87,7 +87,7 @@ zinit wait lucid light-mode for \
       zdharma-continuum/fast-syntax-highlighting
 
 export ATUIN_NOBIND="true"
-zinit ice lucid wait"0" atload"bindkey '^r' atuin-search"
+zinit ice lucid wait"0" atload'eval "$(atuin init zsh)" && bindkey "^r" atuin-search'
 zinit load atuinsh/atuin
 
 zstyle ':prezto:module:editor' ps-context 'yes'
