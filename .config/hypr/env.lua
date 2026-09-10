@@ -38,10 +38,10 @@ hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "qt5ct")
 hl.env("GDK_SCALE", "1")
 hl.env("HYPRLAND_LOG_LEVEL", "0")
-hl.env("GTK_IM_MODULE", "wayland")
-hl.env("QT_IM_MODULE", "wayland")
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 -- hl.env("WLR_NO_HARDWARE_SENSORS", "1")
 -- hl.env("ELECTRON_DISABLE_GPU", "0")
+-- These kill steam
+-- hl.env("GTK_IM_MODULE", "wayland")
+hl.env("QT_IM_MODULE", "wayland")
 hl.env("FREETYPE_PROPERTIES", "truetype:interpreter-version=35")
-
