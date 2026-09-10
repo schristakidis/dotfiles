@@ -82,10 +82,13 @@ zinit wait lucid light-mode for \
     OMZP::aws \
     OMZP::istioctl \
     OMZP::helm \
-    atuinsh/atuin \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     atload"fast-theme $HOME/.dotfiles/resources/fsh/mytheme.ini >/dev/null; eval $(zoxide init --cmd cd zsh)" \
       zdharma-continuum/fast-syntax-highlighting
+
+export ATUIN_NOBIND="true"
+zinit ice lucid wait"0" atload"bindkey '^r' atuin-search"
+zinit load atuinsh/atuin
 
 zstyle ':prezto:module:editor' ps-context 'yes'
 #

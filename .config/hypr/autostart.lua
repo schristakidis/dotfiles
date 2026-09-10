@@ -1,6 +1,7 @@
 -- ============================================
 -- AUTOSTART
 -- ============================================
+hl.exec_cmd("if pgrep waybar > /dev/null; then pkill waybar; fi && waybar")
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -19,5 +20,3 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/usr/bin/pypr")
     hl.exec_cmd("hypridle")
 end)
-
-hl.exec_cmd("if pgrep waybar > /dev/null; then pkill waybar; fi && waybar")
