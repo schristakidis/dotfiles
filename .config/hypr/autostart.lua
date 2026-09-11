@@ -2,6 +2,8 @@
 -- AUTOSTART
 -- ============================================
 
+hl.exec_cmd("if pgrep waybar > /dev/null; then pkill waybar; fi && waybar")
+
 hl.on("hyprland.start", function()
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
@@ -12,6 +14,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("blueman-applet")
     hl.exec_cmd("nm-applet --indicator")
     hl.exec_cmd("udiskie")
+    hl.exec_cmd("waybar")
     hl.exec_cmd("1password --silent")
     hl.exec_cmd("wl-paste -t text --watch cliphist store &")
     hl.exec_cmd("[ -x \"$(command -v wl-paste)\" ] && [ -x \"$(command -v cliphist)\" ] && wl-paste --watch cliphist store &")
@@ -19,5 +22,3 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("/usr/bin/pypr")
     hl.exec_cmd("hypridle")
 end)
-
-hl.exec_cmd("if pgrep waybar > /dev/null; then pkill waybar; fi && waybar")

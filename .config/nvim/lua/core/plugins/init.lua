@@ -32,7 +32,6 @@ return {
   "tpope/vim-fugitive",
 
   -- programming
-  { 'numToStr/Comment.nvim', config = true },
   'sheerun/vim-polyglot',
   { "gennaro-tedesco/nvim-jqx", ft = { "json", "yaml" } },
   {
