@@ -1,12 +1,5 @@
 M = {
   {
-    "Cannon07/code-preview.nvim",
-    config = function()
-      require("code-preview").setup()
-    end,
-
-  },
-  {
     "nickjvandyke/opencode.nvim",
     version = "*", -- Latest stable release
     dependencies = {
@@ -38,10 +31,7 @@ M = {
         server = {
           url = "http://localhost:5000",
           start = false,
-        },
-        events = {
-          reload = true,
-        },
+        }
       }
 
       vim.o.autoread = true

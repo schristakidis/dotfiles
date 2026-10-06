@@ -13,3 +13,7 @@ tmp/*
 .config/hypr/carD
 .zsh_sessions/
 .config/karabiner/automatic_backups/
+node_modules
+.config/opencode/package-lock.json
+.config/opencode/package.json
+.config/opencode/plugins
