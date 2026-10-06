@@ -11,3 +11,8 @@ tmp/*
 .config/waybar/style.css
 .config/hypr/env_nvidia.conf
 .config/hypr/carD
+
+node_modules
+.config/opencode/package-lock.json
+.config/opencode/package.json
+.config/opencode/plugins
