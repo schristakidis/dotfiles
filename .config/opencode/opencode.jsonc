@@ -4,24 +4,24 @@
         "~/.config/opencode/CLAUDE.md"
     ],
     "permissions": [
-        { "action": "shell", "resource": "cd *",            "effect": "allow" },
-        { "action": "shell", "resource": "git status*",     "effect": "allow" },
-        { "action": "shell", "resource": "git diff*",       "effect": "allow" },
-        { "action": "shell", "resource": "git log*",        "effect": "allow" },
-        { "action": "shell", "resource": "git show*",       "effect": "allow" },
-        { "action": "shell", "resource": "git branch*",     "effect": "allow" },
-        { "action": "shell", "resource": "git add *",       "effect": "allow" },
-        { "action": "shell", "resource": "ls *",            "effect": "allow" },
-        { "action": "shell", "resource": "cat *",           "effect": "allow" },
-        { "action": "edit",  "resource": "*",               "effect": "ask" },
-        { "action": "shell", "resource": "*",               "effect": "ask" }
+        // { "action": "shell", "resource": "cd *",            "effect": "allow" },
+        // { "action": "shell", "resource": "git status*",     "effect": "allow" },
+        // { "action": "shell", "resource": "git diff*",       "effect": "allow" },
+        // { "action": "shell", "resource": "git log*",        "effect": "allow" },
+        // { "action": "shell", "resource": "git show*",       "effect": "allow" },
+        // { "action": "shell", "resource": "git branch*",     "effect": "allow" },
+        // { "action": "shell", "resource": "git add *",       "effect": "allow" },
+        // { "action": "shell", "resource": "ls *",            "effect": "allow" },
+        // { "action": "shell", "resource": "cat *",           "effect": "allow" },
+        { "action": "edit", "resource": "*", "effect": "ask" },
+        { "action": "bash", "pattern": "rm*", "effect": "ask" }
     ],
     "provider": {
         "llama.cpp": {
             "npm": "@ai-sdk/openai-compatible",
             "name": "llama-server (local)",
             "options": {
-                "baseURL": "http://p2ner.local:11880/v1"
+                "baseURL": "http://{env:OPENCODE_LLAMA_SERVER}/v1"
             },
             "models": {
                 "Qwen3.8-27B-UD-Q4_K_XL.gguf": {

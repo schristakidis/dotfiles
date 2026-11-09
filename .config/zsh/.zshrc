@@ -32,9 +32,6 @@ zinit light-mode for \
 zinit ice depth=1
 zinit light romkatv/powerlevel10k
 
-for zsh_source in $ZDOTDIR/configs/*.zsh; do
-    source $zsh_source
-done
 
 if [ -d "$ZDOTDIR/local" ]; then
   for zsh_source in "$ZDOTDIR/local"/*.zsh; do
@@ -43,6 +40,10 @@ if [ -d "$ZDOTDIR/local" ]; then
     fi
   done
 fi
+
+for zsh_source in $ZDOTDIR/configs/*.zsh; do
+    source $zsh_source
+done
 
 zvm_config() {
     ZVM_CURSOR_STYLE_ENABLED=false
