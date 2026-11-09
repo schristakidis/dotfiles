@@ -3,12 +3,16 @@
     "instructions": [
         "~/.config/opencode/CLAUDE.md"
     ],
+    "permissions": [
+        { "action": "edit", "resource": "*", "effect": "ask" },
+        { "action": "bash", "pattern": "rm*", "effect": "ask" }
+    ],
     "provider": {
         "llama.cpp": {
             "npm": "@ai-sdk/openai-compatible",
             "name": "llama-server (local)",
             "options": {
-                "baseURL": "http://localhost:11880/v1"
+                "baseURL": "http://{env:OPENCODE_LLAMA_SERVER}/v1"
             },
             "models": {
                 "Qwen3.8-27B-UD-Q4_K_XL.gguf": {

@@ -16,3 +16,7 @@ node_modules
 .config/opencode/package-lock.json
 .config/opencode/package.json
 .config/opencode/plugins
+.config/opencode/service.json
+
+
+llama

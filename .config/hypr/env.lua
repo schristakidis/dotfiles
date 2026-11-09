@@ -45,3 +45,5 @@ hl.env("MOZ_ENABLE_WAYLAND", "1")
 -- hl.env("GTK_IM_MODULE", "wayland")
 hl.env("QT_IM_MODULE", "wayland")
 hl.env("FREETYPE_PROPERTIES", "truetype:interpreter-version=35")
+
+-- hl.env('AQ_NO_MODIFIERS', "1")
